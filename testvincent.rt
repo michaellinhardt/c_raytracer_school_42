@@ -1,0 +1,46 @@
+scene {								
+	name { NAME_SCENE        	 }
+	camera {pos{890; 525; -50}, dir{0; 1; 2}}				
+	spot {							
+		camera {pos{890; 600; -50}, dir{1 ; 1; 5}}
+		color { 0x777777 }					
+	}
+	ambiance { 0x452d6e; 52 }					
+	objects {
+		simple_obj {
+			name { ROUGE }
+			camera {pos{ 875; 525; 1}, dir{0 ;0 ; 0}}				
+			type { sphere }				
+			size { 7 ; 0.0 ; 0 }			
+			effect { 0 ; 0 ; 0 ; 0}			
+			color { 0xFF0000 }				
+			cut { pos{1;22.1;-98}, dir{1;02;35} }
+		}
+		simple_obj {
+			name { SPHERE2 }
+			camera {pos{ 890; 525; 10}, dir{0 ;0 ; 0}}				
+			type { sphere }				
+			size { 7 ; 0.0 ; 0 }			
+			effect { 0 ; 0 ; 0 ; 0}			
+			color { 0x0000FF }				
+			cut { pos{1;22.1;-98}, dir{1;02;35} }
+		}
+		simple_obj {
+			name { SPHERE2 }
+			camera {pos{ 890; 541; 10}, dir{0 ;0 ; 0}}				
+			type { sphere }				
+			size { 7 ; 0.0 ; 0 }			
+			effect { 0 ; 0 ; 0 ; 0}			
+			color { 0x00FF00 }				
+			cut { pos{1;22.1;-98}, dir{1;02;35} }
+		}
+		simple_obj {
+			name { BLANC DE FACE }
+			camera {pos{880 ; 520 ; 0}, dir{0 ; 1 ; -0.2 }}
+			type { plan }				
+			size { 1. ; 0.0 ; 0 }			
+			effect { 0 ; 0 ; 0 ; 0}			
+			color { 0xFFFFFF }				
+			cut { pos{1;22.1;-98}, dir{1;02;35} }
+		}
+}
