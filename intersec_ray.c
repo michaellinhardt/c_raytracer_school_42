@@ -12,7 +12,7 @@
 
 #include "h_raystruct.h"
 
-double intersectRayCylindre(t_ray *r, t_obj *s, double x1, double y1)
+double intersectRayCylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 {
 	(void)x1;
 	(void)y1;
@@ -53,9 +53,20 @@ double intersectRayCylindre(t_ray *r, t_obj *s, double x1, double y1)
 	{
 		dist = ((-b + sqrtf(discriminant)) / (2 * a));
 		if ( ((-b - sqrtf(discriminant)) / (2 * a)) < (dist))
+		{
 			dist = ((-b - sqrtf(discriminant)) / (2 * a));
-		if (dist < 0)
-			return (0);
+			if (dist < 0)
+				return (0);
+			*x1 = dist;
+			*y1 = ((-b + sqrtf(discriminant)) / (2 * a));
+		}
+		else
+		{
+			if (dist < 0)
+				return (0);
+			*x1 = ((-b + sqrtf(discriminant)) / (2 * a));
+			*y1 = ((-b - sqrtf(discriminant)) / (2 * a));
+		}
 		t_vector temp;
 		t_vector tp;
 		t_vector ab;
@@ -109,7 +120,7 @@ t_vector ComputeNormal(t_vector inter, t_vector aabbCenter)
     return normals[coef]; // The sign he is used to know direction of the normal
 }
 
-double intersectRayCarre(t_ray *r, t_obj *s, double x1, double y1)
+double intersectRayCarre(t_ray *r, t_obj *s, double *x1, double *y1)
 {
 	(void)x1;
 	(void)y1;
@@ -165,7 +176,7 @@ double intersectRayCarre(t_ray *r, t_obj *s, double x1, double y1)
     return (t_min < tmax) ? t_min : tmax; 
 }
 
-double intersectRaySphere(t_ray *r, t_obj *s, double x1, double y1)
+double intersectRaySphere(t_ray *r, t_obj *s, double *x1, double *y1)
 {
 
 	(void)x1;
@@ -191,7 +202,18 @@ double intersectRaySphere(t_ray *r, t_obj *s, double x1, double y1)
 
 		if (((-b + sqrtf(discriminant)) / (2 * a)) < 0 || ((-b - sqrtf(discriminant)) / (2 * a)) < 0)
 			return (0);
-	
+		dist = ((-b + sqrtf(discriminant)) / (2 * a));
+		if ( ((-b - sqrtf(discriminant)) / (2 * a)) < (dist))
+		{
+			dist = ((-b - sqrtf(discriminant)) / (2 * a));
+			*x1 = dist;
+			*y1 = ((-b + sqrtf(discriminant)) / (2 * a));
+		}
+		else
+		{
+			*x1 = ((-b + sqrtf(discriminant)) / (2 * a));
+			*y1 = ((-b - sqrtf(discriminant)) / (2 * a));
+		}
 
 		if ( ((-b - sqrtf(discriminant)) / (2 * a)) < (dist))
 			dist = ((-b - sqrtf(discriminant)) / (2 * a));
@@ -277,7 +299,7 @@ double intersectRaySphere(t_ray *r, t_obj *s, double x1, double y1)
 
 
 
-double intersectRayPlane(t_ray *r, t_obj *p, double x1, double y1)
+double intersectRayPlane(t_ray *r, t_obj *p, double *x1, double *y1)
 {
 	(void)x1;
 	(void)y1;	
@@ -293,6 +315,8 @@ double intersectRayPlane(t_ray *r, t_obj *p, double x1, double y1)
 		r->norm.x = n.x;
 		r->norm.y = n.y;
 		r->norm.z = n.z;
+		// *x1 = t;
+		// *y1 = *x1; 
 		r->norm = vectorNormalize(r->norm);
 		return (t);
 	}

@@ -177,10 +177,10 @@ void				colorNormalize(double *tab, double *tmp_tab, double factor, int c);
 **									intersec_ray.c  
 */
 
-double				intersectRaySphere(t_ray *r, t_obj *s, double x1, double y1);
-double				intersectRayPlane(t_ray *r, t_obj *s, double x1, double y1);
-double 				intersectRayCylindre(t_ray *r, t_obj *s, double x1, double y1);
-double 				intersectRayCarre(t_ray *r, t_obj *s, double x1, double y1);
+double				intersectRaySphere(t_ray *r, t_obj *s, double *x1, double *y1);
+double				intersectRayPlane(t_ray *r, t_obj *s, double *x1, double *y1);
+double 				intersectRayCylindre(t_ray *r, t_obj *s, double *x1, double *y1);
+double 				intersectRayCarre(t_ray *r, t_obj *s, double *x1, double *y1);
 
 
 

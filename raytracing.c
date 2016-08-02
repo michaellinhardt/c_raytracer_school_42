@@ -83,9 +83,9 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest)
 }
 
 
-double	getnearesthit(t_ray *r, t_scene *sc, int x1, int y1, t_id *g)
+double	getnearesthit(t_ray *r, t_scene *sc, double x1, double y1, t_id *g)
 {
-	double nearest;
+	double nearest[2];
 	double t;
 	t_obj *tmp;
 	t_obj *s;
@@ -95,35 +95,98 @@ double	getnearesthit(t_ray *r, t_scene *sc, int x1, int y1, t_id *g)
 	color = 0;
 	s = sc->obj; // recuperation de la liste d'objets
 	tmp = NULL;
-	nearest = -1;
+	nearest[0] = -1;
+	nearest[1] = INT_MAX;
 	t = 0;
-	while (s) //pour toute la liste d'objets
+	double tmp_near[2];
+
+	while (s)
 	{
+		if (!s->eff[3])
+		{
+			s = s->next;
+			continue ;
+		}
+		tmp_near[0] = -1;
+		tmp_near[1] = INT_MAX;
 		r->dir = newVector(x1 - W_X / 2.0, W_Y / 2.0 - y1, (W_Y / 2.0) / tan(70*0.5));	//initialisation des donnees de la camera 
 		r->dir = vectorNormalize(r->dir);	// normalisation de la direction
 		if (s->type == SPHERE)
-			t = intersectRaySphere(r, s, x1, y1); // a chaque forme sa formule mathematique 
+			t = intersectRaySphere(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (s->type == PLAN)
-			t = intersectRayPlane(r, s, x1, y1); // a chaque forme sa formule mathematique 
+			t = intersectRayPlane(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (s->type == CYLINDRE)
-			t = intersectRayCylindre(r, s, x1, y1); // a chaque forme sa formule mathematique 
+			t = intersectRayCylindre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (s->type == RECTANGLE)
-			t = intersectRayCarre(r, s, x1, y1); // a chaque forme sa formule mathematique 
-		if ((t < nearest && t > 0) || (nearest < 0 && t > 0))
+			t = intersectRayCarre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
+		if (t > 0 && tmp_near[0] != -1)
+		{
+			if (nearest[0] == -1 || (tmp_near[0] < nearest[0]) || tmp_near[1] > nearest[1])
+			{
+				if (nearest[0] == -1 || tmp_near[0] < nearest[0])
+					nearest[0] = tmp_near[0];
+				if (nearest[1] == INT_MAX || tmp_near[1] > nearest[1])
+					nearest[1] = tmp_near[1];
+				norm = r->norm;
+			}
+			t = 0;
+		}
+		s = s->next;
+	}
+	t = 0;
+	double new_nearest = -1;
+	s = sc->obj; // recuperation de la liste d'objets
+	while (s) //pour toute la liste d'objets
+	{
+		if (s->eff[3])
+		{
+			s = s->next;
+			continue ;
+		}
+		r->dir = newVector(x1 - W_X / 2.0, W_Y / 2.0 - y1, (W_Y / 2.0) / tan(70*0.5));	//initialisation des donnees de la camera 
+		r->dir = vectorNormalize(r->dir);	// normalisation de la direction
+		if (s->type == SPHERE)
+			t = intersectRaySphere(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
+		else if (s->type == PLAN)
+			t = intersectRayPlane(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
+		else if (s->type == CYLINDRE)
+			t = intersectRayCylindre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
+		else if (s->type == RECTANGLE)
+			t = intersectRayCarre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
+		if ((t < new_nearest && t > 0)|| (new_nearest < 0 && t > 0))
 		{
 			// si la distance actuelle calculee est plus petite que la precedente, on garde en memoire 
 			//: la nouvelle plus courte intersection, l'objet concerne, et la normale du point touche
-			nearest = t;
-			tmp = s;
-			norm = r->norm;
+			if (t > nearest[0] && t < nearest[1] && t > 0 && nearest[0] > 0 /*&& nearest[1] < INT_MAX*/)
+			{
+				if (tmp_near[1] < nearest[1])
+				{
+					s = s->next;
+					continue;
+				}
+				new_nearest = nearest[1];
+				tmp = s;
+				norm.x = -norm.x;
+				norm.y = -norm.y;
+				norm.z = -norm.z;
+			}
+			else
+			{
+				new_nearest = t;
+				tmp = s;
+				norm = r->norm;
+			}
 		}
 		s = s->next; //objet suivant
 	}
-	if (nearest >= 0)
+	if (new_nearest >= 0)
 	{
 		r->norm = norm;
-		if (tmp->type == SPHERE || tmp->type == PLAN || tmp->type == CYLINDRE || tmp->type == RECTANGLE)
-			color = diffuse(sc, r, tmp, nearest);
+		color = 0;
+		if (tmp && (tmp->type == SPHERE || tmp->type == PLAN || tmp->type == CYLINDRE || tmp->type == RECTANGLE))
+			color = diffuse(sc, r, tmp, new_nearest);
+		// if (tmp)
+		// color = tmp->c_o;
 		mlx_image_put_pixel(g, x1, y1, color);
 		/*
 		** 		Si a la fin du calcul total on a bien trouve une intersection 
@@ -131,7 +194,7 @@ double	getnearesthit(t_ray *r, t_scene *sc, int x1, int y1, t_id *g)
 		** 		le pourcentage de coloration de la couleur diffuse au point touche
 		*/
 	}
-	return (nearest);	
+	return (nearest[0]);	
 }
 
 void *display(void *z)

@@ -18,7 +18,7 @@ int		quit_w(void)
 	return (1);
 }
 
-t_obj	*obj_to_move(t_obj *s, int x1, int y1, t_ray r)
+t_obj	*obj_to_move(t_obj *s, double x1, double y1, t_ray r)
 {
 	t_obj *tmp;
 	double nearest;
@@ -33,13 +33,13 @@ t_obj	*obj_to_move(t_obj *s, int x1, int y1, t_ray r)
 		r.dir.z = (W_Y / 2.0) / tan(70*0.5);
 		r.dir = vectorNormalize(r.dir);
 		if (s->type == SPHERE)
-			t = intersectRaySphere(&r, s, x1, y1);
+			t = intersectRaySphere(&r, s, &x1, &y1);
 		else if (s->type == PLAN)
-			t = intersectRayPlane(&r, s, x1, y1);
+			t = intersectRayPlane(&r, s, &x1, &y1);
 		else if (s->type == CYLINDRE)
-			t = intersectRayCylindre(&r, s, x1, y1);
+			t = intersectRayCylindre(&r, s, &x1, &y1);
 		else if (s->type == RECTANGLE)
-			t = intersectRayCarre(&r, s, x1, y1);
+			t = intersectRayCarre(&r, s, &x1, &y1);
 		if ((t < nearest && t > 0) || (nearest < 0 && t > 0))
 		{
 			nearest = t;
