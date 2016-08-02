@@ -40,6 +40,8 @@ t_obj	*obj_to_move(t_obj *s, double x1, double y1, t_ray r)
 			t = intersectRayCylindre(&r, s, &x1, &y1);
 		else if (s->type == RECTANGLE)
 			t = intersectRayCarre(&r, s, &x1, &y1);
+		else if (s->type == COMPLEXE)
+			t = intersectRayComplex(&r, s, &x1, &y1);
 		if ((t < nearest && t > 0) || (nearest < 0 && t > 0))
 		{
 			nearest = t;

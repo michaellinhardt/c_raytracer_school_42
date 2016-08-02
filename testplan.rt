@@ -47,9 +47,12 @@ scene {
 			color { 0x0000FF }				
 			cut { pos{1;22.1;-98}, dir{1;02;35} }
 		}
+		complex_obj {
+			name { complex }
+			camera {pos{ 890; 530; 20}, dir{1 ;1 ; 0}}
+			type {test}		
 		simple_obj {
-			name { ROUGE }
-			camera {pos{ 890; 530; 20}, dir{1 ;1 ; 0}}				
+			camera {pos{ 890; 535; 22}, dir{1 ;1 ; 0}}				
 			type { sphere }				
 			size { 7 ; 5.0 ; 0 }			
 			effect { 0 ; 0 ; 0 ; 0}			
@@ -57,13 +60,13 @@ scene {
 			cut { pos{1;22.1;-98}, dir{0;0;0} }
 		}
 		simple_obj {
-			name { Neg }
-			camera {pos{ 890; 540; 20}, dir{1 ;1 ; 0}}				
+			camera {pos{ 895; 535; 20}, dir{1 ;1 ; 0}}				
 			type { sphere }				
 			size { 7 ; 5.0 ; 0 }			
 			effect { 0 ; 0 ; 0 ; 1}			
 			color { 0x0000FF }				
 			cut { pos{1;22.1;-98}, dir{0;0;0} }
+		}
 		}
 }
 }

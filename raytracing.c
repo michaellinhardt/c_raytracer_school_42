@@ -119,6 +119,8 @@ double	getnearesthit(t_ray *r, t_scene *sc, double x1, double y1, t_id *g)
 			t = intersectRayCylindre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (s->type == RECTANGLE)
 			t = intersectRayCarre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
+		else if (s->type == COMPLEXE)
+			t = intersectRayComplex(r, s, &tmp_near[0], &tmp_near[1]);
 		if (t > 0 && tmp_near[0] != -1)
 		{
 			if (nearest[0] == -1 || (tmp_near[0] < nearest[0]) || tmp_near[1] > nearest[1])
@@ -153,6 +155,8 @@ double	getnearesthit(t_ray *r, t_scene *sc, double x1, double y1, t_id *g)
 			t = intersectRayCylindre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (s->type == RECTANGLE)
 			t = intersectRayCarre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
+		else if (s->type == COMPLEXE)
+			t = intersectRayComplex(r, s, &tmp_near[0], &tmp_near[1]);
 		if ((t < new_nearest && t > 0)|| (new_nearest < 0 && t > 0))
 		{
 			// si la distance actuelle calculee est plus petite que la precedente, on garde en memoire 
@@ -183,10 +187,9 @@ double	getnearesthit(t_ray *r, t_scene *sc, double x1, double y1, t_id *g)
 	{
 		r->norm = norm;
 		color = 0;
-		if (tmp && (tmp->type == SPHERE || tmp->type == PLAN || tmp->type == CYLINDRE || tmp->type == RECTANGLE))
+		if (tmp && (tmp->type == SPHERE|| tmp->type == COMPLEXE || tmp->type == PLAN || tmp->type == CYLINDRE || tmp->type == RECTANGLE))
 			color = diffuse(sc, r, tmp, new_nearest);
 		// if (tmp)
-		// color = tmp->c_o;
 		mlx_image_put_pixel(g, x1, y1, color);
 		/*
 		** 		Si a la fin du calcul total on a bien trouve une intersection 
