@@ -56,15 +56,38 @@ static void rotate(t_gen *s, int key)
 		new = MatricerotX(new, vectorDot(new, obj));
 	if (s->to_move->type == SPHERE)
 	{
-	s->to_move->cut[0] = new.x;
-	s->to_move->cut[1] = new.y;
-	s->to_move->cut[2] = new.z;
+		s->to_move->cut[0] = new.x;
+		s->to_move->cut[1] = new.y;
+		s->to_move->cut[2] = new.z;
 	}
 	else
 	{
 		s->to_move->pos[0] = new.x;
 		s->to_move->pos[1] = new.y;
 		s->to_move->pos[2] = new.z;
+	}
+}
+
+void		move_complex(t_gen *s, int key)
+{
+	t_obj *tmp;
+
+	tmp = s->to_move->comp;
+	while (tmp)
+	{
+		if (key == KEY_ONE)
+			tmp->pos[0] -= 1.0;
+		else if (key == KEY_TWO)
+			tmp->pos[0] += 1.0;
+		else if (key == KEY_FOU)
+			tmp->pos[1] -= 1.0;
+		else if (key == KEY_FIV)
+			tmp->pos[1] += 1.0;
+		else if (key == KEY_SEV)
+			tmp->pos[2] -= 1.0;
+		else if (key == KEY_EIG)
+			tmp->pos[2] += 1.0;
+		tmp = tmp->next;
 	}
 }
 
@@ -78,7 +101,9 @@ int			press_key(int key, t_gen *s)
 		switch_scene(s, &s->sc);
 	else if (key == 119)
 		print_scene(s);
-	if (key == KEY_ONE)
+	if (s->to_move->type == COMPLEXE)
+		move_complex(s, key);
+	else if (key == KEY_ONE)
 		s->to_move->pos[0] -= 1.0;
 	else if (key == KEY_TWO)
 		s->to_move->pos[0] += 1.0;

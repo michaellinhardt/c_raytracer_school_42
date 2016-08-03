@@ -60,11 +60,11 @@ scene {
 			cut { pos{1;22.1;-98}, dir{0;0;0} }
 		}
 		simple_obj {
-			camera {pos{ 895; 535; 22}, dir{1 ;1 ; 0}}				
+			camera {pos{ 895; 535; 18}, dir{1 ;1 ; 0}}				
 			type { sphere }				
 			size { 7 ; 5.0 ; 0 }			
 			effect { 0 ; 0 ; 0 ; 1}			
-			color { 0x0000FF }				
+			color { 0x00ff00 }				
 			cut { pos{1;22.1;-98}, dir{0;0;0} }
 		}
 		simple_obj {
@@ -81,10 +81,6 @@ scene {
 scene {								
 	name { NAME_SCENE        	 }
 	camera {pos{890; 525; -50}, dir{0; 1; 2}}				
-	spot {							
-		camera {pos{890; 600; 22}, dir{1 ; 1; 5}}
-		color { 0xFFFFFF }					
-	}
 	spot {							
 		camera {pos{90; 600; -50}, dir{1 ; 1; 5}}
 		color { 0xFFFFFF }					
@@ -138,11 +134,11 @@ scene {
 		}
 		simple_obj {
 			name { complex }
-			camera {pos{ 890; 530; 22}, dir{1 ;1 ; 0}}				
+			camera {pos{ 895; 530; 22}, dir{1 ;1 ; 0}}				
 			type { sphere }				
 			size { 7 ; 5.0 ; 0 }			
 			effect { 0 ; 0 ; 0 ; 1}			
-			color { 0x0000FF }				
+			color { 0x00ff00 }				
 			cut { pos{1;22.1;-98}, dir{0;0;0} }
 		}
 		simple_obj {

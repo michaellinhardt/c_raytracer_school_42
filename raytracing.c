@@ -37,7 +37,7 @@ void sqrtc(double *color)
 	// racine carree d'une couleur
 }
 
-int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest)
+int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 {
 	t_spot		*spot;
 	t_vector	hitpoint;
@@ -59,8 +59,12 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest)
 		++nb_spot;
 	}
 	spot = sc->spot;
-	color_composants(tmp->c_o, rgb);
+	if (tmp->type != COMPLEXE)
+		color_composants(tmp->c_o, rgb);
+	else
+		color_composants(col, rgb);
 	is_ob = cast_shadow(sc->obj, hitpoint, spot, tmp);
+	is_ob = 1;
 	ft_bzero(total_rgb, sizeof(double) * 3);
 	while (spot)
 	{
@@ -100,6 +104,7 @@ double	getnearesthit(t_ray *r, t_scene *sc, double x1, double y1, t_id *g)
 	t = 0;
 	double tmp_near[2];
 
+		color = 0;
 	while (s)
 	{
 		if (!s->eff[3])
@@ -120,7 +125,7 @@ double	getnearesthit(t_ray *r, t_scene *sc, double x1, double y1, t_id *g)
 		else if (s->type == RECTANGLE)
 			t = intersectRayCarre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (s->type == COMPLEXE)
-			t = intersectRayComplex(r, s, &tmp_near[0], &tmp_near[1]);
+			t = intersectRayComplex(r, s, &tmp_near[0], &tmp_near[1], &color);
 		if (t > 0 && tmp_near[0] != -1)
 		{
 			if (nearest[0] == -1 || (tmp_near[0] < nearest[0]) || tmp_near[1] > nearest[1])
@@ -138,6 +143,7 @@ double	getnearesthit(t_ray *r, t_scene *sc, double x1, double y1, t_id *g)
 	t = 0;
 	double new_nearest = -1;
 	s = sc->obj; // recuperation de la liste d'objets
+		color = 0;
 	while (s) //pour toute la liste d'objets
 	{
 		if (s->eff[3])
@@ -156,23 +162,24 @@ double	getnearesthit(t_ray *r, t_scene *sc, double x1, double y1, t_id *g)
 		else if (s->type == RECTANGLE)
 			t = intersectRayCarre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (s->type == COMPLEXE)
-			t = intersectRayComplex(r, s, &tmp_near[0], &tmp_near[1]);
-		if ((t < new_nearest && t > 0)|| (new_nearest < 0 && t > 0))
+			t = intersectRayComplex(r, s, &tmp_near[0], &tmp_near[1], &color);
+		if ((t < new_nearest && t > 0) || (new_nearest < 0 && t > 0))
 		{
 			// si la distance actuelle calculee est plus petite que la precedente, on garde en memoire 
 			//: la nouvelle plus courte intersection, l'objet concerne, et la normale du point touche
-			if (t > nearest[0] && t < nearest[1] && t > 0 && nearest[0] > 0 /*&& nearest[1] < INT_MAX*/)
+			if (t > nearest[0] && t < nearest[1] && nearest[0] > 0 /*&& nearest[1] < INT_MAX*/)
 			{
-				if (tmp_near[1] < nearest[1])
+				if (tmp_near[1] <= nearest[1] && tmp_near[0] >= nearest[0])
 				{
 					s = s->next;
 					continue;
 				}
+				// nearest[0] += 1;
 				new_nearest = nearest[1];
 				tmp = s;
-				norm.x = -norm.x;
-				norm.y = -norm.y;
-				norm.z = -norm.z;
+				norm.x = -r->norm.x;
+				norm.y = -r->norm.y;
+				norm.z = -r->norm.z;
 			}
 			else
 			{
@@ -186,10 +193,9 @@ double	getnearesthit(t_ray *r, t_scene *sc, double x1, double y1, t_id *g)
 	if (new_nearest >= 0)
 	{
 		r->norm = norm;
-		color = 0;
+		// color = 0;
 		if (tmp && (tmp->type == SPHERE|| tmp->type == COMPLEXE || tmp->type == PLAN || tmp->type == CYLINDRE || tmp->type == RECTANGLE))
-			color = diffuse(sc, r, tmp, new_nearest);
-		// if (tmp)
+			color = diffuse(sc, r, tmp, new_nearest, color);
 		mlx_image_put_pixel(g, x1, y1, color);
 		/*
 		** 		Si a la fin du calcul total on a bien trouve une intersection 

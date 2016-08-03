@@ -297,7 +297,7 @@ double intersectRaySphere(t_ray *r, t_obj *s, double *x1, double *y1)
  		return 0;
 }
 
-double intersectRayComplex(t_ray *r, t_obj *p, double *x1, double *y1)
+double intersectRayComplex(t_ray *r, t_obj *p, double *x1, double *y1, int *col)
 {
 	double		t;
 	t_obj		*tmp;
@@ -305,7 +305,7 @@ double intersectRayComplex(t_ray *r, t_obj *p, double *x1, double *y1)
 	double		nearest[2];
 	double		tmp_near[2];
 	t_vector	norm;
-	double		new_nearest = -1;
+	double		new_nearest;
 
 	(void)x1;
 	(void)y1;
@@ -329,8 +329,6 @@ double intersectRayComplex(t_ray *r, t_obj *p, double *x1, double *y1)
 			t = intersectRayCylindre(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (tmp->type == RECTANGLE)
 			t = intersectRayCarre(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		else if (tmp->type == COMPLEXE)
-			t = intersectRayComplex(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		if (t > 0 && tmp_near[0] != -1)
 		{
 			if (nearest[0] == -1 || (tmp_near[0] < nearest[0]) || tmp_near[1] > nearest[1])
@@ -346,6 +344,8 @@ double intersectRayComplex(t_ray *r, t_obj *p, double *x1, double *y1)
 		tmp = tmp->next;
 	}
 	tmp = p->comp;
+	temp = NULL;
+	new_nearest = -1;
 	while (tmp) //pour toute la liste d'objets
 	{
 		if (tmp->eff[3])
@@ -361,24 +361,23 @@ double intersectRayComplex(t_ray *r, t_obj *p, double *x1, double *y1)
 			t = intersectRayCylindre(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (tmp->type == RECTANGLE)
 			t = intersectRayCarre(r, tmp, &tmp_near[0], &tmp_near[1]);
-		else if (tmp->type == COMPLEXE)
-			t = intersectRayComplex(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		if ((t < new_nearest && t > 0)|| (new_nearest < 0 && t > 0))
+		if ((t < new_nearest && t > 0.001)|| (new_nearest < 0 && t > 0.001))
 		{
 			// si la distance actuelle calculee est plus petite que la precedente, on garde en memoire 
 			//: la nouvelle plus courte intersection, l'objet concerne, et la normale du point touche
-			if (t > nearest[0] && t < nearest[1] && t > 0 && nearest[0] > 0 /*&& nearest[1] < INT_MAX*/)
+			if (t > nearest[0] && t < nearest[1] && nearest[0] > 0 /*&& nearest[1] < INT_MAX*/)
 			{
-				if (tmp_near[1] < nearest[1])
+				if (tmp_near[1] <= nearest[1] && tmp_near[0] >= nearest[0])
 				{
 					tmp = tmp->next;
 					continue;
 				}
+				// nearest[0] += 1;
 				new_nearest = nearest[1];
 				temp = tmp;
-				norm.x = -norm.x;
-				norm.y = -norm.y;
-				norm.z = -norm.z;
+				norm.x = -r->norm.x;
+				norm.y = -r->norm.y;
+				norm.z = -r->norm.z;
 			}
 			else
 			{
@@ -386,15 +385,35 @@ double intersectRayComplex(t_ray *r, t_obj *p, double *x1, double *y1)
 				temp = tmp;
 				norm = r->norm;
 			}
+
+			// if (nearest[0] > 0 && t > nearest[0] && t < nearest[1] /*&& nearest[1] < INT_MAX*/)
+			// {
+			// 	if (tmp_near[1] < nearest[1])
+			// 	{
+			// 		tmp = tmp->next;
+			// 		continue;
+			// 	}
+			// 	new_nearest = nearest[1];
+			// 	temp = tmp;
+			// 	norm.x = -norm.x;
+			// 	norm.y = -norm.y;
+			// 	norm.z = -norm.z;
+			// }
+			// else
+			// {
+			// 	new_nearest = t;
+			// 	temp = tmp;
+			// 	norm = r->norm;
+			// }
 		}
 		tmp = tmp->next; //objet suivant
 	}
 	if (new_nearest > 0)
 	{
-		p->c_o = temp->c_o;
+		*col = temp->c_o;
 		r->norm = norm;
 	}
-	return (new_nearest); 
+	return ((new_nearest != -1) ? new_nearest : 0); 
 }
 
 double intersectRayPlane(t_ray *r, t_obj *p, double *x1, double *y1)

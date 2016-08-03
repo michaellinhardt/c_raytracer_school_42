@@ -22,6 +22,7 @@ double cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *tmp)
 	t_vector spot_pos;
 	double truc[2];
 	double nearest[2];
+	int col = 0;
 
 	(void)tmp;
 	is_ob = 0;
@@ -51,7 +52,7 @@ double cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *tmp)
 			else if (s->type == RECTANGLE)
 				t = intersectRayCarre(&r, s, &nearest[0], &nearest[1]); // a chaque forme sa formule mathematique 
 			else if (s->type == COMPLEXE)
-				t = intersectRayComplex(&r, s, &nearest[0], &nearest[1]);
+				t = intersectRayComplex(&r, s, &nearest[0], &nearest[1], &col);
 			if (nearest[0] != -1)
 			{
 				// norm = r->norm;
@@ -77,7 +78,7 @@ double cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *tmp)
 			else if (s->type == RECTANGLE)
 				t = intersectRayCarre(&r, s, &truc[0], &truc[1]);
 			else if (s->type == COMPLEXE)
-				t = intersectRayComplex(&r, s, &truc[0], &truc[1]);
+				t = intersectRayComplex(&r, s, &truc[0], &truc[1], &col);
 				if (t > nearest[0] && t < nearest[1] && t > 0.001 && nearest[0] > 0 /*&& nearest[1] < INT_MAX*/)
 				{
 					if (truc[1] > nearest[1])

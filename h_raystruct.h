@@ -181,7 +181,7 @@ double				intersectRaySphere(t_ray *r, t_obj *s, double *x1, double *y1);
 double				intersectRayPlane(t_ray *r, t_obj *s, double *x1, double *y1);
 double 				intersectRayCylindre(t_ray *r, t_obj *s, double *x1, double *y1);
 double 				intersectRayCarre(t_ray *r, t_obj *s, double *x1, double *y1);
-double 				intersectRayComplex(t_ray *r, t_obj *s, double *x1, double *y1);
+double 				intersectRayComplex(t_ray *r, t_obj *s, double *x1, double *y1, int *col);
 
 
 
