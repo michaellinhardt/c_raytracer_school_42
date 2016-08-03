@@ -1,0 +1,96 @@
+scene {								
+	name { NAME_SCENE        	 }
+	camera {pos{890; 525; -50}, dir{0; 1; 2}}
+	spot {							
+		camera {pos{1000; 600; -50}, dir{1 ; 1; 5}}
+		color { 0xFF0000 }					
+	}
+	spot {							
+		camera {pos{780; 600; -50}, dir{1 ; 1; 5}}
+		color { 0xFFFFFF }					
+	}
+	ambiance { 0x452d6e; 52 }					
+	objects {
+	simple_obj {
+			name { BLUE }
+			camera {pos{ 890; 525; -60}, dir{0 ;0 ; 0}}				
+			type { sphere }				
+			size { 35 ; 0.0 ; 0 }			
+			effect { 0 ; 50 ; 0 ; 0}			
+			color { 0x00FFFF }				
+			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
+		}
+		simple_obj {
+			name { bleu }
+			camera {pos{865 ; 540 ; 0}, dir{0 ; 1 ; 0 }}
+			type { plan }				
+			size { 1. ; 0.0 ; 0 }			
+			effect { 0 ; 0 ; 0 ; 0}			
+			color { 0xFFFFFF }				
+			cut { pos{1;22.1;-98}, dir{1;02;35} }
+		}
+		simple_obj {
+			name { BLUE }
+			camera {pos{ 800; 500; 10}, dir{0 ;10 ; 0}}				
+			type { plan }				
+			size { 0 ; 0.0 ; 0 }			
+			effect { 0 ; 0 ; 0 ; 0}			
+			color { 0xFF0000 }				
+			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
+		}
+		simple_obj {
+			name { BLUE }
+			camera {pos{ 920; 525; 10}, dir{0 ;0 ; 0}}				
+			type { sphere }				
+			size { 7 ; 0.0 ; 0 }			
+			effect { 0 ; 50 ; 0 ; 0}			
+			color { 0xFFFFFF }				
+			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
+		}
+		simple_obj {
+			name { BLUE }
+			camera {pos{ 905; 530; 10}, dir{0 ;0 ; 0}}				
+			type { sphere }				
+			size { 7 ; 0.0 ; 0 }			
+			effect { 0 ; 50 ; 0 ; 0}			
+			color { 0xFFFFFF }				
+			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
+		}
+		simple_obj {
+			name { BLUE }
+			camera {pos{ 890; 530; 10}, dir{0 ;0 ; 0}}				
+			type { sphere }				
+			size { 7 ; 0.0 ; 0 }			
+			effect { 0 ; 50 ; 0 ; 0}			
+			color { 0xFFFFFF }				
+			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
+		}
+		simple_obj {
+			name { BLUE }
+			camera {pos{ 875; 530; 10}, dir{0 ;0 ; 0}}				
+			type { sphere }				
+			size { 7 ; 0.0 ; 0 }			
+			effect { 0 ; 50 ; 0 ; 0}			
+			color { 0xFFFFFF }				
+			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
+		}
+		simple_obj {
+			name { BLUE }
+			camera {pos{ 860; 525; 10}, dir{0 ;0 ; 0}}				
+			type { sphere }				
+			size { 7 ; 0.0 ; 0 }			
+			effect { 0 ; 50 ; 0 ; 0}			
+			color { 0xFFFFFF }				
+			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
+		}
+		simple_obj {
+			name { cylindre1 }
+			camera {pos{ 890; 520; 10}, dir{0 ;0 ; 1}}				
+			type { cylindre }				
+			size { 2 ; 0.0 ; 0 }			
+			effect { 0 ; 0 ; 0 ; 0}	
+			color { 0xFFFF00 }				
+			cut { pos{-0 ; -0 ; -0}, dir{0 ; 0; 0 } }
+		}
+	}
+}
