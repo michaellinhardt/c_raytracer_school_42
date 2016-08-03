@@ -73,6 +73,8 @@ typedef struct		s_ray
 	t_vector 			start;
 	t_vector 			dir;
 	t_vector 			norm;
+	t_obj				*obj;
+	double				inter[2];
 }					t_ray;
 
 typedef struct		s_general
@@ -183,9 +185,16 @@ double 				intersectRayCylindre(t_ray *r, t_obj *s, double *x1, double *y1);
 double 				intersectRayCarre(t_ray *r, t_obj *s, double *x1, double *y1);
 double 				intersectRayComplex(t_ray *r, t_obj *s, double *x1, double *y1, int *col);
 
-
+/*
+**									perlin.c  
+*/
 
 double				perlin(double x, double y, double z);
 
+/*
+**									ray_touch.c  
+*/
+
+double				lenray(t_scene *sc, t_ray *r);
 
 #endif

@@ -11,6 +11,7 @@ SRC = main.c\
 	  parse_size_eff.c\
 	  parse_objects.c\
 	  raytracing.c\
+	  ray_touch.c\
 	  write_img.c\
 	  mouse_functions.c\
 	  key_functions.c\
@@ -21,7 +22,7 @@ SRC = main.c\
 	  matrice_rot.c\
 	  intersec_ray.c\
 	  color_functions.c\
-	  perlin.c
+	  perlin.c\
 
 WFLAGS = -Wall -Werror -Wextra -O3 -march=native
 

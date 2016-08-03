@@ -372,9 +372,9 @@ double intersectRayComplex(t_ray *r, t_obj *p, double *x1, double *y1, int *col)
 					tmp = tmp->next;
 					continue;
 				}
-				// nearest[0] += 1;
 				new_nearest = nearest[1];
 				temp = tmp;
+				r->obj = tmp;
 				norm.x = -r->norm.x;
 				norm.y = -r->norm.y;
 				norm.z = -r->norm.z;
@@ -383,28 +383,9 @@ double intersectRayComplex(t_ray *r, t_obj *p, double *x1, double *y1, int *col)
 			{
 				new_nearest = t;
 				temp = tmp;
+				r->obj = tmp;
 				norm = r->norm;
 			}
-
-			// if (nearest[0] > 0 && t > nearest[0] && t < nearest[1] /*&& nearest[1] < INT_MAX*/)
-			// {
-			// 	if (tmp_near[1] < nearest[1])
-			// 	{
-			// 		tmp = tmp->next;
-			// 		continue;
-			// 	}
-			// 	new_nearest = nearest[1];
-			// 	temp = tmp;
-			// 	norm.x = -norm.x;
-			// 	norm.y = -norm.y;
-			// 	norm.z = -norm.z;
-			// }
-			// else
-			// {
-			// 	new_nearest = t;
-			// 	temp = tmp;
-			// 	norm = r->norm;
-			// }
 		}
 		tmp = tmp->next; //objet suivant
 	}
