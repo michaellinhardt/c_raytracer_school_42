@@ -1,3 +1,4 @@
+
 #include "h_raystruct.h"
 
 double lenray(t_scene *sc, t_ray *r)
@@ -91,9 +92,12 @@ double lenray(t_scene *sc, t_ray *r)
 					tmp = s;
 				else
 					tmp = r->obj;
+				if (tmp->type == SPHERE)
+				{
 				norm.x = -r->norm.x;
 				norm.y = -r->norm.y;
 				norm.z = -r->norm.z;
+				}
 			}
 			else
 			{
@@ -112,7 +116,5 @@ double lenray(t_scene *sc, t_ray *r)
 		r->norm = norm;
 		r->obj = tmp;
 	}
-	else
-		new_nearest = 0;
 	return (new_nearest);
 }

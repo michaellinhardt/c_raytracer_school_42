@@ -88,7 +88,15 @@ double intersectRayCylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 		proj = vectorAdd(proj, cyl_pos);
 		r->norm = vectorNormalize(vectorSub(proj, r->norm));
 
-
+		if (vectorDist(getHitpoint(r->start, r->dir, dist), cyl_pos) > s->size[1])
+		{
+			if (((-b + sqrtf(discriminant)) / (2 * a)) > dist)
+				dist = ((-b + sqrtf(discriminant)) / (2 * a));
+			if (((-b - sqrtf(discriminant)) / (2 * a)) > dist)
+				dist = ((-b - sqrtf(discriminant)) / (2 * a));
+			if (vectorDist(getHitpoint(r->start, r->dir, dist), cyl_pos) > s->size[1])
+				return (0);
+		}
 		r->norm.x = -r->norm.x;
 		r->norm.y = -r->norm.y;
 		r->norm.z = -r->norm.z;
