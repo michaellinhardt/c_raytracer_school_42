@@ -1,8 +1,10 @@
 NAME = RT
 
-INCLUDES = libft/includes/
+SRCSPATH = srcs/
+INCLUDES = includes/
+LIBFT_INCLUDES = libft/includes
 
-SRC = main.c\
+SRCS = main.c\
 	  error.c\
 	  parse.c\
 	  parse_cam.c\
@@ -23,10 +25,17 @@ SRC = main.c\
 	  intersec_ray.c\
 	  color_functions.c\
 	  perlin.c\
+	  interface/window.c\
 
-WFLAGS = -Wall -Werror -Wextra -O3 -march=native
+SRC = $(addprefix $(SRCSPATH), $(SRCS))
 
-LFLAGS = -L libft/ -lft -lm -lmlx -framework OpenGL -framework AppKit
+GTK_FLAGS = `pkg-config --cflags gtk+-3.0`
+
+GTK_LIBS = `pkg-config --libs gtk+-3.0`
+
+WFLAGS = -Wall -Werror -Wextra -O3 -march=native $(GTK_FLAGS)
+
+LFLAGS = -L libft/ -lft -lm -lmlx -framework OpenGL -framework AppKit $(GTK_LIBS)
 
 CC = gcc -g
 
@@ -35,7 +44,7 @@ OBJ = $(SRC:.c=.o)
 all : $(NAME)
 
 %.o: %.c
-	$(CC) -c $(WFLAGS) -I $(INCLUDES) $< -o $@
+	$(CC) -c $(WFLAGS) -I $(LIBFT_INCLUDES) -I $(INCLUDES) $< -o $@
 
 $(NAME) : $(OBJ)
 	make -C libft

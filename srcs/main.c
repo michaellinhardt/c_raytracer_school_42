@@ -6,11 +6,12 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:09:09 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/23 13:16:07 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/04 21:56:59 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "h_raytra_gen.h"
+#include <h_gui.h>
 
 int		usage(int fd)
 {
@@ -39,12 +40,23 @@ void	init_struct(t_gen *s)
 int		main(int argc, char **argv)
 {
 	t_gen s;
+	t_gui_handler	*handler;
 
 	if (argc == 1)
 		return (usage(open("resources/doc.txt", O_RDONLY)));
 	init_struct(&s);
 	parse_scene(&s, argv);
 	raytracing(&s);
+	/*
+	 ** Launch GUI section. 
+	 */
+	handler = NULL;
+	if (!(handler = gui_create()))
+	{
+		ft_putstr_fd("Unable to open GTK GUI.\n", 2);
+		return (-1);
+	}
+	gui_init(handler);
 	// while (1);
 	return (0);
 }
