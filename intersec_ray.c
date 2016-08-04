@@ -87,7 +87,6 @@ double intersectRayCylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 		r->norm = temp;
 		proj = vectorAdd(proj, cyl_pos);
 		r->norm = vectorNormalize(vectorSub(proj, r->norm));
-
 		if (vectorDist(getHitpoint(r->start, r->dir, dist), cyl_pos) > s->size[1])
 		{
 			if (((-b + sqrtf(discriminant)) / (2 * a)) > dist)
@@ -120,11 +119,10 @@ t_vector ComputeNormal(t_vector inter, t_vector aabbCenter)
     const float zyCoef = interRelative.y / interRelative.z;
 
     const int coef = (xyCoef < 1 && -1 < xyCoef) ? 1 :
-                      (zyCoef > 1 || -1 > zyCoef ? 2 : 0);
-    // Here it's exclusive to avoid coef to be 3
-    // normals[coef].x = (interRelative.x > 0) ? normals[coef].x : -normals[coef].x;
-    // normals[coef].y = (interRelative.y > 0) ? normals[coef].y : -normals[coef].y;
-    // normals[coef].z = (interRelative.z > 0) ? normals[coef].z : -normals[coef].z;
+                      (zyCoef > 1 || -1 > zyCoef ? 0 : 2);
+    normals[coef].x = (interRelative.x < 0) ? normals[coef].x : -normals[coef].x;
+    normals[coef].y = (interRelative.y < 0) ? normals[coef].y : -normals[coef].y;
+    normals[coef].z = (interRelative.z < 0) ? normals[coef].z : -normals[coef].z;
     return normals[coef]; // The sign he is used to know direction of the normal
 }
 

@@ -26,6 +26,8 @@ double noise(t_vector hitpoint)
     if (noiseCoef > 1.0)
     	noiseCoef = 1;
     return (noiseCoef);
+    // return (fabs(cos(hitpoint.x + perlin(hitpoint.x, hitpoint.y, hitpoint.z))));
+
 }
 
 
@@ -86,35 +88,43 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 	total_rgb[1] /= nb_spot;
 	total_rgb[2] /= nb_spot;
 	sqrtc(total_rgb);
-	colorNormalize(rgb, total_rgb, is_ob /** noise(hitpoint)*/, 0);			
+	colorNormalize(rgb, total_rgb, is_ob * ((tmp->type == PLAN ) ? noise(hitpoint) : 1), 0);			
 	return (colorfromrgb(rgb));
 }
 
-int 	reflexion(t_scene *sc, t_ray *r, double m, int col)
+int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 {
 	t_vector newstartpoint;
 	// double coeffreflection;
 	t_ray newray;
 	int color;
+	double tmp_rgb[3];
+	double rgb[3];
 
-
-	color = 0;
 	double new_nearest;
 
 	newstartpoint = r->start;
 	newray.start = getHitpoint(newstartpoint, r->dir, m);
 	newray.dir = vectorDir(r->dir, vectorMultByScalar(r->norm, vectorDot(r->dir, r->norm) * 2));
 	new_nearest = lenray(sc, &newray);
-
-	if (new_nearest > 1)
+	color = 0;
+	if (ret < 10 && new_nearest > 0 && newray.obj)
 	{
-		if (newray.obj->type == SPHERE || newray.obj->type == PLAN || newray.obj->type == CYLINDRE || newray.obj->type == RECTANGLE || newray.obj->type == COMPLEXE)
-			col = diffuse(sc, &newray, newray.obj, new_nearest, color);
-
+		if (newray.obj && (newray.obj->type == SPHERE || newray.obj->type == PLAN || newray.obj->type == CYLINDRE || newray.obj->type == RECTANGLE || newray.obj->type == COMPLEXE))
+			color = diffuse(sc, &newray, newray.obj, new_nearest, newray.obj->c_o);
+		color_composants(color, tmp_rgb);
+		color_composants(col, rgb);
+		rgb[0] = rgb[0] * (1 - (eff / 100)) + tmp_rgb[0] * (eff / 100);
+		rgb[1] = rgb[1] * (1 - (eff / 100)) + tmp_rgb[1] * (eff / 100);
+		rgb[2] = rgb[2] * (1 - (eff / 100)) + tmp_rgb[2] * (eff / 100);
+		col = colorfromrgb(rgb);
+		if (newray.obj->eff[1])
+			col = reflexion(sc, &newray, new_nearest, col, ret + 1, (newray.obj->eff[1] > eff) ? eff : newray.obj->eff[1]);
 	}
-	else 
+	else if (new_nearest < 0 && eff == 100)
 	{
-		// color *= coeffreflection;
+		col = 0;
+	// 	// color *= coeffreflection;
 	}
 
 	return col;
@@ -139,7 +149,7 @@ double	getnearesthit(t_ray *r, t_scene *sc, double x1, double y1, t_id *g)
 		{
 			color = diffuse(sc, r, r->obj, new_nearest, color);
 			if (r->obj->eff[1])
-				color = reflexion(sc, r, new_nearest, color);
+				color = reflexion(sc, r, new_nearest, color, 0,r->obj->eff[1]);
 		}
 		mlx_image_put_pixel(g, x1, y1, color);
 		/*
