@@ -66,7 +66,7 @@ void colorNormalize(double *tab, double *tmp_tab, double factor, int c)
 	else
 	{
 		tab[0] = (tab[0] * tmp_tab[0]) *factor;
-		tab[1] = (tab[1] * tmp_tab[1])*factor;
-		tab[2] = (tab[2] * tmp_tab[2])*factor;
+		tab[1] = (tab[1] * tmp_tab[1]) *factor;
+		tab[2] = (tab[2] * tmp_tab[2]) *factor;
 	}
 }

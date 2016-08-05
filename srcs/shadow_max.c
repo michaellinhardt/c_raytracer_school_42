@@ -73,6 +73,7 @@ double cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *tmp)
 				t = intersectRaySphere(&r, s, &truc[0], &truc[1]);
 			else if (s->type == PLAN)
 				;
+				// t = intersectRayPlane(&r, s, &truc[0], &truc[1]);
 			else if (s->type == CYLINDRE)
 				t = intersectRayCylindre(&r, s, &truc[0], &truc[1]);
 			else if (s->type == RECTANGLE)

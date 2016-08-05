@@ -108,7 +108,7 @@ int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 	newray.dir = vectorDir(r->dir, vectorMultByScalar(r->norm, vectorDot(r->dir, r->norm) * 2));
 	new_nearest = lenray(sc, &newray);
 	color = 0;
-	if (ret < 10 && new_nearest > 0 && newray.obj)
+	if (ret < 10 && new_nearest > 0.001 && newray.obj)
 	{
 		if (newray.obj && (newray.obj->type == SPHERE || newray.obj->type == PLAN || newray.obj->type == CYLINDRE || newray.obj->type == RECTANGLE || newray.obj->type == COMPLEXE))
 			color = diffuse(sc, &newray, newray.obj, new_nearest, newray.obj->c_o);
@@ -124,7 +124,7 @@ int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 	else if (new_nearest < 0 && eff == 100)
 	{
 		col = 0;
-	// 	// color *= coeffreflection;
+		// color *= coeffreflection;
 	}
 
 	return col;

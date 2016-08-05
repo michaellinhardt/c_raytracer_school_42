@@ -75,7 +75,7 @@ double lenray(t_scene *sc, t_ray *r)
 			t = intersectRayCarre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (s->type == COMPLEXE)
 			t = intersectRayComplex(r, s, &tmp_near[0], &tmp_near[1], &color);
-		if ((t < new_nearest && t > 1) || (new_nearest < 0 && t > 1))
+		if ((t < new_nearest && t > 0.000) || (new_nearest < 0 && t > 0.000))
 		{
 			// si la distance actuelle calculee est plus petite que la precedente, on garde en memoire 
 			//: la nouvelle plus courte intersection, l'objet concerne, et la normale du point touche
@@ -92,7 +92,7 @@ double lenray(t_scene *sc, t_ray *r)
 					tmp = s;
 				else
 					tmp = r->obj;
-				if (tmp->type == SPHERE)
+				if (tmp->type == SPHERE || tmp->type == PLAN)
 				{
 				norm.x = -r->norm.x;
 				norm.y = -r->norm.y;

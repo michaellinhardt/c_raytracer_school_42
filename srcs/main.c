@@ -47,9 +47,6 @@ int		main(int argc, char **argv)
 	init_struct(&s);
 	parse_scene(&s, argv);
 	raytracing(&s);
-	/*
-	 ** Launch GUI section. 
-	 */
 	handler = NULL;
 	if (!(handler = gui_create()))
 	{
@@ -57,6 +54,9 @@ int		main(int argc, char **argv)
 		return (-1);
 	}
 	gui_init(handler);
+	/*
+	 ** Launch GUI section. 
+	 */
 	// while (1);
 	return (0);
 }
