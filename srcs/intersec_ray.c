@@ -411,10 +411,10 @@ double intersectRayPlane(t_ray *r, t_obj *p, double *x1, double *y1)
 	t_vector n;
 	t_vector p0;
 
-	p0 = newVector(p->pos[0], p->pos[1], p->pos[2]);
-	n = newVector(p->pos[3], p->pos[4], p->pos[5]);
+	p0 = newVector(p->pos[0], p->pos[1], -p->pos[2]);
+	n = vectorNormalize(newVector(p->pos[3], p->pos[4], -p->pos[5]));
 	t = (vectorDot(vectorSub(r->start, p0),n) / vectorDot(r->dir, n));
-	if (t > 0.00001)
+	if (t > 0.001)
 	{
 		r->norm.x = n.x;
 		r->norm.y = n.y;

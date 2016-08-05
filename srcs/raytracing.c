@@ -17,11 +17,11 @@ double noise(t_vector hitpoint)
 	double noiseCoef;
 
 	noiseCoef = 0;
-	for (int level = 1; level < 100; level ++)
+	for (int level = 1; level < 25; level ++)
     {
         noiseCoef += (1.0 / level )  
         // différents coefficients en x, y  et z du Bruit de Perlinpinpin
-            * fabs((perlin(fabs(level * 0.05 * hitpoint.x), fabs(level * 0.00 * hitpoint.y), fabs(level * 0.05 * hitpoint.z))));
+            * fabs((perlin(fabs(level * 0.05 * hitpoint.x), fabs(level * 0.05 * hitpoint.y), fabs(level * 0.05 * hitpoint.z))));
     };
     if (noiseCoef > 1.0)
     	noiseCoef = 1;
