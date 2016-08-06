@@ -38,7 +38,7 @@ double lenray(t_scene *sc, t_ray *r)
 			t = intersectRayCarre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (s->type == COMPLEXE)
 			t = intersectRayComplex(r, s, &tmp_near[0], &tmp_near[1], &color);
-		if (t > 1 && tmp_near[0] != -1)
+		if (t > 0.0001 && tmp_near[0] != -1)
 		{
 			if (nearest[0] == -1 || (tmp_near[0] < nearest[0]) || tmp_near[1] > nearest[1])
 			{
@@ -75,11 +75,11 @@ double lenray(t_scene *sc, t_ray *r)
 			t = intersectRayCarre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (s->type == COMPLEXE)
 			t = intersectRayComplex(r, s, &tmp_near[0], &tmp_near[1], &color);
-		if ((t < new_nearest && t > 0.000) || (new_nearest < 0 && t > 0.000))
+		if ((t < new_nearest && t > 0.000001) || (new_nearest < 0 && t > 0.000001))
 		{
 			// si la distance actuelle calculee est plus petite que la precedente, on garde en memoire 
 			//: la nouvelle plus courte intersection, l'objet concerne, et la normale du point touche
-			if (t > nearest[0] && t < nearest[1] && nearest[0] > 0 /*&& nearest[1] < INT_MAX*/)
+			if (t > nearest[0] && t < nearest[1] && nearest[0] > 0.001 /*&& nearest[1] < INT_MAX*/)
 			{
 				if (tmp_near[1] <= nearest[1] && tmp_near[0] >= nearest[0])
 				{
@@ -92,7 +92,7 @@ double lenray(t_scene *sc, t_ray *r)
 					tmp = s;
 				else
 					tmp = r->obj;
-				if (tmp->type == SPHERE || tmp->type == PLAN)
+				if (/*tmp->type == SPHERE || */tmp->type == PLAN)
 				{
 				norm.x = -r->norm.x;
 				norm.y = -r->norm.y;
@@ -111,7 +111,7 @@ double lenray(t_scene *sc, t_ray *r)
 		}
 		s = s->next; //objet suivant
 	}
-	if (new_nearest > 0)
+	if (new_nearest > 0.00001)
 	{
 		r->norm = norm;
 		r->obj = tmp;

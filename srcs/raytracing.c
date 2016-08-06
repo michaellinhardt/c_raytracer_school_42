@@ -3,21 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/07/28 02:50:33 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/06 07:36:32 by vbauguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "h_raystruct.h"
+
+// int refraction(t_scene *sc, t_ray *r, double dist, int col, int return, double eff)
+// {
+// 	t_vector newray;
+
+// 	newray.start = getHitpoint(r->start, r->dir, dist);
+// 	newray.dir = calcul de merde bullshit
+// }
 
 double noise(t_vector hitpoint)
 {
 	double noiseCoef;
 
 	noiseCoef = 0;
-	for (int level = 1; level < 25; level ++)
+	for (int level = 1; level < 50; level ++)
     {
         noiseCoef += (1.0 / level )  
         // différents coefficients en x, y  et z du Bruit de Perlinpinpin
@@ -88,14 +96,12 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 	total_rgb[1] /= nb_spot;
 	total_rgb[2] /= nb_spot;
 	sqrtc(total_rgb);
-	colorNormalize(rgb, total_rgb, is_ob * ((tmp->type == PLAN ) ? noise(hitpoint) : 1), 0);			
+	colorNormalize(rgb, total_rgb, is_ob /** noise(hitpoint)*/, 0);			
 	return (colorfromrgb(rgb));
 }
 
 int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 {
-	t_vector newstartpoint;
-	// double coeffreflection;
 	t_ray newray;
 	int color;
 	double tmp_rgb[3];
@@ -103,12 +109,11 @@ int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 
 	double new_nearest;
 
-	newstartpoint = r->start;
-	newray.start = getHitpoint(newstartpoint, r->dir, m);
+	newray.start = getHitpoint(r->start, r->dir, m);
 	newray.dir = vectorDir(r->dir, vectorMultByScalar(r->norm, vectorDot(r->dir, r->norm) * 2));
 	new_nearest = lenray(sc, &newray);
 	color = 0;
-	if (ret < 10 && new_nearest > 0.001 && newray.obj)
+	if (ret < 10 && new_nearest > 0.0001 && newray.obj)
 	{
 		if (newray.obj && (newray.obj->type == SPHERE || newray.obj->type == PLAN || newray.obj->type == CYLINDRE || newray.obj->type == RECTANGLE || newray.obj->type == COMPLEXE))
 			color = diffuse(sc, &newray, newray.obj, new_nearest, newray.obj->c_o);

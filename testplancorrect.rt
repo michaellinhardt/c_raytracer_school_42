@@ -1,0 +1,56 @@
+scene {								
+	name { NAME_SCENE        	 }
+	camera {pos{890; 525; -50}, dir{0; 1; 2}}
+	spot {							
+		camera {pos{890; 625; -50}, dir{1 ; 1; 5}}
+		color { 0xFFffff }					
+	}
+	ambiance { 0x452d6e; 52 }					
+	objects {
+		simple_obj {
+			name { SPHERE GAUCHE RELECTIVE }
+			camera {pos{ 880; 527; 10}, dir{0 ;0 ; 0}}				
+			type { sphere }				
+			size { 7 ; 0.0 ; 0 }			
+			effect { 0 ; 20 ; 0 ; 0}			
+			color { 0xFFFFFF }				
+			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
+		}
+		simple_obj {
+			name { SPHERE DROITE REFLECTIVE }
+			camera {pos{ 900; 529; 10}, dir{0 ;0 ; 0}}				
+			type { sphere }				
+			size { 7 ; 0.0 ; 0 }			
+			effect { 0 ; 20 ; 0 ; 0}			
+			color { 0xFFFFFF }				
+			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
+		}
+		simple_obj {
+			name { PLAN DU HAUT VERT }
+			camera {pos{ 900; 535; 200}, dir{0 ; 1 ; 0}}				
+			type { plan }				
+			size { 0 ; 0 ; 0 }			
+			effect { 0 ;00 ; 0 ; 0}	
+			color { 0x00FF00 }				
+			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
+		}
+		simple_obj {
+			name { PLAN DU BAS }
+			camera {pos{ 900; 515; 200}, dir{0 ; 1 ; 0}}				
+			type { plan }				
+			size { 0 ; 0 ; 0 }			
+			effect { 0 ;00 ; 0 ; 0}	
+			color { 0x0000FF }				
+			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
+		}		
+		simple_obj {
+			name { PLAN DE GAUCHE }
+			camera {pos{ 880; 525; 0}, dir{1 ; 0 ; 0}}				
+			type { plan }				
+			size { 0 ; 0 ; 0 }			
+			effect { 0 ;100 ; 0 ; 0}	
+			color { 0xFFFFFF }				
+			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
+		}		
+	}
+}

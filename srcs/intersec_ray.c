@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersec_ray.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/27 14:17:57 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/28 02:34:13 by ocarta-l         ###   ########.fr       */
+/*   Created: 2016/08/06 03:46:50 by vbauguen          #+#    #+#             */
+/*   Updated: 2016/08/06 07:38:34 by vbauguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,7 +249,7 @@ double intersectRaySphere(t_ray *r, t_obj *s, double *x1, double *y1)
    			t = vectorDot(p0_l0, n) / denom ;
 	
 					
-			if (t > 0.00000 && t < s->size[0])
+			if (t > 0.000001 && t < s->size[0])
 			{
 				dist = fabs((-b + sqrtf(discriminant)) / (2 * a));
 
@@ -269,7 +269,7 @@ double intersectRaySphere(t_ray *r, t_obj *s, double *x1, double *y1)
 				p0_l0 = vectorSub(plan, hitpoint);
 			 	double denom = vectorDot(l, n); 
 					t = vectorDot(p0_l0, n) / denom ;
-				if (t > 0.000001 && t < s->size[0])
+				if (t > 0.001 && t < s->size[0])
 				{
 					return (0);
 				}
@@ -335,7 +335,7 @@ double intersectRayComplex(t_ray *r, t_obj *p, double *x1, double *y1, int *col)
 			t = intersectRayCylindre(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (tmp->type == RECTANGLE)
 			t = intersectRayCarre(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		if (t > 0 && tmp_near[0] != -1)
+		if (t > 0.01 && tmp_near[0] != -1)
 		{
 			if (nearest[0] == -1 || (tmp_near[0] < nearest[0]) || tmp_near[1] > nearest[1])
 			{
@@ -367,7 +367,7 @@ double intersectRayComplex(t_ray *r, t_obj *p, double *x1, double *y1, int *col)
 			t = intersectRayCylindre(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (tmp->type == RECTANGLE)
 			t = intersectRayCarre(r, tmp, &tmp_near[0], &tmp_near[1]);
-		if ((t < new_nearest && t > 0.001)|| (new_nearest < 0 && t > 0.001))
+		if ((t < new_nearest && t > 0.00001)|| (new_nearest < 0 && t > 0.00001))
 		{
 			// si la distance actuelle calculee est plus petite que la precedente, on garde en memoire 
 			//: la nouvelle plus courte intersection, l'objet concerne, et la normale du point touche
@@ -395,7 +395,7 @@ double intersectRayComplex(t_ray *r, t_obj *p, double *x1, double *y1, int *col)
 		}
 		tmp = tmp->next; //objet suivant
 	}
-	if (new_nearest > 0)
+	if (new_nearest > 0.00001)
 	{
 		*col = temp->c_o;
 		r->norm = norm;
@@ -411,10 +411,10 @@ double intersectRayPlane(t_ray *r, t_obj *p, double *x1, double *y1)
 	t_vector n;
 	t_vector p0;
 
-	p0 = newVector(p->pos[0], p->pos[1], -p->pos[2]);
-	n = vectorNormalize(newVector(p->pos[3], p->pos[4], -p->pos[5]));
-	t = (vectorDot(vectorSub(r->start, p0),n) / vectorDot(r->dir, n));
-	if (t > 0.001)
+	p0 = newVector(p->pos[0], p->pos[1], p->pos[2]);
+	n = vectorNormalize(newVector(p->pos[3], p->pos[4], p->pos[5]));
+	t = (vectorDot(vectorSub(p0, r->start),n) / vectorDot(r->dir, n));
+	if (t > 0.00001)
 	{
 		r->norm.x = n.x;
 		r->norm.y = n.y;

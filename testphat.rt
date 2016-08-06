@@ -1,9 +1,13 @@
 scene {								
-	name { NAME_SCENE        	 }
+	name { PLOP        	 }
 	camera {pos{890; 525; -50}, dir{0; 1; 2}}
 	spot {							
-		camera {pos{890; 525; -50}, dir{1 ; 1; 5}}
+		camera {pos{890; 625; -50}, dir{1 ; 1; 5}}
 		color { 0xFFffff }					
+	}
+	spot {							
+		camera {pos{890; 425; -50}, dir{1 ; 1; 5}}
+		color { 0xFF0000 }					
 	}
 	ambiance { 0x452d6e; 52 }					
 	objects {
@@ -13,7 +17,7 @@ scene {
 			type { sphere }				
 			size { 7 ; 0.0 ; 0 }			
 			effect { 0 ; 20 ; 0 ; 0}			
-			color { 0xFFFFFF }				
+			color { 0x00ff00 }				
 			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
 		}
 		simple_obj {
@@ -21,17 +25,17 @@ scene {
 			camera {pos{ 905; 530; 10}, dir{0 ;0 ; 0}}				
 			type { sphere }				
 			size { 7 ; 0.0 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0}			
-			color { 0xFFFFFF }				
+			effect { 0 ; 20 ; 0 ; 0}			
+			color { 0x00ff00 }				
 			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
 		}
 		simple_obj {
-			name { BLUE }
+			name { RED }
 			camera {pos{ 890; 530; 10}, dir{0 ;0 ; 0}}				
 			type { sphere }				
 			size { 7 ; 0.0 ; 0 }			
-			effect { 0 ; 20 ; 0 ; 0}			
-			color { 0xFF0000 }				
+			effect { 0 ; 100 ; 0 ; 0}			
+			color { 0x00ff00 }				
 			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
 		}
 		simple_obj {
@@ -39,8 +43,8 @@ scene {
 			camera {pos{ 875; 530; 10}, dir{0 ;0 ; 0}}				
 			type { sphere }				
 			size { 7 ; 0.0 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0}			
-			color { 0x0000FF }				
+			effect { 0 ; 20 ; 0 ; 0}			
+			color { 0x00ff00 }				
 			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
 		}
 		simple_obj {
@@ -49,7 +53,7 @@ scene {
 			type { sphere }				
 			size { 7 ; 0.0 ; 0 }			
 			effect { 0 ; 20 ; 0 ; 0}			
-			color { 0x0000FF }				
+			color { 0x00ff00 }				
 			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
 		}
 		simple_obj {
@@ -57,53 +61,62 @@ scene {
 			camera {pos{ 890; 515; 10}, dir{0 ;0 ; 1}}				
 			type { cylindre }				
 			size { 3 ; 50 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0}	
-			color { 0xFFFF00 }				
+			effect { 0 ; 00 ; 0 ; 0}	
+			color { 0xFFFFFF }				
 			cut { pos{-0 ; -0 ; -0}, dir{0 ; 0; 0 } }
 		}
 		simple_obj {
-			name { plan }
-			camera {pos{ 880; 540; 200}, dir{0 ; 0 ; 1}}				
+			name { PLAN1 }
+			camera {pos{ 880; 540; 60}, dir{0 ; 0 ; -1}}				
 			type { plan }				
 			size { 0 ; 0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}	
+			effect { 0 ; 00 ; 0 ; 0}	
+			color { 0x0000FF }				
+			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
+		}		
+		simple_obj {
+			name { PLAN2 }
+			camera {pos{ 878; 525; 200}, dir{11 ; 0 ; 0}}				
+			type { plan }				
+			size { 0 ; 0 ; 0 }			
+			effect { 0 ; 100 ; 0 ; 0}	
+			color { 0xFF0000 }				
+			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
+		}		
+		simple_obj {
+			name { PLAN3 }
+			camera {pos{ 902; 525; 200}, dir{-1 ; 0 ; 0}}				
+			type { plan }				
+			size { 0 ; 0 ; 0 }			
+			effect { 0 ; 100 ; 0 ; 0}	
 			color { 0xFFFFFF }				
 			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
 		}		
 		simple_obj {
-			name { plan }
-			camera {pos{ 860; 525; 200}, dir{-1 ; 0 ; 0}}				
-			type { plan }				
-			size { 0 ; 0 ; 0 }			
+			name { PLAN4 }
+			camera {pos{ 870; 515; 5}, dir{1 ; 0 ; 0}}				
+			type { sphere }				
+			size { 7 ; 0 ; 0 }			
 			effect { 0 ; 0 ; 0 ; 0}	
-			color { 0xFFFFFF }				
+			color { 0xaaaaaa }				
 			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
 		}		
 		simple_obj {
-			name { plan }
-			camera {pos{ 920; 525; 200}, dir{1 ; 0 ; 0}}				
-			type { plan }				
-			size { 0 ; 0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}	
-			color { 0xFFFFFF }				
-			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
-		}		
-		simple_obj {
-			name { plan }
+			name { PLAN5 }
 			camera {pos{ 900; 535; 200}, dir{0 ; 1 ; 0}}				
 			type { plan }				
 			size { 0 ; 0 ; 0 }			
-			effect { 0 ; 20 ; 0 ; 0}	
+			effect { 0 ;100 ; 0 ; 0}	
 			color { 0xFFFFFF }				
 			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
 		}
 		simple_obj {
-			name { plan }
+			name { PLAN6 }
 			camera {pos{ 900; 515; 200}, dir{0 ; 1 ; 0}}				
 			type { plan }				
 			size { 0 ; 0 ; 0 }			
-			effect { 0 ; 20 ; 0 ; 0}	
-			color { 0xFFFFFF }				
+			effect { 0 ;100 ; 0 ; 0}	
+			color { 0xFF00FF }				
 			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
 		}		
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow_max.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/24 20:10:10 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/27 18:33:43 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/06 07:34:20 by vbauguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ double cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *tmp)
 				t = intersectRayCarre(&r, s, &truc[0], &truc[1]);
 			else if (s->type == COMPLEXE)
 				t = intersectRayComplex(&r, s, &truc[0], &truc[1], &col);
-				if (t > nearest[0] && t < nearest[1] && t > 0.001 && nearest[0] > 0 /*&& nearest[1] < INT_MAX*/)
+				if (t > nearest[0] && t < nearest[1] && t > 0.00001 && nearest[0] > 0.00001 /*&& nearest[1] < INT_MAX*/)
 				{
 					if (truc[1] > nearest[1])
 					{
@@ -89,7 +89,7 @@ double cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *tmp)
 						break ;
 					}
 				}
-				else if (t > 0.001)
+				else if (t > 0.00001)
 				{
 
 					is_ob += 1;
