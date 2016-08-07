@@ -6,11 +6,12 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/06 07:36:32 by vbauguen         ###   ########.fr       */
+/*   Updated: 2016/08/07 05:06:54 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "h_raystruct.h"
+#include <h_gui.h>
 
 // int refraction(t_scene *sc, t_ray *r, double dist, int col, int return, double eff)
 // {
@@ -38,7 +39,6 @@ double noise(t_vector hitpoint)
 
 }
 
-
 void sqrtc(double *color)
 {
 	color[0] = sqrtf(color[0]);
@@ -46,9 +46,6 @@ void sqrtc(double *color)
 	color[2] = sqrtf(color[2]);
 	// racine carree d'une couleur
 }
-
-
-
 
 int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 {
@@ -71,7 +68,6 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 		spot =spot->next;
 		++nb_spot;
 	}
-	spot = sc->spot;
 	if (tmp->type != COMPLEXE)
 		color_composants(tmp->c_o, rgb);
 	else
@@ -193,14 +189,12 @@ void *display(void *z)
 	return (NULL);
 }
 
-
 void raytracing(t_gen *s)
 {
-	static t_id t;
-	static char c = 0;
-	int j;
-	pthread_t	p[MT];
-
+	static t_id		t;
+	static char		c = 0;
+	int				j;
+	pthread_t		p[MT + 1];
 
 
 	// initialisation minilibx

@@ -6,26 +6,29 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 19:53:30 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/08/04 20:18:15 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/07 04:47:18 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_GUI_H
 # define FT_GUI_H
+#include <glib.h>
 #include <gtk/gtk.h>
 
-typedef struct	s_gui_handler
-{
-	GtkWidget	*pwindow;
+typedef struct	s_gen t_gen;
 
-}				t_gui_handler;
+#define CH_GET_OBJECT(builder, name, type, data) \
+	data->name = type(gtk_builder_get_object(builder, #name) )
+#define CH_GET_WIDGET(builder, name, data) \
+	CH_GET_OBJECT(builder, name, GTK_WIDGET, data )
 
-t_gui_handler	*gui_create(void);
-int				gui_init(t_gui_handler *handler);
-void			gui_create_window(t_gui_handler *handler);
+int				load_interface(t_gen *raycaster);
+GdkPixbuf		*gtk_new_image(unsigned char *data, int width, int heigth);
+int				gtk_put_image_to_window(GtkImage *image, GdkPixbuf *pixbuf);
 
 /*
  ** @Callback section.
  */
 void			on_destroy_callback(GtkWidget *pwidget, gpointer *data);
+void			on_pbutton_clicked(GtkWidget *pwidget, gpointer data);
 #endif

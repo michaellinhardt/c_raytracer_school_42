@@ -25,7 +25,8 @@ SRCS = main.c\
 	  intersec_ray.c\
 	  color_functions.c\
 	  perlin.c\
-	  interface/window.c\
+	  interface/builder.c\
+	  interface/draw.c
 
 SRC = $(addprefix $(SRCSPATH), $(SRCS))
 

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/25 05:36:40 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/07 04:03:18 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "get_next_line.h"
+# include <h_gui.h>
 
 # include <stdio.h>			/* to del */
 # include <math.h>
@@ -67,12 +68,13 @@ typedef struct		s_scene
 
 typedef struct		s_gen 			/* structure generale */
 {
-	int				rep;				/* pour des booleens */
-	t_obj			*to_move;			/* objet a bouger */
+	t_obj			*to_move;			/* Objet courant */	
+	t_scene			*sc;				/* Liste des scenes chargees */
+	GtkWidget		*pwindow;			/* La fenetre LOL */
+	GtkWidget		*pdrawarea;			/* La ou on dessine pour les nuls */	
+	int				rep;				/* pour des booleens (keycode MLX) */
 	char			nb;					/* nombre de scene */
-	t_scene			*sc;
 }					t_gen;
-
 
 void				error(int i, char *str);
 void				parse_scene(t_gen *s, char **argv);

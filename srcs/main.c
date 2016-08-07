@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:09:09 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/04 21:56:59 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/07 05:07:22 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,12 @@ void	init_struct(t_gen *s)
 int		main(int argc, char **argv)
 {
 	t_gen s;
-	t_gui_handler	*handler;
 
-	if (argc == 1)
-		return (usage(open("resources/doc.txt", O_RDONLY)));
+	load_interface(&s);
 	init_struct(&s);
 	parse_scene(&s, argv);
+	if (argc == 1)
+		return (usage(open("resources/doc.txt", O_RDONLY)));
 	raytracing(&s);
-	handler = NULL;
-	if (!(handler = gui_create()))
-	{
-		ft_putstr_fd("Unable to open GTK GUI.\n", 2);
-		return (-1);
-	}
-	gui_init(handler);
-	/*
-	 ** Launch GUI section. 
-	 */
-	// while (1);
 	return (0);
 }
