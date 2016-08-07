@@ -12,6 +12,109 @@
 
 #include "h_raystruct.h"
 
+double intersectRayCone(t_ray *r, t_obj *s, double *x1, double *y1)
+{
+		(void)x1;
+	(void)y1;
+	(void)r;
+	(void)s;
+
+	double discriminant;
+	//double dot;
+	//double dot2;
+	double a;
+	double b;
+	double c;
+	double k;
+	double dist;
+	t_vector cone_pos;
+	t_vector cone_dir;
+	t_vector x;
+	// t_vector p_top;
+	// t_vector p_bot;
+
+	//size->1 == l'angle
+	cone_pos = newVector(s->pos[0], s->pos[1],s->pos[2]);
+	cone_dir = vectorNormalize(newVector(s->pos[3], s->pos[4],s->pos[5]));
+	x = vectorSub(r->start, cone_pos);
+	k = tan(((s->size[1] > 150) ? 150 : s->size[1]) * (M_PI / 180) / 2);
+	a = vectorDot(r->dir, r->dir) - (1 + k * k) * vectorDot(r->dir, cone_dir) * vectorDot(r->dir, cone_dir);
+	b = 2 * (vectorDot(r->dir, x) - (1 + k * k) * vectorDot(r->dir, cone_dir) * vectorDot(x, cone_dir));
+	c = vectorDot(x, x) - (1 + k * k) *  vectorDot(x, cone_dir) *  vectorDot(x, cone_dir);
+
+	discriminant = b * b - 4.0 * (a * c);
+	// p_top = newVector(s->pos[0] - angle, s->pos[1] - angle, s->pos[2] - s->size[1]);
+	// p_bot = newVector(s->pos[0] + s->size[1], s->pos[1] + s->size[1], s->pos[2] + s->size[1]);
+
+	
+	if (discriminant >= 0)
+	{
+
+		dist = ((-b + sqrtf(discriminant)) / (2 * a));
+		if ( ((-b - sqrtf(discriminant)) / (2 * a)) < (dist))
+		{
+			dist = ((-b - sqrtf(discriminant)) / (2 * a));
+			if (dist < 0)
+				return (0);
+			*x1 = dist;
+			*y1 = ((-b + sqrtf(discriminant)) / (2 * a));
+		}
+		else
+		{
+			if (dist < 0)
+				return (0);
+			*x1 = ((-b + sqrtf(discriminant)) / (2 * a));
+			*y1 = ((-b - sqrtf(discriminant)) / (2 * a));
+		}
+		if (vectorDist(getHitpoint(r->start, r->dir, dist), cone_pos) > s->size[0] || vectorDist(getHitpoint(r->start, r->dir, dist), getHitpoint(cone_pos, cone_dir, s->size[0])) < s->size[0])
+		{
+			if ((-b + sqrtf(discriminant)) / (2 * a) > dist)
+				dist = (-b + sqrtf(discriminant)) / (2 * a);
+			if ((-b - sqrtf(discriminant)) / (2 * a) > dist)
+				dist = (-b - sqrtf(discriminant)) / (2 * a);
+			if (vectorDist(getHitpoint(r->start, r->dir, dist), cone_pos) > s->size[0] || vectorDist(getHitpoint(r->start, r->dir, dist), getHitpoint(cone_pos, cone_dir, s->size[0])) < s->size[0])
+				return (0);
+		}
+		
+	t_vector intersection_pos;
+
+	intersection_pos = getHitpoint(r->start, r->dir, dist);
+	x = vectorSub(intersection_pos, cone_pos);// P - C
+	k = vectorDot(x, cone_dir);
+	r->norm = vectorSub(x, vectorMultByScalar(cone_dir, k));// (P - C) - V * k? 
+		// r->norm.x = -r->norm.x;
+		// r->norm.y = -r->norm.y;
+		// r->norm.z = -r->norm.z;
+	// r->norm = vectorSub(r->norm, vectorMultByScalar(cone_dir, tan(s->size[1]) * tan(s->size[1]) * k));
+	vectorNormalize(r->norm);
+		return dist;
+	}
+ 		return 0;
+ 	/*******************************************************************************************************************************************/
+	// (void)x1;
+	// (void)y1;
+	// (void)r;
+	// (void)s;
+	// 	double a;
+	// double b;
+	// double c;
+	// double d;
+	// double e;
+	// t_vector torus_pos;
+	// t_vector torus_dir;
+	// t_vector x;
+
+	// torus_pos = newVector(s->pos[0], s->pos[1],s->pos[2]);
+	// torus_dir = vectorNormalize(newVector(s->pos[3], s->pos[4],s->pos[5]));
+	// x = vectorSub(r->start, torus_pos);//X
+	// a = vectorDot(r->dir, r->dir) * vectorDot(r->dir, r->dir);
+	// b = 4 * vectorDot(r->dir, r->dir) * vectorDot(r->dir, x);
+	// c = 4 * vectorDot(r->dir, r->dir) * vectorDot(r->dir, r->dir) + 2 * vectorDot(r->dir, r->dir) * vectorDot(x, x) - 2 * (s->size[0] * s->size[0] + s->size[1] * s->size[1]) * vectorDot(r->dir, r->dir) + 4 * s->size[0] * s->size[0] * vectorDot(r->dir, torus_dir) * vectorDot(r->dir, torus_dir);
+	// d = 4 * vectorDot(r->dir, x) * vectorDot(x, x) - 4 * (s->size[0] * s->size[0] + s->size[1] * s->size[1]) * vectorDot(r->dir, x) + 8 * s->size[0] * s->size[0] * vectorDot(r->dir, torus_dir) * vectorDot(x, torus_dir);
+	// e = vectorDot(x, x) * vectorDot(x, x) - 2 * (s->size[0] * s->size[0] + s->size[1] * s->size[1]) * vectorDot(x, x) + 4 * s->size[0] * s->size[0] * vectorDot(x, torus_dir) * vectorDot(x, torus_dir) + (s->size[0] * s->size[0] - s->size[1] * s->size[1]) * (s->size[0] * s->size[0] - s->size[1] * s->size[1]);
+	// return (ferrari(a, b, c, d, e));
+}
+
 double intersectRayCylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 {
 	(void)x1;
@@ -206,9 +309,10 @@ double intersectRaySphere(t_ray *r, t_obj *s, double *x1, double *y1)
 	{
 		dist = ((-b + sqrtf(discriminant)) / (2 * a));
 
-		if (((-b + sqrtf(discriminant)) / (2 * a)) < 0 || ((-b - sqrtf(discriminant)) / (2 * a)) < 0)
+		if (((-b + sqrtf(discriminant)) / (2 * a)) <= 0 || ((-b - sqrtf(discriminant)) / (2 * a)) <= 0)
 			return (0);
-		dist = ((-b + sqrtf(discriminant)) / (2 * a));
+		// dist = ((-b + sqrtf(discriminant)) / (2 * a));
+		
 		if ( ((-b - sqrtf(discriminant)) / (2 * a)) < (dist))
 		{
 			dist = ((-b - sqrtf(discriminant)) / (2 * a));

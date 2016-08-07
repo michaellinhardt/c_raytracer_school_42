@@ -32,6 +32,7 @@ t_obj	*obj_to_move(t_obj *s, double x1, double y1, t_ray r)
 		r.dir.y = W_Y / 2.0 - y1 ;
 		r.dir.z = (W_Y / 2.0) / tan(70*0.5);
 		r.dir = vectorNormalize(r.dir);
+		t = 0;
 		if (s->type == SPHERE)
 			t = intersectRaySphere(&r, s, &x1, &y1);
 		else if (s->type == PLAN)
@@ -42,14 +43,16 @@ t_obj	*obj_to_move(t_obj *s, double x1, double y1, t_ray r)
 			t = intersectRayCarre(&r, s, &x1, &y1);
 		else if (s->type == COMPLEXE)
 			t = intersectRayComplex(&r, s, &x1, &y1, &col);
-		if ((t < nearest && t > 0) || (nearest < 0 && t > 0))
+		else if (s->type == CONE)
+			t = intersectRayCone(&r, s, &x1, &y1);
+		if ((t < nearest && t > 0.00001) || (nearest < 0 && t > 0.00001))
 		{
 			nearest = t;
 			tmp = s;
 		}
 		s = s->next;
 	}
-	printf("nearest ==\e[0;32m %lf \e[0;0m\n", nearest);
+	printf("nearest ==\e[0;32m %lf t == %lf\e[0;0m\n", nearest, t);
 	return (tmp);
 }
 

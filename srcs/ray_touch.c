@@ -38,6 +38,8 @@ double lenray(t_scene *sc, t_ray *r)
 			t = intersectRayCarre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (s->type == COMPLEXE)
 			t = intersectRayComplex(r, s, &tmp_near[0], &tmp_near[1], &color);
+		else if (s->type == CONE)
+			t = intersectRayCone(r, s, &tmp_near[0], &tmp_near[1]);
 		if (t > 0.0001 && tmp_near[0] != -1)
 		{
 			if (nearest[0] == -1 || (tmp_near[0] < nearest[0]) || tmp_near[1] > nearest[1])
@@ -75,6 +77,8 @@ double lenray(t_scene *sc, t_ray *r)
 			t = intersectRayCarre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (s->type == COMPLEXE)
 			t = intersectRayComplex(r, s, &tmp_near[0], &tmp_near[1], &color);
+		else if (s->type == CONE)
+			t = intersectRayCone(r, s, &tmp_near[0], &tmp_near[1]);
 		if ((t < new_nearest && t > 0.000001) || (new_nearest < 0 && t > 0.000001))
 		{
 			// si la distance actuelle calculee est plus petite que la precedente, on garde en memoire 
