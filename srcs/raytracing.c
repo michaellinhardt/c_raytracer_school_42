@@ -68,6 +68,7 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 		spot =spot->next;
 		++nb_spot;
 	}
+	spot = sc->spot;
 	if (tmp->type != COMPLEXE)
 		color_composants(tmp->c_o, rgb);
 	else
@@ -194,7 +195,7 @@ void raytracing(t_gen *s)
 	static t_id		t;
 	static char		c = 0;
 	int				j;
-	pthread_t		p[MT + 1];
+	pthread_t		p[MT];
 
 
 	// initialisation minilibx

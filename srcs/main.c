@@ -41,7 +41,7 @@ int		main(int argc, char **argv)
 {
 	t_gen s;
 
-	load_interface(&s);
+	// load_interface(&s);
 	init_struct(&s);
 	parse_scene(&s, argv);
 	if (argc == 1)
