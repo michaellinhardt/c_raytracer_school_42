@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 03:46:50 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/08 11:11:40 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/08 12:17:51 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -638,14 +638,14 @@ double intersectRayTriangle(t_ray *r, t_obj *p, double *x1, double *y1)
 			continue ;	
 		}
 		t = t * vectorDot(c1, c3);
-		if (t > 0.0001 && t < near)
+		if (t > 0.01 && t < near)
 		{
 			new = tmp->nor;
 			near = t;
 		}
 		tmp = tmp->next;
 	}
-	if (near > 0 && near < INT_MAX)
+	if (near > 0.01 && near < INT_MAX)
 	{
 		r->norm.x = new.x;
 		r->norm.y = new.y;

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 00:43:52 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/08 09:52:55 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/08 12:19:12 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ void 	add_vector(double nbr_vn[][3], double nbr_v[][3], t_obj **o, char *line, i
 			line = ft_strsub(tmp, 0, ft_strlen(tmp) - ft_strlen(ft_strchr(tmp, '/')));
 			if (verif_double(line))
 			{
+				ft_printf("%d \n", ft_atoi(line));
 				triangle->tri[i].x = (nbr_v[ft_atoi(line) - 1][0]) * 5	 + (*o)->pos[0];
 				triangle->tri[i].y = (nbr_v[ft_atoi(line) - 1][1]) * 5	 + (*o)->pos[1];
 				triangle->tri[i].z = (nbr_v[ft_atoi(line) - 1][2]) * 5	 + (*o)->pos[2];
@@ -194,9 +195,9 @@ void 	add_vector(double nbr_vn[][3], double nbr_v[][3], t_obj **o, char *line, i
 			ft_strdel(&temp[i]);
 			++i;
 		}
-			printf("vector 1 = %lf %lf %lf\n", triangle->tri[0].x,triangle->tri[0].y,triangle->tri[0].z);
-		printf("vector 2 = %lf %lf %lf\n", triangle->tri[1].x,triangle->tri[1].y,triangle->tri[1].z);
-		printf("vector 3 = %lf %lf %lf\n\n", triangle->tri[2].x,triangle->tri[2].y,triangle->tri[2].z);
+			// printf("vector 1 = %lf %lf %lf\n", triangle->tri[0].x,triangle->tri[0].y,triangle->tri[0].z);
+		// printf("vector 2 = %lf %lf %lf\n", triangle->tri[1].x,triangle->tri[1].y,triangle->tri[1].z);
+		// printf("vector 3 = %lf %lf %lf\n\n", triangle->tri[2].x,triangle->tri[2].y,triangle->tri[2].z);
 		free(temp);
 		temp = NULL;
 		if (i != 3)
@@ -233,6 +234,7 @@ void	parse_f(t_line *v, t_line *vn, char *tmp, t_obj **o, int fd)
 
 	init_tab(v, nbr_v);
 	init_tab(vn, nbr_vn);
+	ft_printf("%d \n", len_lst(v));
 	free_lst(v);
 	free_lst(vn);
 	add_vector(nbr_vn, nbr_v, o, tmp, fd);
