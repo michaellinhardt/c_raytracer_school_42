@@ -26,6 +26,8 @@
 # define CONE 4
 # define CYLINDRE 5
 # define COMPLEXE 6
+# define TORUS 7
+# define BOLOID 8
 
 /*
 **	BOOL

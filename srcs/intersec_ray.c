@@ -36,6 +36,43 @@ double	equa_sec(double a, double b, double discriminant, double *x1, double *y1,
 	}
 }
 
+double	ferrari(double a, double b, double c, double d, double e)
+{
+	double p;
+	double q;
+	double r;
+	double x[4];
+	int i;
+	//double discriminant;
+	if (a != 0)
+	{
+		q = (8 * a * a * d + b * b * b - 4 * a * b * c) / (8 * a * a * a);
+		p = (8 * a * c - 3 * b * b) / (8 * a * a);
+		r = (16 * a * b * b * c - 64 * a * a * b * d - 3 * b * b * b * b + 256 * a * a * a * e) / 256 * a * a * a * a;
+		if (q != 0)
+		{
+			x[0] = sqrtf((-p - sqrtf(p * p - 4 * r)) / 2) - b / (4 * a);
+			x[1] = -sqrtf((-p - sqrtf(p * p - 4 * r)) / 2) - b / (4 * a);
+			x[2] = sqrtf((-p + sqrtf(p * p - 4 * r)) / 2) - b / (4 * a);
+			x[3] = -sqrtf((-p + sqrtf(p * p - 4 * r)) / 2) - b / (4 * a);
+			i = 0;
+			q = 0;
+			while (i != 4)
+			{
+				if (x[i] >= 0 && (x[i] < q || q == 0))
+					q = x[i];
+				i++;
+			}
+			return (q);
+		}
+		else
+		{
+			return (0);
+		}
+	}
+	return (0);
+}
+
 double intersectRayCone(t_ray *r, t_obj *s, double *x1, double *y1)
 {
 	(void)x1;
@@ -110,9 +147,54 @@ double intersectRayCone(t_ray *r, t_obj *s, double *x1, double *y1)
 	return (0);
 }
 
+double intersectRayBoloid(t_ray *r, t_obj *s, double *x1, double *y1)
+{
+	(void)r;
+	(void)s;
+	(void)x1;
+	(void)y1;
+	return (0);
+}
+double intersectRayTorus(t_ray *r, t_obj *s, double *x1, double *y1)
+{
+	double a;
+	double b;
+	double c;
+	double d;
+	double e;
+	double dist;
+	t_vector torus_pos;
+	t_vector torus_dir;
+	t_vector intersection_pos;
+	t_vector x;
+	(void)x1;
+	(void)y1;
+	torus_pos = newVector(s->pos[0], s->pos[1],s->pos[2]);
+	torus_dir = vectorNormalize(newVector(s->pos[3], s->pos[4],s->pos[5]));
+	x = vectorSub(r->start, torus_pos);
+	
+	a = pow(vectorDot(r->dir, r->dir), 2);
+	b = 4 * vectorDot(r->dir, r->dir) * vectorDot(x, r->dir);
+	c = 4 * pow(vectorDot(x, r->dir), 2) + 2 * vectorDot(r->dir, r->dir) * (vectorDot(x, x) - pow(s->size[1], 2) - pow(s->size[0], 2))
+			+ 4 * pow(s->size[0], 2) * pow(vectorDot(r->dir, torus_dir), 2);
+	d = 4 * vectorDot(x, r->dir) * (vectorDot(x, x)
+			- pow(s->size[1], 2) - pow(s->size[0], 2)) + 8
+			* pow(s->size[0], 2) *  vectorDot(x, torus_dir) * vectorDot(r->dir, torus_dir);
+	e = pow((vectorDot(x, x) - pow(s->size[1], 2)
+			- pow(s->size[0], 2)), 2) + 4 * pow(s->size[0], 2) * pow( vectorDot(x, torus_dir), 2)
+			- 4 * pow(s->size[0], 2) * pow(s->size[1], 2);
+
+	dist = ferrari(a, b, c, d, e);
+	t_vector circ_pos;
+	intersection_pos = getHitpoint(r->start, r->dir, dist);
+	circ_pos = getHitpoint(torus_pos, torus_dir, s->size[0] - s->size[1]);
+	r->norm = vectorNormalize(vectorSub(intersection_pos, circ_pos));
+	return (dist);
+}
+
 double intersectRayCylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 {
-	(void)x1;
+		(void)x1;
 	(void)y1;
 	(void)r;
 	(void)s;
@@ -127,8 +209,6 @@ double intersectRayCylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 	t_vector cyl_pos;
 	t_vector cyl_dir;
 	t_vector tmp;
-	double test1;
-	double test2;
 	// t_vector p_top;
 	// t_vector p_bot;
 
@@ -136,7 +216,7 @@ double intersectRayCylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 	cyl_dir = vectorNormalize(newVector(s->pos[3], s->pos[4],s->pos[5]));
 
 	dot = vectorDot(r->dir, cyl_dir);
-	tmp = vectorSub(r->start, cyl_pos);
+	tmp = vectorSub(r->start, cyl_pos);//delta p cyl_pos == pa
 	dot2 = vectorDot(tmp, cyl_dir);
 	// dot2 = vectorDot(r->dir, cyl_dir);
 
@@ -151,14 +231,21 @@ double intersectRayCylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 
 	if (discriminant >= 0)
 	{
-		test1 = *x1;
-		test2 = *y1;
-		dist = equa_sec(a, b, discriminant, x1, y1, 0);
-		if (dist < 0)
+		dist = ((-b + sqrtf(discriminant)) / (2 * a));
+		if ( ((-b - sqrtf(discriminant)) / (2 * a)) < (dist))
 		{
-			*x1 = test1;
-			*y1 = test2;
-			return (0);
+			dist = ((-b - sqrtf(discriminant)) / (2 * a));
+			if (dist < 0)
+				return (0);
+			*x1 = dist;
+			*y1 = ((-b + sqrtf(discriminant)) / (2 * a));
+		}
+		else
+		{
+			if (dist < 0)
+				return (0);
+			*x1 = ((-b + sqrtf(discriminant)) / (2 * a));
+			*y1 = ((-b - sqrtf(discriminant)) / (2 * a));
 		}
 		t_vector temp;
 		t_vector tp;
@@ -187,11 +274,7 @@ double intersectRayCylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 			if (((-b - sqrtf(discriminant)) / (2 * a)) > dist)
 				dist = ((-b - sqrtf(discriminant)) / (2 * a));
 			if (vectorDist(getHitpoint(r->start, r->dir, dist), cyl_pos) > s->size[1])
-			{
-				*x1 = test1;
-				*y1 = test2;
 				return (0);
-			}
 		}
 		r->norm.x = -r->norm.x;
 		r->norm.y = -r->norm.y;
@@ -200,7 +283,6 @@ double intersectRayCylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 		return dist;
 	}
  		return 0;
-
 	
 }
 
@@ -433,6 +515,12 @@ double intersectRayComplex(t_ray *r, t_obj *p, double *x1, double *y1, int *col)
 			t = intersectRayCylindre(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (tmp->type == RECTANGLE)
 			t = intersectRayCarre(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
+		else if (tmp->type == CONE)
+			t = intersectRayCylindre(r, tmp, &tmp_near[0], &tmp_near[1]);
+		else if (tmp->type == BOLOID)
+			t = intersectRayBoloid(r, tmp, &tmp_near[0], &tmp_near[1]);
+		else if (tmp->type == TORUS)
+			t = intersectRayCone(r, tmp, &tmp_near[0], &tmp_near[1]);
 		if (t > 0.01 && tmp_near[0] != -1)
 		{
 			if (nearest[0] == -1 || (tmp_near[0] < nearest[0]) || tmp_near[1] > nearest[1])
@@ -465,6 +553,12 @@ double intersectRayComplex(t_ray *r, t_obj *p, double *x1, double *y1, int *col)
 			t = intersectRayCylindre(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (tmp->type == RECTANGLE)
 			t = intersectRayCarre(r, tmp, &tmp_near[0], &tmp_near[1]);
+		else if (tmp->type == CONE)
+			t = intersectRayCylindre(r, tmp, &tmp_near[0], &tmp_near[1]);
+		else if (tmp->type == TORUS)
+			t = intersectRayCone(r, tmp, &tmp_near[0], &tmp_near[1]);
+		else if (tmp->type == BOLOID)
+			t = intersectRayBoloid(r, tmp, &tmp_near[0], &tmp_near[1]);
 		if ((t < new_nearest && t > 0.00001)|| (new_nearest < 0 && t > 0.00001))
 		{
 			// si la distance actuelle calculee est plus petite que la precedente, on garde en memoire 

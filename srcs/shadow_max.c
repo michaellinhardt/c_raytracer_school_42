@@ -55,6 +55,10 @@ double cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *tmp)
 				t = intersectRayComplex(&r, s, &nearest[0], &nearest[1], &col);
 			else if (s->type == CONE)
 				t = intersectRayCone(&r, s, &nearest[0], &nearest[1]);
+			else if (s->type == TORUS)
+				t = intersectRayCone(&r, s, &nearest[0], &nearest[1]);
+			else if (s->type == BOLOID)
+				t = intersectRayBoloid(&r, s, &nearest[0], &nearest[1]);
 			if (nearest[0] != -1)
 			{
 				// norm = r->norm;
@@ -84,6 +88,10 @@ double cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *tmp)
 				t = intersectRayComplex(&r, s, &truc[0], &truc[1], &col);
 			else if (s->type == CONE)
 				t = intersectRayCone(&r, s, &truc[0], &truc[1]);
+			else if (s->type == TORUS)
+				t = intersectRayCone(&r, s, &truc[0], &truc[1]);
+			else if (s->type == BOLOID)
+				t = intersectRayBoloid(&r, s, &truc[0], &truc[1]);
 				if (t > nearest[0] && t < nearest[1] && t > 0.00001 && nearest[0] > 0.00001 /*&& nearest[1] < INT_MAX*/)
 				{
 					if (truc[1] > nearest[1])
