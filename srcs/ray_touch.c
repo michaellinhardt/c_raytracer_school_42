@@ -26,8 +26,6 @@ double lenray(t_scene *sc, t_ray *r)
 		}
 		tmp_near[0] = -1;
 		tmp_near[1] = INT_MAX;
-	//	r->dir = newVector(x1 - W_X / 2.0, W_Y / 2.0 - y1, (W_Y / 2.0) / tan(70*0.5));	//initialisation des donnees de la camera 
-	//	r->dir = vectorNormalize(r->dir);	// normalisation de la direction
 		if (s->type == SPHERE)
 			t = intersectRaySphere(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (s->type == PLAN)
@@ -69,8 +67,6 @@ double lenray(t_scene *sc, t_ray *r)
 			s = s->next;
 			continue ;
 		}
-	//	r->dir = newVector(x1 - W_X / 2.0, W_Y / 2.0 - y1, (W_Y / 2.0) / tan(70*0.5));	//initialisation des donnees de la camera 
-//		r->dir = vectorNormalize(r->dir);	// normalisation de la direction
 		if (s->type == SPHERE)
 			t = intersectRaySphere(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (s->type == PLAN)
@@ -87,6 +83,8 @@ double lenray(t_scene *sc, t_ray *r)
 			t = intersectRayCone(r, s, &tmp_near[0], &tmp_near[1]);
 		else if (s->type == BOLOID)
 			t = intersectRayBoloid(r, s, &tmp_near[0], &tmp_near[1]);
+		else if (s->type == TRIANGLE)
+			t = intersectRayTriangle(r, s, &tmp_near[0], &tmp_near[1]);
 		if ((t < new_nearest && t > 0.000001) || (new_nearest < 0 && t > 0.000001))
 		{
 			// si la distance actuelle calculee est plus petite que la precedente, on garde en memoire 

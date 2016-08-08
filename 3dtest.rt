@@ -1,0 +1,121 @@
+scene {								
+	name { NAME_SCENE        	 }
+	camera {pos{890; 525; -50}, dir{0; 1; 2}}
+	spot {							
+		camera {pos{890; 525; 050}, dir{1 ; 1; 5}}
+		color { 0x00ff00 }					
+	}
+	spot {							
+		camera {pos{890; 605; -50}, dir{1 ; 1; 5}}
+		color { 0x00ffff }					
+	}
+	ambiance { 0x452d6e; 52 }					
+	objects {
+		simple_obj {
+			name { 3d }
+			camera {pos{ 900; 520; 20}, dir{0 ;0 ; 0}}				
+			type { triangle }				
+			color { 0xffffff }				
+			{
+					# Blender v2.77 (sub 0) OBJ File: ''
+					# www.blender.org
+					# cube.obj
+					#
+					 
+					g cube
+					 
+					v  0.0  0.0  0.0
+					v  0.0  0.0  1.0
+					v  0.0  1.0  0.0
+					v  0.0  1.0  1.0
+					v  1.0  0.0  0.0
+					v  1.0  0.0  1.0
+					v  1.0  1.0  0.0
+					v  1.0  1.0  1.0
+
+					vn  0.0  0.0  1.0
+					vn  0.0  0.0 -1.0
+					vn  0.0  1.0  0.0
+					vn  0.0 -1.0  0.0
+					vn  1.0  0.0  0.0
+					vn -1.0  0.0  0.0
+					 
+					f  1//2  7//2  5//2
+					f  1//2  3//2  7//2 
+					f  1//6  4//6  3//6 
+					f  1//6  2//6  4//6 
+					f  3//3  8//3  7//3 
+					f  3//3  4//3  8//3 
+					f  5//5  7//5  8//5 
+					f  5//5  8//5  6//5 
+					f  1//4  5//4  6//4 
+					f  1//4  6//4  2//4 
+					f  2//1  6//1  8//1 
+					f  2//1  8//1  4//1 
+			}
+		}
+		simple_obj {
+			name { BLUE }
+			camera {pos{ 875; 530; 10}, dir{0 ;0 ; 0}}				
+			type { sphere }				
+			size { 7 ; 0.0 ; 0 }			
+			effect { 0 ; 80 ; 0 ; 0}			
+			color { 0x0000FF }				
+			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
+		}
+		simple_obj {
+			name { BLUE }
+			camera {pos{ 860; 525; 10}, dir{0 ;0 ; 0}}				
+			type { sphere }				
+			size { 7 ; 0.0 ; 0 }			
+			effect { 0 ; 00 ; 0 ; 0}			
+			color { 0x0000FF }				
+			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
+		}
+		simple_obj {
+			name { plan }
+			camera {pos{ 880; 540; 200}, dir{0 ; 0 ; -1}}				
+			type { plan }				
+			size { 0 ; 0 ; 0 }			
+			effect { 0 ; 0 ; 0 ; 0}	
+			color { 0xFFFFFF }				
+			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
+		}		
+		simple_obj {
+			name { plan }
+			camera {pos{ 860; 525; 200}, dir{-1 ; 0 ; 0}}				
+			type { plan }				
+			size { 0 ; 0 ; 0 }			
+			effect { 0 ; 100 ; 0 ; 0}	
+			color { 0xFFFFFF }				
+			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
+		}		
+		simple_obj {
+			name { plan }
+			camera {pos{ 920; 525; 200}, dir{1 ; 0 ; 0}}				
+			type { plan }				
+			size { 0 ; 0 ; 0 }			
+			effect { 0 ; 100 ; 0 ; 0}	
+			color { 0xFFFFFF }				
+			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
+		}		
+		simple_obj {
+			name { plan }
+			camera {pos{ 900; 535; 200}, dir{0 ; 1 ; 0}}				
+			type { plan }				
+			size { 0 ; 0 ; 0 }			
+			effect { 0 ; 00 ; 0 ; 0}	
+			color { 0xFFFFFF }				
+			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
+		}
+		simple_obj {
+			name { plan }
+			camera {pos{ 900; 515; 200}, dir{0 ; 1 ; 0}}				
+			type { plan }				
+			size { 0 ; 0 ; 0 }			
+			effect { 0 ; 100 ; 0 ; 0}	
+			color { 0xFFFFFF }				
+			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
+		}		
+	}
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow_max.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/24 20:10:10 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/06 07:34:20 by vbauguen         ###   ########.fr       */
+/*   Updated: 2016/08/08 10:57:41 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,27 +92,23 @@ double cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *tmp)
 				t = intersectRayCone(&r, s, &truc[0], &truc[1]);
 			else if (s->type == BOLOID)
 				t = intersectRayBoloid(&r, s, &truc[0], &truc[1]);
-				if (t > nearest[0] && t < nearest[1] && t > 0.00001 && nearest[0] > 0.00001 /*&& nearest[1] < INT_MAX*/)
+			else if (s->type == TRIANGLE)
+				t = intersectRayTriangle(&r, s, &truc[0], &truc[1]);
+			if (t > nearest[0] && t < nearest[1] && t > 0.00001 && nearest[0] > 0.00001 /*&& nearest[1] < INT_MAX*/)
+			{
+				if (truc[1] > nearest[1])
 				{
-					if (truc[1] > nearest[1])
-					{
-						s = s->next;
-						is_ob += 1;
-						break ;
-					}
-				}
-				else if (t > 0.00001)
-				{
-
+					s = s->next;
 					is_ob += 1;
 					break ;
 				}
+			}
+			else if (t > 0.00001)
+			{
 
-			// if (t > 0.001 && t < nearest[1] && t > nearest[0])
-			// {
-				// is_ob += 1;
-				// break ;
-			// }
+				is_ob += 1;
+				break ;
+			}
 			s = s->next;
 		}
 		spot = spot->next;

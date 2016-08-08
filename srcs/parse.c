@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 19:49:55 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/25 08:27:29 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/08 10:56:36 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,11 @@ char type(int fd)
 		{
 			ft_strdel(&tmp);
 			return (BOLOID);
+		}
+		else if (ft_strequ(tmp, "triangle"))
+		{
+			ft_strdel(&tmp);
+			return (TRIANGLE);
 		}
 		else
 			error(3, "type object");

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/07/28 02:34:18 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/08 11:02:20 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,6 @@
 # include "mlx.h"
 # include "libft.h"
 #include "h_raytra_gen.h"
-
-
-typedef struct		s_vector
-{
-	double				x;
-	double				y;
-	double				z;
-}					t_vector;
 
 typedef struct		s_ray
 {
@@ -128,6 +120,7 @@ void				raytracing(t_gen *s);
 
 double 				vectorDot(t_vector v1, t_vector v2);
 t_vector 			vectorAdd(t_vector v1, t_vector v2);
+t_vector			vectorCross(t_vector v1, t_vector v2);
 t_vector 			vectorDivByScalar(t_vector v, double scalar);
 t_vector 			vectorSub(t_vector v1, t_vector v2);
 t_vector 			vectorMult(t_vector v1, t_vector v2);
@@ -187,6 +180,7 @@ double 				intersectRayComplex(t_ray *r, t_obj *s, double *x1, double *y1, int *
 double 				intersectRayCone(t_ray *r, t_obj *s, double *x1, double *y1);
 double 				intersectRayTorus(t_ray *r, t_obj *s, double *x1, double *y1);
 double 				intersectRayBoloid(t_ray *r, t_obj *s, double *x1, double *y1);
+double 				intersectRayTriangle(t_ray *r, t_obj *s, double *x1, double *y1);
 
 /*
 **									perlin.c  

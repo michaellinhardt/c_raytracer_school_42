@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersec_ray.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 03:46:50 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/06 07:38:34 by vbauguen         ###   ########.fr       */
+/*   Updated: 2016/08/08 11:11:40 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -593,6 +593,68 @@ double intersectRayComplex(t_ray *r, t_obj *p, double *x1, double *y1, int *col)
 		r->norm = norm;
 	}
 	return ((new_nearest != -1) ? new_nearest : 0); 
+}
+
+double intersectRayTriangle(t_ray *r, t_obj *p, double *x1, double *y1)
+{
+	(void)y1;	
+	double t;
+	double d;
+	double near;
+	t_obj		*tmp;
+	t_vector new;
+	t_vector test;
+	t_vector c0;
+	t_vector c1;
+	t_vector c2;
+	t_vector c3;
+	
+	tmp = p->comp;
+	near = INT_MAX;
+	while (tmp)
+	{
+		c0 = vectorSub(tmp->tri[1], tmp->tri[0]);
+		c1 = vectorSub(tmp->tri[2], tmp->tri[0]);
+		test = vectorCross(r->dir, c1);
+		d = vectorDot(c0, test);
+		if (d > -0.00001 && d < 0.00001)
+		{
+			tmp = tmp->next;
+			continue ;
+		}
+		t = 1.0 / d;
+		c2 = vectorSub(r->start, tmp->tri[0]);
+		double u = t * vectorDot(c2, test);
+		if (u < 0.0 || u > 1.0)
+		{
+			tmp = tmp->next;
+			continue ;	
+		}
+		c3 = vectorCross(c2, c0);
+		double v = t * vectorDot(r->dir, c3);
+		if (v < 0.0 || u + v > 1.0)
+		{
+			tmp = tmp->next;
+			continue ;	
+		}
+		t = t * vectorDot(c1, c3);
+		if (t > 0.0001 && t < near)
+		{
+			new = tmp->nor;
+			near = t;
+		}
+		tmp = tmp->next;
+	}
+	if (near > 0 && near < INT_MAX)
+	{
+		r->norm.x = new.x;
+		r->norm.y = new.y;
+		r->norm.z = new.z;
+		*x1 = near;
+		r->norm = vectorNormalize(r->norm);
+		return (near);
+	}
+	return (0);
 }
 
 double intersectRayPlane(t_ray *r, t_obj *p, double *x1, double *y1)

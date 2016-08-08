@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/07 04:03:18 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/08 10:53:16 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define COMPLEXE 6
 # define TORUS 7
 # define BOLOID 8
+# define TRIANGLE 9
 
 /*
 **	BOOL
@@ -36,6 +37,14 @@
 # define SAVE 0x1
 
 # define DEBUG 0
+
+
+typedef struct		s_vector
+{
+	double				x;
+	double				y;
+	double				z;
+}					t_vector;
 
 typedef struct		s_spot
 {
@@ -53,6 +62,8 @@ typedef struct		s_obj
 	double			eff[4];				/* eff[0] = transparence , [1] = reflexion, [2] = refraction, [3] == negatif */
 	int				c_o;				/* color 0xRGB */
 	struct s_obj	*comp;				/* pour les objets complexes */
+	t_vector		tri[3];				/* pour les .obj */
+	t_vector		nor;				/* pour les .obj */
 	double			cut[6];				/* a voir comment faire */
 	void			*next;
 }					t_obj;

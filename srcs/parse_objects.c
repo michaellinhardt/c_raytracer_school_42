@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/21 06:34:57 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/21 07:09:05 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/08 10:54:26 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static t_obj	*simple_obj(int fd, char *line, char c)
 {
-	t_obj *o;
+		t_obj *o;
 	char *temp;
 
 	(!(o = ft_memalloc(sizeof(t_obj)))) ? error(2, "Malloc") : 1;
@@ -23,10 +23,18 @@ static t_obj	*simple_obj(int fd, char *line, char c)
 		o->name = name(fd);
 	camera(fd, o->pos, 0);
 	o->type = type(fd);
-	size(fd, o->size);
-	effect(fd, o->eff);
-	color(fd, &o->c_o, 0);
-	camera(fd, o->cut, 1);
+	if (o->type != TRIANGLE)
+	{
+		size(fd, o->size);
+		effect(fd, o->eff);
+		color(fd, &o->c_o, 0);
+		camera(fd, o->cut, 1);
+	}
+	else
+	{
+		color(fd, &o->c_o, 0);
+		triangle(fd, &o, NULL);
+	}
 	if (get_next_line(fd, &line) > 0 && ft_strstr(line, "}"))
 	{
 		temp = ft_strtrim(line);

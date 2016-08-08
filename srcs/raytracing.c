@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/07 05:06:54 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/08 10:59:10 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 	color = 0;
 	if (ret < 10 && new_nearest > 0.0001 && newray.obj)
 	{
-		if (newray.obj && (newray.obj->type == SPHERE || newray.obj->type == CONE || newray.obj->type == PLAN || newray.obj->type == CYLINDRE || newray.obj->type == RECTANGLE || newray.obj->type == COMPLEXE))
+		if (newray.obj && (newray.obj->type == SPHERE || newray.obj->type == TRIANGLE || newray.obj->type == CONE || newray.obj->type == PLAN || newray.obj->type == CYLINDRE || newray.obj->type == RECTANGLE || newray.obj->type == COMPLEXE))
 			color = diffuse(sc, &newray, newray.obj, new_nearest, newray.obj->c_o);
 		color_composants(color, tmp_rgb);
 		color_composants(col, rgb);
@@ -147,7 +147,7 @@ double	getnearesthit(t_ray *r, t_scene *sc, double x1, double y1, t_id *g)
 		color = 0;
 	if (new_nearest >= 0)
 	{
-		if (r->obj && (r->obj->type == SPHERE||  r->obj->type == CONE || r->obj->type == COMPLEXE || r->obj->type == PLAN || r->obj->type == CYLINDRE || r->obj->type == RECTANGLE))
+		if (r->obj && (r->obj->type == SPHERE||  r->obj->type == CONE || r->obj->type == COMPLEXE || r->obj->type == TRIANGLE || r->obj->type == PLAN || r->obj->type == CYLINDRE || r->obj->type == RECTANGLE))
 		{
 			color = diffuse(sc, r, r->obj, new_nearest, color);
 			if (r->obj->eff[1])

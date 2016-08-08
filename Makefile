@@ -25,6 +25,7 @@ SRCS = main.c\
 	  intersec_ray.c\
 	  color_functions.c\
 	  perlin.c\
+	  parse_triangle.c\
 	  interface/builder.c\
 	  interface/draw.c
 

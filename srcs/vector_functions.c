@@ -19,6 +19,12 @@ t_vector vectorDivByScalar(t_vector v, double scalar)
 
 }
 
+t_vector vectorCross(t_vector v1, t_vector v2)
+{
+	t_vector result = { v1.y * v2.z - v2.y * v1.z, v1.z * v2.x - v2.z * v1.x, v1.x * v2.y - v2.x * v1.y};
+	return result;
+}
+
 t_vector vectorMultByScalar(t_vector v, double scalar)
 {
 	t_vector result = {v.x*scalar, v.y * scalar, v.z * scalar }; // multiplie les composante du vecteur 1 par un nombre reel
