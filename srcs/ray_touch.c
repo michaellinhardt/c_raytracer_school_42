@@ -39,7 +39,7 @@ double lenray(t_scene *sc, t_ray *r)
 		else if (s->type == CONE)
 			t = intersectRayCone(r, s, &tmp_near[0], &tmp_near[1]);
 		else if (s->type == TORUS)
-			t = intersectRayCone(r, s, &tmp_near[0], &tmp_near[1]);
+			t = intersectRayTorus(r, s, &tmp_near[0], &tmp_near[1]);
 		else if (s->type == BOLOID)
 			t = intersectRayBoloid(r, s, &tmp_near[0], &tmp_near[1]);
 		if (t > 0.0001 && tmp_near[0] != -1)
@@ -81,7 +81,7 @@ double lenray(t_scene *sc, t_ray *r)
 		else if (s->type == CONE)
 			t = intersectRayCone(r, s, &tmp_near[0], &tmp_near[1]);
 		else if (s->type == TORUS)
-			t = intersectRayCone(r, s, &tmp_near[0], &tmp_near[1]);
+			t = intersectRayTorus(r, s, &tmp_near[0], &tmp_near[1]);
 		else if (s->type == BOLOID)
 			t = intersectRayBoloid(r, s, &tmp_near[0], &tmp_near[1]);
 		else if (s->type == TRIANGLE)
