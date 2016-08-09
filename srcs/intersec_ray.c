@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 03:46:50 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/08 12:17:51 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/09 18:56:40 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,8 +229,9 @@ double intersectRayCylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 	// p_top = newVector(s->pos[0] - s->size[1], s->pos[1] - s->size[1], s->pos[2] - s->size[1]);
 	// p_bot = newVector(s->pos[0] + s->size[1], s->pos[1] + s->size[1], s->pos[2] + s->size[1]);
 
-	if (discriminant >= 0)
+	if (discriminant >= 0 && a)
 	{
+		// double tmp_y = *y1;
 		dist = ((-b + sqrtf(discriminant)) / (2 * a));
 		if ( ((-b - sqrtf(discriminant)) / (2 * a)) < (dist))
 		{
@@ -239,6 +240,7 @@ double intersectRayCylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 				return (0);
 			*x1 = dist;
 			*y1 = ((-b + sqrtf(discriminant)) / (2 * a));
+			// neg = 1;
 		}
 		else
 		{
@@ -247,39 +249,28 @@ double intersectRayCylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 			*x1 = ((-b + sqrtf(discriminant)) / (2 * a));
 			*y1 = ((-b - sqrtf(discriminant)) / (2 * a));
 		}
-		t_vector temp;
-		t_vector tp;
-		t_vector ab;
-		t_vector proj;
-		t_vector cyl_pos_dir = newVector(s->pos[0] + s->pos[3], s->pos[1] + s->pos[4], s->pos[2] + s->pos[5]);
+		
+		// if (vectorDist(getHitpoint(r->start, r->dir, dist), cyl_pos) > s->size[1])
+		// {
+		// 	if (((-b + sqrtf(discriminant)) / (2 * a)) > dist)
+		// 		dist = ((-b + sqrtf(discriminant)) / (2 * a));
+		// 	if (((-b - sqrtf(discriminant)) / (2 * a)) > dist)
+		// 		dist = ((-b - sqrtf(discriminant)) / (2 * a));
+		// 	if (vectorDist(getHitpoint(r->start, r->dir, dist), cyl_pos) > s->size[1])
+		// 		return (0);
+		// 	neg = 1;
+		// }
+		t_vector	hitpoint;
 
-		temp = vectorMultByScalar(r->dir, dist);
-		temp = vectorAdd(temp, r->start);
-		proj = vectorSub(cyl_pos_dir, temp);
-		ab = vectorSub(cyl_pos, cyl_pos_dir);
-		tp = vectorMultByScalar(ab, vectorDot(ab, proj) / vectorDot(ab, ab));
-		tp = vectorAdd(tp, cyl_pos_dir);
+		hitpoint = getHitpoint(r->start, r->dir, dist);
 
-		proj.x = tp.x;
-		proj.y = tp.y;
-		proj.z = tp.z;
-		proj = vectorSub(cyl_pos, proj);
-		r->norm = temp;
-		proj = vectorAdd(proj, cyl_pos);
-		r->norm = vectorNormalize(vectorSub(proj, r->norm));
-		if (vectorDist(getHitpoint(r->start, r->dir, dist), cyl_pos) > s->size[1])
-		{
-			if (((-b + sqrtf(discriminant)) / (2 * a)) > dist)
-				dist = ((-b + sqrtf(discriminant)) / (2 * a));
-			if (((-b - sqrtf(discriminant)) / (2 * a)) > dist)
-				dist = ((-b - sqrtf(discriminant)) / (2 * a));
-			if (vectorDist(getHitpoint(r->start, r->dir, dist), cyl_pos) > s->size[1])
-				return (0);
-		}
-		r->norm.x = -r->norm.x;
-		r->norm.y = -r->norm.y;
-		r->norm.z = -r->norm.z;
 		r->norm = vectorNormalize(r->norm);
+		// }
+			// *x1 = dist;
+			// *y1 = INT_MAX;
+			// printf(" x1 == %lf, y1 == %lf, dist == %lf, tmp == %lf \n", *x1, *y1, dist, tmp_y);
+			// exit(1);
+		// }
 		return dist;
 	}
  		return 0;
@@ -668,13 +659,13 @@ double intersectRayPlane(t_ray *r, t_obj *p, double *x1, double *y1)
 	p0 = newVector(p->pos[0], p->pos[1], p->pos[2]);
 	n = vectorNormalize(newVector(p->pos[3], p->pos[4], p->pos[5]));
 	t = (vectorDot(vectorSub(p0, r->start),n) / vectorDot(r->dir, n));
-	if (t > 0.00001)
+	if (t > 0.01)
 	{
 		r->norm.x = n.x;
 		r->norm.y = n.y;
 		r->norm.z = n.z;
-		// *x1 = t;
-		// *y1 = *x1; 
+		*x1 = t;
+		*y1 = *x1; 
 		r->norm = vectorNormalize(r->norm);
 		return (t);
 	}

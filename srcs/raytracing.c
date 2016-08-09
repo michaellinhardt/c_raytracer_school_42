@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/08 10:59:10 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/09 15:29:45 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,18 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 	// is_ob = 1;
 	ft_bzero(total_rgb, sizeof(double) * 3);
 	if (is_ob)
-	while (spot)
-	{
-		spot_pos = newVector(spot->spot[0], spot->spot[1], spot->spot[2]);
-		light_dist = vectorDir(spot_pos, hitpoint);
-		factor = vectorDot(light_dist, r->norm);
-		color_composants(spot->c_s, tmp_rgb);
-		if (factor < 0)
-			factor = 0;
-		if (factor > 0)
-			colorNormalize(total_rgb, tmp_rgb, factor, 1);			
-		spot = spot->next;
-	}
+		while (spot)
+		{
+			spot_pos = newVector(spot->spot[0], spot->spot[1], spot->spot[2]);
+			light_dist = vectorDir(spot_pos, hitpoint);
+			factor = vectorDot(light_dist, r->norm);
+			color_composants(spot->c_s, tmp_rgb);
+			if (factor < 0)
+				factor = 0;
+			if (factor > 0)
+				colorNormalize(total_rgb, tmp_rgb, factor, 1);			
+			spot = spot->next;
+		}
 	total_rgb[0] /= nb_spot;
 	total_rgb[1] /= nb_spot;
 	total_rgb[2] /= nb_spot;
@@ -107,13 +107,15 @@ int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 	double new_nearest;
 
 	newray.start = getHitpoint(r->start, r->dir, m);
-	newray.dir = vectorDir(r->dir, vectorMultByScalar(r->norm, vectorDot(r->dir, r->norm) * 2));
+	newray.dir = vectorDir(r->dir, vectorMultByScalar(r->norm, vectorDot(r->norm, r->dir) * 2));
 	new_nearest = lenray(sc, &newray);
 	color = 0;
 	if (ret < 10 && new_nearest > 0.0001 && newray.obj)
 	{
 		if (newray.obj && (newray.obj->type == SPHERE || newray.obj->type == TRIANGLE || newray.obj->type == CONE || newray.obj->type == PLAN || newray.obj->type == CYLINDRE || newray.obj->type == RECTANGLE || newray.obj->type == COMPLEXE))
+		{
 			color = diffuse(sc, &newray, newray.obj, new_nearest, newray.obj->c_o);
+		}
 		color_composants(color, tmp_rgb);
 		color_composants(col, rgb);
 		rgb[0] = rgb[0] * (1 - (eff / 100)) + tmp_rgb[0] * (eff / 100);
@@ -121,7 +123,9 @@ int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 		rgb[2] = rgb[2] * (1 - (eff / 100)) + tmp_rgb[2] * (eff / 100);
 		col = colorfromrgb(rgb);
 		if (newray.obj->eff[1])
+		{
 			col = reflexion(sc, &newray, new_nearest, col, ret + 1, (newray.obj->eff[1] > eff) ? eff : newray.obj->eff[1]);
+		}
 	}
 	else if (new_nearest < 0 && eff == 100)
 	{
@@ -151,7 +155,9 @@ double	getnearesthit(t_ray *r, t_scene *sc, double x1, double y1, t_id *g)
 		{
 			color = diffuse(sc, r, r->obj, new_nearest, color);
 			if (r->obj->eff[1])
+			{
 				color = reflexion(sc, r, new_nearest, color, 0,r->obj->eff[1]);
+			}
 		}
 		mlx_image_put_pixel(g, x1, y1, color);
 		/*
@@ -174,7 +180,7 @@ void *display(void *z)
 
 	mt = (t_thread*)z;
 	r.start = newVector(mt->s->sc->cam[0], mt->s->sc->cam[1], mt->s->sc->cam[2]); // Recuperation de la postion de la camera pour le multithread
-	r.dir = newVector(mt->s->sc->cam[3], mt->s->sc->cam[4], mt->s->sc->cam[5]);	// Recuperation de la direction de la camera pour le multithread
+	// r.dir = newVector(mt->s->sc->cam[3], mt->s->sc->cam[4], mt->s->sc->cam[5]);	// Recuperation de la direction de la camera pour le multithread
 	tmp = mt->s->sc->obj;
 	t = mt->t;
 	y = mt->lim[1] - 1;

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 00:43:52 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/08 12:19:12 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/09 08:04:58 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ char *parse_vertex(int fd, char *line, t_line **v)
 	t_line *temp;
 	char *tmp;
 
-	// (!(v = ft_memalloc(sizeof(t_line)))) ? error(2, "Malloc") : 1;
 	while (line && line[0] == 'v' && line[1] == ' ' && ft_strchr_c(line, ' ') >= 3)
 	{
 		(!(temp = ft_memalloc(sizeof(t_line)))) ? error(2, "Malloc") : 1;
@@ -111,7 +110,7 @@ void init_tab(t_line *v, double tab[][3])
 	char **tmp;
 	char *temp;
 
-	i = 0;
+	i = 1;
 	while (v)
 	{
 		j = 0;
@@ -169,19 +168,22 @@ void 	add_vector(double nbr_vn[][3], double nbr_v[][3], t_obj **o, char *line, i
 			line = ft_strsub(tmp, 0, ft_strlen(tmp) - ft_strlen(ft_strchr(tmp, '/')));
 			if (verif_double(line))
 			{
-				ft_printf("%d \n", ft_atoi(line));
-				triangle->tri[i].x = (nbr_v[ft_atoi(line) - 1][0]) * 5	 + (*o)->pos[0];
-				triangle->tri[i].y = (nbr_v[ft_atoi(line) - 1][1]) * 5	 + (*o)->pos[1];
-				triangle->tri[i].z = (nbr_v[ft_atoi(line) - 1][2]) * 5	 + (*o)->pos[2];
+				if (ft_atoi(line) > nbr_v[0][0])
+					error(3, "vector information");
+				triangle->tri[i].x = (nbr_v[ft_atoi(line)][0]) * 5	 + (*o)->pos[0];
+				triangle->tri[i].y = (nbr_v[ft_atoi(line)][1]) * 5	 + (*o)->pos[1];
+				triangle->tri[i].z = (nbr_v[ft_atoi(line)][2]) * 5	 + (*o)->pos[2];
 				ft_strdel(&line);
 				if (i == 2)
 				{
 					line = ft_strsub(tmp, ft_strlen(tmp) - ft_strlen(ft_strrchr(tmp, '/')) + 1, ft_strlen(tmp));
 					if (verif_double(line))
 					{
-						triangle->nor.x = nbr_vn[ft_atoi(line) - 1][0];
-						triangle->nor.y = nbr_vn[ft_atoi(line) - 1][1];
-						triangle->nor.z = nbr_vn[ft_atoi(line) - 1][2];
+						if (ft_atoi(line) > nbr_vn[0][0])
+							error(3, "normal information");
+						triangle->nor.x = nbr_vn[ft_atoi(line)][0];
+						triangle->nor.y = nbr_vn[ft_atoi(line)][1];
+						triangle->nor.z = nbr_vn[ft_atoi(line)][2];
 						ft_strdel(&line);
 					}
 					else
@@ -195,21 +197,11 @@ void 	add_vector(double nbr_vn[][3], double nbr_v[][3], t_obj **o, char *line, i
 			ft_strdel(&temp[i]);
 			++i;
 		}
-			// printf("vector 1 = %lf %lf %lf\n", triangle->tri[0].x,triangle->tri[0].y,triangle->tri[0].z);
-		// printf("vector 2 = %lf %lf %lf\n", triangle->tri[1].x,triangle->tri[1].y,triangle->tri[1].z);
-		// printf("vector 3 = %lf %lf %lf\n\n", triangle->tri[2].x,triangle->tri[2].y,triangle->tri[2].z);
 		free(temp);
 		temp = NULL;
 		if (i != 3)
 			error(3, "objects");
 		add_list_bis(&(*o)->comp, triangle);
-		/*if (!(*o)->comp)
-			(*o)->comp = triangle;
-		else
-		{
-			triangle->next = (*o)->comp;
-			(*o)->comp = triangle;
-		}*/
 		get_next_line(fd, &line);
 		tmp = ft_strtrim(line);
 		ft_strdel(&line);
@@ -229,25 +221,29 @@ void 	add_vector(double nbr_vn[][3], double nbr_v[][3], t_obj **o, char *line, i
 
 void	parse_f(t_line *v, t_line *vn, char *tmp, t_obj **o, int fd)
 {
-	double		nbr_v[len_lst(v) + 1][3];
-	double		nbr_vn[len_lst(vn) + 1][3];
+	double		nbr_v[len_lst(v) + 2][3];
+	double		nbr_vn[len_lst(vn) + 2][3];
 
+	nbr_v[0][0] = len_lst(v);
 	init_tab(v, nbr_v);
+	nbr_vn[0][0] = len_lst(vn);
 	init_tab(vn, nbr_vn);
-	ft_printf("%d \n", len_lst(v));
 	free_lst(v);
 	free_lst(vn);
 	add_vector(nbr_vn, nbr_v, o, tmp, fd);
-	t_obj *t = (*o)->comp;
-	ft_printf("________________________________________________________________________\n");
-	while (t)
+	if (DEBUG)
 	{
-		printf("vector 1 = %lf %lf %lf\n", t->tri[0].x,t->tri[0].y,t->tri[0].z);
-		printf("vector 2 = %lf %lf %lf\n", t->tri[1].x,t->tri[1].y,t->tri[1].z);
-		printf("vector 3 = %lf %lf %lf\n", t->tri[2].x,t->tri[2].y,t->tri[2].z);
-		printf("norm = %lf %lf %lf\n\n", t->nor.x,t->nor.y,t->nor.z);
-		t = t->next;
-	}
+		t_obj *t = (*o)->comp;
+		ft_printf("________________________________________________________________________\n");
+		while (t)
+		{
+			printf("vector 1 = %lf %lf %lf\n", t->tri[0].x,t->tri[0].y,t->tri[0].z);
+			printf("vector 2 = %lf %lf %lf\n", t->tri[1].x,t->tri[1].y,t->tri[1].z);
+			printf("vector 3 = %lf %lf %lf\n", t->tri[2].x,t->tri[2].y,t->tri[2].z);
+			printf("norm = %lf %lf %lf\n\n", t->nor.x,t->nor.y,t->nor.z);
+			t = t->next;
+		}
+	}	
 }
 
 void	triangle(int fd, t_obj **o, char *line)
@@ -264,8 +260,11 @@ void	triangle(int fd, t_obj **o, char *line)
 		tmp = ft_strtrim(line);
 		ft_strdel(&line);
 		if (!tmp[0])
+		{
+			ft_strdel(&tmp);
 			continue ;
-		if (tmp[0] == '#' || tmp[0] == 'g' || tmp[0] == 's')
+		}
+		if (tmp[0] == '#' || tmp[0] == 'o' || tmp[0] == 'g' || tmp[0] == 's')
 		{
 			ft_strdel(&tmp);
 			continue ;

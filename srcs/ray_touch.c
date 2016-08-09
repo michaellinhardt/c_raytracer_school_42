@@ -67,6 +67,7 @@ double lenray(t_scene *sc, t_ray *r)
 			s = s->next;
 			continue ;
 		}
+		t = 0;
 		if (s->type == SPHERE)
 			t = intersectRaySphere(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (s->type == PLAN)
