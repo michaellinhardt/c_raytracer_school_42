@@ -5,10 +5,6 @@ scene {
 		camera {pos{890; 625; -50}, dir{1 ; 1; 5}}
 		color { 0xFFffff }					
 	}
-	spot {							
-		camera {pos{890; 425; -50}, dir{1 ; 1; 5}}
-		color { 0xFF0000 }					
-	}
 	ambiance { 0x452d6e; 52 }					
 	objects {
 		simple_obj {

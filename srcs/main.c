@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:09:09 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/09 10:05:08 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/09 23:29:13 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		main(int argc, char **argv)
 {
 	t_gen s;
 
-	// load_interface(&s);
+	load_interface(&s);	
 	init_struct(&s);
 	parse_scene(&s, argv);
 	if (argc == 1)

@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 19:53:30 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/08/07 04:47:18 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/09 22:10:17 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct	s_gen t_gen;
 
 int				load_interface(t_gen *raycaster);
 GdkPixbuf		*gtk_new_image(unsigned char *data, int width, int heigth);
+void			gtk_put_pixel(GdkPixbuf *pixbuf, int x, int y, int color);
 int				gtk_put_image_to_window(GtkImage *image, GdkPixbuf *pixbuf);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/09 15:29:45 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/09 23:33:17 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 	nb_spot = 0;
 	while (spot)
 	{
-		spot =spot->next;
+		spot = spot->next;
 		++nb_spot;
 	}
 	spot = sc->spot;
@@ -137,29 +137,28 @@ int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 
 }
 
-double	getnearesthit(t_ray *r, t_scene *sc, double x1, double y1, t_id *g)
+double	getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1, t_id *g)
 {
+	(void)g;
 	t_obj *s;
 	int color;
 	double new_nearest;
-
-	s = sc->obj; // recuperation de la liste d'objets
+	s = raytracer->sc->obj; // recuperation de la liste d'objets
 	r->dir = newVector(x1 - W_X / 2.0, W_Y / 2.0 - y1, (W_Y / 2.0) / tan(70*0.5));	//initialisation des donnees de la camera 
 	r->dir = vectorNormalize(r->dir);	// normalisation de la direction
 
-	new_nearest = lenray(sc, r);
+	new_nearest = lenray(raytracer->sc, r);
 		color = 0;
 	if (new_nearest >= 0)
 	{
 		if (r->obj && (r->obj->type == SPHERE||  r->obj->type == CONE || r->obj->type == COMPLEXE || r->obj->type == TRIANGLE || r->obj->type == PLAN || r->obj->type == CYLINDRE || r->obj->type == RECTANGLE))
 		{
-			color = diffuse(sc, r, r->obj, new_nearest, color);
+			color = diffuse(raytracer->sc, r, r->obj, new_nearest, color);
 			if (r->obj->eff[1])
-			{
-				color = reflexion(sc, r, new_nearest, color, 0,r->obj->eff[1]);
-			}
+				color = reflexion(raytracer->sc, r, new_nearest, color, 0,r->obj->eff[1]);
 		}
-		mlx_image_put_pixel(g, x1, y1, color);
+		/* SECURE THIS FUCKING AREA */
+		gtk_put_pixel(raytracer->pixbuf, x1, y1, color);
 		/*
 		** 		Si a la fin du calcul total on a bien trouve une intersection 
 		** 		existante (nearest > 0), on lance la fonction qui permet de calculer  
@@ -190,7 +189,7 @@ void *display(void *z)
 		while (++x < mt->lim[2])
 		{
 			// Pour chaque pixel traite par le thread actuel, 
-			getnearesthit(&r, mt->s->sc, x, y, t);
+			getnearesthit(&r, mt->s, x, y, t);
 		}
 	}
 	return (NULL);
@@ -203,25 +202,26 @@ void raytracing(t_gen *s)
 	int				j;
 	pthread_t		p[MT];
 
-
 	// initialisation minilibx
 	if (!c)
 	{
-		t.mlx = mlx_init();
+	/*	t.mlx = mlx_init();
 		t.win = mlx_new_window(t.mlx, W_X, W_Y, WIN_NAME);
 		t.img = mlx_new_image(t.mlx, W_X, W_Y);
 		t.data = mlx_get_data_addr(t.img, &t.bit_per_pixel, &t.s_line,
 			&t.endian);
 		t.bpp = t.bit_per_pixel / 8;
+		*/
+		t.data = malloc(W_X * 3 * 1050);
+		s->pixbuf = NULL;
 		(!(t.z = ft_memalloc(sizeof(t_thread) * MT))) ? error(2, "Malloc") : 1;
 		init_threads(t.z, &t, s);
 		c = 1;
 	}
 	else
-	{
-		mlx_clear_window(t.mlx, t.win);
-		ft_bzero(t.data, W_Y * t.s_line);
-	}
+		ft_bzero(t.data, W_X * W_Y * 3);	
+	if (!(s->pixbuf = gtk_new_image((unsigned char *)(t.data), W_X, W_Y)))
+		error(2, "Unable to initialize pixbuf for GtkImage :'(\n");
 	j = -1;
 	while (++j < MT)
 		pthread_create(&p[j], NULL, display, &t.z[j]);	// creation des threads
@@ -229,10 +229,8 @@ void raytracing(t_gen *s)
 	while (++j < MT)
 		pthread_join(p[j], NULL);	// synchro des threads
 	// display(s->sc, r, &t);
-
-
-
-	mlx_put_image_to_window(t.mlx, t.win, t.img, 0, 0);
+	gtk_put_image_to_window(GTK_IMAGE(s->pdrawarea), s->pixbuf);
+/*	mlx_put_image_to_window(t.mlx, t.win, t.img, 0, 0);
 	mlx_mouse_hook(t.win, mouse_functions, s);
 	mlx_hook(t.win, 2, (1l << 0), press_key, s);				// hooks et autres trucs de la minilibx
 	// mlx_hook(t.win, 3, (1L << 1), release_key, s);
@@ -243,5 +241,8 @@ void raytracing(t_gen *s)
 		print_bmp(t.data, t, s);
 		s->rep ^= SAVE;
 	}
-	mlx_loop(t.mlx);
+	mlx_loop(t.mlx);*/	
+	g_object_unref(s->pixbuf);
+	gtk_widget_show_all(s->pwindow);
+	gtk_main();
 }

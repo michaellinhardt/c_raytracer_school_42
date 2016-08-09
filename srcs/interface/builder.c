@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 02:10:37 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/08/07 05:05:05 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/08 04:28:59 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ int		load_interface(t_gen *raytracer)
 	ft_bzero(data, sizeof(data));	
 	pixbuf = gtk_new_image(data, 1680, 1050);
 	gtk_put_image_to_window(GTK_IMAGE(raytracer->pdrawarea), pixbuf);
-	gtk_builder_connect_signals(builder, raytracer);
-	gtk_widget_show_all(raytracer->pwindow);
-	gtk_main();
+	gtk_builder_connect_signals(builder, raytracer);		
 	g_object_unref(pixbuf);
 	g_object_unref(builder);
 	free(data);
