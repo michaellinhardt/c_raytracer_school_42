@@ -6,11 +6,11 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/21 06:18:57 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/21 06:33:32 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 21:46:15 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "h_parse.h"
+#include "parse.h"
 
 static void		size_mid(double *size, char **temp, char *tmp)
 {

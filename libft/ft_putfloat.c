@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/08 19:01:38 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/25 08:01:14 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 22:24:02 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,25 @@ static void	ft_afterpoint(double n, int ps, int p, long long int *j)
 	l = ft_sizeintu(ps) - ft_sizeint(*j) - 2;
 	if ((k % 10) >= 5)
 		++(*j);
+}
+
+static char	*end(int l, char *str, char *temp, int j)
+{
+	char *tmp;
+
+	while (l > 0)
+	{
+		tmp = str;
+		str = ft_strjoin(str, "0");
+		ft_strdel(&tmp);
+		l--;
+	}
+	tmp = str;
+	temp = ft_itoa(j);
+	str = ft_strjoin(str, temp);
+	ft_strdel(&tmp);
+	ft_strdel(&temp);
+	return (str);
 }
 
 static char	*ft_transformation(unsigned long long int ps, long long int k,
@@ -51,19 +70,7 @@ static char	*ft_transformation(unsigned long long int ps, long long int k,
 	tmp = str;
 	str = ft_strjoin(str, ".");
 	ft_strdel(&tmp);
-	while (l > 0)
-	{
-		tmp = str;
-		str = ft_strjoin(str, "0");
-		ft_strdel(&tmp);
-		l--;
-	}
-	tmp = str;
-	temp = ft_itoa(j);
-	str = ft_strjoin(str, temp);
-	ft_strdel(&tmp);
-	ft_strdel(&temp);
-	return (str);
+	return (end(l, str, temp, j));
 }
 
 char		*ft_putfloat(double n, int p)

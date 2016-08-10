@@ -6,11 +6,11 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/23 09:43:40 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/09 12:37:44 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 22:56:38 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "h_raystruct.h"
+#include "raystruct.h"
 
 int		quit_w(void)
 {
@@ -20,43 +20,15 @@ int		quit_w(void)
 
 t_obj	*obj_to_move(t_scene *s, double x1, double y1, t_ray r)
 {
-	t_obj *tmp;
-	double nearest;
-	// double t;
-	// int col = 0;
+	t_obj	*tmp;
+	double	nearest;
+
 	tmp = NULL;
-		r.dir = newVector((int)x1 - W_X / 2.0, W_Y / 2.0 - (int)y1, (W_Y / 2.0) / tan(70*0.5));	//initialisation des donnees de la camera 
-		r.dir = vectorNormalize(r.dir);
+	r.dir = new_vector((int)x1 - W_X / 2.0, W_Y / 2.0 - (int)y1, (W_Y / 2.0) / tan(70*0.5));
+	r.dir = vector_normalize(r.dir);
 	nearest = lenray(s, &r);
 	if (r.obj)
 		tmp = r.obj;
-/*	while (s)
-	{
-		// t = 0;
-		if (s->type == SPHERE)
-			t = intersectRaySphere(&r, s, &x1, &y1);
-		else if (s->type == PLAN)
-			t = intersectRayPlane(&r, s, &x1, &y1);
-		else if (s->type == CYLINDRE)
-			t = intersectRayCylindre(&r, s, &x1, &y1);
-		else if (s->type == RECTANGLE)
-			t = intersectRayCarre(&r, s, &x1, &y1);
-		else if (s->type == COMPLEXE)
-			t = intersectRayComplex(&r, s, &x1, &y1, &col);
-		else if (s->type == CONE)
-			t = intersectRayCone(&r, s, &x1, &y1);
-		else if (s->type == TORUS)
-			t = intersectRayCone(&r, s, &x1, &y1);
-		else if (s->type == BOLOID)
-			t = intersectRayBoloid(&r, s, &x1, &y1);
-		if ((t < nearest && t > 1) || (nearest < 0 && t >  1))
-		{
-			nearest = t;
-			printf("nearest ==\e[0;32m %lf obj == %s\e[0;0m\n", nearest, s->name);
-			tmp = s;
-		}
-		s = s->next;
-	}*/
 	printf("nearest ==\e[0;32m %lf name == %s\e[0;0m\n", nearest, "plop");
 	return (tmp);
 }

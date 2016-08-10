@@ -6,11 +6,11 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/24 17:20:00 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/24 17:43:14 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 21:47:05 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "h_raystruct.h"
+#include "raystruct.h"
 
 void		init_threads(t_thread *t, t_id *t_g, t_gen *s)
 {

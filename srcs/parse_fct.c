@@ -6,11 +6,11 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/21 04:26:54 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/21 04:29:21 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 21:46:07 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "h_parse.h"
+#include "parse.h"
 
 int			verif_str(char *str, int i)
 {

@@ -6,18 +6,18 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/10 06:46:38 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/10 22:14:07 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "h_raystruct.h"
-#include <h_gui.h>
+#include "raystruct.h"
+#include <gui.h>
 
 // int refraction(t_scene *sc, t_ray *r, double dist, int col, int return, double eff)
 // {
 // 	t_vector newray;
 
-// 	newray.start = getHitpoint(r->start, r->dir, dist);
+// 	newray.start = get_hitpoint(r->start, r->dir, dist);
 // 	newray.dir = calcul de merde bullshit
 // }
 
@@ -44,7 +44,6 @@ void sqrtc(double *color)
 	color[0] = sqrtf(color[0]);
 	color[1] = sqrtf(color[1]);
 	color[2] = sqrtf(color[2]);
-	// racine carree d'une couleur
 }
 
 int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
@@ -61,7 +60,7 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 	int			nb_spot;
 
 	spot = sc->spot;
-	hitpoint = getHitpoint(r->start, r->dir, nearest);
+	hitpoint = get_hitpoint(r->start, r->dir, nearest);
 	nb_spot = 0;
 	while (spot)
 	{
@@ -73,15 +72,15 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 		color_composants(tmp->c_o, rgb);
 	else
 		color_composants(col, rgb);
-	is_ob = cast_shadow(sc->obj, hitpoint, spot, tmp);
+	is_ob = cast_shadow(sc->obj, hitpoint, spot, sc->obj);
 	// is_ob = 1;
 	ft_bzero(total_rgb, sizeof(double) * 3);
 	if (is_ob)
 		while (spot)
 		{
-			spot_pos = newVector(spot->spot[0], spot->spot[1], spot->spot[2]);
-			light_dist = vectorDir(spot_pos, hitpoint);
-			factor = vectorDot(light_dist, r->norm);
+			spot_pos = new_vector(spot->pos[0], spot->pos[1], spot->pos[2]);
+			light_dist = vector_dir(spot_pos, hitpoint);
+			factor = vector_dot(light_dist, r->norm);
 			color_composants(spot->c_s, tmp_rgb);
 			if (factor < 0)
 				factor = 0;
@@ -106,8 +105,8 @@ int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 
 	double new_nearest;
 
-	newray.start = getHitpoint(r->start, r->dir, m);
-	newray.dir = vectorDir(r->dir, vectorMultByScalar(r->norm, vectorDot(r->norm, r->dir) * 2));
+	newray.start = get_hitpoint(r->start, r->dir, m);
+	newray.dir = vector_dir(r->dir, vectormultby_scalar(r->norm, vector_dot(r->norm, r->dir) * 2));
 	new_nearest = lenray(sc, &newray);
 	color = 0;
 	if (ret < 10 && new_nearest > 0.0001 && newray.obj)
@@ -144,8 +143,8 @@ double	getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1, t_id *g)
 	int color;
 	double new_nearest;
 	s = raytracer->sc->obj; // recuperation de la liste d'objets
-	r->dir = newVector(x1 - W_X / 2.0, W_Y / 2.0 - y1, (W_Y / 2.0) / tan(70*0.5));	//initialisation des donnees de la camera 
-	r->dir = vectorNormalize(r->dir);	// normalisation de la direction
+	r->dir = new_vector(x1 - W_X / 2.0, W_Y / 2.0 - y1, (W_Y / 2.0) / tan(70*0.5));	//initialisation des donnees de la camera 
+	r->dir = vector_normalize(r->dir);	// normalisation de la direction
 
 	new_nearest = lenray(raytracer->sc, r);
 		color = 0;
@@ -178,8 +177,7 @@ void *display(void *z)
 	int y;
 
 	mt = (t_thread*)z;
-	r.start = newVector(mt->s->sc->cam[0], mt->s->sc->cam[1], mt->s->sc->cam[2]); // Recuperation de la postion de la camera pour le multithread
-	// r.dir = newVector(mt->s->sc->cam[3], mt->s->sc->cam[4], mt->s->sc->cam[5]);	// Recuperation de la direction de la camera pour le multithread
+	r.start = new_vector(mt->s->sc->cam[0], mt->s->sc->cam[1], mt->s->sc->cam[2]);
 	tmp = mt->s->sc->obj;
 	t = mt->t;
 	y = mt->lim[1] - 1;
@@ -188,10 +186,7 @@ void *display(void *z)
 	{
 		x = mt->lim[0] - 1;
 		while (++x < mt->lim[2])
-		{
-			// Pour chaque pixel traite par le thread actuel, 
 			getnearesthit(&r, mt->s, x, y, t);
-		}
 	}
 	pthread_mutex_unlock(&(mt->s->lock_draw));
 	return (NULL);
@@ -204,16 +199,8 @@ void raytracing(t_gen *s)
 	int				j;
 	pthread_t		p[MT];
 
-	// initialisation minilibx
 	if (!c)
 	{
-	/*	t.mlx = mlx_init();
-		t.win = mlx_new_window(t.mlx, W_X, W_Y, WIN_NAME);
-		t.img = mlx_new_image(t.mlx, W_X, W_Y);
-		t.data = mlx_get_data_addr(t.img, &t.bit_per_pixel, &t.s_line,
-			&t.endian);
-		t.bpp = t.bit_per_pixel / 8;
-		*/
 		s->lock_draw = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 		t.data = malloc(W_X * 3 * 1050);
 		s->pixbuf = NULL;
@@ -224,27 +211,14 @@ void raytracing(t_gen *s)
 	else
 		ft_bzero(t.data, W_X * W_Y * 3);	
 	if (!(s->pixbuf = gtk_new_image((unsigned char *)(t.data), W_X, W_Y)))
-		error(2, "Unable to initialize pixbuf for GtkImage :'(\n");
+		error(4, "Unable to initialize pixbuf for GtkImage :'(\n");
 	j = -1;
 	while (++j < MT)
 		pthread_create(&p[j], NULL, display, &t.z[j]);	// creation des threads	
 	j = -1;
 	while (++j < MT)
 		pthread_join(p[j], NULL);	// synchro des threads
-	// display(s->sc, r, &t);
 	gtk_put_image_to_window(GTK_IMAGE(s->pdrawarea), s->pixbuf);
-/*	mlx_put_image_to_window(t.mlx, t.win, t.img, 0, 0);
-	mlx_mouse_hook(t.win, mouse_functions, s);
-	mlx_hook(t.win, 2, (1l << 0), press_key, s);				// hooks et autres trucs de la minilibx
-	// mlx_hook(t.win, 3, (1L << 1), release_key, s);
-	mlx_hook(t.win, 17, (1L << 17), quit_w, s);
-	mlx_key_hook(t.win, key_reaction, &t);
-	if (s->rep & SAVE)
-	{
-		print_bmp(t.data, t, s);
-		s->rep ^= SAVE;
-	}
-	mlx_loop(t.mlx);*/
 	g_object_unref(s->pixbuf);
 	gtk_widget_show_all(s->pwindow);
 	gtk_main();

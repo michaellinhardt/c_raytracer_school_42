@@ -6,11 +6,11 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/27 14:20:29 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/28 02:47:52 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 21:45:00 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "h_raystruct.h"
+#include "raystruct.h"
 
 void mlx_image_put_pixel(t_id *g, int x, int y, int color)
 {

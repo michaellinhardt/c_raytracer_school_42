@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 04:11:05 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/08/09 22:45:48 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/10 21:48:24 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <h_raytra_gen.h>
+#include <raytra_gen.h>
 
 GdkPixbuf	*gtk_new_image(unsigned char *data, int width, int height)
 {

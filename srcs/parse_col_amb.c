@@ -6,11 +6,11 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/21 05:00:54 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/21 06:13:17 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 21:45:53 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "h_parse.h"
+#include "parse.h"
 
 static int		hexa_to_dec(char c)
 {

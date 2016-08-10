@@ -1,42 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   h_raystruct.h                                      :+:      :+:    :+:   */
+/*   raystruct.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/10 05:09:30 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/10 22:59:00 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RTV1_H
-# define RTV1_H
+#ifndef RAYSTRUCT_H
+# define RAYSTRUCT_H
 # define W_Y 1050
 # define W_X 1680
-# define WIN_NAME "RTv1"
+# define WIN_NAME "RT"
 # define PI 3.14159265359
-# define KEYPRESS 2
-# define KEYPRESSMASK (1L<<0)
-# define POINTERMOTIOMMASK (1L<<6)
-# define MOTIONNOTIFY 6
 # define TEXWIDTH 64
 # define TEXHEIGHT 64
-# define KEY_W keycode == 13
-# define KEY_A keycode == 0
-# define KEY_S keycode == 1
-# define KEY_D keycode == 2
-# define KEY_Q keycode == 12
-# define KEY_E keycode == 14
-# define KEY_T keycode == 17
-# define KEY_UP keycode == 126
-# define KEY_DOWN keycode == 125
-# define KEY_LEFT keycode == 123
-# define KEY_RIGHT keycode == 124
-# define KEY_G keycode == 5
-# define KEY_PGUP keycode == 116
-# define KEY_PGDOWN keycode == 121
-# define KEY_ESC keycode == 53
 
 # define KEY_ONE 83
 # define KEY_TWO 84
@@ -51,6 +32,8 @@
 # define MT 4
 # define THE struct s_thread
 
+# define EPS 0.0001
+
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -58,15 +41,15 @@
 
 # include "mlx.h"
 # include "libft.h"
-#include "h_raytra_gen.h"
+#include "raytra_gen.h"
 
 typedef struct		s_ray
 {
-	t_vector 			start;
-	t_vector 			dir;
-	t_vector 			norm;
-	t_obj				*obj;
-	double				inter[2];
+	t_vector 		start;
+	t_vector 		dir;
+	t_vector 		norm;
+	t_obj			*obj;
+	double			inter[2];
 }					t_ray;
 
 typedef struct		s_general
@@ -118,19 +101,20 @@ void				raytracing(t_gen *s);
 **									vector_functions.c
 */
 
-double 				vectorDot(t_vector v1, t_vector v2);
-t_vector 			vectorAdd(t_vector v1, t_vector v2);
-t_vector			vectorCross(t_vector v1, t_vector v2);
-t_vector 			vectorDivByScalar(t_vector v, double scalar);
-t_vector 			vectorSub(t_vector v1, t_vector v2);
-t_vector 			vectorMult(t_vector v1, t_vector v2);
-double 				vectorMagnitude(t_vector v);
-t_vector 			vectorNormalize(t_vector v);
-t_vector			vectorMultByScalar(t_vector v, double scalar);
-t_vector 			newVector(double x, double y, double z);
-double 				vectorDist(t_vector v1, t_vector v2);
-t_vector 			vectorDir(t_vector v1, t_vector v2);
-t_vector 			getHitpoint(t_vector start, t_vector dir, double dist);
+double 				vector_dot(t_vector v1, t_vector v2);
+t_vector 			vector_add(t_vector v1, t_vector v2);
+t_vector			vector_cross(t_vector v1, t_vector v2);
+t_vector 			vectordivby_scalar(t_vector v, double scalar);
+t_vector 			vector_sub(t_vector v1, t_vector v2);
+t_vector 			vector_mult(t_vector v1, t_vector v2);
+double 				vector_magnitude(t_vector v);
+t_vector 			vector_normalize(t_vector v);
+t_vector			vectormultby_scalar(t_vector v, double scalar);
+t_vector 			new_vector(double x, double y, double z);
+double 				vector_dist(t_vector v1, t_vector v2);
+t_vector 			vector_dir(t_vector v1, t_vector v2);
+t_vector 			get_hitpoint(t_vector start, t_vector dir, double dist);
+t_vector			vector_rev(t_vector v);
 
 /*
 **									threads.c
@@ -142,7 +126,7 @@ void				init_threads(t_thread *t, t_id *t_g, t_gen *s);
 **									shadow_max.c
 */
 
-double				cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *tmp);
+double				cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *object);
 
 /*
 **									write_scene.c
@@ -155,9 +139,9 @@ void				print_scene(t_gen *s);
 **									matrice_rot.c  (with doc)
 */
 
-t_vector			MatricerotX(t_vector v, double angle);
-t_vector 			MatricerotY(t_vector v, double angle);
-t_vector			MatricerotZ(t_vector v, double angle);
+t_vector			matricerot_x(t_vector v, double angle);
+t_vector 			matricerot_y(t_vector v, double angle);
+t_vector			matricerot_z(t_vector v, double angle);
 
 /*
 **									color_functions.c  
@@ -172,15 +156,15 @@ void				colorNormalize(double *tab, double *tmp_tab, double factor, int c);
 **									intersec_ray.c  
 */
 
-double				intersectRaySphere(t_ray *r, t_obj *s, double *x1, double *y1);
-double				intersectRayPlane(t_ray *r, t_obj *s, double *x1, double *y1);
-double 				intersectRayCylindre(t_ray *r, t_obj *s, double *x1, double *y1);
-double 				intersectRayCarre(t_ray *r, t_obj *s, double *x1, double *y1);
-double 				intersectRayComplex(t_ray *r, t_obj *s, double *x1, double *y1, int *col);
-double 				intersectRayCone(t_ray *r, t_obj *s, double *x1, double *y1);
-double 				intersectRayTorus(t_ray *r, t_obj *s, double *x1, double *y1);
-double 				intersectRayBoloid(t_ray *r, t_obj *s, double *x1, double *y1);
-double 				intersectRayTriangle(t_ray *r, t_obj *s, double *x1, double *y1);
+double				intersectray_sphere(t_ray *r, t_obj *s, double *x1, double *y1);
+double				intersectray_plane(t_ray *r, t_obj *s, double *x1, double *y1);
+double 				intersectray_cylindre(t_ray *r, t_obj *s, double *x1, double *y1);
+double 				intersectray_carre(t_ray *r, t_obj *s, double *x1, double *y1);
+double 				intersectray_complex(t_ray *r, t_obj *s, double *x1, double *y1, int *col);
+double 				intersectray_cone(t_ray *r, t_obj *s, double *x1, double *y1);
+double 				intersectray_torus(t_ray *r, t_obj *s, double *x1, double *y1);
+double 				intersectray_boloid(t_ray *r, t_obj *s, double *x1, double *y1);
+double 				intersectray_triangle(t_ray *r, t_obj *s, double *x1, double *y1);
 
 /*
 **									perlin.c  
@@ -192,6 +176,7 @@ double				perlin(double x, double y, double z);
 **									ray_touch.c  
 */
 
+double				lenray_type(t_ray *r, t_obj *s, double *tmp_near, int *col);
 double				lenray(t_scene *sc, t_ray *r);
 
 #endif

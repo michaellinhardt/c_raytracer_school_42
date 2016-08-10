@@ -6,11 +6,11 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/22 07:58:30 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/25 07:42:41 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 21:47:10 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "h_raystruct.h"
+#include "raystruct.h"
 
 static void	write_header(int fd)
 {

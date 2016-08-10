@@ -6,11 +6,11 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 23:38:55 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/15 03:22:10 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 21:44:24 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "h_raytra_gen.h"
+#include "raytra_gen.h"
 
 void		error(int i, char *str)
 {
@@ -22,5 +22,7 @@ void		error(int i, char *str)
 		ft_printf("{CRED%s} failed\n", str);
 	if (i == 3)
 		ft_printf("Wrong format for {CRED%s}\n", str);
+	if (i == 4)
+		ft_printf("%s", str);
 	exit(1);
 }

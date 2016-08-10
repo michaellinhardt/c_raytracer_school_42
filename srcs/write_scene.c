@@ -6,11 +6,11 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/25 05:39:29 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/25 08:29:22 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 22:03:40 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "h_raytra_gen.h"
+#include "raytra_gen.h"
 
 static void	print_type(t_gen *s, char **to_print, char type)
 {
@@ -338,7 +338,7 @@ void	print_scene(t_gen *s)
 		tmp = to_print;
 		to_print = ft_strjoin(to_print, "spot {\n");
 		ft_strdel(&tmp);
-		print_cam(s, &to_print, spot->spot,0);
+		print_cam(s, &to_print, spot->pos,0);
 		print_col(s, &to_print, spot->c_s);
 		tmp = to_print;
 		to_print = ft_strjoin(to_print, "}\n");

@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   h_raytra_gen.h                                     :+:      :+:    :+:   */
+/*   raytra_gen.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/10 04:53:25 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/10 22:01:35 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef H_RAYTRA_GEN_H
-# define H_RAYTRA_GEN_H
+#ifndef RAYTRA_GEN_H
+# define RAYTRA_GEN_H
 
 # include "libft.h"
 # include "get_next_line.h"
-# include <h_gui.h>
+# include <gui.h>
 
 # include <stdio.h>			/* to del */
 # include <math.h>
@@ -48,7 +48,7 @@ typedef struct		s_vector
 
 typedef struct		s_spot
 {
-	double			spot[6];			/* spot position [0-2] x y z ; direction [3-5] x y z*/
+	double			pos[6];			/* spot position [0-2] x y z ; direction [3-5] x y z*/
 	int				c_s;				/* color 0xRGB */
 	void			*next;
 }					t_spot;

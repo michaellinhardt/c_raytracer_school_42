@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/15 01:23:15 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/15 03:53:09 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 22:20:29 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ double	ft_atob(char *str)
 	{
 		str += (ft_strlen(str) - ft_strlen(ft_strchr(str, '.'))) + 1;
 		tmp = ft_atoi(str);
-		tmp = tmp / pow(10 , ft_strlen(str));
+		tmp = tmp / pow(10, ft_strlen(str));
 		if (!n)
 			t += tmp;
 		else

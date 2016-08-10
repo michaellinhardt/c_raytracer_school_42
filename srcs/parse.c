@@ -6,11 +6,11 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 19:49:55 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/08 10:56:36 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 22:03:11 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "h_parse.h"
+#include "parse.h"
 
 char	*name(int fd) 
 {
@@ -47,7 +47,7 @@ static void	spot(int fd, t_spot **spot)
 	t_spot *temp;
 
 	(!(tmp = ft_memalloc(sizeof(t_spot)))) ? error(2, "Malloc") : 1;
-	camera(fd, tmp->spot, 0);
+	camera(fd, tmp->pos, 0);
 	color(fd, &tmp->c_s, 1);
 	if (!*spot)
 		*spot = tmp;
@@ -160,8 +160,8 @@ static void	scene(t_gen *s, int fd, t_scene *tmp)
 		temp = tmp->spot;
 		while (temp)
 		{
-			printf("\t\tpos cam_spot == \e[0;32m %lf %lf %lf\e[0;0m\n", temp->spot[0], temp->spot[1], temp->spot[2]);
-			printf("\t\tdir cam_spot == \e[0;32m %lf %lf %lf\e[0;0m\n", temp->spot[3], temp->spot[4], temp->spot[5]);
+			printf("\t\tpos cam_spot == \e[0;32m %lf %lf %lf\e[0;0m\n", temp->pos[0], temp->pos[1], temp->pos[2]);
+			printf("\t\tdir cam_spot == \e[0;32m %lf %lf %lf\e[0;0m\n", temp->pos[3], temp->pos[4], temp->pos[5]);
 			ft_printf("\t\tcolor_spot == {CGREEN%#x}\n", temp->c_s);
 			temp = temp->next;
 		}

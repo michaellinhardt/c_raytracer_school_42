@@ -1,131 +1,135 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_touch.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/08/10 16:52:24 by ocarta-l          #+#    #+#             */
+/*   Updated: 2016/08/10 21:44:37 by ocarta-l         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "h_raystruct.h"
+#include "raystruct.h"
 
-double lenray(t_scene *sc, t_ray *r)
+double			lenray_type(t_ray *r, t_obj *s, double *tmp_near, int *col)
 {
-	double nearest[2];
-	double t;
-	t_obj *tmp;
-	t_obj *s;
-	t_vector norm;
-	int color;
+	if (s->type == SPHERE)
+		return (intersectray_sphere(r, s, &tmp_near[0], &tmp_near[1]));
+	else if (s->type == PLAN)
+		return (intersectray_plane(r, s, &tmp_near[0], &tmp_near[1]));
+	else if (s->type == CYLINDRE)
+		return (intersectray_cylindre(r, s, &tmp_near[0], &tmp_near[1]));
+	else if (s->type == RECTANGLE)
+		return (intersectray_carre(r, s, &tmp_near[0], &tmp_near[1]));
+	else if (s->type == COMPLEXE)
+		return (intersectray_complex(r, s, &tmp_near[0], &tmp_near[1], col));
+	else if (s->type == CONE)
+		return (intersectray_cone(r, s, &tmp_near[0], &tmp_near[1]));
+	else if (s->type == TORUS)
+		return (intersectray_torus(r, s, &tmp_near[0], &tmp_near[1]));
+	else if (s->type == BOLOID)
+		return (intersectray_boloid(r, s, &tmp_near[0], &tmp_near[1]));
+	else if (s->type == TRIANGLE)
+		return (intersectray_triangle(r, s, &tmp_near[0], &tmp_near[1]));
+	return (0);
+}
+
+static void		lenray_neg(t_obj *s, t_ray *r, double *nearest, t_vector *norm)
+{
+	int		color;
+	double	t;
+	double	tmp_near[2];
 
 	color = 0;
-	s = sc->obj; // recuperation de la liste d'objets
-	tmp = NULL;
-	nearest[0] = -1;
-	nearest[1] = INT_MAX;
-	t = 0;
-	double tmp_near[2];
+	while (s)
+	{
+		if (s->eff[3])
+		{
+			tmp_near[0] = -1;
+			tmp_near[1] = INT_MAX;
+			t = lenray_type(r, s, tmp_near, &color);
+			if (t > EPS && tmp_near[0] != -1)
+				if (nearest[0] == -1 || (tmp_near[0] < nearest[0])
+					|| tmp_near[1] > nearest[1])
+				{
+					if (nearest[0] == -1 || tmp_near[0] < nearest[0])
+						nearest[0] = tmp_near[0];
+					if (nearest[1] == INT_MAX || tmp_near[1] > nearest[1])
+						nearest[1] = tmp_near[1];
+					*norm = r->norm;
+				}
+		}
+		s = s->next;
+	}
+}
+
+static char		replace_nearest(t_obj *s, t_ray *r,
+	double *nearest, t_vector *norm)
+{
+	if (nearest[3] > nearest[0] && nearest[3] < nearest[1]
+		&& nearest[0] > EPS)
+	{
+		if (nearest[5] <= nearest[1] && nearest[4] >= nearest[0])
+			return (0);
+		nearest[2] = nearest[1];
+		if ((s->type != COMPLEXE && s->type == PLAN)
+			|| (r->obj->type != COMPLEXE && r->obj->type == PLAN))
+			*norm = vector_rev(*norm);
+	}
+	else
+	{
+		nearest[2] = nearest[3];
+		*norm = r->norm;
+	}
+	return (1);
+}
+
+static t_obj	*lenray_final(t_obj *s, t_ray *r,
+	double *nearest, t_vector *norm)
+{
+	double		tmp_near[2];
+	int			color;
+	t_obj		*tmp;
+
+	color = 0;
+	tmp_near[0] = -1;
 	while (s)
 	{
 		if (!s->eff[3])
 		{
-			s = s->next;
-			continue ;
-		}
-		tmp_near[0] = -1;
-		tmp_near[1] = INT_MAX;
-		if (s->type == SPHERE)
-			t = intersectRaySphere(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		else if (s->type == PLAN)
-			t = intersectRayPlane(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		else if (s->type == CYLINDRE)
-			t = intersectRayCylindre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		else if (s->type == RECTANGLE)
-			t = intersectRayCarre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		else if (s->type == COMPLEXE)
-			t = intersectRayComplex(r, s, &tmp_near[0], &tmp_near[1], &color);
-		else if (s->type == CONE)
-			t = intersectRayCone(r, s, &tmp_near[0], &tmp_near[1]);
-		else if (s->type == TORUS)
-			t = intersectRayTorus(r, s, &tmp_near[0], &tmp_near[1]);
-		else if (s->type == BOLOID)
-			t = intersectRayBoloid(r, s, &tmp_near[0], &tmp_near[1]);
-		if (t > 0.0001 && tmp_near[0] != -1)
-		{
-			if (nearest[0] == -1 || (tmp_near[0] < nearest[0]) || tmp_near[1] > nearest[1])
+			nearest[3] = lenray_type(r, s, tmp_near, &color);
+			nearest[4] = tmp_near[0];
+			nearest[5] = tmp_near[1];
+			if ((nearest[3] < nearest[2] && nearest[3] > 0.000001)
+				|| (nearest[2] < 0 && nearest[3] > 0.000001))
 			{
-				if (nearest[0] == -1 || tmp_near[0] < nearest[0])
-					nearest[0] = tmp_near[0];
-				if (nearest[1] == INT_MAX || tmp_near[1] > nearest[1])
-					nearest[1] = tmp_near[1];
-				norm = r->norm;
+				if (replace_nearest(s, r, nearest, norm))
+					tmp = (s->type != COMPLEXE) ? s : r->obj;
 			}
-			t = 0;
 		}
 		s = s->next;
 	}
-	t = 0;
-	double new_nearest = -1;
-	s = sc->obj; // recuperation de la liste d'objets
-		color = 0;
-	while (s) //pour toute la liste d'objets
-	{
-		if (s->eff[3])
-		{
-			s = s->next;
-			continue ;
-		}
-		t = 0;
-		if (s->type == SPHERE)
-			t = intersectRaySphere(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		else if (s->type == PLAN)
-			t = intersectRayPlane(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		else if (s->type == CYLINDRE)
-			t = intersectRayCylindre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		else if (s->type == RECTANGLE)
-			t = intersectRayCarre(r, s, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		else if (s->type == COMPLEXE)
-			t = intersectRayComplex(r, s, &tmp_near[0], &tmp_near[1], &color);
-		else if (s->type == CONE)
-			t = intersectRayCone(r, s, &tmp_near[0], &tmp_near[1]);
-		else if (s->type == TORUS)
-			t = intersectRayTorus(r, s, &tmp_near[0], &tmp_near[1]);
-		else if (s->type == BOLOID)
-			t = intersectRayBoloid(r, s, &tmp_near[0], &tmp_near[1]);
-		else if (s->type == TRIANGLE)
-			t = intersectRayTriangle(r, s, &tmp_near[0], &tmp_near[1]);
-		if ((t < new_nearest && t > 0.000001) || (new_nearest < 0 && t > 0.000001))
-		{
-			// si la distance actuelle calculee est plus petite que la precedente, on garde en memoire 
-			//: la nouvelle plus courte intersection, l'objet concerne, et la normale du point touche
-			if (t > nearest[0] && t < nearest[1] && nearest[0] > 0.001 /*&& nearest[1] < INT_MAX*/)
-			{
-				if (tmp_near[1] <= nearest[1] && tmp_near[0] >= nearest[0])
-				{
-					s = s->next;
-					continue;
-				}
-				// nearest[0] += 1;
-				new_nearest = nearest[1];
-				if (s->type != COMPLEXE)
-					tmp = s;
-				else
-					tmp = r->obj;
-				if (/*tmp->type == SPHERE || */tmp->type == PLAN)
-				{
-				norm.x = -r->norm.x;
-				norm.y = -r->norm.y;
-				norm.z = -r->norm.z;
-				}
-			}
-			else
-			{
-				new_nearest = t;
-				if (s->type != COMPLEXE)
-					tmp = s;
-				else
-					tmp = r->obj;
-				norm = r->norm;
-			}
-		}
-		s = s->next; //objet suivant
-	}
-	if (new_nearest > 0.00001)
+	return (tmp);
+}
+
+double			lenray(t_scene *sc, t_ray *r)
+{
+	double		nearest[6];
+	t_obj		*tmp;
+	t_vector	norm;
+
+	tmp = NULL;
+	nearest[0] = -1;
+	nearest[1] = INT_MAX;
+	norm.x = 0;
+	lenray_neg(sc->obj, r, nearest, &norm);
+	nearest[2] = -1;
+	tmp = lenray_final(sc->obj, r, nearest, &norm);
+	if (nearest[2] > EPS)
 	{
 		r->norm = norm;
 		r->obj = tmp;
 	}
-	return (new_nearest);
+	return (nearest[2]);
 }

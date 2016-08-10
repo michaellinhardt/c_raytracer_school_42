@@ -6,12 +6,12 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:09:09 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/09 23:29:13 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/10 21:45:14 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "h_raytra_gen.h"
-#include <h_gui.h>
+#include "raytra_gen.h"
+#include <gui.h>
 
 int		usage(int fd)
 {

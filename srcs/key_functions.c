@@ -6,11 +6,11 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/23 09:43:35 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/27 17:23:30 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 22:57:34 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "h_raystruct.h"
+#include "raystruct.h"
 
 int		key_reaction(int keycode)
 {
@@ -42,18 +42,16 @@ static void rotate(t_gen *s, int key)
 	t_vector obj;
 
 	if (s->to_move->type == SPHERE)
-		new = newVector(s->to_move->cut[0], s->to_move->cut[1], s->to_move->cut[2]);
+		new = new_vector(s->to_move->cut[0], s->to_move->cut[1], s->to_move->cut[2]);
 	else if (s->to_move->type == PLAN)
-		new = newVector(s->to_move->pos[0], s->to_move->pos[1], s->to_move->pos[2]);
-	// else if (s->to_move->type == CYLINDRE)
-		// new = newVector(s->to_move->cut[0], s->to_move->cut[1], s->to_move->cut[2]);
-	obj = newVector(s->to_move->pos[0], s->to_move->pos[1], s->to_move->pos[2]);
+		new = new_vector(s->to_move->pos[0], s->to_move->pos[1], s->to_move->pos[2]);
+	obj = new_vector(s->to_move->pos[0], s->to_move->pos[1], s->to_move->pos[2]);
 	if (key == KEY_NIN)
-		new = MatricerotZ(new, vectorDot(new, obj));
+		new = matricerot_z(new, vector_dot(new, obj));
 	if (key == KEY_SIX)
-		new = MatricerotY(new, vectorDot(new, obj));
+		new = matricerot_y(new, vector_dot(new, obj));
 	if (key == KEY_THR)
-		new = MatricerotX(new, vectorDot(new, obj));
+		new = matricerot_x(new, vector_dot(new, obj));
 	if (s->to_move->type == SPHERE)
 	{
 		s->to_move->cut[0] = new.x;

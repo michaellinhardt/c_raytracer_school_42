@@ -6,11 +6,11 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/21 04:25:26 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/21 04:56:44 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 21:45:45 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "h_parse.h"
+#include "parse.h"
 
 static void		split_cam_mid(double *cam, char *temp, char c, int *i)
 {

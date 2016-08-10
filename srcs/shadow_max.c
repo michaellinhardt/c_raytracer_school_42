@@ -6,114 +6,66 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/24 20:10:10 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/09 13:03:48 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 22:19:38 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "h_raystruct.h"
+#include "raystruct.h"
 
-double cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *tmp)
+static void	is_shadow(t_obj *s, double *nearest, t_ray r, int *is_ob)
 {
-	double is_ob;
-	double t;
-	t_ray	r;
-	t_obj	*object;
-	int 	i;
-	t_vector spot_pos;
-	double truc[2];
-	double nearest[2];
-	int col = 0;
+	double	t[3];
+	int		col;
 
-	(void)tmp;
-	is_ob = 0;
-	i = 0;
-	object = s;
-	r.start = newVector(hitpoint.x, hitpoint.y, hitpoint.z);
-	while (spot)
+	col = 0;
+	t[0] = 1;
+	while (s)
 	{
-		s = object;
-		spot_pos = newVector(spot->spot[0], spot->spot[1], spot->spot[2]);
-		r.dir = vectorDir(spot_pos, r.start);
+		if (!s->eff[3] && s->type != PLAN)
+		{
+			t[2] = lenray_type(&r, s, t, &col);
+			if (t[2] > nearest[0] && t[2] < nearest[1]
+				&& t[2] > EPS && nearest[0] > EPS)
+			{
+				if (t[1] > nearest[1])
+				{
+					s = s->next;
+					*is_ob += 1;
+					return ;
+				}
+			}
+			else if (t[2] > EPS && (*is_ob += 1))
+				return ;
+		}
+		s = s->next;
+	}
+}
+
+double		cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *obj)
+{
+	t_ray		r;
+	int			i[3];
+	t_vector	spot_pos;
+	double		nearest[2];
+
+	i[2] = 0;
+	i[0] = 0;
+	r.start = new_vector(hitpoint.x, hitpoint.y, hitpoint.z);
+	while (spot && ++i[0])
+	{
+		s = obj;
+		spot_pos = new_vector(spot->pos[0], spot->pos[1], spot->pos[2]);
+		r.dir = vector_dir(spot_pos, r.start);
 		nearest[0] = -1;
 		nearest[1] = INT_MAX;
 		while (s)
 		{
-			if (!s->eff[3])
-			{
-				s = s->next;
-				continue ;
-			}
-			if (s->type == SPHERE)
-				t = intersectRaySphere(&r, s, &nearest[0], &nearest[1]); // a chaque forme sa formule mathematique 
-			else if (s->type == PLAN)
-				t = intersectRayPlane(&r, s, &nearest[0], &nearest[1]); // a chaque forme sa formule mathematique 
-			else if (s->type == CYLINDRE)
-				t = intersectRayCylindre(&r, s, &nearest[0], &nearest[1]); // a chaque forme sa formule mathematique 
-			else if (s->type == RECTANGLE)
-				t = intersectRayCarre(&r, s, &nearest[0], &nearest[1]); // a chaque forme sa formule mathematique 
-			else if (s->type == COMPLEXE)
-				t = intersectRayComplex(&r, s, &nearest[0], &nearest[1], &col);
-			else if (s->type == CONE)
-				t = intersectRayCone(&r, s, &nearest[0], &nearest[1]);
-			else if (s->type == TORUS)
-				t = intersectRayTorus(&r, s, &nearest[0], &nearest[1]);
-			else if (s->type == BOLOID)
-				t = intersectRayBoloid(&r, s, &nearest[0], &nearest[1]);
-			if (nearest[0] != -1)
-			{
-				// norm = r->norm;
-				// t = 0;
-			}
-			s = s->next;
-		}
-		s = object;
-		while (s)
-		{
 			if (s->eff[3])
-			{
-				s = s->next;
-				continue ;
-			}
-			t = 0;
-			if (s->type == SPHERE)
-				t = intersectRaySphere(&r, s, &truc[0], &truc[1]);
-			else if (s->type == PLAN)
-				;
-				// t = intersectRayPlane(&r, s, &truc[0], &truc[1]);
-			else if (s->type == CYLINDRE)
-				t = intersectRayCylindre(&r, s, &truc[0], &truc[1]);
-			else if (s->type == RECTANGLE)
-				t = intersectRayCarre(&r, s, &truc[0], &truc[1]);
-			else if (s->type == COMPLEXE)
-				t = intersectRayComplex(&r, s, &truc[0], &truc[1], &col);
-			else if (s->type == CONE)
-				t = intersectRayCone(&r, s, &truc[0], &truc[1]);
-			else if (s->type == TORUS)
-				t = intersectRayTorus(&r, s, &truc[0], &truc[1]);
-			else if (s->type == BOLOID)
-				t = intersectRayBoloid(&r, s, &truc[0], &truc[1]);
-			else if (s->type == TRIANGLE)
-				t = intersectRayTriangle(&r, s, &truc[0], &truc[1]);
-			if (t > nearest[0] && t < nearest[1] && t > 0.00001 && nearest[0] > 0.00001 /*&& nearest[1] < INT_MAX*/)
-			{
-				if (truc[1] > nearest[1])
-				{
-					s = s->next;
-					is_ob += 1;
-					break ;
-				}
-			}
-			else if (t > 0.00001)
-			{
-
-				is_ob += 1;
-				break ;
-			}
+				lenray_type(&r, s, nearest, &i[1]);
 			s = s->next;
 		}
+		is_shadow(obj, nearest, r, &i[2]);
 		spot = spot->next;
-		++i;
 	}
-	return ((is_ob > 0) ? (double)(i - is_ob) / i : 1);
+	return ((i[2] > 0) ? (double)(i[0] - i[2]) / i[0] : 1);
 }
-	

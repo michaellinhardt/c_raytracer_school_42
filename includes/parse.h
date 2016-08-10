@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   h_parse.h                                          :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 19:51:51 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/08 10:51:36 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 21:50:47 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef H_PARSE_H
-# define H_PARSE_H
+#ifndef PARSE_H
+# define PARSE_H
 
-# include "h_raytra_gen.h"
+# include "raytra_gen.h"
 
 typedef struct		s_line
 {

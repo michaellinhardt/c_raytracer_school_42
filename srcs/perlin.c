@@ -6,11 +6,11 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 19:31:15 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/27 14:23:24 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 21:46:36 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "h_raystruct.h"
+#include "raystruct.h"
 
 static double fade(double t) 
 { 

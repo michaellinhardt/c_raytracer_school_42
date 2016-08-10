@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builder.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 02:10:37 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/08/08 04:28:59 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/10 21:48:11 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <h_gui.h>
+#include <gui.h>
 #include "libft.h"
-#include <h_raystruct.h>
-#include <h_raytra_gen.h>
+#include <raystruct.h>
+#include <raytra_gen.h>
 
 G_MODULE_EXPORT void	on_pbutton_clicked(GtkWidget *pwidget, gpointer data)
 {
