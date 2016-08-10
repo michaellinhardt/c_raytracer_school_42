@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/09 23:29:04 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/10 04:53:25 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct		s_gen 			/* structure generale */
 	GtkWidget		*pwindow;			/* La fenetre LOL */
 	GtkWidget		*pdrawarea;
 	GdkPixbuf		*pixbuf;
+	pthread_mutex_t	lock_draw;
 	/* La ou on dessine pour les nuls */	
 	int				rep;				/* pour des booleens (keycode MLX) */
 	char			nb;					/* nombre de scene */

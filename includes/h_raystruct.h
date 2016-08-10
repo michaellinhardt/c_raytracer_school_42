@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/08 11:02:20 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 05:09:30 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 # define KEY_EIG 91
 # define KEY_NIN 92
 
-# define MT 16
+# define MT 4
 # define THE struct s_thread
 
 # include <fcntl.h>

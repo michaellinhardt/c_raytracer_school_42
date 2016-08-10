@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/09 23:33:17 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/10 06:46:38 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ double	getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1, t_id *g)
 			if (r->obj->eff[1])
 				color = reflexion(raytracer->sc, r, new_nearest, color, 0,r->obj->eff[1]);
 		}
-		/* SECURE THIS FUCKING AREA */
+		/* SECURE THIS FUCKING AREA */	
 		gtk_put_pixel(raytracer->pixbuf, x1, y1, color);
 		/*
 		** 		Si a la fin du calcul total on a bien trouve une intersection 
@@ -183,6 +183,7 @@ void *display(void *z)
 	tmp = mt->s->sc->obj;
 	t = mt->t;
 	y = mt->lim[1] - 1;
+	pthread_mutex_lock(&(mt->s->lock_draw));
 	while (++y < mt->lim[3])
 	{
 		x = mt->lim[0] - 1;
@@ -192,6 +193,7 @@ void *display(void *z)
 			getnearesthit(&r, mt->s, x, y, t);
 		}
 	}
+	pthread_mutex_unlock(&(mt->s->lock_draw));
 	return (NULL);
 }
 
@@ -212,6 +214,7 @@ void raytracing(t_gen *s)
 			&t.endian);
 		t.bpp = t.bit_per_pixel / 8;
 		*/
+		s->lock_draw = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 		t.data = malloc(W_X * 3 * 1050);
 		s->pixbuf = NULL;
 		(!(t.z = ft_memalloc(sizeof(t_thread) * MT))) ? error(2, "Malloc") : 1;
@@ -224,7 +227,7 @@ void raytracing(t_gen *s)
 		error(2, "Unable to initialize pixbuf for GtkImage :'(\n");
 	j = -1;
 	while (++j < MT)
-		pthread_create(&p[j], NULL, display, &t.z[j]);	// creation des threads
+		pthread_create(&p[j], NULL, display, &t.z[j]);	// creation des threads	
 	j = -1;
 	while (++j < MT)
 		pthread_join(p[j], NULL);	// synchro des threads
@@ -241,7 +244,7 @@ void raytracing(t_gen *s)
 		print_bmp(t.data, t, s);
 		s->rep ^= SAVE;
 	}
-	mlx_loop(t.mlx);*/	
+	mlx_loop(t.mlx);*/
 	g_object_unref(s->pixbuf);
 	gtk_widget_show_all(s->pwindow);
 	gtk_main();
