@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 03:46:50 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/10 21:44:44 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 23:44:22 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,16 +209,13 @@ double intersectray_cylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 	t_vector cyl_pos;
 	t_vector cyl_dir;
 	t_vector tmp;
-	// t_vector p_top;
-	// t_vector p_bot;
 
 	cyl_pos = new_vector(s->pos[0], s->pos[1],s->pos[2]);
 	cyl_dir = vector_normalize(new_vector(s->pos[3], s->pos[4],s->pos[5]));
 
 	dot = vector_dot(r->dir, cyl_dir);
-	tmp = vector_sub(r->start, cyl_pos);//delta p cyl_pos == pa
+	tmp = vector_sub(r->start, cyl_pos);
 	dot2 = vector_dot(tmp, cyl_dir);
-	// dot2 = vector_dot(r->dir, cyl_dir);
 
 	a = vector_dot(vector_sub(r->dir, vectormultby_scalar(cyl_dir, dot)), vector_sub(r->dir, vectormultby_scalar(cyl_dir, dot)));
 	b = 2 * vector_dot(vector_sub(r->dir, vectormultby_scalar(cyl_dir, dot)), vector_sub(tmp, vectormultby_scalar(cyl_dir, dot2)));
@@ -226,12 +223,9 @@ double intersectray_cylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 
 
 	discriminant = b * b - 4 * (a * c);
-	// p_top = new_vector(s->pos[0] - s->size[1], s->pos[1] - s->size[1], s->pos[2] - s->size[1]);
-	// p_bot = new_vector(s->pos[0] + s->size[1], s->pos[1] + s->size[1], s->pos[2] + s->size[1]);
 
 	if (discriminant >= 0 && a)
 	{
-		// double tmp_y = *y1;
 		dist = ((-b + sqrtf(discriminant)) / (2 * a));
 		if ( ((-b - sqrtf(discriminant)) / (2 * a)) < (dist))
 		{
@@ -240,7 +234,6 @@ double intersectray_cylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 				return (0);
 			*x1 = dist;
 			*y1 = ((-b + sqrtf(discriminant)) / (2 * a));
-			// neg = 1;
 		}
 		else
 		{
@@ -271,15 +264,14 @@ double intersectray_cylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 			// printf(" x1 == %lf, y1 == %lf, dist == %lf, tmp == %lf \n", *x1, *y1, dist, tmp_y);
 			// exit(1);
 		// }
-		return dist;
+		return (dist);
 	}
- 		return 0;
-	
+	return (0);
 }
 
 t_vector ComputeNormal(t_vector inter, t_vector aabbCenter)
 {
-    t_vector normals[] = { // A cube has 3 possible orientations
+    t_vector normals[] = {
        (t_vector){1,0,0},
        (t_vector){0,1,0},
        (t_vector){0,0,1}
@@ -293,7 +285,7 @@ t_vector ComputeNormal(t_vector inter, t_vector aabbCenter)
     normals[coef].x = (interRelative.x < 0) ? normals[coef].x : -normals[coef].x;
     normals[coef].y = (interRelative.y < 0) ? normals[coef].y : -normals[coef].y;
     normals[coef].z = (interRelative.z < 0) ? normals[coef].z : -normals[coef].z;
-    return normals[coef]; // The sign he is used to know direction of the normal
+    return normals[coef]; 
 }
 
 double intersectray_carre(t_ray *r, t_obj *s, double *x1, double *y1)
@@ -491,38 +483,20 @@ double intersectray_complex(t_ray *r, t_obj *p, double *x1, double *y1, int *col
 	nearest[1] = INT_MAX;
 	while (tmp)
 	{
-		if (!tmp->eff[3])
+		if (tmp->eff[3])
 		{
-			tmp = tmp->next;
-			continue ;
-		}
-		tmp_near[0] = -1;
-		tmp_near[1] = INT_MAX;
-		if (tmp->type == SPHERE)
-			t = intersectray_sphere(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		else if (tmp->type == PLAN)
-			t = intersectray_plane(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		else if (tmp->type == CYLINDRE)
-			t = intersectray_cylindre(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		else if (tmp->type == RECTANGLE)
-			t = intersectray_carre(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		else if (tmp->type == CONE)
-			t = intersectray_cone(r, tmp, &tmp_near[0], &tmp_near[1]);
-		else if (tmp->type == BOLOID)
-			t = intersectray_boloid(r, tmp, &tmp_near[0], &tmp_near[1]);
-		else if (tmp->type == TORUS)
-			t = intersectray_torus(r, tmp, &tmp_near[0], &tmp_near[1]);
-		if (t > 0.01 && tmp_near[0] != -1)
-		{
-			if (nearest[0] == -1 || (tmp_near[0] < nearest[0]) || tmp_near[1] > nearest[1])
-			{
-				if (nearest[0] == -1 || tmp_near[0] < nearest[0])
-					nearest[0] = tmp_near[0];
-				if (nearest[1] == INT_MAX || tmp_near[1] > nearest[1])
-					nearest[1] = tmp_near[1];
-				norm = r->norm;
-			}
-			t = 0;
+			tmp_near[0] = -1;
+			tmp_near[1] = INT_MAX;
+			t = lenray_type(r, tmp, tmp_near, col);
+			if (t > EPS && tmp_near[0] != -1)
+				if (nearest[0] == -1 || (tmp_near[0] < nearest[0]) || tmp_near[1] > nearest[1])
+				{
+					if (nearest[0] == -1 || tmp_near[0] < nearest[0])
+						nearest[0] = tmp_near[0];
+					if (nearest[1] == INT_MAX || tmp_near[1] > nearest[1])
+						nearest[1] = tmp_near[1];
+					norm = r->norm;
+				}
 		}
 		tmp = tmp->next;
 	}
@@ -531,54 +505,35 @@ double intersectray_complex(t_ray *r, t_obj *p, double *x1, double *y1, int *col
 	new_nearest = -1;
 	while (tmp) //pour toute la liste d'objets
 	{
-		if (tmp->eff[3])
+		if (!tmp->eff[3])
 		{
-			tmp = tmp->next;
-			continue ;
-		}
-		if (tmp->type == SPHERE)
-			t = intersectray_sphere(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		else if (tmp->type == PLAN)
-			t = intersectray_plane(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		else if (tmp->type == CYLINDRE)
-			t = intersectray_cylindre(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
-		else if (tmp->type == RECTANGLE)
-			t = intersectray_carre(r, tmp, &tmp_near[0], &tmp_near[1]);
-		else if (tmp->type == CONE)
-			t = intersectray_cone(r, tmp, &tmp_near[0], &tmp_near[1]);
-		else if (tmp->type == TORUS)
-			t = intersectray_torus(r, tmp, &tmp_near[0], &tmp_near[1]);
-		else if (tmp->type == BOLOID)
-			t = intersectray_boloid(r, tmp, &tmp_near[0], &tmp_near[1]);
-		if ((t < new_nearest && t > 0.00001)|| (new_nearest < 0 && t > 0.00001))
-		{
-			// si la distance actuelle calculee est plus petite que la precedente, on garde en memoire 
-			//: la nouvelle plus courte intersection, l'objet concerne, et la normale du point touche
-			if (t > nearest[0] && t < nearest[1] && nearest[0] > 0 /*&& nearest[1] < INT_MAX*/)
+			t = lenray_type(r, tmp, tmp_near, col);
+			if ((t < new_nearest && t > EPS)|| (new_nearest < 0 && t > EPS))
 			{
-				if (tmp_near[1] <= nearest[1] && tmp_near[0] >= nearest[0])
+				if (t > nearest[0] && t < nearest[1] && nearest[0] > 0)
 				{
-					tmp = tmp->next;
-					continue;
+					if (tmp_near[1] <= nearest[1] && tmp_near[0] >= nearest[0])
+					{
+						tmp = tmp->next;
+						continue;
+					}
+					new_nearest = nearest[1];
+					temp = tmp;
+					r->obj = tmp;
+					norm = vector_rev(norm);
 				}
-				new_nearest = nearest[1];
-				temp = tmp;
-				r->obj = tmp;
-				norm.x = -r->norm.x;
-				norm.y = -r->norm.y;
-				norm.z = -r->norm.z;
-			}
-			else
-			{
-				new_nearest = t;
-				temp = tmp;
-				r->obj = tmp;
-				norm = r->norm;
+				else
+				{
+					new_nearest = t;
+					temp = tmp;
+					r->obj = tmp;
+					norm = r->norm;
+				}
 			}
 		}
-		tmp = tmp->next; //objet suivant
+		tmp = tmp->next;
 	}
-	if (new_nearest > 0.00001)
+	if (new_nearest > EPS)
 	{
 		*col = temp->c_o;
 		r->norm = norm;
@@ -608,39 +563,31 @@ double intersectray_triangle(t_ray *r, t_obj *p, double *x1, double *y1)
 		c1 = vector_sub(tmp->tri[2], tmp->tri[0]);
 		test = vector_cross(r->dir, c1);
 		d = vector_dot(c0, test);
-		if (d > -EPS && d < EPS)
+		if (d < -EPS && d > EPS)
 		{
-			tmp = tmp->next;
-			continue ;
-		}
-		t = 1.0 / d;
-		c2 = vector_sub(r->start, tmp->tri[0]);
-		double u = t * vector_dot(c2, test);
-		if (u < 0.0 || u > 1.0)
-		{
-			tmp = tmp->next;
-			continue ;	
-		}
-		c3 = vector_cross(c2, c0);
-		double v = t * vector_dot(r->dir, c3);
-		if (v < 0.0 || u + v > 1.0)
-		{
-			tmp = tmp->next;
-			continue ;	
-		}
-		t = t * vector_dot(c1, c3);
-		if (t > EPS && t < near)
-		{
-			new = tmp->nor;
-			near = t;
+			t = 1.0 / d;
+			c2 = vector_sub(r->start, tmp->tri[0]);
+			double u = t * vector_dot(c2, test);
+			if (u >= 0.0 && u <= 1.0)
+			{
+				c3 = vector_cross(c2, c0);
+				double v = t * vector_dot(r->dir, c3);
+				if (v >= 0.0 && u + v <= 1.0)
+				{
+					t = t * vector_dot(c1, c3);
+					if (t > EPS && t < near)
+					{
+						new = tmp->nor;
+						near = t;
+					}
+				}
+			}
 		}
 		tmp = tmp->next;
 	}
 	if (near > EPS && near < INT_MAX)
 	{
-		r->norm.x = new.x;
-		r->norm.y = new.y;
-		r->norm.z = new.z;
+		r->norm = new;
 		*x1 = near;
 		r->norm = vector_normalize(r->norm);
 		return (near);
@@ -661,9 +608,7 @@ double intersectray_plane(t_ray *r, t_obj *p, double *x1, double *y1)
 	t = (vector_dot(vector_sub(p0, r->start),n) / vector_dot(r->dir, n));
 	if (t > EPS)
 	{
-		r->norm.x = n.x;
-		r->norm.y = n.y;
-		r->norm.z = n.z;
+		r->norm = n;
 		*x1 = t;
 		*y1 = *x1; 
 		r->norm = vector_normalize(r->norm);

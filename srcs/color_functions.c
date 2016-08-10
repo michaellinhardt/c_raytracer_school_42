@@ -6,24 +6,11 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/27 14:20:29 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/10 21:45:00 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 23:17:33 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raystruct.h"
-
-void mlx_image_put_pixel(t_id *g, int x, int y, int color)
-{
-	int	index;
-
-	if (y >= W_Y || x >= W_X || x < 0 || y < 0)
-		return ;
-	index = (y * g->s_line) + x * (g->bpp);
-	g->data[index + 3] = (color & 0xFF000000) >> 24;
-	g->data[index + 2] = (color & 0x00FF0000) >> 16;
-	g->data[index + 1] = (color & 0x0000FF00) >> 8;
-	g->data[index] = color & 0x000000FF;
-}
 
 void color_composants(int color, double *ret)
 {
@@ -55,7 +42,7 @@ double sqr(double color)
 	return (color * color);
 }
 
-void colorNormalize(double *tab, double *tmp_tab, double factor, int c)
+void color_normalize(double *tab, double *tmp_tab, double factor, int c)
 {
 	if (c)
 	{

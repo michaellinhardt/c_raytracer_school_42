@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/10 22:14:07 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/11 00:56:05 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,14 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 			if (factor < 0)
 				factor = 0;
 			if (factor > 0)
-				colorNormalize(total_rgb, tmp_rgb, factor, 1);			
+				color_normalize(total_rgb, tmp_rgb, factor, 1);			
 			spot = spot->next;
 		}
 	total_rgb[0] /= nb_spot;
 	total_rgb[1] /= nb_spot;
 	total_rgb[2] /= nb_spot;
 	sqrtc(total_rgb);
-	colorNormalize(rgb, total_rgb, is_ob /** noise(hitpoint)*/, 0);			
+	color_normalize(rgb, total_rgb, is_ob * noise(hitpoint), 0);			
 	return (colorfromrgb(rgb));
 }
 

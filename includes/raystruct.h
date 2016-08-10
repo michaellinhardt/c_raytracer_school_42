@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/10 22:59:00 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/10 23:13:40 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ typedef struct		s_general
 	THE				*z;
 }					t_id;
 
-typedef struct	s_thread
+typedef struct		s_thread
 {
-	int			nb;
-	int			lim[4];
-	t_id		*t;
-	t_gen		*s;	
-}				t_thread;
+	int				nb;
+	int				lim[4];
+	t_id			*t;
+	t_gen			*s;	
+}					t_thread;
 
 /*
 **									write_img.c
@@ -150,7 +150,7 @@ t_vector			matricerot_z(t_vector v, double angle);
 void				mlx_image_put_pixel(t_id *g, int x, int y, int color);
 void				color_composants(int color, double *ret);
 int					colorfromrgb(double *tab);
-void				colorNormalize(double *tab, double *tmp_tab, double factor, int c);
+void				color_normalize(double *tab, double *tmp_tab, double factor, int c);
 
 /*
 **									intersec_ray.c  
