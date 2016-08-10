@@ -507,11 +507,11 @@ double intersectRayComplex(t_ray *r, t_obj *p, double *x1, double *y1, int *col)
 		else if (tmp->type == RECTANGLE)
 			t = intersectRayCarre(r, tmp, &tmp_near[0], &tmp_near[1]); // a chaque forme sa formule mathematique 
 		else if (tmp->type == CONE)
-			t = intersectRayCylindre(r, tmp, &tmp_near[0], &tmp_near[1]);
+			t = intersectRayCone(r, tmp, &tmp_near[0], &tmp_near[1]);
 		else if (tmp->type == BOLOID)
 			t = intersectRayBoloid(r, tmp, &tmp_near[0], &tmp_near[1]);
 		else if (tmp->type == TORUS)
-			t = intersectRayCone(r, tmp, &tmp_near[0], &tmp_near[1]);
+			t = intersectRayTorus(r, tmp, &tmp_near[0], &tmp_near[1]);
 		if (t > 0.01 && tmp_near[0] != -1)
 		{
 			if (nearest[0] == -1 || (tmp_near[0] < nearest[0]) || tmp_near[1] > nearest[1])
@@ -545,9 +545,9 @@ double intersectRayComplex(t_ray *r, t_obj *p, double *x1, double *y1, int *col)
 		else if (tmp->type == RECTANGLE)
 			t = intersectRayCarre(r, tmp, &tmp_near[0], &tmp_near[1]);
 		else if (tmp->type == CONE)
-			t = intersectRayCylindre(r, tmp, &tmp_near[0], &tmp_near[1]);
-		else if (tmp->type == TORUS)
 			t = intersectRayCone(r, tmp, &tmp_near[0], &tmp_near[1]);
+		else if (tmp->type == TORUS)
+			t = intersectRayTorus(r, tmp, &tmp_near[0], &tmp_near[1]);
 		else if (tmp->type == BOLOID)
 			t = intersectRayBoloid(r, tmp, &tmp_near[0], &tmp_near[1]);
 		if ((t < new_nearest && t > 0.00001)|| (new_nearest < 0 && t > 0.00001))
