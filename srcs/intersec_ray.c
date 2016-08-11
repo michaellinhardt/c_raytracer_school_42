@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 03:46:50 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/11 02:52:40 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/11 21:52:41 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,6 @@ double intersectray_cylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 	b = 2 * vector_dot(vector_sub(r->dir, vectormultby_scalar(cyl_dir, dot)), vector_sub(tmp, vectormultby_scalar(cyl_dir, dot2)));
 	c = vector_dot(vector_sub(tmp, vectormultby_scalar(cyl_dir, dot2)), vector_sub(tmp, vectormultby_scalar(cyl_dir, dot2))) - s->size[0] * s->size[0];
 
-
 	discriminant = b * b - 4 * (a * c);
 
 	if (discriminant >= 0 && a)
@@ -242,7 +241,48 @@ double intersectray_cylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 			*x1 = ((-b + sqrtf(discriminant)) / (2 * a));
 			*y1 = ((-b - sqrtf(discriminant)) / (2 * a));
 		}
-		
+		// if (vector_dist(get_hitpoint(r->start, r->dir, dist), cyl_pos) > s->size[1])
+		// {
+		// 	if (((-b + sqrtf(discriminant)) / (2 * a)) > dist)
+		// 		dist = ((-b + sqrtf(discriminant)) / (2 * a));
+		// 	if (((-b - sqrtf(discriminant)) / (2 * a)) > dist)
+		// 		dist = ((-b - sqrtf(discriminant)) / (2 * a));
+		// 	if (vector_dist(get_hitpoint(r->start, r->dir, dist), cyl_pos) > s->size[1])
+		// 		return (0);
+		// }
+		t_vector   inter;
+	    t_vector   proj;
+	    t_vector   cyl_pos_dir;
+	    t_vector   cyl_dir2;
+	    double  dot3;
+	    double  tmp;
+
+	    cyl_pos_dir = vector_add(cyl_pos, cyl_dir);
+	    cyl_dir2 = vector_sub(cyl_pos_dir, cyl_pos);
+	    dot3 = vector_dot((cyl_dir2), (cyl_dir2));
+	    inter = vectormultby_scalar(r->dir, dist);
+	    inter = vector_add(inter, r->start);
+	    proj = vector_sub(inter, cyl_pos_dir);
+	    tmp = vector_dot((cyl_dir2), (proj)) / dot3;
+		cyl_dir2 = vectormultby_scalar(cyl_dir2, tmp);
+		cyl_dir2 = vector_add(cyl_dir2, cyl_pos_dir);
+		proj = cyl_dir2;
+		proj = vector_sub(proj, cyl_pos);
+		r->norm = inter;
+		proj = vector_add(cyl_pos, proj);
+		r->norm = vector_sub(r->norm, proj);
+		// if (neg)
+		// {
+		// 	r->norm = cyl_dir;
+		// 	if (neg == 2)
+		// 	r->norm = vector_rev(r->norm);
+		// 	return (dist);
+		// }
+		// r->norm.x = -r->norm.x;
+		// r->norm.y = -r->norm.y;
+		// r->norm.z = -r->norm.z;
+		r->norm = vector_normalize(r->norm);
+		return dist;
 		// if (vector_dist(get_hitpoint(r->start, r->dir, dist), cyl_pos) > s->size[1])
 		// {
 		// 	if (((-b + sqrtf(discriminant)) / (2 * a)) > dist)
@@ -253,11 +293,11 @@ double intersectray_cylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 		// 		return (0);
 		// 	neg = 1;
 		// }
-		t_vector	hitpoint;
+		// t_vector	hitpoint;
 
-		hitpoint = get_hitpoint(r->start, r->dir, dist);
-		r->norm = vector_normalize(r->norm);
-		return (dist);
+		// hitpoint = get_hitpoint(r->start, r->dir, dist);
+		// r->norm = vector_normalize(r->norm);
+		// return (dist);
 	}
 	return (0);
 }

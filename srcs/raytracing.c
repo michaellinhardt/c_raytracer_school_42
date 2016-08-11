@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/11 02:50:03 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/11 21:31:43 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ double noise(t_vector hitpoint)
     {
         noiseCoef += (1.0 / level)  
             * fabs((perlin(fabs(level * 0.05 * hitpoint.x),
-            	fabs(level * 0.05 * hitpoint.y),
-            	fabs(level * 0.05 * hitpoint.z))));
+            	fabs(level * 0.00 * hitpoint.y),
+            	fabs(level * 0.00 * hitpoint.z))));
     	level++;
     }
     if (noiseCoef > 1.0)
@@ -61,13 +61,12 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 		spot = spot->next;
 		++nb_spot;
 	}
-	spot = sc->spot;
 	if (tmp->type != COMPLEXE)
 		color_composants(tmp->c_o, rgb);
 	else
 		color_composants(col, rgb);
+	spot = sc->spot;
 	is_ob = cast_shadow(sc->obj, hitpoint, spot, sc->obj);
-	// is_ob = 1;
 	ft_bzero(total_rgb, sizeof(double) * 3);
 	if (is_ob)
 		while (spot)
@@ -76,8 +75,6 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 			light_dist = vector_dir(spot_pos, hitpoint);
 			factor = vector_dot(light_dist, r->norm);
 			color_composants(spot->c_s, tmp_rgb);
-			if (factor < 0)
-				factor = 0;
 			if (factor > 0)
 				color_normalize(total_rgb, tmp_rgb, factor, 1);			
 			spot = spot->next;
@@ -159,14 +156,14 @@ void *display(void *z)
 	tmp = mt->s->sc->obj;
 	t = mt->t;
 	y = mt->lim[1] - 1;
-	// pthread_mutex_lock(&(mt->s->lock_draw));
+	pthread_mutex_lock(&(mt->s->lock_draw));
 	while (++y < mt->lim[3])
 	{
 		x = mt->lim[0] - 1;
 		while (++x < mt->lim[2])
 			getnearesthit(&r, mt->s, x, y, t);
 	}
-	// pthread_mutex_unlock(&(mt->s->lock_draw));
+	pthread_mutex_unlock(&(mt->s->lock_draw));
 	return (NULL);
 }
 

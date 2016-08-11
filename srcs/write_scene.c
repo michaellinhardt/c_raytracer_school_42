@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/25 05:39:29 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/11 02:37:10 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/11 18:47:00 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ static void	print_type(t_gen *s, char **to_print, char type)
 		*to_print = ft_strjoin(*to_print, "cylindre }\n");
 	if (type & COMPLEXE)
 		*to_print = ft_strjoin(*to_print, "complexe }\n");
+	if (type & TORUS)
+		*to_print = ft_strjoin(*to_print, "torus }\n");
+	if (type & BOLOID)
+		*to_print = ft_strjoin(*to_print, "para }\n");
+	if (type & TRIANGLE)
+		*to_print = ft_strjoin(*to_print, "triangle }\n");
 	ft_strdel(&tmp);
 }
 
