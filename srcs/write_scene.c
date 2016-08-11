@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/25 05:39:29 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/10 22:03:40 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/11 02:37:10 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ static void	print_type(t_gen *s, char **to_print, char type)
 
 	tmp = *to_print;
 	(void)s;
-	if (type == RECTANGLE)
+	if (type & RECTANGLE)
 		*to_print = ft_strjoin(*to_print, "rectangle }\n");
-	if (type == SPHERE)
+	if (type & SPHERE)
 		*to_print = ft_strjoin(*to_print, "sphere }\n");
-	if (type == PLAN)
+	if (type & PLAN)
 		*to_print = ft_strjoin(*to_print, "plan }\n");
-	if (type == CONE)
+	if (type & CONE)
 		*to_print = ft_strjoin(*to_print, "cone }\n");
-	if (type == CYLINDRE)
+	if (type & CYLINDRE)
 		*to_print = ft_strjoin(*to_print, "cylindre }\n");
-	if (type == COMPLEXE)
+	if (type & COMPLEXE)
 		*to_print = ft_strjoin(*to_print, "complexe }\n");
 	ft_strdel(&tmp);
 }
@@ -352,7 +352,7 @@ void	print_scene(t_gen *s)
 	obj = s->sc->obj;
 	while (obj)
 	{
-		if (obj->type != COMPLEXE)
+		if (!(obj->type & COMPLEXE))
 			print_simple(s, &to_print, obj,0);
 		else
 			print_complexe(s, &to_print, obj);

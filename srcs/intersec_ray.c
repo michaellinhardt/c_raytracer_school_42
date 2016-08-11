@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 03:46:50 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/10 23:44:22 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/11 02:52:40 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,14 +256,7 @@ double intersectray_cylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 		t_vector	hitpoint;
 
 		hitpoint = get_hitpoint(r->start, r->dir, dist);
-
 		r->norm = vector_normalize(r->norm);
-		// }
-			// *x1 = dist;
-			// *y1 = INT_MAX;
-			// printf(" x1 == %lf, y1 == %lf, dist == %lf, tmp == %lf \n", *x1, *y1, dist, tmp_y);
-			// exit(1);
-		// }
 		return (dist);
 	}
 	return (0);
@@ -338,8 +331,6 @@ double intersectray_carre(t_ray *r, t_obj *s, double *x1, double *y1)
  
     if (tzmax < tmax) 
         tmax = tzmax; 
-	
-
     r->norm = ComputeNormal(get_hitpoint(r->start, r->dir, (t_min < tmax) ? t_min : tmax), new_vector(s->pos[0], s->pos[1], s->pos[2]));
     return (t_min < tmax) ? t_min : tmax; 
 }
@@ -388,7 +379,6 @@ double intersectray_sphere(t_ray *r, t_obj *s, double *x1, double *y1)
 			dist = ((-b - sqrtf(discriminant)) / (2 * a));
 		t_vector hitpoint;
 		hitpoint = get_hitpoint(r->start, r->dir, dist);
-
 		r->norm = new_vector((hitpoint.x - s->pos[0]) / s->size[0], 
 			(hitpoint.y - s->pos[1]) / s->size[0],
 			(hitpoint.z - s->pos[2]) / s->size[0]);
@@ -563,25 +553,31 @@ double intersectray_triangle(t_ray *r, t_obj *p, double *x1, double *y1)
 		c1 = vector_sub(tmp->tri[2], tmp->tri[0]);
 		test = vector_cross(r->dir, c1);
 		d = vector_dot(c0, test);
-		if (d < -EPS && d > EPS)
+		if (d > -0.00001 && d < 0.00001)
 		{
-			t = 1.0 / d;
-			c2 = vector_sub(r->start, tmp->tri[0]);
-			double u = t * vector_dot(c2, test);
-			if (u >= 0.0 && u <= 1.0)
-			{
-				c3 = vector_cross(c2, c0);
-				double v = t * vector_dot(r->dir, c3);
-				if (v >= 0.0 && u + v <= 1.0)
-				{
-					t = t * vector_dot(c1, c3);
-					if (t > EPS && t < near)
-					{
-						new = tmp->nor;
-						near = t;
-					}
-				}
-			}
+			tmp = tmp->next;
+			continue ;
+		}
+		t = 1.0 / d;
+		c2 = vector_sub(r->start, tmp->tri[0]);
+		double u = t * vector_dot(c2, test);
+		if (u < 0.0 || u > 1.0)
+		{
+			tmp = tmp->next;
+			continue ;	
+		}
+		c3 = vector_cross(c2, c0);
+		double v = t * vector_dot(r->dir, c3);
+		if (v < 0.0 || u + v > 1.0)
+		{
+			tmp = tmp->next;
+			continue ;	
+		}
+		t = t * vector_dot(c1, c3);
+		if (t > 0.01 && t < near)
+		{
+			new = tmp->nor;
+			near = t;
 		}
 		tmp = tmp->next;
 	}
@@ -597,11 +593,9 @@ double intersectray_triangle(t_ray *r, t_obj *p, double *x1, double *y1)
 
 double intersectray_plane(t_ray *r, t_obj *p, double *x1, double *y1)
 {
-	(void)x1;
-	(void)y1;	
-	double t;
-	t_vector n;
-	t_vector p0;
+	double		t;
+	t_vector	n;
+	t_vector	p0;
 
 	p0 = new_vector(p->pos[0], p->pos[1], p->pos[2]);
 	n = vector_normalize(new_vector(p->pos[3], p->pos[4], p->pos[5]));

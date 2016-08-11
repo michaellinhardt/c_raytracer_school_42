@@ -6,37 +6,31 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/11 00:56:05 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/11 02:50:03 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raystruct.h"
 #include <gui.h>
 
-// int refraction(t_scene *sc, t_ray *r, double dist, int col, int return, double eff)
-// {
-// 	t_vector newray;
-
-// 	newray.start = get_hitpoint(r->start, r->dir, dist);
-// 	newray.dir = calcul de merde bullshit
-// }
-
 double noise(t_vector hitpoint)
 {
 	double noiseCoef;
+	int level;
 
 	noiseCoef = 0;
-	for (int level = 1; level < 50; level ++)
+	level = 1;
+	while (level < 50)
     {
-        noiseCoef += (1.0 / level )  
-        // différents coefficients en x, y  et z du Bruit de Perlinpinpin
-            * fabs((perlin(fabs(level * 0.05 * hitpoint.x), fabs(level * 0.05 * hitpoint.y), fabs(level * 0.05 * hitpoint.z))));
-    };
+        noiseCoef += (1.0 / level)  
+            * fabs((perlin(fabs(level * 0.05 * hitpoint.x),
+            	fabs(level * 0.05 * hitpoint.y),
+            	fabs(level * 0.05 * hitpoint.z))));
+    	level++;
+    }
     if (noiseCoef > 1.0)
     	noiseCoef = 1;
     return (noiseCoef);
-    // return (fabs(cos(hitpoint.x + perlin(hitpoint.x, hitpoint.y, hitpoint.z))));
-
 }
 
 void sqrtc(double *color)
@@ -92,29 +86,27 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 	total_rgb[1] /= nb_spot;
 	total_rgb[2] /= nb_spot;
 	sqrtc(total_rgb);
-	color_normalize(rgb, total_rgb, is_ob * noise(hitpoint), 0);			
+	color_normalize(rgb, total_rgb, is_ob /** noise(hitpoint)*/, 0);
 	return (colorfromrgb(rgb));
 }
 
 int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 {
-	t_ray newray;
-	int color;
-	double tmp_rgb[3];
-	double rgb[3];
-
+	t_ray	newray;
+	int		color;
+	double	tmp_rgb[3];
+	double	rgb[3];
 	double new_nearest;
 
 	newray.start = get_hitpoint(r->start, r->dir, m);
-	newray.dir = vector_dir(r->dir, vectormultby_scalar(r->norm, vector_dot(r->norm, r->dir) * 2));
+	newray.dir = vector_dir(r->dir, vectormultby_scalar(r->norm,
+		vector_dot(r->norm, r->dir) * 2));
 	new_nearest = lenray(sc, &newray);
 	color = 0;
-	if (ret < 10 && new_nearest > 0.0001 && newray.obj)
+	if (ret < 10 && new_nearest > EPS && newray.obj)
 	{
-		if (newray.obj && (newray.obj->type == SPHERE || newray.obj->type == TORUS || newray.obj->type == TRIANGLE || newray.obj->type == CONE || newray.obj->type == PLAN || newray.obj->type == CYLINDRE || newray.obj->type == RECTANGLE || newray.obj->type == COMPLEXE))
-		{
+		if (newray.obj && (newray.obj->type))
 			color = diffuse(sc, &newray, newray.obj, new_nearest, newray.obj->c_o);
-		}
 		color_composants(color, tmp_rgb);
 		color_composants(col, rgb);
 		rgb[0] = rgb[0] * (1 - (eff / 100)) + tmp_rgb[0] * (eff / 100);
@@ -122,47 +114,33 @@ int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 		rgb[2] = rgb[2] * (1 - (eff / 100)) + tmp_rgb[2] * (eff / 100);
 		col = colorfromrgb(rgb);
 		if (newray.obj->eff[1])
-		{
-			col = reflexion(sc, &newray, new_nearest, col, ret + 1, (newray.obj->eff[1] > eff) ? eff : newray.obj->eff[1]);
-		}
+			col = reflexion(sc, &newray, new_nearest, col, ret + 1,
+				(newray.obj->eff[1] > eff) ? eff : newray.obj->eff[1]);
 	}
 	else if (new_nearest < 0 && eff == 100)
-	{
 		col = 0;
-		// color *= coeffreflection;
-	}
-
-	return col;
-
+	return (col);
 }
 
 double	getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1, t_id *g)
 {
+	int		color;
+	double	new_nearest;
+	
 	(void)g;
-	t_obj *s;
-	int color;
-	double new_nearest;
-	s = raytracer->sc->obj; // recuperation de la liste d'objets
-	r->dir = new_vector(x1 - W_X / 2.0, W_Y / 2.0 - y1, (W_Y / 2.0) / tan(70*0.5));	//initialisation des donnees de la camera 
-	r->dir = vector_normalize(r->dir);	// normalisation de la direction
-
+	r->dir = vector_normalize(new_vector(x1 - W_X / 2.0, W_Y / 2.0 - y1,
+		(W_Y / 2.0) / tan(70*0.5)));
 	new_nearest = lenray(raytracer->sc, r);
-		color = 0;
+	color = 0;
 	if (new_nearest >= 0)
 	{
-		if (r->obj && (r->obj->type == SPHERE || r->obj->type == TORUS || r->obj->type == CONE || r->obj->type == COMPLEXE || r->obj->type == TRIANGLE || r->obj->type == PLAN || r->obj->type == CYLINDRE || r->obj->type == RECTANGLE))
+		if (r->obj && (r->obj->type))
 		{
 			color = diffuse(raytracer->sc, r, r->obj, new_nearest, color);
 			if (r->obj->eff[1])
-				color = reflexion(raytracer->sc, r, new_nearest, color, 0,r->obj->eff[1]);
+				color = reflexion(raytracer->sc, r, new_nearest, color, 0, r->obj->eff[1]);
 		}
-		/* SECURE THIS FUCKING AREA */	
 		gtk_put_pixel(raytracer->pixbuf, x1, y1, color);
-		/*
-		** 		Si a la fin du calcul total on a bien trouve une intersection 
-		** 		existante (nearest > 0), on lance la fonction qui permet de calculer  
-		** 		le pourcentage de coloration de la couleur diffuse au point touche
-		*/
 	}
 	return (new_nearest);	
 }
@@ -181,14 +159,14 @@ void *display(void *z)
 	tmp = mt->s->sc->obj;
 	t = mt->t;
 	y = mt->lim[1] - 1;
-	pthread_mutex_lock(&(mt->s->lock_draw));
+	// pthread_mutex_lock(&(mt->s->lock_draw));
 	while (++y < mt->lim[3])
 	{
 		x = mt->lim[0] - 1;
 		while (++x < mt->lim[2])
 			getnearesthit(&r, mt->s, x, y, t);
 	}
-	pthread_mutex_unlock(&(mt->s->lock_draw));
+	// pthread_mutex_unlock(&(mt->s->lock_draw));
 	return (NULL);
 }
 

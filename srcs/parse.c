@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 19:49:55 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/10 22:03:11 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/11 02:32:32 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	spot(int fd, t_spot **spot)
 	}
 }
 
-char type(int fd)
+int type(int fd)
 {
 	char	*tmp;
 	char	*line;

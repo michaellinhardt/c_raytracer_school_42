@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/21 06:34:57 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/10 21:46:11 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/11 02:34:01 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_obj	*simple_obj(int fd, char *line, char c)
 	if (!c)
 		o->name = name(fd);
 	camera(fd, o->pos, 0);
-	o->type = type(fd);
+	o->type ^= type(fd);
 	if (o->type != TRIANGLE)
 	{
 		size(fd, o->size);
@@ -69,7 +69,7 @@ static t_obj	*cmpl_obj(int fd, char *line)
 	(!(o = ft_memalloc(sizeof(t_obj)))) ? error(2, "Malloc") : 1;
 	o->name = name(fd);
 	camera(fd, o->pos, 0);
-	o->type = COMPLEXE;
+	o->type ^= COMPLEXE;
 	o->comp = NULL;
 
 	get_next_line(fd, &line);

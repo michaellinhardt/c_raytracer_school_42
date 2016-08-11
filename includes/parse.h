@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 19:51:51 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/10 23:51:16 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/11 02:40:27 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void				size(int fd, double *size);
 void				effect(int fd, double *eff);
 void				objects(t_scene *tmp, int fd, char *line);
 char				*name(int fd);
-char				type(int fd);
+int					type(int fd);
 void				triangle(int fd, t_obj **o, char *line);
 
 #endif

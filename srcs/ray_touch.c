@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 16:52:24 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/10 21:44:37 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/11 02:39:25 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 double			lenray_type(t_ray *r, t_obj *s, double *tmp_near, int *col)
 {
-	if (s->type == SPHERE)
+	if (s->type & SPHERE)
 		return (intersectray_sphere(r, s, &tmp_near[0], &tmp_near[1]));
-	else if (s->type == PLAN)
+	else if (s->type & PLAN)
 		return (intersectray_plane(r, s, &tmp_near[0], &tmp_near[1]));
-	else if (s->type == CYLINDRE)
+	else if (s->type & CYLINDRE)
 		return (intersectray_cylindre(r, s, &tmp_near[0], &tmp_near[1]));
-	else if (s->type == RECTANGLE)
+	else if (s->type & RECTANGLE)
 		return (intersectray_carre(r, s, &tmp_near[0], &tmp_near[1]));
-	else if (s->type == COMPLEXE)
+	else if (s->type & COMPLEXE)
 		return (intersectray_complex(r, s, &tmp_near[0], &tmp_near[1], col));
-	else if (s->type == CONE)
+	else if (s->type & CONE)
 		return (intersectray_cone(r, s, &tmp_near[0], &tmp_near[1]));
-	else if (s->type == TORUS)
+	else if (s->type & TORUS)
 		return (intersectray_torus(r, s, &tmp_near[0], &tmp_near[1]));
-	else if (s->type == BOLOID)
+	else if (s->type & BOLOID)
 		return (intersectray_boloid(r, s, &tmp_near[0], &tmp_near[1]));
-	else if (s->type == TRIANGLE)
+	else if (s->type & TRIANGLE)
 		return (intersectray_triangle(r, s, &tmp_near[0], &tmp_near[1]));
 	return (0);
 }
@@ -73,8 +73,8 @@ static char		replace_nearest(t_obj *s, t_ray *r,
 		if (nearest[5] <= nearest[1] && nearest[4] >= nearest[0])
 			return (0);
 		nearest[2] = nearest[1];
-		if ((s->type != COMPLEXE && s->type == PLAN)
-			|| (r->obj->type != COMPLEXE && r->obj->type == PLAN))
+		if ((!(s->type & COMPLEXE) && (s->type & PLAN))
+			|| (!(r->obj->type & COMPLEXE) && (r->obj->type & PLAN)))
 			*norm = vector_rev(*norm);
 	}
 	else

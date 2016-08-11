@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/23 09:43:35 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/10 22:57:34 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/11 02:35:55 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static void rotate(t_gen *s, int key)
 	t_vector new;
 	t_vector obj;
 
-	if (s->to_move->type == SPHERE)
+	if (s->to_move->type & SPHERE)
 		new = new_vector(s->to_move->cut[0], s->to_move->cut[1], s->to_move->cut[2]);
-	else if (s->to_move->type == PLAN)
+	else if (s->to_move->type & PLAN)
 		new = new_vector(s->to_move->pos[0], s->to_move->pos[1], s->to_move->pos[2]);
 	obj = new_vector(s->to_move->pos[0], s->to_move->pos[1], s->to_move->pos[2]);
 	if (key == KEY_NIN)
@@ -119,10 +119,3 @@ int			press_key(int key, t_gen *s)
 	return (1);
 }
 
-int			release_key(int key, t_gen *s)
-{
-	if (!s->to_move)
-		return (0);
-	(void)key;
-	return (1);
-}

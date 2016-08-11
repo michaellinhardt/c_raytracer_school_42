@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/24 20:10:10 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/10 22:19:38 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/11 02:36:24 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	is_shadow(t_obj *s, double *nearest, t_ray r, int *is_ob)
 	t[0] = 1;
 	while (s)
 	{
-		if (!s->eff[3] && s->type != PLAN)
+		if (!s->eff[3] && !(s->type & PLAN))
 		{
 			t[2] = lenray_type(&r, s, t, &col);
 			if (t[2] > nearest[0] && t[2] < nearest[1]

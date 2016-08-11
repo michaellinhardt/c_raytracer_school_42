@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/10 22:01:35 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/11 02:32:20 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@
 # include <stdio.h>			/* to del */
 # include <math.h>
 
-# define SPHERE 1
-# define RECTANGLE 2
-# define PLAN 3
-# define CONE 4
-# define CYLINDRE 5
-# define COMPLEXE 6
-# define TORUS 7
-# define BOLOID 8
-# define TRIANGLE 9
+# define SPHERE 0x1
+# define RECTANGLE 0x2
+# define PLAN 0x4
+# define CONE 0x8
+# define CYLINDRE 0x10
+# define COMPLEXE 0x20
+# define TORUS 0x40
+# define BOLOID 0x80
+# define TRIANGLE 0x100
 
 /*
 **	BOOL
@@ -56,7 +56,7 @@ typedef struct		s_spot
 typedef struct		s_obj
 {
 	char			*name;
-	char			type;				/* cf MACRO */
+	int				type;				/* cf MACRO */
 	double			pos[6];				/* obj position [0-2] x y z ; direction [3-5] x y z*/
 	double			size[3];			/* cf doc */
 	double			eff[4];				/* eff[0] = transparence , [1] = reflexion, [2] = refraction, [3] == negatif */
