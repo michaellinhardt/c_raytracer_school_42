@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/11 02:32:20 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/12 06:26:23 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,13 @@ typedef struct		s_scene
 typedef struct		s_gen 			/* structure generale */
 {
 	t_obj			*to_move;			/* Objet courant */	
-	t_scene			*sc;				/* Liste des scenes chargees */
+	t_scene			*sc;				/* Liste des scenes chargees */	
+	GdkPixbuf		*pixbuf;
 	GtkWidget		*pwindow;			/* La fenetre LOL */
 	GtkWidget		*pdrawarea;
-	GdkPixbuf		*pixbuf;
+	GtkWidget		*pscene_choosefile;
+	GtkWidget		*pscene_current_scene;
+	GtkWidget		*pscene_object_select;
 	pthread_mutex_t	lock_draw;
 	/* La ou on dessine pour les nuls */	
 	int				rep;				/* pour des booleens (keycode MLX) */
@@ -93,7 +96,7 @@ typedef struct		s_gen 			/* structure generale */
 }					t_gen;
 
 void				error(int i, char *str);
-void				parse_scene(t_gen *s, char **argv);
+void				parse_scene(t_gen *s, char *argv);
 void				raytracing(t_gen *s);
 
 #endif

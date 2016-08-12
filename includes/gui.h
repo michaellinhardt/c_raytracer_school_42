@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 19:53:30 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/08/10 21:50:49 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/12 03:50:35 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int				gtk_put_image_to_window(GtkImage *image, GdkPixbuf *pixbuf);
 /*
  ** @Callback section.
  */
+void			on_pscene_current_scene_changed(GtkWidget *pwidget, gpointer data);
+void			pscene_button_save(GtkWidget *pwdiget, gpointer data);
+void			pscene_button_load(GtkWidget *pwdiget, gpointer data);
 void			on_destroy_callback(GtkWidget *pwidget, gpointer *data);
 void			on_pbutton_clicked(GtkWidget *pwidget, gpointer data);
 #endif

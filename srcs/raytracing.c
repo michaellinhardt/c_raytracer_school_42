@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/11 21:31:43 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/12 06:22:40 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,5 +196,4 @@ void raytracing(t_gen *s)
 	gtk_put_image_to_window(GTK_IMAGE(s->pdrawarea), s->pixbuf);
 	g_object_unref(s->pixbuf);
 	gtk_widget_show_all(s->pwindow);
-	gtk_main();
 }

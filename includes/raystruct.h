@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/10 23:13:40 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/12 06:25:16 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define KEY_EIG 91
 # define KEY_NIN 92
 
-# define MT 4
+# define MT 16
 # define THE struct s_thread
 
 # define EPS 0.0001

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 19:49:55 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/11 02:32:32 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/12 00:18:28 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ static void	scene(t_gen *s, int fd, t_scene *tmp)
 	}
 }
 
-void		parse_scene(t_gen *s, char **argv)
+void		parse_scene(t_gen *s, char *argv)
 {
 	int		fd;
 	char	*line;
@@ -185,9 +185,9 @@ void		parse_scene(t_gen *s, char **argv)
 	char	*tmp;
 	int		a;
 
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0 || !ft_strstr(argv[1], ".rt")
-		|| ft_strlen(ft_strstr(argv[1], ".rt")) != 3)
+	fd = open(argv, O_RDONLY);
+	if (fd < 0 || !ft_strstr(argv, ".rt")
+		|| ft_strlen(ft_strstr(argv, ".rt")) != 3)
 		return (error(0, NULL));
 	a = -1;
 	while ((ret = get_next_line(fd, &line)) > 0)
