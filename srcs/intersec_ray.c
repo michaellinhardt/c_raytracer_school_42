@@ -101,7 +101,6 @@ double intersectray_cone(t_ray *r, t_obj *s, double *x1, double *y1)
 	c = vector_dot(x, x) - (1 + k * k) *  vector_dot(x, cone_dir) *  vector_dot(x, cone_dir);
 
 	discriminant = b * b - 4.0 * (a * c);
-
 	if (discriminant < 0)
 		return (0);
 	if (discriminant >= 0)
@@ -127,21 +126,36 @@ double intersectray_cone(t_ray *r, t_obj *s, double *x1, double *y1)
 				*y1 = test2;
 				return (0);
 			}
+			t_vector center_dir;
+			t_vector center_pos;
+			double t;
+			center_dir = vector_rev(cone_dir);
+			center_pos = get_hitpoint(cone_pos, cone_dir, s->size[0]);
+			t = (vector_dot(vector_sub(center_pos, r->start),center_dir) / vector_dot(r->dir, center_dir));
+			r->norm = center_dir;
+			*x1 = t;
+			*y1 = t;
+			return (t);
 		}
 		
-	t_vector intersection_pos;
+	 t_vector intersection_pos;
+	 // cone_dir.x = -cone_dir.x;
+	 // cone_dir.y = -cone_dir.y;
+	 // cone_dir.z = -cone_dir.z;
 
-	intersection_pos = get_hitpoint(r->start, r->dir, dist);
-	x = vector_sub(intersection_pos, cone_pos);// P - C
-	k = vector_dot(x, cone_dir);
-	r->norm = vector_sub(x, vectormultby_scalar(cone_dir, k));// (P - C) - V * k? 
-	if (*x1 < 0)
-	{
-		r->norm.x = -r->norm.x;
-		r->norm.y = -r->norm.y;
-		r->norm.z = -r->norm.z;
-	}
-	vector_normalize(r->norm);
+	 intersection_pos = get_hitpoint(r->start, r->dir, dist);
+	// x = vector_sub(intersection_pos, cone_pos);// P - C
+	// k = vector_dot(x, cone_dir);
+	// r->norm = vector_sub(x, vectormultby_scalar(cone_dir, k));// (P - C) - V * k? 
+	// if (*x1 < 0)
+	// {
+	// 	r->norm.x = -r->norm.x;
+	// 	r->norm.y = -r->norm.y;
+	// 	r->norm.z = -r->norm.z;
+	// }
+	// vector_normalize(r->norm);
+		t_vector lambda = vector_normalize(vector_sub(cone_pos, intersection_pos));
+	r->norm = vector_normalize(vector_sub(vectormultby_scalar(cone_dir, vector_dot(lambda, cone_dir) / vector_dot(cone_dir, cone_dir)),lambda));
 		return dist;
 	}
 	return (0);
