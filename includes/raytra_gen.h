@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/12 06:26:23 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/14 01:31:57 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ typedef struct		s_obj
 	char			*name;
 	int				type;				/* cf MACRO */
 	double			pos[6];				/* obj position [0-2] x y z ; direction [3-5] x y z*/
-	double			size[3];			/* cf doc */
-	double			eff[4];				/* eff[0] = transparence , [1] = reflexion, [2] = refraction, [3] == negatif */
+	double			size[3];			/* cf doc les gars, quel doc ?*/
+	double			eff[4];				/* les valeurs max ? eff[0] = transparence , [1] = reflexion, [2] = refraction, [3] == negatif */
 	int				c_o;				/* color 0xRGB */
 	struct s_obj	*comp;				/* pour les objets complexes */
 	t_vector		tri[3];				/* pour les .obj */

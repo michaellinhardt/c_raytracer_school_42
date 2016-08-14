@@ -12,7 +12,7 @@ scene {
 			camera {pos{ 920; 525; 10}, dir{0 ;0 ; 0}}				
 			type { sphere }				
 			size { 7 ; 0.0 ; 0 }			
-			effect { 0 ; 20 ; 0 ; 0}			
+			effect { 0 ; 0 ; 0 ; 0}			
 			color { 0x00ff00 }				
 			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
 		}
@@ -21,7 +21,7 @@ scene {
 			camera {pos{ 905; 530; 10}, dir{0 ;0 ; 0}}				
 			type { sphere }				
 			size { 7 ; 0.0 ; 0 }			
-			effect { 0 ; 20 ; 0 ; 0}			
+			effect { 0 ; 0 ; 0 ; 0}			
 			color { 0x00ff00 }				
 			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
 		}
@@ -30,7 +30,7 @@ scene {
 			camera {pos{ 890; 530; 10}, dir{0 ;0 ; 0}}				
 			type { sphere }				
 			size { 7 ; 0.0 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0}			
+			effect { 0 ; 0 ; 0 ; 0}			
 			color { 0x00ff00 }				
 			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
 		}
@@ -39,7 +39,7 @@ scene {
 			camera {pos{ 875; 530; 10}, dir{0 ;0 ; 0}}				
 			type { sphere }				
 			size { 7 ; 0.0 ; 0 }			
-			effect { 0 ; 20 ; 0 ; 0}			
+			effect { 0 ; 0 ; 0 ; 0}			
 			color { 0x00ff00 }				
 			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
 		}
