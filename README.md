@@ -1,3 +1,9 @@
+TODOLIST:
+
+Bonjour ceci est un todo list.
+- Changer GTKFileChooserButton par GtkFileChooserDialog.
+- Trouver ou sont les leaks des shortcut / hotkey cf. Stack Overflow / Etudiants.
+
 enregistrer l'image   --> 's'   (dossier image, s'enregistre a la suite)  
 sauvegarder la scene  --> 'end' (dossier scene, efface la scene du même nom)  
 changement de scene   --> fleche droite  

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/12 06:22:40 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/15 02:18:47 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,19 +174,21 @@ void raytracing(t_gen *s)
 	int				j;
 	pthread_t		p[MT];
 
+	s->pixbuf = NULL;
 	if (!c)
 	{
 		s->lock_draw = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
-		t.data = malloc(W_X * 3 * 1050);
-		s->pixbuf = NULL;
 		(!(t.z = ft_memalloc(sizeof(t_thread) * MT))) ? error(2, "Malloc") : 1;
 		init_threads(t.z, &t, s);
 		c = 1;
 	}
-	else
-		ft_bzero(t.data, W_X * W_Y * 3);	
+	if (!(t.data = malloc(W_X * 3 * 1050)))
+		return ;
+	ft_bzero(t.data, W_X * W_Y * 3);	
 	if (!(s->pixbuf = gtk_new_image((unsigned char *)(t.data), W_X, W_Y)))
 		error(4, "Unable to initialize pixbuf for GtkImage :'(\n");
+	free(t.data);
+	t.data = NULL;	
 	j = -1;
 	while (++j < MT)
 		pthread_create(&p[j], NULL, display, &t.z[j]);	// creation des threads	
@@ -194,6 +196,5 @@ void raytracing(t_gen *s)
 	while (++j < MT)
 		pthread_join(p[j], NULL);	// synchro des threads
 	gtk_put_image_to_window(GTK_IMAGE(s->pdrawarea), s->pixbuf);
-	g_object_unref(s->pixbuf);
 	gtk_widget_show_all(s->pwindow);
 }

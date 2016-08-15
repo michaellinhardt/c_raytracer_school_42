@@ -6,13 +6,13 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/23 09:43:35 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/12 03:29:21 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/14 23:32:14 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raystruct.h"
 
-int		key_reaction(int keycode)
+/*int		key_reaction(int keycode)
 {
 	if (keycode == 53)
 		exit(0);
@@ -117,5 +117,5 @@ int			press_key(int key, t_gen *s)
 		rotate(s, key);
 	raytracing(s);
 	return (1);
-}
+}*/
 

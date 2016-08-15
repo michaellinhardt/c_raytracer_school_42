@@ -35,7 +35,7 @@ GTK_FLAGS = `pkg-config --cflags gtk+-3.0`
 
 GTK_LIBS = `pkg-config --libs gtk+-3.0`
 
-WFLAGS = -Wall -Werror -Wextra -O3 -march=native $(GTK_FLAGS)
+WFLAGS = -Wall -Werror -Wextra -g -march=native $(GTK_FLAGS)
 
 LFLAGS = -L libft/ -lft -lm -lmlx -framework OpenGL -framework AppKit $(GTK_LIBS)
 

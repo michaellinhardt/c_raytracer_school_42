@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 02:10:37 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/08/12 06:33:29 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/15 03:03:27 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,41 +18,27 @@
 #include <gdk/gdkkeysyms.h>
 
 
-static void	switch_scene(t_gen *s, t_scene **first)
-{
-	t_scene *tmp;
-	t_scene *temp;
-
-	if (!s->sc->next)
-		return ;
-
-	tmp = *first;
-	*first = (*first)->next;
-	temp = *first;
-	while (temp->next)
-		temp = temp->next;
-	tmp->next = NULL;
-	temp->next = tmp;
-}	
-
+/*
+ ** Change ces putains de fonctions de fichier lel.
+ */ 
 static void rotate(t_gen *s, int key)
 {
 	t_vector new;
 	t_vector obj;
 
 	if (s->to_move->type == SPHERE)
-		new = newVector(s->to_move->cut[0], s->to_move->cut[1], s->to_move->cut[2]);
+		new = new_vector(s->to_move->cut[0], s->to_move->cut[1], s->to_move->cut[2]);
 	else if (s->to_move->type == PLAN)
-		new = newVector(s->to_move->pos[0], s->to_move->pos[1], s->to_move->pos[2]);
+		new = new_vector(s->to_move->pos[0], s->to_move->pos[1], s->to_move->pos[2]);
 	// else if (s->to_move->type == CYLINDRE)
 		// new = newVector(s->to_move->cut[0], s->to_move->cut[1], s->to_move->cut[2]);
-	obj = newVector(s->to_move->pos[0], s->to_move->pos[1], s->to_move->pos[2]);
+	obj = new_vector(s->to_move->pos[0], s->to_move->pos[1], s->to_move->pos[2]);
 	if (key == KEY_NIN)
-		new = MatricerotZ(new, vectorDot(new, obj));
+		new = matricerot_z(new, vector_dot(new, obj));
 	if (key == KEY_SIX)
-		new = MatricerotY(new, vectorDot(new, obj));
+		new = matricerot_y(new, vector_dot(new, obj));
 	if (key == KEY_THR)
-		new = MatricerotX(new, vectorDot(new, obj));
+		new = matricerot_x(new, vector_dot(new, obj));
 	if (s->to_move->type == SPHERE)
 	{
 		s->to_move->cut[0] = new.x;
@@ -93,12 +79,10 @@ void		move_complex(t_gen *s, int key)
 G_MODULE_EXPORT	gboolean	on_key_press(GtkWidget *widget, GdkEvent  *event, void *user_data)
 {
 	GdkEventKey *key;
-	(void)user_data;
+
 	(void)widget;
 	key = (void*)event;
-
 	t_gen *s = user_data;
-
 	if (!s->to_move)
 		return (0);
 	if (s->to_move->type == COMPLEXE)
@@ -107,8 +91,6 @@ G_MODULE_EXPORT	gboolean	on_key_press(GtkWidget *widget, GdkEvent  *event, void 
 		exit(0);
 	else if (key->keyval == GDK_KEY_s)
 		s->rep ^= SAVE;
-	else if (key->keyval == GDK_KEY_Right)
-		switch_scene(s, &s->sc);
 	else if (key->keyval ==  GDK_KEY_End)
 		print_scene(s);
 	else if (key->keyval == GDK_KEY_KP_1)
@@ -124,7 +106,7 @@ G_MODULE_EXPORT	gboolean	on_key_press(GtkWidget *widget, GdkEvent  *event, void 
 	else if (key->keyval == GDK_KEY_KP_8)
 		s->to_move->pos[2] += 1.0;
 	else if (key->keyval == GDK_KEY_KP_3 || key->keyval == GDK_KEY_KP_6 || key->keyval == GDK_KEY_KP_9)
-		rotate(s, key->keyval);
+		rotate(s, key->keyval);	
 	raytracing(s);
 	return 0;	
 }
@@ -158,6 +140,7 @@ G_MODULE_EXPORT void	on_pscene_object_select_changed(GtkWidget *pwidget, gpointe
 			raytracer->to_move = tmp;
 		tmp = tmp->next;
 	}
+	g_free(objname);
 }
 
 G_MODULE_EXPORT void	on_pscene_current_scene_changed(GtkWidget *pwidget, gpointer data)
@@ -229,8 +212,10 @@ G_MODULE_EXPORT void	pscene_button_load_clicked(GtkWidget *pwidget, gpointer dat
 	tmp = NULL;
 	raytracer = (t_gen *)data;
 	raytracer->to_move = NULL;
-	chooser = GTK_FILE_CHOOSER(raytracer->pscene_choosefile);
-	filename = gtk_file_chooser_get_filename(chooser);
+	(void)chooser;
+	(void)filename;
+	//chooser = GTK_FILE_CHOOSER(raytracer->pscene_choosefile);
+//	filename = gtk_file_chooser_get_filename(chooser);
 	parse_scene(raytracer, filename);
 	/*
 	 ** @Ajout des elements au combo box.
@@ -287,7 +272,7 @@ int		load_interface(t_gen *raytracer)
 	}
 	CH_GET_WIDGET(builder, pwindow, raytracer);
 	CH_GET_WIDGET(builder, pdrawarea, raytracer);
-	CH_GET_WIDGET(builder, pscene_choosefile, raytracer);
+	//CH_GET_WIDGET(builder, pscene_choosefile, raytracer);
 	CH_GET_WIDGET(builder, pscene_current_scene, raytracer);
 	CH_GET_WIDGET(builder, pscene_object_select, raytracer);
 	if (!(data = ft_memalloc(1680 * 24 * 1050)))
@@ -295,8 +280,11 @@ int		load_interface(t_gen *raytracer)
 	pixbuf = gtk_new_image(data, 1680, 1050);
 	gtk_put_image_to_window(GTK_IMAGE(raytracer->pdrawarea), pixbuf);
 	gtk_builder_connect_signals(builder, raytracer);		
-	g_object_unref(pixbuf);
-	g_object_unref(builder);
+	g_clear_object(&pixbuf);
 	free(data);
+	(void)pixbuf;
+	(void)data;
+	(void)raytracer;
+	g_clear_object(&builder);
 	return (1);
 }
