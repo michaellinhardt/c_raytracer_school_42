@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 02:10:37 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/08/15 03:03:27 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/15 05:38:49 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,8 +214,8 @@ G_MODULE_EXPORT void	pscene_button_load_clicked(GtkWidget *pwidget, gpointer dat
 	raytracer->to_move = NULL;
 	(void)chooser;
 	(void)filename;
-	//chooser = GTK_FILE_CHOOSER(raytracer->pscene_choosefile);
-//	filename = gtk_file_chooser_get_filename(chooser);
+	chooser = GTK_FILE_CHOOSER(raytracer->pscene_choosefile);
+	filename = gtk_file_chooser_get_filename(chooser);
 	parse_scene(raytracer, filename);
 	/*
 	 ** @Ajout des elements au combo box.
@@ -272,7 +272,7 @@ int		load_interface(t_gen *raytracer)
 	}
 	CH_GET_WIDGET(builder, pwindow, raytracer);
 	CH_GET_WIDGET(builder, pdrawarea, raytracer);
-	//CH_GET_WIDGET(builder, pscene_choosefile, raytracer);
+	CH_GET_WIDGET(builder, pscene_choosefile, raytracer);
 	CH_GET_WIDGET(builder, pscene_current_scene, raytracer);
 	CH_GET_WIDGET(builder, pscene_object_select, raytracer);
 	if (!(data = ft_memalloc(1680 * 24 * 1050)))
