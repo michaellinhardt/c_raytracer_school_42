@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 16:52:24 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/11 02:39:25 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/16 14:33:01 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static char		replace_nearest(t_obj *s, t_ray *r,
 			return (0);
 		nearest[2] = nearest[1];
 		if ((!(s->type & COMPLEXE) && (s->type & PLAN))
-			|| (!(r->obj->type & COMPLEXE) && (r->obj->type & PLAN)))
+			|| (r->obj && (!(r->obj->type & COMPLEXE) && (r->obj->type & PLAN))))
 			*norm = vector_rev(*norm);
 	}
 	else
