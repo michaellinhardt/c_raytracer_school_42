@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/15 02:18:47 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/16 14:27:19 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,68 @@ void sqrtc(double *color)
 	color[2] = sqrtf(color[2]);
 }
 
+int texture_sphere(t_obj *tmp, t_vector hitpoint, t_vector *norm)
+{
+	t_vector v_n;
+	t_vector v_e;
+	t_vector v_p;
+	t_vector s_pos;
+	// t_vector s_npos;
+	double u = 0;
+	double v;
+	double phi;
+	double theta;
+
+	s_pos = (new_vector(tmp->pos[0], tmp->pos[1], tmp->pos[2]));
+	v_n = (new_vector(0, -1, 0));
+	v_e = (new_vector(1, 0, 0));
+	v_p = vector_normalize(vector_sub(hitpoint, s_pos));
+	phi = acosf(-vector_dot(vector_normalize(v_n),vector_normalize(v_p)));
+	v = phi / M_PI;
+	theta = acosf(vector_dot(vector_normalize(v_p), vector_normalize(v_e)) / (sinf(phi))) / (8 * M_PI);
+	if (vector_dot(vector_cross(v_n, v_e), hitpoint) > 0)
+		u = theta;
+	else
+		u = 1 - theta;
+	(void)norm;
+	if (tmp->text & EARTH)
+		return (texture_earth(u, v, NULL, NULL));
+	if (tmp->text & FIRE)
+		return (texture_fire(u, v, NULL, NULL));
+	return (0);
+}
+
+int texture_plan(t_obj *tmp, t_vector hitpoint, t_vector *norm)
+{
+	t_vector m_u;
+	t_vector m_v;
+	t_vector m_n;
+	double u;
+	double v;
+
+// new_vector(tmp->pos[0], tmp->pos[1],tmp->pos[2])
+	m_n = vectormultby_scalar(*norm,100);
+	m_u = new_vector(m_n.y,m_n.z,-m_n.x);
+	m_v = vector_cross(m_n, m_u);
+	(void)norm;
+	u = (vector_dot(hitpoint, m_u));
+	v = (vector_dot(hitpoint, m_v));
+	// if (tmp->text & EARTH)
+		return (texture_earth(u, v, NULL, tmp));
+	if (tmp->text & FIRE)
+		return (texture_fire(u, v, NULL, tmp));
+	return (0);
+}
+
+int texture(t_obj *tmp, t_vector hitpoint, t_vector *norm)
+{
+	if (tmp->type & PLAN)
+		return (texture_plan(tmp, hitpoint, norm));
+	else if (tmp->type & SPHERE)
+		return (texture_sphere(tmp, hitpoint, norm));
+	return (0);
+}
+
 int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 {
 	t_spot		*spot;
@@ -61,8 +123,14 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 		spot = spot->next;
 		++nb_spot;
 	}
-	if (tmp->type != COMPLEXE)
-		color_composants(tmp->c_o, rgb);
+	if (!(tmp->type & COMPLEXE))
+	{
+			// normal_pertu(&r->norm, hitpoint);	
+		if (!(tmp->text))
+			color_composants(tmp->c_o, rgb);
+		else
+			color_composants(texture(tmp, hitpoint, &r->norm), rgb);
+	}
 	else
 		color_composants(col, rgb);
 	spot = sc->spot;

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 19:49:55 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/12 00:18:28 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/16 10:53:44 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	spot(int fd, t_spot **spot)
 
 	(!(tmp = ft_memalloc(sizeof(t_spot)))) ? error(2, "Malloc") : 1;
 	camera(fd, tmp->pos, 0);
-	color(fd, &tmp->c_s, 1);
+	color(fd, &tmp->c_s, 1, NULL);
 	if (!*spot)
 		*spot = tmp;
 	else
@@ -57,8 +57,6 @@ static void	spot(int fd, t_spot **spot)
 		while (temp->next)
 			temp = temp->next;
 		temp->next = tmp;
-		// tmp->next = *spot;
-		// *spot = tmp;
 	}
 }
 
@@ -151,7 +149,6 @@ static void	scene(t_gen *s, int fd, t_scene *tmp)
 	ambiance(tmp->amb, line);
 	objects(tmp, fd, NULL);
 	ft_strdel(&line);
-
 	if (DEBUG)
 	{
 		ft_printf("\nscene_name == {CGREEN %s}\n", tmp->name);

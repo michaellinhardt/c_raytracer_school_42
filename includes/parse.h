@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 19:51:51 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/11 02:40:27 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/16 10:46:09 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void				camera(int fd, double *cam, char c);
 int					verif_double(char *str);
 int					verif_str(char *str, int i);
 void				ambiance(int *amb, char *line);
-void				color(int fd, int *color, char c);
+void				color(int fd, int *color, char c, t_obj *o);
 void				size(int fd, double *size);
 void				effect(int fd, double *eff);
 void				objects(t_scene *tmp, int fd, char *line);

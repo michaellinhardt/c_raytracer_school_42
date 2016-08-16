@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 02:10:37 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/08/15 05:38:49 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/16 02:25:27 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,6 +263,7 @@ int		load_interface(t_gen *raytracer)
 	builder = gtk_builder_new();
 	if (builder == NULL)
 		return (0);
+	ft_printf("cocuou\n");
 	gtk_builder_add_from_file(builder, "resources/interface.glade", &err);
 	if (err != NULL)
 	{

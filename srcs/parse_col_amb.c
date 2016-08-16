@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/21 05:00:54 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/10 21:45:53 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/16 12:07:21 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,25 @@ static void		color_mid(char *tmp, char *line, int *color)
 		error(3, "color");
 }
 
-void			color(int fd, int *color, char c)
+void			color_text(char *str, t_obj *o)
+{
+	char *tmp;
+
+	tmp = ft_strsub(str, 9, ft_strlen(str) - 10);
+	ft_strdel(&str);
+	str = ft_strtrim(tmp);
+	ft_strdel(&tmp);
+	ft_printf("[%s]", str);
+	if (ft_strequ(str, "earth"))
+		o->text ^= EARTH;
+	else if (ft_strequ(str, "fire"))
+		o->text ^= FIRE;
+	else
+		error(3, "color");
+	ft_strdel(&str);
+}
+
+void			color(int fd, int *color, char c, t_obj *o)
 {
 	char	*line;
 	char	*tmp;
@@ -61,6 +79,12 @@ void			color(int fd, int *color, char c)
 	if (get_next_line(fd, &line) > 0 && (tmp = ft_strtrim(line))
 		&& !ft_strncmp(tmp, "color {", 7) && verif_str(tmp, 1))
 		color_mid(tmp, line, color);
+	else if (!ft_strncmp(tmp, "texture {", 9))
+	{
+		ft_strdel(&line);
+		color_text(tmp, o);
+		return ;
+	}
 	else
 		error(3, "color");
 	if (c)

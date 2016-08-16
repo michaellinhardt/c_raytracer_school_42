@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/14 01:31:57 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/16 12:07:31 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,14 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include <gui.h>
+# include <mlx.h>			/* pour charger les xpm/textures */
 
 # include <stdio.h>			/* to del */
 # include <math.h>
+
+/*
+**	BOOL pour les objets
+*/
 
 # define SPHERE 0x1
 # define RECTANGLE 0x2
@@ -31,8 +36,12 @@
 # define TRIANGLE 0x100
 
 /*
-**	BOOL
+**	BOOL pour les textures
 */
+
+# define EARTH 0x1
+# define FIRE 0x2
+
 
 # define SAVE 0x1
 
@@ -46,6 +55,15 @@ typedef struct		s_vector
 	double				z;
 }					t_vector;
 
+typedef struct		s_tex
+{
+	char 			*data;
+	int 			heigh;
+	int 			weigh;
+	int 			y_line;
+	int 			x_line;
+}					t_tex;
+
 typedef struct		s_spot
 {
 	double			pos[6];			/* spot position [0-2] x y z ; direction [3-5] x y z*/
@@ -58,12 +76,13 @@ typedef struct		s_obj
 	char			*name;
 	int				type;				/* cf MACRO */
 	double			pos[6];				/* obj position [0-2] x y z ; direction [3-5] x y z*/
-	double			size[3];			/* cf doc les gars, quel doc ?*/
+	double			size[3];			/* cf doc les gars, quel doc ? ressource/doc.txt ...*/
 	double			eff[4];				/* les valeurs max ? eff[0] = transparence , [1] = reflexion, [2] = refraction, [3] == negatif */
 	int				c_o;				/* color 0xRGB */
 	struct s_obj	*comp;				/* pour les objets complexes */
 	t_vector		tri[3];				/* pour les .obj */
 	t_vector		nor;				/* pour les .obj */
+	int				text;
 	double			cut[6];				/* a voir comment faire */
 	void			*next;
 }					t_obj;

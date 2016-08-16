@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/12 06:25:16 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/16 12:08:16 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,5 +178,12 @@ double				perlin(double x, double y, double z);
 
 double				lenray_type(t_ray *r, t_obj *s, double *tmp_near, int *col);
 double				lenray(t_scene *sc, t_ray *r);
+
+/*
+**									texture.c  
+*/
+
+int					texture_earth(double u, double v, char *str, void *mlx);
+int					texture_fire(double u, double v, char *str, void *mlx);
 
 #endif
