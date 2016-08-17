@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/25 05:39:29 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/11 18:47:00 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/17 19:47:05 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,25 @@ static void	print_col(t_gen *s, char **to_print, int col)
 	*to_print = ft_strjoin(*to_print, " }\n");
 	ft_strdel(&tmp);
 }
+
+static void	print_text(t_gen *s, char **to_print, int col)
+{
+	char *tmp;
+
+	(void)s;
+	tmp = *to_print;
+	*to_print = ft_strjoin(*to_print, "texture { ");
+	if (col & EARTH)
+		*to_print = ft_strjoin(*to_print, "texture { earth }");
+	else if (col & FIRE)
+		*to_print = ft_strjoin(*to_print, "texture { fire }");
+	else if (col & BLACK)
+		*to_print = ft_strjoin(*to_print, "texture { black }");
+	else if (col & ICE)
+		*to_print = ft_strjoin(*to_print, "texture { ice }");
+	ft_strdel(&tmp);
+}
+
 static void	print_size_eff(t_gen *s, char **to_print, double *size, char c)
 {
 	char	*tmp;
@@ -207,7 +226,10 @@ static void	print_simple(t_gen *s, char **to_print, t_obj *obj, char c)
 	print_type(s, to_print, obj->type);
 	print_size_eff(s, to_print, obj->size, 0);
 	print_size_eff(s, to_print, obj->eff, 1);
-	print_col(s, to_print, obj->c_o);
+	if (!obj->text)
+		print_col(s, to_print, obj->c_o);
+	else
+		print_text(s, to_print, obj->text);
 	print_cam(s, to_print, obj->cut, 1);
 	tmp = *to_print;
 	*to_print = ft_strjoin(*to_print, "}\n");	

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/17 17:12:57 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/17 19:50:09 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 	}
 	if (!(tmp->type & COMPLEXE))
 	{
-			// normal_pertu(&r->norm, hitpoint);	
 		if (!(tmp->text))
 			color_composants(tmp->c_o, rgb);
 		else

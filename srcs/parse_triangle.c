@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 00:43:52 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/10 21:46:23 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/17 19:37:24 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,8 +189,7 @@ void 	add_vector(double nbr_vn[][3], double nbr_v[][3], t_obj **o, char *line, i
 					else
 						error(3, "objects");
 				}
-				else
-					ft_strdel(&tmp);
+				ft_strdel(&tmp);
 			}
 			else
 				error(3, "objects");
