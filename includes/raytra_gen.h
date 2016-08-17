@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/16 12:07:31 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/17 17:11:55 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@
 
 # define EARTH 0x1
 # define FIRE 0x2
+# define BLACK 0x4
+# define ICE 0x8
 
 
 # define SAVE 0x1

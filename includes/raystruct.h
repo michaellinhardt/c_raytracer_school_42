@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/16 12:08:16 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/17 17:13:16 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,5 +185,7 @@ double				lenray(t_scene *sc, t_ray *r);
 
 int					texture_earth(double u, double v, char *str, void *mlx);
 int					texture_fire(double u, double v, char *str, void *mlx);
+int					texture_black(double u, double v, char *str, void *mlx);
+int					texture_ice(double u, double v, char *str, void *mlx);
 
 #endif

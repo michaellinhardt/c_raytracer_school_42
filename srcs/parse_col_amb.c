@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/21 05:00:54 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/16 12:07:21 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/17 19:27:30 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,14 @@ void			color_text(char *str, t_obj *o)
 	ft_strdel(&str);
 	str = ft_strtrim(tmp);
 	ft_strdel(&tmp);
-	ft_printf("[%s]", str);
 	if (ft_strequ(str, "earth"))
 		o->text ^= EARTH;
 	else if (ft_strequ(str, "fire"))
 		o->text ^= FIRE;
+	else if (ft_strequ(str, "black"))
+		o->text ^= BLACK;
+	else if (ft_strequ(str, "ice"))
+		o->text ^= ICE;
 	else
 		error(3, "color");
 	ft_strdel(&str);

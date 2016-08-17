@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/21 06:34:57 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/16 10:53:00 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/17 19:27:17 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,6 @@ static t_obj	*cmpl_obj(int fd, char *line)
 	camera(fd, o->pos, 0);
 	o->type ^= COMPLEXE;
 	o->comp = NULL;
-
-	get_next_line(fd, &line);
-	ft_strdel(&line);
-/*
-	a rajouter
-*/
 	while (get_next_line(fd, &line) > 0 && ft_strstr(line, "simple_obj {"))
 	{
 		t = simple_obj(fd, NULL, 1);
