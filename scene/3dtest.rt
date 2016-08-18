@@ -15,7 +15,7 @@ scene {
 			name { 3d }
 			camera {pos{ 900; 520; 20}, dir{0 ;0 ; 0}}				
 			type { triangle }				
-			color { 0xff0000 }				
+		color { 0xaf5c30 }					
 			{
 				# Blender v2.77 (sub 0) OBJ File: ''
 # www.blender.org

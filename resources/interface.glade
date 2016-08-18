@@ -11,7 +11,7 @@
     <property name="title" translatable="yes">Interface RayTracer</property>
     <property name="resizable">False</property>
     <signal name="destroy" handler="on_pwindow_destroy" swapped="no"/>
-	<signal name="key-press-event" handler="on_key_press" swapped="no"/>
+  <signal name="key-press-event" handler="on_key_press" swapped="no"/>
     <child>
       <object class="GtkGrid">
         <property name="visible">True</property>
@@ -42,18 +42,18 @@
                         <property name="can_focus">False</property>
                         <property name="vexpand">False</property>
                         <child>
-							<object class="GtkFileChooserButton" id="pscene_choosefile">
+              <object class="GtkFileChooserButton" id="pscene_choosefile">
                             <property name="name">pscene_choosefile</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_left">5</property>
                             <property name="margin_right">5</property>
-							<property name="title" translatable="yes"/>
-						  </object>
+              <property name="title" translatable="yes"/>
+              </object>
                           <packing>
                             <property name="left_attach">0</property>
                             <property name="top_attach">0</property>
-						  </packing>
+              </packing>
                         </child>
                         <child>
                           <object class="GtkButton" id="pscene_load_button">

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/17 22:06:44 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/18 19:12:11 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct		s_gen 			/* structure generale */
 	GtkWidget		*pscene_choosefile;
 	GtkWidget		*pscene_current_scene;
 	GtkWidget		*pscene_object_select;
+	char 			*data;
 	/* La ou on dessine pour les nuls */	
 	int				rep;				/* pour des booleens (keycode MLX) */
 	char			nb;					/* nombre de scene */

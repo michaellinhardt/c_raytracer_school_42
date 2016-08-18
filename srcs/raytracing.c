@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/17 22:31:35 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/18 20:11:31 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,23 @@ void sqrtc(double *color)
 	color[2] = sqrtf(color[2]);
 }
 
-int texture_sphere(t_obj *tmp, t_vector hitpoint, t_vector *norm)
+int texture_sphere(t_obj *tmp, t_vector hitpoint)
 {
-	t_vector v_n;
-	t_vector v_e;
-	t_vector v_p;
-	t_vector s_pos;
-	// t_vector s_npos;
-	double u = 0;
-	double v;
-	double phi;
-	double theta;
+	t_vector	v_n;
+	t_vector	v_e;
+	t_vector	v_p;
+	double		u;
+	double		v;
+	double		phi;
+	double		theta;
 
-	s_pos = (new_vector(tmp->pos[0], tmp->pos[1], tmp->pos[2]));
 	v_n = (new_vector(0, -1, 0));
 	v_e = (new_vector(1, 0, 0));
-	v_p = vector_normalize(vector_sub(hitpoint, s_pos));
+	v_p = vector_normalize(vector_sub(hitpoint, new_vector(tmp->pos[0], tmp->pos[1], tmp->pos[2])));
 	phi = acosf(-vector_dot(vector_normalize(v_n),vector_normalize(v_p)));
 	v = phi / M_PI;
 	theta = acosf(vector_dot(vector_normalize(v_p), vector_normalize(v_e)) / (sinf(phi))) / (8 * M_PI);
-	if (vector_dot(vector_cross(v_n, v_e), hitpoint) > 0)
-		u = theta;
-	else
-		u = 1 - theta;
-	(void)norm;
+	u = (vector_dot(vector_cross(v_n, v_e), hitpoint) > 0) ? theta : 1 - theta;
 	if (tmp->text & EARTH)
 		return (texture_earth(u, v, NULL, NULL));
 	else if (tmp->text & FIRE)
@@ -75,10 +68,10 @@ int texture_sphere(t_obj *tmp, t_vector hitpoint, t_vector *norm)
 	return (0);
 }
 
-int texture(t_obj *tmp, t_vector hitpoint, t_vector *norm)
+int texture(t_obj *tmp, t_vector hitpoint)
 {
 	if (tmp->type & SPHERE)
-		return (texture_sphere(tmp, hitpoint, norm));
+		return (texture_sphere(tmp, hitpoint));
 	return (0);
 }
 
@@ -108,7 +101,7 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 		if (!(tmp->text))
 			color_composants(tmp->c_o, rgb);
 		else
-			color_composants(texture(tmp, hitpoint, &r->norm), rgb);
+			color_composants(texture(tmp, hitpoint), rgb);
 	}
 	else
 		color_composants(col, rgb);
@@ -166,7 +159,7 @@ int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 	return (col);
 }
 
-double	getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1, GdkPixbuf *pixbuf)
+double	getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1)
 {
 	int		color;
 	double	new_nearest;
@@ -183,7 +176,7 @@ double	getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1, GdkPixbuf
 			if (r->obj->eff[1])
 				color = reflexion(raytracer->sc, r, new_nearest, color, 0, r->obj->eff[1]);
 		}
-		gtk_put_pixel(pixbuf, x1, y1, color);
+		gtk_put_pixel(raytracer->pixbuf, x1, y1, color, raytracer);
 	}
 	return (new_nearest);	
 }
@@ -196,15 +189,7 @@ void *display(void *z)
 	t_ray r;
 	int x;
 	int y;
-	GdkPixbuf		*pixbuf;
-	unsigned char	*buffer;
 
-
-	if (!(buffer = (unsigned char *)ft_memalloc(W_X  * W_Y * 3)) ||
-		!(pixbuf = gtk_new_image(buffer, W_X, W_Y)))
-			return (NULL);	
-	free(buffer);
-	buffer = NULL;
 	mt = (t_thread*)z;
 	r.start = new_vector(mt->s->sc->cam[0], mt->s->sc->cam[1], mt->s->sc->cam[2]);
 	tmp = mt->s->sc->obj;
@@ -214,9 +199,9 @@ void *display(void *z)
 	{
 		x = mt->lim[0] - 1;
 		while (++x < mt->lim[2])
-			getnearesthit(&r, mt->s, x, y, pixbuf);
+			getnearesthit(&r, mt->s, x, y);
 	}
-	return (pixbuf);
+	return (NULL);
 }
 
 static void		merge_chuncks(void	*dest, void const *src)
@@ -242,7 +227,7 @@ void raytracing(t_gen *s)
 	static char		c = 0;
 	int				j;
 	pthread_t		p[MT];
-	void			*chunks[MT];
+	unsigned char	*pixbuffer;
 
 	s->pixbuf = NULL;
 	if (!c)
@@ -250,33 +235,23 @@ void raytracing(t_gen *s)
 		(!(t.z = ft_memalloc(sizeof(t_thread) * MT))) ? error(2, "Malloc") : 1;
 		init_threads(t.z, &t, s);
 		c = 1;
+		if (!(s->data = (char *)ft_memalloc(W_X * 3 * W_Y)))
+			return ;
 	}
-	if (!(t.data = (char *)ft_memalloc(W_X * 3 * W_Y)))
-		return ;
-	if (!(s->pixbuf = gtk_new_image((unsigned char *)(t.data), W_X, W_Y)))
+	else
+		ft_bzero(s->data, W_X * 3 * W_Y);
+	if (!(s->pixbuf = gtk_new_image((unsigned char *)(s->data), W_X, W_Y)))
 		error(4, "Unable to initialize pixbuf for GtkImage :'(\n");
-	free(t.data);
-	t.data = NULL;
 	j = -1;
 	while (++j < MT)
 		pthread_create(&p[j], NULL, display, &t.z[j]);	// creation des threads	
 	j = -1;
 	while (++j < MT)
-		pthread_join(p[j], &(chunks[j]));	// synchro des threads
+		pthread_join(p[j], NULL);	// synchro des threads
 	j = -1;
-	while (++j < MT)
-	{
-		unsigned char	*buffer;
-		unsigned char	*pixbuffer;
-
-		buffer = gdk_pixbuf_get_pixels((GdkPixbuf *)(chunks[j]));
-		pixbuffer = gdk_pixbuf_get_pixels(s->pixbuf);
-		merge_chuncks(pixbuffer, buffer);	
-		free(buffer);
-		buffer = NULL;
-		g_object_unref((GdkPixbuf *)(chunks[j]));
-	}
+	pixbuffer = gdk_pixbuf_get_pixels(s->pixbuf);
+	merge_chuncks(pixbuffer, s->data);	
 	gtk_put_image_to_window(GTK_IMAGE(s->pdrawarea), s->pixbuf);
+	free(pixbuffer);
 	g_object_unref(s->pixbuf);
-	gtk_widget_show(s->pwindow);
 }

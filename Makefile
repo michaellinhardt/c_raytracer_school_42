@@ -28,7 +28,8 @@ SRCS = main.c\
 	  texture.c\
 	  parse_triangle.c\
 	  interface/builder.c\
-	  interface/draw.c
+	  interface/draw.c\
+	  interface/hook.c
 
 SRC = $(addprefix $(SRCSPATH), $(SRCS))
 

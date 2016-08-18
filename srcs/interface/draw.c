@@ -6,11 +6,12 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 04:11:05 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/08/17 22:32:21 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/18 20:09:57 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <raytra_gen.h>
+// #include <raytra_gen.h>
+#include <raystruct.h>
 
 GdkPixbuf	*gtk_new_image(unsigned char *data, int width, int height)
 {
@@ -27,24 +28,20 @@ GdkPixbuf	*gtk_new_image(unsigned char *data, int width, int height)
 	return (pixbuf);
 }
 
-void	gtk_put_pixel(GdkPixbuf *pixbuf, int x, int y, int color)
+void	gtk_put_pixel(GdkPixbuf *pixbuf, int x, int y, int color, void *z)
 {
-	int				width;
-	int				height;
-	int				rowstride;
-	int				n_channels;
-	unsigned char	*buffer;
-	unsigned char	*p;
+	int					index;
+	int					rowstride;
+	int					n_channels;
+	t_gen 				*t;
 
+	t = (t_gen*)z;
 	n_channels = gdk_pixbuf_get_n_channels(pixbuf);
-	width = gdk_pixbuf_get_width(pixbuf);
-	height = gdk_pixbuf_get_height(pixbuf);
 	rowstride = gdk_pixbuf_get_rowstride(pixbuf);
-	buffer = gdk_pixbuf_get_pixels(pixbuf);
-	p = buffer + y * rowstride + x * n_channels;
-	p[0] = (color & 0xFF0000) >> 16;
-	p[1] = (color & 0x00FF00) >> 8;
-	p[2] = (color & 0xFF);
+	index = y * rowstride + x * n_channels;
+	t->data[index + 0] = (color & 0xFF0000) >> 16;
+	t->data[index + 1] = (color & 0x00FF00) >> 8;
+	t->data[index + 2] = (color & 0xFF);
 }
 
 int		gtk_put_image_to_window(GtkImage *image, GdkPixbuf *pixbuf)
