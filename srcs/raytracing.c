@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/17 19:50:09 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/17 22:31:35 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,12 +166,11 @@ int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 	return (col);
 }
 
-double	getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1, t_id *g)
+double	getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1, GdkPixbuf *pixbuf)
 {
 	int		color;
 	double	new_nearest;
 	
-	(void)g;
 	r->dir = vector_normalize(new_vector(x1 - W_X / 2.0, W_Y / 2.0 - y1,
 		(W_Y / 2.0) / tan(70*0.5)));
 	new_nearest = lenray(raytracer->sc, r);
@@ -184,7 +183,7 @@ double	getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1, t_id *g)
 			if (r->obj->eff[1])
 				color = reflexion(raytracer->sc, r, new_nearest, color, 0, r->obj->eff[1]);
 		}
-		gtk_put_pixel(raytracer->pixbuf, x1, y1, color);
+		gtk_put_pixel(pixbuf, x1, y1, color);
 	}
 	return (new_nearest);	
 }
@@ -197,21 +196,44 @@ void *display(void *z)
 	t_ray r;
 	int x;
 	int y;
+	GdkPixbuf		*pixbuf;
+	unsigned char	*buffer;
 
+
+	if (!(buffer = (unsigned char *)ft_memalloc(W_X  * W_Y * 3)) ||
+		!(pixbuf = gtk_new_image(buffer, W_X, W_Y)))
+			return (NULL);	
+	free(buffer);
+	buffer = NULL;
 	mt = (t_thread*)z;
 	r.start = new_vector(mt->s->sc->cam[0], mt->s->sc->cam[1], mt->s->sc->cam[2]);
 	tmp = mt->s->sc->obj;
 	t = mt->t;
 	y = mt->lim[1] - 1;
-	pthread_mutex_lock(&(mt->s->lock_draw));
 	while (++y < mt->lim[3])
 	{
 		x = mt->lim[0] - 1;
 		while (++x < mt->lim[2])
-			getnearesthit(&r, mt->s, x, y, t);
+			getnearesthit(&r, mt->s, x, y, pixbuf);
 	}
-	pthread_mutex_unlock(&(mt->s->lock_draw));
-	return (NULL);
+	return (pixbuf);
+}
+
+static void		merge_chuncks(void	*dest, void const *src)
+{
+	size_t			size;
+	size_t			i;
+
+	i = -1;
+	size = W_X * W_Y * 3;
+	while (++i < size)
+	{
+		if ((*(unsigned char *)(src)) > 0)
+			(*(unsigned char *)(dest)) = (*(unsigned char *)src);
+		dest++;
+		src++;
+	}
+	dest -= size;
 }
 
 void raytracing(t_gen *s)
@@ -220,28 +242,41 @@ void raytracing(t_gen *s)
 	static char		c = 0;
 	int				j;
 	pthread_t		p[MT];
+	void			*chunks[MT];
 
 	s->pixbuf = NULL;
 	if (!c)
 	{
-		s->lock_draw = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 		(!(t.z = ft_memalloc(sizeof(t_thread) * MT))) ? error(2, "Malloc") : 1;
 		init_threads(t.z, &t, s);
 		c = 1;
 	}
-	if (!(t.data = malloc(W_X * 3 * 1050)))
+	if (!(t.data = (char *)ft_memalloc(W_X * 3 * W_Y)))
 		return ;
-	ft_bzero(t.data, W_X * W_Y * 3);	
 	if (!(s->pixbuf = gtk_new_image((unsigned char *)(t.data), W_X, W_Y)))
 		error(4, "Unable to initialize pixbuf for GtkImage :'(\n");
 	free(t.data);
-	t.data = NULL;	
+	t.data = NULL;
 	j = -1;
 	while (++j < MT)
 		pthread_create(&p[j], NULL, display, &t.z[j]);	// creation des threads	
 	j = -1;
 	while (++j < MT)
-		pthread_join(p[j], NULL);	// synchro des threads
+		pthread_join(p[j], &(chunks[j]));	// synchro des threads
+	j = -1;
+	while (++j < MT)
+	{
+		unsigned char	*buffer;
+		unsigned char	*pixbuffer;
+
+		buffer = gdk_pixbuf_get_pixels((GdkPixbuf *)(chunks[j]));
+		pixbuffer = gdk_pixbuf_get_pixels(s->pixbuf);
+		merge_chuncks(pixbuffer, buffer);	
+		free(buffer);
+		buffer = NULL;
+		g_object_unref((GdkPixbuf *)(chunks[j]));
+	}
 	gtk_put_image_to_window(GTK_IMAGE(s->pdrawarea), s->pixbuf);
-	gtk_widget_show_all(s->pwindow);
+	g_object_unref(s->pixbuf);
+	gtk_widget_show(s->pwindow);
 }

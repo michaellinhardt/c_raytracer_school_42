@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 02:10:37 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/08/17 19:27:56 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/17 22:08:30 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ G_MODULE_EXPORT	gboolean	on_key_press(GtkWidget *widget, GdkEvent  *event, void 
 		exit(0);
 	else if (key->keyval == GDK_KEY_s)
 		s->rep ^= SAVE;
-	else if (key->keyval ==  GDK_KEY_End)
-		print_scene(s);
 	else if (key->keyval == GDK_KEY_KP_1)
 		s->to_move->pos[0] -= 1.0;
 	else if (key->keyval == GDK_KEY_KP_2)
@@ -113,8 +111,28 @@ G_MODULE_EXPORT	gboolean	on_key_press(GtkWidget *widget, GdkEvent  *event, void 
 
 G_MODULE_EXPORT void	pscene_button_save_clicked(GtkWidget *pwidget, gpointer data)
 {
+	t_scene		*head;
+	t_scene		*tmp;
+	char		*current;
+
 	(void)pwidget;
-	(void)data;
+	head = ((t_gen *)(data))->sc;
+	if (!head)
+		return ;
+	tmp = head;
+	current = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(
+				((t_gen *)(data))->pscene_current_scene));
+	while (tmp)
+	{
+		if (!ft_strcmp(current, tmp->name))
+		{
+			print_scene(tmp);
+			free(current);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+	free(current);
 }
 
 G_MODULE_EXPORT void	on_pscene_object_select_changed(GtkWidget *pwidget, gpointer data)
@@ -126,9 +144,7 @@ G_MODULE_EXPORT void	on_pscene_object_select_changed(GtkWidget *pwidget, gpointe
 	(void)pwidget;
 	raytracer = NULL;
 	if (!data)
-	{
 		error(4, "unable to get pointer to raytracer\n");
-	}
 	raytracer = (t_gen *)data;
 	objname = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(raytracer->pscene_object_select));
 	if (!objname)
@@ -140,7 +156,7 @@ G_MODULE_EXPORT void	on_pscene_object_select_changed(GtkWidget *pwidget, gpointe
 			raytracer->to_move = tmp;
 		tmp = tmp->next;
 	}
-	g_free(objname);
+	free(objname);
 }
 
 G_MODULE_EXPORT void	on_pscene_current_scene_changed(GtkWidget *pwidget, gpointer data)
@@ -167,6 +183,7 @@ G_MODULE_EXPORT void	on_pscene_current_scene_changed(GtkWidget *pwidget, gpointe
 		return ;
 	while (tmp)
 	{
+		/* Chargement des objets dans la liste deroulante */
 		if (ft_strcmp(tmp->name, current) == 0)
 		{
 			raytracer->sc = tmp;
@@ -182,11 +199,12 @@ G_MODULE_EXPORT void	on_pscene_current_scene_changed(GtkWidget *pwidget, gpointe
 						NULL, otmp->name);
 				otmp = otmp->next;
 			}
+			free(current);
 			/* Fin de la redondance */
-			raytracing(raytracer);
 		}
 		tmp = tmp->next;
 	}
+	raytracing(raytracer);
 	raytracer->sc = head;
 	(void)pwidget;
 	(void)data;

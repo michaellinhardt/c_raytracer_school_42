@@ -6,13 +6,13 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/25 05:39:29 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/17 19:47:05 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/17 20:42:37 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raytra_gen.h"
 
-static void	print_type(t_gen *s, char **to_print, char type)
+static void	print_type(t_scene *s, char **to_print, char type)
 {
 	char *tmp;
 
@@ -39,7 +39,7 @@ static void	print_type(t_gen *s, char **to_print, char type)
 	ft_strdel(&tmp);
 }
 
-static void	print_cam(t_gen *s, char **to_print, double *cam, char c)
+static void	print_cam(t_scene *s, char **to_print, double *cam, char c)
 {
 	char *tmp;
 	char *temp;
@@ -90,7 +90,7 @@ static void	print_cam(t_gen *s, char **to_print, double *cam, char c)
 	ft_strdel(&temp);
 }
 
-static void	print_col(t_gen *s, char **to_print, int col)
+static void	print_col(t_scene *s, char **to_print, int col)
 {
 	char *tmp;
 	char *temp;
@@ -152,7 +152,7 @@ static void	print_col(t_gen *s, char **to_print, int col)
 	ft_strdel(&tmp);
 }
 
-static void	print_text(t_gen *s, char **to_print, int col)
+static void	print_text(t_scene *s, char **to_print, int col)
 {
 	char *tmp;
 
@@ -170,7 +170,7 @@ static void	print_text(t_gen *s, char **to_print, int col)
 	ft_strdel(&tmp);
 }
 
-static void	print_size_eff(t_gen *s, char **to_print, double *size, char c)
+static void	print_size_eff(t_scene *s, char **to_print, double *size, char c)
 {
 	char	*tmp;
 	char	*temp;
@@ -201,7 +201,7 @@ static void	print_size_eff(t_gen *s, char **to_print, double *size, char c)
 	}
 }
 
-static void	print_simple(t_gen *s, char **to_print, t_obj *obj, char c)
+static void	print_simple(t_scene *s, char **to_print, t_obj *obj, char c)
 {
 	char *tmp;
 
@@ -235,7 +235,7 @@ static void	print_simple(t_gen *s, char **to_print, t_obj *obj, char c)
 	*to_print = ft_strjoin(*to_print, "}\n");	
 	ft_strdel(&tmp);
 }
-static void	print_complexe(t_gen *s, char **to_print, t_obj *obj)
+static void	print_complexe(t_scene *s, char **to_print, t_obj *obj)
 {
 	char *tmp;
 
@@ -264,7 +264,7 @@ static void	print_complexe(t_gen *s, char **to_print, t_obj *obj)
 	ft_strdel(&tmp);
 }
 
-static void	print_amb(t_gen *s, char **to_print, int col)
+static void	print_amb(t_scene *s, char **to_print, int col)
 {
 	char *tmp;
 	char *temp;
@@ -325,7 +325,7 @@ static void	print_amb(t_gen *s, char **to_print, int col)
 	*to_print = ft_strjoin(*to_print, " ; ");
 	ft_strdel(&tmp);
 	tmp = *to_print;
-	temp = ft_itoa(s->sc->amb[1]);
+	temp = ft_itoa(s->amb[1]);
 	*to_print = ft_strjoin(*to_print, temp);
 	ft_strdel(&tmp);
 	ft_strdel(&temp);
@@ -335,7 +335,7 @@ static void	print_amb(t_gen *s, char **to_print, int col)
 }
 
 
-void	print_scene(t_gen *s)
+void	print_scene(t_scene *s)
 {
 	char *to_print;
 	char *tmp;
@@ -343,24 +343,24 @@ void	print_scene(t_gen *s)
 	t_obj *obj;
 	int fd;
 
-	if (!s->sc)
+	if (!s)
 		return ;
 	if (access("scene", R_OK | W_OK) < 0)
 		system("mkdir scene");
-	tmp = ft_strjoin("./scene/", s->sc->name);
+	tmp = ft_strjoin("./scene/", s->name);
 	to_print = ft_strjoin(tmp, ".rt");
 	fd = open(to_print, O_CREAT | O_RDWR | O_TRUNC, 0755);
 	ft_strdel(&tmp);
 	ft_strdel(&to_print);
 	to_print = ft_strdup("scene {\n\tname {");
 	tmp = to_print;
-	to_print = ft_strjoin(to_print, s->sc->name);
+	to_print = ft_strjoin(to_print, s->name);
 	ft_strdel(&tmp);
 	tmp = to_print;
 	to_print = ft_strjoin(to_print, "}\n");
 	ft_strdel(&tmp);
-	print_cam(s, &to_print, s->sc->cam, 0);
-	spot = s->sc->spot;
+	print_cam(s, &to_print, s->cam, 0);
+	spot = s->spot;
 	while (spot)
 	{
 		tmp = to_print;
@@ -373,11 +373,11 @@ void	print_scene(t_gen *s)
 		ft_strdel(&tmp);
 		spot = spot->next;
 	}
-	print_amb(s, &to_print, s->sc->amb[0]);
+	print_amb(s, &to_print, s->amb[0]);
 	tmp = to_print;
 	to_print = ft_strjoin(to_print, "objects {\n");
 	ft_strdel(&tmp);
-	obj = s->sc->obj;
+	obj = s->obj;
 	while (obj)
 	{
 		if (!(obj->type & COMPLEXE))

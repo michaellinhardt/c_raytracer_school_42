@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/17 17:13:16 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/17 20:42:48 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ double				cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *object);
 **									write_scene.c
 */
 
-void				print_scene(t_gen *s);
+void				print_scene(t_scene *s);
 
 
 /*

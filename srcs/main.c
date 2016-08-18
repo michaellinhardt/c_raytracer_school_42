@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:09:09 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/17 17:11:32 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/17 22:32:20 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,13 @@ void	init_struct(t_gen *s)
 	s->rep = 0;
 }
 
-int		main(int argc, char **argv)
+int		main(void)
 {
 	t_gen s;
 
-	(void)argv;
 	load_interface(&s);
 	init_struct(&s);
-	parse_scene(&s, argv[1]);
-	if (argc == 1)
-		return (usage(open("resources/doc.txt", O_RDONLY)));
-	raytracing(&s);
+	gtk_widget_show_all(s.pwindow);
 	gtk_main();
 	return (0);
 }
