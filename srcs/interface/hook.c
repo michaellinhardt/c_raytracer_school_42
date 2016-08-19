@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/18 20:05:03 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/18 23:55:58 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/19 05:25:06 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,17 @@ void		move_complex(t_gen *s, int key)
 	tmp = s->to_move->comp;
 	while (tmp)
 	{
-		if (key == KEY_ONE)
+		if (key ==GDK_KEY_KP_1)
 			tmp->pos[0] -= 1.0;
-		else if (key == KEY_TWO)
+		else if (key == GDK_KEY_KP_2)
 			tmp->pos[0] += 1.0;
-		else if (key == KEY_FOU)
+		else if (key == GDK_KEY_KP_4)
 			tmp->pos[1] -= 1.0;
-		else if (key == KEY_FIV)
+		else if (key == GDK_KEY_KP_5)
 			tmp->pos[1] += 1.0;
-		else if (key == KEY_SEV)
+		else if (key == GDK_KEY_KP_7)
 			tmp->pos[2] -= 1.0;
-		else if (key == KEY_EIG)
+		else if (key == GDK_KEY_KP_8)
 			tmp->pos[2] += 1.0;
 		tmp = tmp->next;
 	}

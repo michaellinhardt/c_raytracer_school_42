@@ -2,7 +2,7 @@ scene {
 	name { NAME_SCENE        	 }
 	camera {pos{890; 525; -50}, dir{0; 1; 2}}				
 	spot {							
-		camera {pos{890; 600; -50}, dir{1 ; 1; 5}}
+		camera {pos{890; 525; -50}, dir{1 ; 1; 5}}
 		color { 0xFFFFFF }					
 	}
 	spot {							
@@ -13,124 +13,44 @@ scene {
 	objects {
 		simple_obj {
 			name { vert }
-			camera {pos{1060 ; 550 ; 0}, dir{10 ; 0 ; 0 }}
+			camera {pos{1060 ; 550 ; 0}, dir{-10 ; 0 ; 0 }}
 			type { plan }				
 			size { 1. ; 0.0 ; 0 }			
 			effect { 0 ; 0 ; 0 ; 0}			
 			color { 0x00FF00 }				
-			cut { pos{1;22.1;-98}, dir{1;02;35} }
 		}
 		simple_obj {
 			name { rouge }
-			camera {pos{0 ; 550 ; 0}, dir{-10 ; 0 ; 0 }}
+			camera {pos{0 ; 550 ; 0}, dir{10 ; 0 ; 0 }}
 			type { plan }				
 			size { 1. ; 0.0 ; 0 }			
 			effect { 0 ; 0 ; 0 ; 0}			
 			color { 0xFF0000 }				
-			cut { pos{1;22.1;-98}, dir{1;02;35} }
 		}
 		complex_obj {
 			name { complex }
 			camera {pos{ 890; 530; 20}, dir{1 ;1 ; 0}}
-			type {test}		
-		simple_obj {
-			camera {pos{ 890; 535; 22}, dir{1 ;1 ; 0}}				
-			type { sphere }				
-			size { 7 ; 5.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}			
-			color { 0xFF0000 }				
-			cut { pos{1;22.1;-98}, dir{0;0;0} }
-		}
-		simple_obj {
-			camera {pos{ 895; 535; 18}, dir{1 ;1 ; 0}}				
-			type { sphere }				
-			size { 7 ; 5.0 ; 0 }			
-			effect { 0 ; 50 ; 0 ; 1}			
-			color { 0x00ff00 }				
-			cut { pos{1;22.1;-98}, dir{0;0;0} }
-		}
-		simple_obj {
-			camera {pos{ 890; 525; 22}, dir{1 ;1 ; 0}}				
-			type { sphere }				
-			size { 7 ; 5.0 ; 0 }			
-			effect { 0 ; 50 ; 0 ; 0}			
-			color { 0x0000FF }				
-			cut { pos{1;22.1;-98}, dir{0;0;0} }
-		}
-		}
-}
-}
-scene {								
-	name { NAME_SCENE        	 }
-	camera {pos{890; 525; -50}, dir{0; 1; 2}}				
-	spot {							
-		camera {pos{90; 600; -50}, dir{1 ; 1; 5}}
-		color { 0xFFFFFF }					
-	}
-	ambiance { 0x452d6e; 52 }					
-	objects {
-		simple_obj {
-			name { vert }
-			camera {pos{1060 ; 550 ; 0}, dir{10 ; 0 ; 0 }}
-			type { plan }				
-			size { 1. ; 0.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}			
-			color { 0x00FF00 }				
-			cut { pos{1;22.1;-98}, dir{1;02;35} }
-		}
-		simple_obj {
-			name { rouge }
-			camera {pos{0 ; 550 ; 0}, dir{-10 ; 0 ; 0 }}
-			type { plan }				
-			size { 1. ; 0.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}			
-			color { 0xFF0000 }				
-			cut { pos{1;22.1;-98}, dir{1;02;35} }
-		}
-		simple_obj {
-			name { bleu }
-			camera {pos{0 ; 550 ; 0}, dir{0 ; 10 ; 0 }}
-			type { plan }				
-			size { 1. ; 0.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}			
-			color { 0x0000FF }				
-			cut { pos{1;22.1;-98}, dir{1;02;35} }
-		}
-		simple_obj {
-			name { bleu }
-			camera {pos{0 ; 0 ; 0}, dir{0 ; -10 ; 0 }}
-			type { plan }				
-			size { 1. ; 0.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}			
-			color { 0x0000FF }				
-			cut { pos{1;22.1;-98}, dir{1;02;35} }
-		}
-		simple_obj {
-			name { complex }
-			camera {pos{ 890; 535; 22}, dir{1 ;1 ; 0}}				
-			type { sphere }				
-			size { 7 ; 5.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}			
-			color { 0xFF0000 }				
-			cut { pos{1;22.1;-98}, dir{0;0;0} }
-		}
-		simple_obj {
-			name { complex }
-			camera {pos{ 895; 530; 22}, dir{1 ;1 ; 0}}				
-			type { sphere }				
-			size { 7 ; 5.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 1}			
-			color { 0x00ff00 }				
-			cut { pos{1;22.1;-98}, dir{0;0;0} }
-		}
-		simple_obj {
-			name { complex }
-			camera {pos{ 890; 525; 22}, dir{1 ;1 ; 0}}				
-			type { sphere }				
-			size { 7 ; 5.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}			
-			color { 0x0000FF }				
-			cut { pos{1;22.1;-98}, dir{0;0;0} }
+			simple_obj {
+				camera {pos{ 890; 535; 22}, dir{1 ;1 ; 0}}				
+				type { sphere }				
+				size { 7 ; 5.0 ; 0 }			
+				effect { 0 ; 0 ; 0 ; 0}			
+				color { 0xFF0000 }				
+			}
+			simple_obj {
+				camera {pos{ 895; 520; 18}, dir{1 ;1 ; 0}}				
+				type { sphere }				
+				size { 7 ; 5.0 ; 0 }			
+				effect { 0 ; 50 ; 0 ; 1}			
+				color { 0x00ff00 }				
+			}
+			simple_obj {
+				camera {pos{ 890; 525; 22}, dir{1 ;1 ; 0}}				
+				type { sphere }				
+				size { 7 ; 5.0 ; 0 }			
+				effect { 0 ; 50 ; 0 ; 0}			
+				color { 0x0000FF }				
+			}
 		}
 }
 }

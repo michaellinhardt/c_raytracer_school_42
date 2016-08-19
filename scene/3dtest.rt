@@ -852,7 +852,6 @@ f 182//278 46//279 94//270
 			size { 7 ; 0.0 ; 0 }			
 			effect { 0 ; 70 ; 0 ; 0}			
 			color { 0x0000FF }				
-			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
 		}
 		simple_obj {
 			name { BLUE }
@@ -861,7 +860,6 @@ f 182//278 46//279 94//270
 			size { 7 ; 0.0 ; 0 }			
 			effect { 0 ; 00 ; 0 ; 0}			
 			color { 0x0000FF }				
-			cut { pos{-0 ; -0.5 ; -0.5}, dir{0 ; 0; 0 } }
 		}
 		simple_obj {
 			name { plan }
@@ -870,7 +868,6 @@ f 182//278 46//279 94//270
 			size { 0 ; 0 ; 0 }			
 			effect { 0 ; 0 ; 0 ; 0}	
 			color { 0xFFFFFF }				
-			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
 		}		
 		simple_obj {
 			name { plan }
@@ -879,7 +876,6 @@ f 182//278 46//279 94//270
 			size { 0 ; 0 ; 0 }			
 			effect { 0 ; 100 ; 0 ; 0}	
 			color { 0xFFFFFF }				
-			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
 		}		
 		simple_obj {
 			name { plan }
@@ -888,7 +884,6 @@ f 182//278 46//279 94//270
 			size { 0 ; 0 ; 0 }			
 			effect { 0 ; 100 ; 0 ; 0}	
 			color { 0xFFFFFF }				
-			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
 		}		
 		simple_obj {
 			name { plan }
@@ -897,7 +892,6 @@ f 182//278 46//279 94//270
 			size { 0 ; 0 ; 0 }			
 			effect { 0 ; 0 ; 0 ; 0}	
 			color { 0xFFFFFF }				
-			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
 		}
 		simple_obj {
 			name { plan }
@@ -906,7 +900,6 @@ f 182//278 46//279 94//270
 			size { 0 ; 0 ; 0 }			
 			effect { 0 ; 00 ; 0 ; 0}	
 			color { 0xFFFFFF }				
-			cut { pos{0 ; 0 ; 0}, dir{ 0 ; 0; 0 } }
 		}		
 	}
 }

@@ -14,7 +14,6 @@ scene {
 			size { 7 ; 0.0 ; 0 }			
 			effect { 0 ; 0 ; 0 ; 0}			
 			color { 0xFF0000 }				
-			cut { pos{1;22.1;-98}, dir{1;02;35} }
 		}
 		simple_obj {
 			name { SPHERE2 }
@@ -23,7 +22,6 @@ scene {
 			size { 7 ; 0.0 ; 0 }			
 			effect { 0 ; 0 ; 0 ; 0}			
 			color { 0x0000FF }				
-			cut { pos{1;22.1;-98}, dir{1;02;35} }
 		}
 		simple_obj {
 			name { SPHERE2 }
@@ -32,7 +30,6 @@ scene {
 			size { 7 ; 0.0 ; 0 }			
 			effect { 0 ; 0 ; 0 ; 0}			
 			color { 0x00FF00 }				
-			cut { pos{1;22.1;-98}, dir{1;02;35} }
 		}
 		simple_obj {
 			name { BLANC DE FACE }
@@ -41,6 +38,6 @@ scene {
 			size { 1. ; 0.0 ; 0 }			
 			effect { 0 ; 0 ; 0 ; 0}			
 			color { 0xFFFFFF }				
-			cut { pos{1;22.1;-98}, dir{1;02;35} }
 		}
+}
 }
