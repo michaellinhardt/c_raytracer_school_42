@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/18 20:05:03 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/18 20:05:48 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/18 23:55:58 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,30 @@ static void rotate(t_gen *s, int key)
 	t_vector new;
 	t_vector obj;
 
-	if (s->to_move->type == SPHERE)
-		new = new_vector(s->to_move->cut[0], s->to_move->cut[1], s->to_move->cut[2]);
-	else if (s->to_move->type == PLAN)
+	if (s->to_move->type & SPHERE)
+	{
+		if (!s->to_move->cut)
+			return ;
+		new = new_vector(s->to_move->cut->pos[0], s->to_move->cut->pos[1], s->to_move->cut->pos[2]);
+	}
+	else if (s->to_move->type & PLAN)
 		new = new_vector(s->to_move->pos[0], s->to_move->pos[1], s->to_move->pos[2]);
 	// else if (s->to_move->type == CYLINDRE)
-		// new = newVector(s->to_move->cut[0], s->to_move->cut[1], s->to_move->cut[2]);
+		// new = newVector(s->to_move->cut->pos[0], s->to_move->cut->pos[1], s->to_move->cut->pos[2]);
 	obj = new_vector(s->to_move->pos[0], s->to_move->pos[1], s->to_move->pos[2]);
-	if (key == KEY_NIN)
-		new = matricerot_z(new, vector_dot(new, obj));
-	if (key == KEY_SIX)
-		new = matricerot_y(new, vector_dot(new, obj));
-	if (key == KEY_THR)
-		new = matricerot_x(new, vector_dot(new, obj));
-	if (s->to_move->type == SPHERE)
+	if (key == GDK_KEY_KP_9)
 	{
-		s->to_move->cut[0] = new.x;
-		s->to_move->cut[1] = new.y;
-		s->to_move->cut[2] = new.z;
+		new = matricerot_z(new, vector_dot(new, obj));
+	}
+	if (key == GDK_KEY_KP_6)
+		new = matricerot_y(new, vector_dot(new, obj));
+	if (key == GDK_KEY_KP_3)
+		new = matricerot_x(new, vector_dot(new, obj));
+	if (s->to_move->type & SPHERE)
+	{
+		s->to_move->cut->pos[0] = new.x;
+		s->to_move->cut->pos[1] = new.y;
+		s->to_move->cut->pos[2] = new.z;
 	}
 	else
 	{
@@ -81,7 +87,7 @@ G_MODULE_EXPORT	gboolean	on_key_press(GtkWidget *widget, GdkEvent  *event, void 
 	t_gen *s = user_data;
 	if (!s->to_move)
 		return (0);
-	if (s->to_move->type == COMPLEXE)
+	if (s->to_move->type & COMPLEXE)
 		move_complex(s, key->keyval);
 	if(key->keyval == GDK_KEY_Escape)
 		exit(0);

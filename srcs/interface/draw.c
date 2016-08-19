@@ -6,11 +6,10 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 04:11:05 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/08/18 20:09:57 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/18 21:10:58 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <raytra_gen.h>
 #include <raystruct.h>
 
 GdkPixbuf	*gtk_new_image(unsigned char *data, int width, int height)

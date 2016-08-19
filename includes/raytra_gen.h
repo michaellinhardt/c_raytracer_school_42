@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/18 19:12:11 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/18 21:34:44 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,12 @@ typedef struct		s_vector
 	double				z;
 }					t_vector;
 
+typedef struct		s_cut
+{
+	double			pos[6];
+	void			*next;
+}					t_cut;
+
 typedef struct		s_tex
 {
 	char 			*data;
@@ -85,7 +91,7 @@ typedef struct		s_obj
 	t_vector		tri[3];				/* pour les .obj */
 	t_vector		nor;				/* pour les .obj */
 	int				text;
-	double			cut[6];				/* a voir comment faire */
+	t_cut			*cut;
 	void			*next;
 }					t_obj;
 

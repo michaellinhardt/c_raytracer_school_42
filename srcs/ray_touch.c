@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 16:52:24 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/16 14:33:01 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/19 01:24:20 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ static t_obj	*lenray_final(t_obj *s, t_ray *r,
 	{
 		if (!s->eff[3])
 		{
+			r->obj = NULL;
 			nearest[3] = lenray_type(r, s, tmp_near, &color);
 			nearest[4] = tmp_near[0];
 			nearest[5] = tmp_near[1];

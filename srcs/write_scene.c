@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/25 05:39:29 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/17 20:42:37 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/18 21:50:43 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,14 @@ static void	print_cam(t_scene *s, char **to_print, double *cam, char c)
 	ft_strdel(&tmp);
 	ft_strdel(&temp);
 }
-
+static void	print_cut(t_scene *s, char **to_print, t_cut *cut, char c)
+{
+	while (cut)
+	{
+		print_cam(s, to_print, cut->pos, c);
+		cut = cut->next;
+	}
+}
 static void	print_col(t_scene *s, char **to_print, int col)
 {
 	char *tmp;
@@ -230,7 +237,8 @@ static void	print_simple(t_scene *s, char **to_print, t_obj *obj, char c)
 		print_col(s, to_print, obj->c_o);
 	else
 		print_text(s, to_print, obj->text);
-	print_cam(s, to_print, obj->cut, 1);
+	if (obj->cut)
+		print_cut(s, to_print, obj->cut, 1);
 	tmp = *to_print;
 	*to_print = ft_strjoin(*to_print, "}\n");	
 	ft_strdel(&tmp);

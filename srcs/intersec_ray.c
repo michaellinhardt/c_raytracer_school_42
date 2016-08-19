@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 03:46:50 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/17 19:50:21 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/19 04:48:32 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,38 @@ double	equa_sec(double a, double b, double discriminant, double *x1, double *y1,
 	}
 }
 
+double cut_object(t_obj *obj, double dist, t_ray *r, char c)
+{
+	t_ray	tmp;
+	t_cut	*cut;
+	t_obj	new_plan;
+	double	t;
+	double	x1;
+	double	y1;
+
+	new_plan = *obj;
+	new_plan.type = 0;
+	x1 = 0;
+	y1 = 0;
+	new_plan.type ^= PLAN;
+	cut = obj->cut;
+	new_plan.cut = NULL;
+	while (cut)
+	{
+		tmp = *r;
+		ft_memcpy(new_plan.pos, cut->pos, sizeof(double) * 6);
+		new_plan.pos[0] += obj->pos[0];
+		new_plan.pos[1] += obj->pos[1];
+		new_plan.pos[2] += obj->pos[2];
+		t = intersectray_plane(&tmp, &new_plan, &x1, &y1);
+		if (!c && t > EPS && t < dist)
+			return (0);
+		if (c && t > EPS && t > dist)
+			return (0);
+		cut = cut->next;
+	}
+	return (dist);
+}
 double	ferrari(double a, double b, double c, double d, double e)
 {
 	double p;
@@ -285,33 +317,21 @@ double intersectray_cylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 		r->norm = inter;
 		proj = vector_add(cyl_pos, proj);
 		r->norm = vector_sub(r->norm, proj);
-		// if (neg)
-		// {
-		// 	r->norm = cyl_dir;
-		// 	if (neg == 2)
-		// 	r->norm = vector_rev(r->norm);
-		// 	return (dist);
-		// }
-		// r->norm.x = -r->norm.x;
-		// r->norm.y = -r->norm.y;
-		// r->norm.z = -r->norm.z;
 		r->norm = vector_normalize(r->norm);
+		if (s->cut)
+		{
+			if (!cut_object(s, dist, r, 0))
+			{
+				if (dist < ((-b + sqrtf(discriminant)) / (2 * a)))
+					dist = ((-b + sqrtf(discriminant)) / (2 * a));
+				else
+					dist = ((-b - sqrtf(discriminant)) / (2 * a));
+				// r->norm = vector_rev(r->norm);
+				if (!cut_object(s, dist, r, 1))
+					return (0);
+			}
+		}
 		return dist;
-		// if (vector_dist(get_hitpoint(r->start, r->dir, dist), cyl_pos) > s->size[1])
-		// {
-		// 	if (((-b + sqrtf(discriminant)) / (2 * a)) > dist)
-		// 		dist = ((-b + sqrtf(discriminant)) / (2 * a));
-		// 	if (((-b - sqrtf(discriminant)) / (2 * a)) > dist)
-		// 		dist = ((-b - sqrtf(discriminant)) / (2 * a));
-		// 	if (vector_dist(get_hitpoint(r->start, r->dir, dist), cyl_pos) > s->size[1])
-		// 		return (0);
-		// 	neg = 1;
-		// }
-		// t_vector	hitpoint;
-
-		// hitpoint = get_hitpoint(r->start, r->dir, dist);
-		// r->norm = vector_normalize(r->norm);
-		// return (dist);
 	}
 	return (0);
 }
@@ -339,8 +359,9 @@ double intersectray_carre(t_ray *r, t_obj *s, double *x1, double *y1)
 {
 	(void)x1;
 	(void)y1;
-	double t_min = (-s->size[0] - (r->start.x - s->pos[0])) / r->dir.x; 
-    double tmax = (s->size[0] - (r->start.x - s->pos[0])) / r->dir.x; 
+
+	double t_min = (-s->size[0] / 2 - (r->start.x - s->pos[0])) / r->dir.x; 
+    double tmax = (s->size[0] / 2 - (r->start.x - s->pos[0])) / r->dir.x; 
  	double t;
     if (t_min > tmax)
     { 
@@ -348,16 +369,15 @@ double intersectray_carre(t_ray *r, t_obj *s, double *x1, double *y1)
     	t_min = tmax;
     	tmax = t;
  	}
-    double tymin = (-s->size[1] - (r->start.y - s->pos[1])) / r->dir.y; 
-    double tymax = (s->size[1] - (r->start.y - s->pos[1])) / r->dir.y; 
- 
+    double tymin = (-s->size[1] / 2 - (r->start.y - s->pos[1])) / r->dir.y; 
+    double tymax = (s->size[1] / 2 - (r->start.y - s->pos[1])) / r->dir.y; 
+ 	
     if (tymin > tymax)
     {
     	t = tymin;
     	tymin = tymax;
     	tymax = t;
     } 
-
     if ((t_min > tymax) || (tymin > tmax)) 
         return 0; 
  
@@ -367,8 +387,8 @@ double intersectray_carre(t_ray *r, t_obj *s, double *x1, double *y1)
     if (tymax < tmax) 
         tmax = tymax; 
  
-    double tzmin = (-s->size[2] - (r->start.z - s->pos[2])) / r->dir.z; 
-    double tzmax = (s->size[2] - (r->start.z - s->pos[2])) / r->dir.z; 
+    double tzmin = (-s->size[2] / 2 - (r->start.z - s->pos[2])) / r->dir.z; 
+    double tzmax = (s->size[2] / 2 - (r->start.z - s->pos[2])) / r->dir.z; 
  
     if (tzmin > tzmax)
 	{
@@ -376,17 +396,42 @@ double intersectray_carre(t_ray *r, t_obj *s, double *x1, double *y1)
 		tzmin = tzmax;
 		tzmax = t;
 	}
- 
     if ((t_min > tzmax) || (tzmin > tmax)) 
         return 0; 
  
     if (tzmin > t_min) 
-        t_min = tzmin; 
+		t_min = tzmin; 
  
-    if (tzmax < tmax) 
-        tmax = tzmax; 
-    r->norm = ComputeNormal(get_hitpoint(r->start, r->dir, (t_min < tmax) ? t_min : tmax), new_vector(s->pos[0], s->pos[1], s->pos[2]));
-    return (t_min < tmax) ? t_min : tmax; 
+    if (tzmax < tmax)
+		tmax = tzmax;
+	double dist;
+	dist = (t_min < tmax) ? t_min : tmax;
+	*x1 = dist;
+	*y1 = (t_min > tmax) ? t_min : tmax;
+	t_vector hitpoint = get_hitpoint(r->start, r->dir, dist);
+	t_vector rec_pos = new_vector(s->pos[0], s->pos[1], s->pos[2]);
+	t_vector calc = vector_sub(hitpoint, rec_pos);
+	r->norm = new_vector(0, 0, 0);
+
+	if (calc.x >= s->size[0] / 2)
+		r->norm.x = 1;
+	else if (calc.x <= -s->size[0] / 2)
+		r->norm.x = -1;
+	if (calc.y >= s->size[1] / 2)
+		r->norm.y = 1;
+	else if (calc.y <= -s->size[1] / 2)
+		r->norm.y = -1;
+	if (calc.z >= s->size[2] / 2)
+		r->norm.z = 1;
+	else if (calc.z <= -s->size[2] / 2)
+		r->norm.z = -1;
+	if (fabs(calc.x) >= fabs(calc.y) && fabs(calc.z) >= fabs(calc.y))
+		r->norm.y = 0;
+	else if (fabs(calc.x) >= fabs(calc.z) && fabs(calc.z) <= fabs(calc.y))
+		r->norm.z = 0;
+	else
+		r->norm.x = 0;
+    return (dist); 
 }
 
 double intersectray_sphere(t_ray *r, t_obj *s, double *x1, double *y1)
@@ -437,71 +482,17 @@ double intersectray_sphere(t_ray *r, t_obj *s, double *x1, double *y1)
 			(hitpoint.y - s->pos[1]) / s->size[0],
 			(hitpoint.z - s->pos[2]) / s->size[0]);
 		r->norm = vector_normalize(r->norm);
-		if (s->cut[3] || s->cut[4] || s->cut[5])
+		if (s->cut)
 		{
-			t_vector hitpoint;
-			t_vector plan;
-			double t;
-			t_vector l;
-			t_vector p0_l0;
-			t_vector n;
-
-			hitpoint = get_hitpoint(r->start, r->dir, dist);
-			plan = new_vector(s->pos[0] + s->cut[0], s->pos[1] + s->cut[1], s->pos[2] + s->cut[2]);
-			n = new_vector(s->cut[3], s->cut[4], s->cut[5]);
-			l = vector_dir(plan, hitpoint);
-			n = vector_normalize(n);
-			p0_l0 = vector_sub(plan, hitpoint);
-		 	double denom = vector_dot(l, n); 
-   			t = vector_dot(p0_l0, n) / denom ;
-	
-					
-			if (t > EPS && t < s->size[0])
+			if (!cut_object(s, dist, r, 0))
 			{
-				dist = fabs((-b + sqrtf(discriminant)) / (2 * a));
-
-				if ( fabs((-b - sqrtf(discriminant)) / (2 * a)) > fabs(dist))
-				{
-					dist = fabs((-b - sqrtf(discriminant)) / (2 * a));
-				// r->norm = new_vector(-(hitpoint.x - s->pos[0]) / s->size[0], 
-			// -(hitpoint.y - s->pos[1]) / s->size[0],
-			// -(hitpoint.z - s->pos[2]) / s->size[0]);
-		// r->norm = vector_normalize(r->norm);
-				}
-				hitpoint = get_hitpoint(r->start, r->dir, dist);
-				plan = new_vector(s->pos[0] + s->cut[0], s->pos[1] + s->cut[1], s->pos[2] + s->cut[2]);
-				// n = new_vector(s->cut[3], s->cut[4], s->cut[5]);
-				l = vector_dir(plan, hitpoint);
-				// n = vector_normalize(n);
-				p0_l0 = vector_sub(plan, hitpoint);
-			 	double denom = vector_dot(l, n); 
-					t = vector_dot(p0_l0, n) / denom ;
-				if (t > EPS && t < s->size[0])
-				{
-					return (0);
-				}
+				if (dist < ((-b + sqrtf(discriminant)) / (2 * a)))
+					dist = ((-b + sqrtf(discriminant)) / (2 * a));
 				else
-				{
-			if (dist >= fabs((-b - sqrtf(discriminant)) / (2 * a)) && dist >= fabs((-b + sqrtf(discriminant)) / (2 * a)))
-			{
-				r->norm = new_vector(-(hitpoint.x - s->pos[0]) / s->size[0], 
-			-(hitpoint.y - s->pos[1]) / s->size[0],
-			-(hitpoint.z - s->pos[2]) / s->size[0]);
-		r->norm = vector_normalize(r->norm);
-			}
-					hitpoint = get_hitpoint(hitpoint, l, t); // get_hitpoint(p0_l0, l, t) pour surface pleine
-			
-
-					return (vector_dist(r->start, hitpoint));
-					
-				}
-			}
-			if (dist >= fabs((-b - sqrtf(discriminant)) / (2 * a)) && dist >= fabs((-b + sqrtf(discriminant)) / (2 * a)))
-			{
-				r->norm = new_vector(-(hitpoint.x - s->pos[0]) / s->size[0], 
-			-(hitpoint.y - s->pos[1]) / s->size[0],
-			-(hitpoint.z - s->pos[2]) / s->size[0]);
-		r->norm = vector_normalize(r->norm);
+					dist = ((-b - sqrtf(discriminant)) / (2 * a));
+				r->norm = vector_rev(r->norm);
+				if (!cut_object(s, dist, r, 1))
+					return (0);
 			}
 		}
  		return dist;
@@ -509,6 +500,8 @@ double intersectray_sphere(t_ray *r, t_obj *s, double *x1, double *y1)
  	else
  		return 0;
 }
+
+
 
 double intersectray_complex(t_ray *r, t_obj *p, double *x1, double *y1, int *col)
 {
@@ -660,6 +653,8 @@ double intersectray_plane(t_ray *r, t_obj *p, double *x1, double *y1)
 		*x1 = t;
 		*y1 = *x1; 
 		r->norm = vector_normalize(r->norm);
+		if (p->cut)
+			return(cut_object(p, t, r, 0));
 		return (t);
 	}
 	return (0);

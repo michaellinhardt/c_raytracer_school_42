@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/17 20:42:48 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/08/18 21:33:26 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void				print_scene(t_scene *s);
 
 
 /*
-**									matrice_rot.c  (with doc)
+**									matrice_rot.c
 */
 
 t_vector			matricerot_x(t_vector v, double angle);

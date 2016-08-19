@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/18 20:11:31 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/19 04:49:04 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ double noise(t_vector hitpoint)
     {
         noiseCoef += (1.0 / level)  
             * fabs((perlin(fabs(level * 0.05 * hitpoint.x),
-            	fabs(level * 0.00 * hitpoint.y),
-            	fabs(level * 0.00 * hitpoint.z))));
+            	fabs(level * 0.05 * hitpoint.y),
+            	fabs(level * 0.05 * hitpoint.z))));
     	level++;
     }
     if (noiseCoef > 1.0)
