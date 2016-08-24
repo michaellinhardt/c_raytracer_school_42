@@ -127,7 +127,7 @@ double intersectray_cone(t_ray *r, t_obj *s, double *x1, double *y1)
 	cone_pos = new_vector(s->pos[0], s->pos[1],s->pos[2]);
 	cone_dir = vector_normalize(new_vector(s->pos[3], s->pos[4],s->pos[5]));
 	x = vector_sub(r->start, cone_pos);
-	k = tan(((s->size[1] > 150) ? 150 : s->size[1]) * (M_PI / 180) / 2);
+	k = tan(((s->size[1] > 150) ? 150 * (M_PI / 180) / 2 : s->size[1]) * (M_PI / 180) / 2);
 	a = vector_dot(r->dir, r->dir) - (1 + k * k) * vector_dot(r->dir, cone_dir) * vector_dot(r->dir, cone_dir);
 	b = 2 * (vector_dot(r->dir, x) - (1 + k * k) * vector_dot(r->dir, cone_dir) * vector_dot(x, cone_dir));
 	c = vector_dot(x, x) - (1 + k * k) *  vector_dot(x, cone_dir) *  vector_dot(x, cone_dir);
@@ -146,46 +146,81 @@ double intersectray_cone(t_ray *r, t_obj *s, double *x1, double *y1)
 			*y1 = test2;
 			return (0);
 		}
-		if (vector_dist(get_hitpoint(r->start, r->dir, dist), cone_pos) > s->size[0] || vector_dist(get_hitpoint(r->start, r->dir, dist), get_hitpoint(cone_pos, cone_dir, s->size[0])) < s->size[0])
+		double q;
+
+		q = s->size[0] / cos(((s->size[1] > 150) ? 150 * (M_PI / 180) / 2 : s->size[1]) * (M_PI / 180) / 2);
+		if (vector_dist(get_hitpoint(r->start, r->dir, dist), cone_pos) > q || vector_dist(get_hitpoint(r->start, r->dir, dist), get_hitpoint(cone_pos, cone_dir, s->size[0])) < s->size[0])
 		{
 			if ((-b + sqrtf(discriminant)) / (2 * a) > dist)
 				dist = (-b + sqrtf(discriminant)) / (2 * a);
 			if ((-b - sqrtf(discriminant)) / (2 * a) > dist)
 				dist = (-b - sqrtf(discriminant)) / (2 * a);
-			if (vector_dist(get_hitpoint(r->start, r->dir, dist), cone_pos) > s->size[0] || vector_dist(get_hitpoint(r->start, r->dir, dist), get_hitpoint(cone_pos, cone_dir, s->size[0])) < s->size[0])
+			if ( dist <=  0 ||vector_dist(get_hitpoint(r->start, r->dir, dist), cone_pos) > q || vector_dist(get_hitpoint(r->start, r->dir, dist), get_hitpoint(cone_pos, cone_dir, s->size[0])) < s->size[0])
 			{
 				*x1 = test1;
 				*y1 = test2;
 				return (0);
 			}
+		}
+		if (vector_dist(get_hitpoint(r->start, r->dir, *x1), cone_pos) > q || vector_dist(get_hitpoint(r->start, r->dir, *x1), get_hitpoint(cone_pos, cone_dir, s->size[0])) < s->size[0])// || vector_dist(get_hitpoint(r->start, r->dir, *y1), cone_pos) > q || vector_dist(get_hitpoint(r->start, r->dir, *y1), get_hitpoint(cone_pos, cone_dir, s->size[0])) < s->size[0])
+		{	
 			t_vector center_dir;
 			t_vector center_pos;
 			double t;
-			center_dir = vector_rev(cone_dir);
-			center_pos = get_hitpoint(cone_pos, cone_dir, s->size[0]);
+			center_dir.x = -cone_dir.x;
+			center_dir.y = -cone_dir.y;
+			center_dir.z = -cone_dir.z;
+			center_pos = get_hitpoint(cone_pos, center_dir, s->size[0]);
 			t = (vector_dot(vector_sub(center_pos, r->start),center_dir) / vector_dot(r->dir, center_dir));
-			r->norm = center_dir;
-			*x1 = t;
-			*y1 = t;
-			return (t);
+				*y1 = *x1;
+				*x1 = t;
+
+				r->norm = center_dir;
+				// r->norm.x = -center_dir.x;
+				// r->norm.y = -center_dir.y;
+				// r->norm.z = -center_dir.z;
+
+				return (t);
 		}
-		
+		if (vector_dist(get_hitpoint(r->start, r->dir, *y1), cone_pos) > q || vector_dist(get_hitpoint(r->start, r->dir, *y1), get_hitpoint(cone_pos, cone_dir, s->size[0])) < s->size[0])// || vector_dist(get_hitpoint(r->start, r->dir, *y1), cone_pos) > q || vector_dist(get_hitpoint(r->start, r->dir, *y1), get_hitpoint(cone_pos, cone_dir, s->size[0])) < s->size[0])
+		{	
+			t_vector center_dir;
+			t_vector center_pos;
+			double t;
+			center_dir.x = -cone_dir.x;
+			center_dir.y = -cone_dir.y;
+			center_dir.z = -cone_dir.z;
+			center_pos = get_hitpoint(cone_pos, center_dir, s->size[0]);
+			t = (vector_dot(vector_sub(center_pos, r->start),center_dir) / vector_dot(r->dir, center_dir));
+			if (*x1 < 0 || *x1 > t)
+			{
+				*y1 = *x1;
+				*x1 = t;
+				r->norm = center_dir;
+				// r->norm.x = -center_dir.x;
+				// r->norm.y = -center_dir.y;
+				// r->norm.z = -center_dir.z;
+
+				return (t);
+			}
+		}
+
 	 t_vector intersection_pos;
 	 // cone_dir.x = -cone_dir.x;
 	 // cone_dir.y = -cone_dir.y;
 	 // cone_dir.z = -cone_dir.z;
 
 	 intersection_pos = get_hitpoint(r->start, r->dir, dist);
-	// x = vector_sub(intersection_pos, cone_pos);// P - C
-	// k = vector_dot(x, cone_dir);
-	// r->norm = vector_sub(x, vectormultby_scalar(cone_dir, k));// (P - C) - V * k? 
-	// if (*x1 < 0)
-	// {
-	// 	r->norm.x = -r->norm.x;
-	// 	r->norm.y = -r->norm.y;
-	// 	r->norm.z = -r->norm.z;
-	// }
-	// vector_normalize(r->norm);
+	x = vector_sub(intersection_pos, cone_pos);// P - C
+	k = vector_dot(x, cone_dir);
+	r->norm = vector_sub(x, vectormultby_scalar(cone_dir, k));// (P - C) - V * k? 
+	if (*x1 < 0)
+	{
+		r->norm.x = -r->norm.x;
+		r->norm.y = -r->norm.y;
+		r->norm.z = -r->norm.z;
+	}
+	vector_normalize(r->norm);
 		t_vector lambda = vector_normalize(vector_sub(cone_pos, intersection_pos));
 	r->norm = vector_normalize(vector_sub(vectormultby_scalar(cone_dir, vector_dot(lambda, cone_dir) / vector_dot(cone_dir, cone_dir)),lambda));
 		return dist;
@@ -255,6 +290,8 @@ double intersectray_cylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 	t_vector cyl_pos;
 	t_vector cyl_dir;
 	t_vector tmp;
+	double test1;
+	double test2;
 
 	cyl_pos = new_vector(s->pos[0], s->pos[1],s->pos[2]);
 	cyl_dir = vector_normalize(new_vector(s->pos[3], s->pos[4],s->pos[5]));
@@ -262,46 +299,80 @@ double intersectray_cylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 	dot = vector_dot(r->dir, cyl_dir);
 	tmp = vector_sub(r->start, cyl_pos);
 	dot2 = vector_dot(tmp, cyl_dir);
+	r->norm.x = 0;
+			r->norm.y = 0;
+			r->norm.z = 0;
 
 	a = vector_dot(vector_sub(r->dir, vectormultby_scalar(cyl_dir, dot)), vector_sub(r->dir, vectormultby_scalar(cyl_dir, dot)));
 	b = 2 * vector_dot(vector_sub(r->dir, vectormultby_scalar(cyl_dir, dot)), vector_sub(tmp, vectormultby_scalar(cyl_dir, dot2)));
 	c = vector_dot(vector_sub(tmp, vectormultby_scalar(cyl_dir, dot2)), vector_sub(tmp, vectormultby_scalar(cyl_dir, dot2))) - s->size[0] * s->size[0];
 
 	discriminant = b * b - 4 * (a * c);
-
-	if (discriminant >= 0 && a)
+	if (discriminant < 0)
+		return (0);
+	if (discriminant >= 0)
 	{
-		dist = ((-b + sqrtf(discriminant)) / (2 * a));
-		if ( ((-b - sqrtf(discriminant)) / (2 * a)) < (dist))
+		test1 = *x1;
+		test2 = *y1;
+		dist = equa_sec(a, b, discriminant, x1, y1, 0);
+		if (dist < 0)
 		{
-			dist = ((-b - sqrtf(discriminant)) / (2 * a));
-			if (dist < 0)
-				return (0);
-			*x1 = dist;
-			*y1 = ((-b + sqrtf(discriminant)) / (2 * a));
+			*x1 = test1;
+			*y1 = test2;
+			return (0);
 		}
+	}
+	double q;
+	q = sqrtf(s->size[0] * s->size[0] + s->size[1] / 2 * s->size[1] / 2);
+	// if (vector_dist(get_hitpoint(r->start, r->dir, *x1), cyl_pos) >= q && *x1 == *y1)
+	// {
+	// 		t_vector center_dir;
+	// 		t_vector center_pos;
+	// 		double t;
+	// 		double t2;
+	// 		center_dir.x = -cyl_dir.x;
+	// 		center_dir.y = -cyl_dir.y;
+	// 		center_dir.z = -cyl_dir.z;
+	// 		center_pos = get_hitpoint(cyl_pos, center_dir, s->size[1] / 2);
+	// 		t = (vector_dot(vector_sub(center_pos, r->start),center_dir) / vector_dot(r->dir, center_dir));
+	// 		center_pos = get_hitpoint(cyl_pos, cyl_dir, s->size[1] / 2);
+	// 		t2 = (vector_dot(vector_sub(center_pos, r->start),center_dir) / vector_dot(r->dir, center_dir));
+	// 		r->norm = cyl_dir;
+	// 		if (t < 0 && t2 < 0)
+	// 			return (0);
+	// 		return ((t < t2 && t > 0) ? t : t2);
+
+	// }
+	if (vector_dist(get_hitpoint(r->start, r->dir, *x1), cyl_pos) < q && vector_dist(get_hitpoint(r->start, r->dir, *y1), cyl_pos) >= q)////C'est la
+	{
+			t_vector center_dir;
+			t_vector center_pos;
+			double t;
+			center_dir.x = -cyl_dir.x;
+			center_dir.y = -cyl_dir.y;
+			center_dir.z = -cyl_dir.z;
+		if (vector_dist(get_hitpoint(r->start, r->dir, *y1), cyl_pos) < vector_dist(get_hitpoint(r->start, r->dir, *y1), get_hitpoint(cyl_pos, cyl_dir, s->size[1] / 2)))		
+			center_pos = get_hitpoint(cyl_pos, center_dir, s->size[1] / 2);
 		else
+			center_pos = get_hitpoint(cyl_pos, cyl_dir, s->size[1] / 2);
+		t = (vector_dot(vector_sub(center_pos, r->start),center_dir) / vector_dot(r->dir, center_dir));
+		if (t < *x1 && t > 0)
 		{
-			if (dist < 0)
-				return (0);
-			*x1 = ((-b + sqrtf(discriminant)) / (2 * a));
-			*y1 = ((-b - sqrtf(discriminant)) / (2 * a));
+			*y1 = *x1;
+			*x1 = t;
+			if (vector_dist(get_hitpoint(r->start, r->dir, t), cyl_pos) < vector_dist(get_hitpoint(r->start, r->dir, t), get_hitpoint(cyl_pos, cyl_dir, s->size[1] / 2)))
+				r->norm = center_dir;
+			else
+				r->norm = cyl_dir;
+			return (t);
 		}
-		// if (vector_dist(get_hitpoint(r->start, r->dir, dist), cyl_pos) > s->size[1])
-		// {
-		// 	if (((-b + sqrtf(discriminant)) / (2 * a)) > dist)
-		// 		dist = ((-b + sqrtf(discriminant)) / (2 * a));
-		// 	if (((-b - sqrtf(discriminant)) / (2 * a)) > dist)
-		// 		dist = ((-b - sqrtf(discriminant)) / (2 * a));
-		// 	if (vector_dist(get_hitpoint(r->start, r->dir, dist), cyl_pos) > s->size[1])
-		// 		return (0);
-		// }
+		*y1 = t;
 		t_vector   inter;
-	    t_vector   proj;
-	    t_vector   cyl_pos_dir;
-	    t_vector   cyl_dir2;
-	    double  dot3;
-	    double  tmp;
+    	t_vector   proj;
+    	t_vector   cyl_pos_dir;
+    	t_vector   cyl_dir2;
+    	double  dot3;
+	   		double  tmp;
 
 	    cyl_pos_dir = vector_add(cyl_pos, cyl_dir);
 	    cyl_dir2 = vector_sub(cyl_pos_dir, cyl_pos);
@@ -318,24 +389,111 @@ double intersectray_cylindre(t_ray *r, t_obj *s, double *x1, double *y1)
 		proj = vector_add(cyl_pos, proj);
 		r->norm = vector_sub(r->norm, proj);
 		r->norm = vector_normalize(r->norm);
-		if (s->cut)
-		{
-			if (!cut_object(s, dist, r, 0))
-			{
-				if (dist < ((-b + sqrtf(discriminant)) / (2 * a)))
-					dist = ((-b + sqrtf(discriminant)) / (2 * a));
-				else
-					dist = ((-b - sqrtf(discriminant)) / (2 * a));
-				// r->norm = vector_rev(r->norm);
-				if (!cut_object(s, dist, r, 1))
-					return (0);
-			}
-		}
 		return dist;
 	}
+	if (vector_dist(get_hitpoint(r->start, r->dir, *x1), cyl_pos) < q && vector_dist(get_hitpoint(r->start, r->dir, *y1), cyl_pos) < q)
+	{			
+		t_vector   inter;
+    	t_vector   proj;
+    	t_vector   cyl_pos_dir;
+    	t_vector   cyl_dir2;
+    	double  dot3;
+	   		double  tmp;
+
+	    cyl_pos_dir = vector_add(cyl_pos, cyl_dir);
+	    cyl_dir2 = vector_sub(cyl_pos_dir, cyl_pos);
+	    dot3 = vector_dot((cyl_dir2), (cyl_dir2));
+	    inter = vectormultby_scalar(r->dir, dist);
+	    inter = vector_add(inter, r->start);
+	    proj = vector_sub(inter, cyl_pos_dir);
+	    tmp = vector_dot((cyl_dir2), (proj)) / dot3;
+		cyl_dir2 = vectormultby_scalar(cyl_dir2, tmp);
+		cyl_dir2 = vector_add(cyl_dir2, cyl_pos_dir);
+		proj = cyl_dir2;
+		proj = vector_sub(proj, cyl_pos);
+		r->norm = inter;
+		proj = vector_add(cyl_pos, proj);
+		r->norm = vector_sub(r->norm, proj);
+		r->norm = vector_normalize(r->norm);
+		if (*x1 < 0 && *y1 < 0)
+		{
+			*x1 = test1;
+			*y1 = test2;
+			return (0);
+		}
+		if (*x1 > 0 && (*y1 <= 0 || *x1 < *y1))
+			return (*x1);
+		return (*y1);
+	}
+	if (vector_dist(get_hitpoint(r->start, r->dir, *x1), cyl_pos) >= q && vector_dist(get_hitpoint(r->start, r->dir, *y1), cyl_pos) < q)
+	{			
+		t_vector center_dir;
+			t_vector center_pos;
+			double t;
+			center_dir.x = -cyl_dir.x;
+			center_dir.y = -cyl_dir.y;
+			center_dir.z = -cyl_dir.z;
+		if (vector_dist(get_hitpoint(r->start, r->dir, *x1), cyl_pos) < vector_dist(get_hitpoint(r->start, r->dir, *x1), get_hitpoint(cyl_pos, cyl_dir, s->size[1] / 2)))		
+			center_pos = get_hitpoint(cyl_pos, center_dir, s->size[1] / 2);
+		else
+			center_pos = get_hitpoint(cyl_pos, cyl_dir, s->size[1] / 2);
+		t = (vector_dot(vector_sub(center_pos, r->start),center_dir) / vector_dot(r->dir, center_dir));
+		*x1 = t;
+
+		if (t <= 0 && *y1 <= 0)
+		{
+			*x1 = test1;
+			*y1 = test2;
+			return (0);
+		}
+		if (vector_dist(get_hitpoint(r->start, r->dir, t), cyl_pos) < vector_dist(get_hitpoint(r->start, r->dir, t), get_hitpoint(cyl_pos, cyl_dir, s->size[1] / 2)))
+				r->norm = center_dir;
+			else
+				r->norm = cyl_dir;
+		return ((t <= 0) ? *y1 : t);
+	}
+	if (vector_dist(get_hitpoint(r->start, r->dir, *x1), cyl_pos) >= q && vector_dist(get_hitpoint(r->start, r->dir, *y1), cyl_pos) >= q && ((vector_dist(get_hitpoint(r->start, r->dir, *x1), cyl_pos) <= vector_dist(get_hitpoint(r->start, r->dir, *x1), get_hitpoint(cyl_pos, cyl_dir, s->size[1] / 2)) && /*/*/vector_dist(get_hitpoint(r->start, r->dir, *y1), cyl_pos) <= vector_dist(get_hitpoint(r->start, r->dir, *y1), get_hitpoint(cyl_pos, cyl_dir, s->size[1] / 2))) || (vector_dist(get_hitpoint(r->start, r->dir, *x1), cyl_pos) >= vector_dist(get_hitpoint(r->start, r->dir, *x1), get_hitpoint(cyl_pos, cyl_dir, s->size[1] / 2)) && /*/*/vector_dist(get_hitpoint(r->start, r->dir, *y1), cyl_pos) >= vector_dist(get_hitpoint(r->start, r->dir, *y1), get_hitpoint(cyl_pos, cyl_dir, s->size[1] / 2)))))
+	{
+		*x1 = test1;
+			*y1 = test2;
+		r->norm.x = 0;
+			r->norm.y = 0;
+			r->norm.z = 0;
+			return (0);
+	}
+	else if (vector_dist(get_hitpoint(r->start, r->dir, *x1), cyl_pos) >= q && vector_dist(get_hitpoint(r->start, r->dir, *y1), cyl_pos) >= q) //&& ((vector_dist(get_hitpoint(r->start, r->dir, *x1), cyl_pos) > vector_dist(get_hitpoint(r->start, r->dir, *x1), get_hitpoint(cyl_pos, cyl_dir, s->size[1] / 2)) && /*/*/vector_dist(get_hitpoint(r->start, r->dir, *y1), cyl_pos) <= vector_dist(get_hitpoint(r->start, r->dir, *y1), get_hitpoint(cyl_pos, cyl_dir, s->size[1] / 2))) || (vector_dist(get_hitpoint(r->start, r->dir, *x1), cyl_pos) < vector_dist(get_hitpoint(r->start, r->dir, *x1), get_hitpoint(cyl_pos, cyl_dir, s->size[1] / 2)) && /*/*/vector_dist(get_hitpoint(r->start, r->dir, *y1), cyl_pos) >= vector_dist(get_hitpoint(r->start, r->dir, *y1), get_hitpoint(cyl_pos, cyl_dir, s->size[1] / 2)))))
+	{
+		if (*y1 == *x1)
+			return (0);
+		t_vector center_dir;
+		t_vector center_pos;
+		double t;
+		double t2;
+		center_dir.x = -cyl_dir.x;
+		center_dir.y = -cyl_dir.y;
+		center_dir.z = -cyl_dir.z;
+		center_pos = get_hitpoint(cyl_pos, center_dir, s->size[1] / 2);
+		t = (vector_dot(vector_sub(center_pos, r->start),center_dir) / vector_dot(r->dir, center_dir));
+		center_pos = get_hitpoint(cyl_pos, cyl_dir, s->size[1] / 2);
+		t2 = (vector_dot(vector_sub(center_pos, r->start),center_dir) / vector_dot(r->dir, center_dir));
+		if (t <= 0 && t2 <= 0)
+		{
+			*x1 = test1;
+			*y1 = test2;
+			r->norm.x = 0;
+			r->norm.y = 0;
+			r->norm.z = 0;
+			return (0);
+		}
+		if (vector_dist(get_hitpoint(r->start, r->dir, t), cyl_pos) < vector_dist(get_hitpoint(r->start, r->dir, t), get_hitpoint(cyl_pos, cyl_dir, s->size[1] / 2)))
+			r->norm = center_dir;
+		else
+			r->norm = cyl_dir;
+		return (t);
+	}
+
 	return (0);
 }
-
 t_vector ComputeNormal(t_vector inter, t_vector aabbCenter)
 {
     t_vector normals[] = {
