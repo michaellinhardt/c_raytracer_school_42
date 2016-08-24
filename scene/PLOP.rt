@@ -2,15 +2,21 @@ scene {
 	name {PLOP}
 camera {pos{890.000000;525.000000;-50.000000}, dir{0.000000;1.000000;2.000000}}
 spot {
+name {cocuou}
+type {point}
 camera {pos{890.000000;525.000000;-50.000000}, dir{1.000000;1.000000;5.000000}}
 color { 0xff0000 }
 }
 spot {
+name {cocuou}
+type {point}
 camera {pos{890.000000;525.000000;50.000000}, dir{1.000000;1.000000;5.000000}}
 color { 0x00ff00 }
 }
 spot {
-camera {pos{90.000000;525.000000;50.000000}, dir{1.000000;1.000000;5.000000}}
+name {cocuou}
+type {directional}
+camera {pos{90.000000;525.000000;50.000000}, dir{-1.000000;0.000000;0.000000}}
 color { 0x0000ff }
 }
 ambiance { 0x452d6e ; 52 }
@@ -82,7 +88,7 @@ simple_obj {
 	name { rectangle }
 camera {pos{890.000000;525.000000;-14.000000}, dir{0.000000;1.000000;0.000000}}
 type { rectangle }
-size {2	.000000;5.000000;10.000000}
+size {2.000000;5.000000;10.000000}
 effect {0.000000;100.000000;0.000000;1.000000}
 color {0xffffff}
 }

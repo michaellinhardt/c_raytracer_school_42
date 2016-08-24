@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 19:49:55 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/16 10:53:44 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/24 16:56:39 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,53 @@ char	*name(int fd)
 	return (NULL);
 }
 
+int type_spot(int fd)
+{
+	char	*tmp;
+	char	*line;
+	int		i;
+	int		j;
+	
+	line = NULL;
+	if (get_next_line(fd, &line) > 0 && ft_strstr(line, "type {") && verif_str(line, 1))
+	{
+		tmp = ft_strtrim(line);
+		ft_strdel(&line);
+		i = ft_strlen(ft_strchr(tmp, '{')) - 1;
+		j = ft_strlen(ft_strrchr(tmp, '}')) ;
+		(!(line = ft_strsub(tmp, ft_strlen(tmp) - i, i - j))) ? error(2, "Malloc") : 1;
+		ft_strdel(&tmp);
+		tmp = ft_strtrim(line);
+		ft_strdel(&line);
+		if (ft_strequ(tmp, "directional"))
+		{
+			ft_strdel(&tmp);
+			return (DIR);
+		}
+		else if (ft_strequ(tmp, "point"))
+		{
+			ft_strdel(&tmp);
+			return (POINT);
+		}
+		else
+			error(3, "type spot1");
+	}
+	else
+	{
+		ft_printf("%s\n", line);
+		error(1, "type spot");
+	}
+	return (0);
+}
+
 static void	spot(int fd, t_spot **spot) 
 {
 	t_spot *tmp;
 	t_spot *temp;
 
 	(!(tmp = ft_memalloc(sizeof(t_spot)))) ? error(2, "Malloc") : 1;
+	tmp->name = name(fd);
+	tmp->type ^= type_spot(fd);
 	camera(fd, tmp->pos, 0);
 	color(fd, &tmp->c_s, 1, NULL);
 	if (!*spot)
@@ -123,7 +164,7 @@ int type(int fd)
 	}
 	else
 		error(1, "type object");
-	return ('p');
+	return (0);
 }
 
 static void	scene(t_gen *s, int fd, t_scene *tmp) 

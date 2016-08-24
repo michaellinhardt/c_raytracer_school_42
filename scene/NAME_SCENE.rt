@@ -2,6 +2,8 @@ scene {
 	name {NAME_SCENE}
 camera {pos{890.000000;525.000000;-50.000000}, dir{0.000000;1.000000;2.000000}}
 spot {
+name {cocuou}
+type {point}
 camera {pos{90.000000;600.000000;-50.000000}, dir{1.000000;1.000000;5.000000}}
 color { 0xff0f00 }
 }

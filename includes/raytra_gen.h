@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/18 21:34:44 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/24 15:59:18 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@
 # define BLACK 0x4
 # define ICE 0x8
 
+/*
+**	BOOL pour les spots
+*/
+
+# define DIR 0x1
+# define POINT 0x2
 
 # define SAVE 0x1
 
@@ -74,6 +80,8 @@ typedef struct		s_tex
 
 typedef struct		s_spot
 {
+	char			*name;
+	int				type;				/* cf MACRO */
 	double			pos[6];			/* spot position [0-2] x y z ; direction [3-5] x y z*/
 	int				c_s;				/* color 0xRGB */
 	void			*next;

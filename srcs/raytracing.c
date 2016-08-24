@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/19 04:49:04 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/24 17:25:54 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,15 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 	if (is_ob)
 		while (spot)
 		{
-			spot_pos = new_vector(spot->pos[0], spot->pos[1], spot->pos[2]);
-			light_dist = vector_dir(spot_pos, hitpoint);
+			if (spot->type & POINT)
+			{
+				spot_pos = new_vector(spot->pos[0], spot->pos[1], spot->pos[2]);
+				light_dist = vector_dir(spot_pos, hitpoint);
+			}
+			else if (spot->type & DIR)
+			{
+				light_dist = vector_normalize(new_vector(spot->pos[3], spot->pos[4], spot->pos[5]));
+			}
 			factor = vector_dot(light_dist, r->norm);
 			color_composants(spot->c_s, tmp_rgb);
 			if (factor > 0)

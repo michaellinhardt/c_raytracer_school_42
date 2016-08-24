@@ -1,11 +1,15 @@
 scene {								
 	name { NAME_SCENE}
 	camera {pos{10.5;-100.00;22.36987}, dir{0  	;	421.21;-3}}				
-	spot {							
+	spot {
+	name {co1cuou}
+type {point}							
 		camera {pos{10.5;-100.01;22.36987}, dir{0  	;	321.21;-3}}				
 		color { 0x25f44A }					
 }
-		spot {							
+		spot {
+		name {cocuou}
+type {point}							
 		camera {pos{10.5;-100.02;22.36987}, dir{0  	;	221.21;-4}}				
 		color { 0x0FFFFF }					
 }
@@ -46,11 +50,15 @@ scene {
 	scene {								
 				name { NAME_SCENE        	 }
 				camera {pos{10.5;-100.00;22.36987}, dir{0  	;	421.21;-3}}				
-				spot {							
+				spot {
+				name {co1cuou}
+type {point}							
 						camera {pos{10.5;-100.01;22.36987}, dir{0  	;	321.21;-3}}				
 						color { 0x25f44A }					
 					}
-				spot {							
+				spot {
+				name {cocuou}
+type {point}							
 						camera {pos{10.5;-100.02;22.36987}, dir{0  	;	221.21;-4}}				
 						color { 0x0FFFFF }					
 					}

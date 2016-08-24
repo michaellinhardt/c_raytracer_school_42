@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/24 20:10:10 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/11 21:46:51 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/24 17:28:52 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,13 @@ double		cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *obj)
 	while (spot && ++i[0])
 	{
 		s = obj;
-		spot_pos = new_vector(spot->pos[0], spot->pos[1], spot->pos[2]);
-		r.dir = vector_dir(spot_pos, r.start);
+		if (spot->type & POINT)
+		{
+			spot_pos = new_vector(spot->pos[0], spot->pos[1], spot->pos[2]);
+			r.dir = vector_dir(spot_pos, r.start);
+		}
+		else if (spot->type & DIR)
+			r.dir = vector_normalize(new_vector(spot->pos[3], spot->pos[4], spot->pos[5]));
 		nearest[0] = -1;
 		nearest[1] = INT_MAX;
 		while (s)

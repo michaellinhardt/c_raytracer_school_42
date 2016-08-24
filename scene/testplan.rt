@@ -1,11 +1,15 @@
 scene {								
 	name { NAME_SCENE        	 }
 	camera {pos{890; 525; -50}, dir{0; 1; 2}}				
-	spot {							
+	spot {	
+	name {cocuou}
+type {point}						
 		camera {pos{890; 525; -50}, dir{1 ; 1; 5}}
 		color { 0xFFFFFF }					
 	}
-	spot {							
+	spot {	
+	name {co1cuou}
+type {point}						
 		camera {pos{90; 600; -50}, dir{1 ; 1; 5}}
 		color { 0xFFFFFF }					
 	}
