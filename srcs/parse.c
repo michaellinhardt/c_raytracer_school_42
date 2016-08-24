@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 19:49:55 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/24 16:56:39 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/24 19:27:09 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,7 @@ int type_spot(int fd)
 			error(3, "type spot1");
 	}
 	else
-	{
-		ft_printf("%s\n", line);
 		error(1, "type spot");
-	}
 	return (0);
 }
 

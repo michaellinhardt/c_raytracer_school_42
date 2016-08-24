@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/25 05:39:29 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/18 21:50:43 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/08/24 19:38:17 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,35 @@ static void	print_type(t_scene *s, char **to_print, char type)
 	if (type & TRIANGLE)
 		*to_print = ft_strjoin(*to_print, "triangle }\n");
 	ft_strdel(&tmp);
+}
+
+static void	print_spot_type(t_scene *s, char **to_print, char type)
+{
+	char *tmp;
+
+	tmp = *to_print;
+	(void)s;
+	if (type & DIR)
+		*to_print = ft_strjoin(*to_print, "type {directional}\n");
+	if (type & POINT)
+		*to_print = ft_strjoin(*to_print, "type {point}\n");
+	ft_strdel(&tmp);
+}
+
+static void	print_spot_name(t_scene *s, char **to_print, char* name)
+{
+	char *tmp;
+
+	tmp = *to_print;
+	*to_print = ft_strjoin(*to_print, "name {");
+	ft_strdel(&tmp);
+	tmp = *to_print;
+	*to_print = ft_strjoin(*to_print, name);
+	ft_strdel(&tmp);
+	tmp = *to_print;
+	*to_print = ft_strjoin(*to_print, "}\n");
+	ft_strdel(&tmp);
+	(void)s;
 }
 
 static void	print_cam(t_scene *s, char **to_print, double *cam, char c)
@@ -165,15 +194,14 @@ static void	print_text(t_scene *s, char **to_print, int col)
 
 	(void)s;
 	tmp = *to_print;
-	*to_print = ft_strjoin(*to_print, "texture { ");
 	if (col & EARTH)
-		*to_print = ft_strjoin(*to_print, "texture { earth }");
+		*to_print = ft_strjoin(*to_print, "texture { earth ");
 	else if (col & FIRE)
-		*to_print = ft_strjoin(*to_print, "texture { fire }");
+		*to_print = ft_strjoin(*to_print, "texture { fire ");
 	else if (col & BLACK)
-		*to_print = ft_strjoin(*to_print, "texture { black }");
+		*to_print = ft_strjoin(*to_print, "texture { black ");
 	else if (col & ICE)
-		*to_print = ft_strjoin(*to_print, "texture { ice }");
+		*to_print = ft_strjoin(*to_print, "texture { ice ");
 	ft_strdel(&tmp);
 }
 
@@ -236,7 +264,12 @@ static void	print_simple(t_scene *s, char **to_print, t_obj *obj, char c)
 	if (!obj->text)
 		print_col(s, to_print, obj->c_o);
 	else
+	{
 		print_text(s, to_print, obj->text);
+		tmp = *to_print;
+		*to_print = ft_strjoin(*to_print, "}\n");
+		ft_strdel(&tmp);
+	}
 	if (obj->cut)
 		print_cut(s, to_print, obj->cut, 1);
 	tmp = *to_print;
@@ -365,6 +398,9 @@ void	print_scene(t_scene *s)
 	to_print = ft_strjoin(to_print, s->name);
 	ft_strdel(&tmp);
 	tmp = to_print;
+	to_print = ft_strjoin(to_print, "1");
+	ft_strdel(&tmp);
+	tmp = to_print;
 	to_print = ft_strjoin(to_print, "}\n");
 	ft_strdel(&tmp);
 	print_cam(s, &to_print, s->cam, 0);
@@ -374,6 +410,8 @@ void	print_scene(t_scene *s)
 		tmp = to_print;
 		to_print = ft_strjoin(to_print, "spot {\n");
 		ft_strdel(&tmp);
+		print_spot_name(s, &to_print, spot->name);
+		print_spot_type(s, &to_print, spot->type);
 		print_cam(s, &to_print, spot->pos,0);
 		print_col(s, &to_print, spot->c_s);
 		tmp = to_print;
