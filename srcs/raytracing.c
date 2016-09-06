@@ -256,6 +256,7 @@ void raytracing(t_gen *s)
 	while (++j < MT)
 		pthread_join(p[j], NULL);	// synchro des threads
 	j = -1;
+	browni((unsigned char *)s->data, gdk_pixbuf_get_rowstride(s->pixbuf), -3);
 	pixbuffer = gdk_pixbuf_get_pixels(s->pixbuf);
 	merge_chuncks(pixbuffer, s->data);	
 	gtk_put_image_to_window(GTK_IMAGE(s->pdrawarea), s->pixbuf);
