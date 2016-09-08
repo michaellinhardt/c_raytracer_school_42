@@ -165,6 +165,7 @@ double 				intersectray_cone(t_ray *r, t_obj *s, double *x1, double *y1);
 double 				intersectray_torus(t_ray *r, t_obj *s, double *x1, double *y1);
 double 				intersectray_boloid(t_ray *r, t_obj *s, double *x1, double *y1);
 double 				intersectray_triangle(t_ray *r, t_obj *s, double *x1, double *y1);
+double				intersectray_ellipse(t_ray *r, t_obj *s, double *x1, double *y1);
 
 /*
 **									perlin.c  
@@ -187,5 +188,24 @@ int					texture_earth(double u, double v, char *str, void *mlx);
 int					texture_fire(double u, double v, char *str, void *mlx);
 int					texture_black(double u, double v, char *str, void *mlx);
 int					texture_ice(double u, double v, char *str, void *mlx);
+
+/*
+**									palette_couleur
+*/
+
+unsigned char		change_col(unsigned char *col, double *nbr);
+void				abstract(unsigned char *t, int rowstride, int index);
+void				brightness(unsigned char *t, int rowstride, int index);
+void				darkness(unsigned char *t, int rowstride, int index);
+void				negative(unsigned char *t, int rowstride, int index);
+void				sepia(unsigned char *t, int rowstride, int index);
+void				technicolor(unsigned char *t, int rowstride, int index);
+void				polaroid(unsigned char *t, int rowstride, int index);
+void				bgr(unsigned char *t, int rowstride, int index);
+void				kodachrome(unsigned char *t, int rowstride, int index);
+void				browni(unsigned char *t, int rowstride, int index);
+void				vintage(unsigned char *t, int rowstride, int index);
+void				black_and_white(unsigned char *t, int rowstride, int index);
+void				lsd(unsigned char *t, int rowstride, int index);
 
 #endif

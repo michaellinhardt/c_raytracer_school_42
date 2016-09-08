@@ -156,6 +156,11 @@ int type(int fd)
 			ft_strdel(&tmp);
 			return (TRIANGLE);
 		}
+		else if (ft_strequ(tmp, "ellipse"))
+		{
+			ft_strdel(&tmp);
+			return (ELLIPSE);
+		}
 		else
 			error(3, "type object");
 	}

@@ -29,7 +29,11 @@ SRCS = main.c\
 	  parse_triangle.c\
 	  interface/builder.c\
 	  interface/draw.c\
-	  interface/hook.c
+	  interface/hook.c\
+	  filter_part1.c\
+	  filter_part2.c\
+	  filter_part3.c
+
 
 SRC = $(addprefix $(SRCSPATH), $(SRCS))
 

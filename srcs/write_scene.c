@@ -36,6 +36,8 @@ static void	print_type(t_scene *s, char **to_print, char type)
 		*to_print = ft_strjoin(*to_print, "para }\n");
 	if (type & TRIANGLE)
 		*to_print = ft_strjoin(*to_print, "triangle }\n");
+	if (type & ELLIPSE)
+		*to_print = ft_strjoin(*to_print, "ellipse }\n");
 	ft_strdel(&tmp);
 }
 

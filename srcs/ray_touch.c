@@ -32,6 +32,8 @@ double			lenray_type(t_ray *r, t_obj *s, double *tmp_near, int *col)
 		return (intersectray_boloid(r, s, &tmp_near[0], &tmp_near[1]));
 	else if (s->type & TRIANGLE)
 		return (intersectray_triangle(r, s, &tmp_near[0], &tmp_near[1]));
+	else if (s->type & ELLIPSE)
+		return (intersectray_ellipse(r, s, &tmp_near[0], &tmp_near[1]));
 	return (0);
 }
 

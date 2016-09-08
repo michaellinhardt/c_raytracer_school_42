@@ -85,12 +85,12 @@ G_MODULE_EXPORT	gboolean	on_key_press(GtkWidget *widget, GdkEvent  *event, void 
 	(void)widget;
 	key = (void*)event;
 	t_gen *s = user_data;
+	if(key->keyval == GDK_KEY_Escape)
+		exit(0);
 	if (!s->to_move)
 		return (0);
 	if (s->to_move->type & COMPLEXE)
 		move_complex(s, key->keyval);
-	if(key->keyval == GDK_KEY_Escape)
-		exit(0);
 	else if (key->keyval == GDK_KEY_s)
 		s->rep ^= SAVE;
 	else if (key->keyval == GDK_KEY_KP_1)
