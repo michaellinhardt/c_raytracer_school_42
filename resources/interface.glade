@@ -534,7 +534,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkComboBox" id="pscene_object_type">
+                                  <object class="GtkComboBoxText" id="pscene_object_type">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="margin_right">5</property>
@@ -615,7 +615,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>
-                                  <object class="GtkComboBox">
+                                  <object class="GtkComboBoxText" id="pscene_spot_select">
                                     <property name="name">pscene_object_select</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
@@ -790,7 +790,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkEntry">
+                                  <object class="GtkEntry" id="pscene_spot_color">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="margin_right">5</property>

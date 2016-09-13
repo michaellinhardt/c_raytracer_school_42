@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 19:53:30 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/08/18 19:01:43 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/09/13 05:15:44 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,12 @@ int				gtk_put_image_to_window(GtkImage *image, GdkPixbuf *pixbuf);
  ** @Callback section.
  */
 void			on_pscene_current_scene_changed(GtkWidget *pwidget, gpointer data);
-void			pscene_button_save(GtkWidget *pwdiget, gpointer data);
-void			pscene_button_load(GtkWidget *pwdiget, gpointer data);
+void			on_pscene_object_create_clicked(GtkWidget *pwidget, gpointer data);
+void			on_pscene_object_update_clicked(GtkWidget *pwidget, gpointer data);
+void			on_pscene_object_select_changed(GtkWidget *pwidget, gpointer data);
+void			on_pwindow_destroy(GtkWidget *pwidget, gpointer data);
+void			pscene_button_save_clicked(GtkWidget *pwdiget, gpointer data);
+void			pscene_button_load_clicked(GtkWidget *pwdiget, gpointer data);
 void			on_destroy_callback(GtkWidget *pwidget, gpointer *data);
 void			on_pbutton_clicked(GtkWidget *pwidget, gpointer data);
 #endif
