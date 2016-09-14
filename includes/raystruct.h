@@ -96,6 +96,8 @@ int					key_reaction(int keycode);
 **									raytracing.c
 */
 void				raytracing(t_gen *s);
+int					diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col);
+int					reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff);
 
 /*
 **									vector_functions.c

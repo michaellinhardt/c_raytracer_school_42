@@ -1,45 +1,85 @@
 scene {								
 	name { NAME_SCENE        	 }
-	camera {pos{890; 525; -50}, dir{0; 1; 2}}				
+	camera {pos{890; 535; -80}, dir{0; 1; 2}}				
 	spot {			
 	name {co1cuou}
 type {point}				
 		camera {pos{890; 600; -50}, dir{1 ; 1; 5}}
-		color { 0x777777 }					
+		color { 0xffffff}					
 	}
 	ambiance { 0x452d6e; 52 }					
 	objects {
 		simple_obj {
 			name { ROUGE }
-			camera {pos{ 875; 525; 1}, dir{0 ;0 ; 0}}				
-			type { sphere }				
-			size { 7 ; 0.0 ; 0 }			
+			camera {pos{ 890; 525; 0}, dir{1 ;-1 ; 0}}				
+			type { cylindre }				
+			size { 7 ; 10.0 ; 0 }			
 			effect { 0 ; 0 ; 0 ; 0}			
-			color { 0xFF0000 }				
+			color { 0xFf00e3 }				
 		}
 		simple_obj {
 			name { SPHERE2 }
 			camera {pos{ 890; 525; 10}, dir{0 ;0 ; 0}}				
 			type { sphere }				
 			size { 7 ; 0.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}			
+			effect { 0 ; 100 ; 0 ; 0 }			
 			color { 0x0000FF }				
 		}
 		simple_obj {
-			name { SPHERE2 }
+			name { OPAQUE VERTE }
 			camera {pos{ 890; 541; 10}, dir{0 ;0 ; 0}}				
 			type { sphere }				
 			size { 7 ; 0.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}			
+			effect { 0 ; 0 ; 0 ; 0 }			
 			color { 0x00FF00 }				
 		}
 		simple_obj {
-			name { BLANC DE FACE }
-			camera {pos{880 ; 520 ; 0}, dir{0 ; 1 ; -0.2 }}
+			name { Miroir }
+			camera {pos{ 897; 538; -40}, dir{0 ;0 ; -1}}				
+			type { cone }				
+			size { 7 ; 90 ; 0 }			
+			effect { 100 ; 0 ; 1.02 ; 0}			
+			color { 0xFf00e3 }		
+		}
+		simple_obj {
+			name { Transparente }
+			camera {pos{ 883; 535; -40}, dir{0 ;0 ; 0}}				
+			type { sphere }				
+			size { 7 ; 0.0 ; 0 }			
+			effect { 100 ; 0 ; 1.03 ; 0 }			
+			color { 0x000000 }				
+		}
+		simple_obj {
+			name { BLANC BAS }
+			camera {pos{880 ; 520 ; 50}, dir{0 ; 1 ; 0 }}
 			type { plan }				
 			size { 1. ; 0.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}			
+			effect { 0 ; 0 ; 0 ; 0}
 			color { 0xFFFFFF }				
+		}
+		simple_obj {
+			name { PLAN DE DROITE }
+			camera {pos{910 ; 520 ; 50}, dir{-1 ; -0.2 ; 0 }}
+			type { plan }				
+			size { 1. ; 0.0 ; 0 }			
+			effect { 0 ; 0 ; 0 ; 0}
+			color { 0xFFF000 }				
+		}
+		simple_obj {
+			name { PLAN DE GAUCHE }
+			camera {pos{870 ; 520 ; 50}, dir{-1 ; 0 ; 0 }}
+			type { plan }				
+			size { 1. ; 0.0 ; 0 }			
+			effect { 0 ; 100 ; 0 ; 0}
+			color { 0xffff00 }				
+		}
+		simple_obj {
+			name { PLAN HAUT }
+			camera {pos{870 ; 565 ; 50}, dir{0 ; 1 ; 0 }}
+			type { plan }				
+			size { 1. ; 0.0 ; 0 }			
+			effect { 0 ; 0 ; 0 ; 0}
+			color { 0x777777 }				
 		}
 }
 }

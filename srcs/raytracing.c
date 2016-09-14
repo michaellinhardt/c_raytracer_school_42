@@ -13,6 +13,126 @@
 #include "raystruct.h"
 #include <gui.h>
 
+int refraction(t_scene *sc, t_ray *r, double dist, int col, int ret, double refrini)
+{
+	t_ray newray;
+	double refrhit;
+	double ndoti;
+	double two_ndoti;
+	double ndoti2;
+	double new_nearest;
+	t_vector tmp;
+	(void)ret;
+	int color;
+	int reflcolor;
+	double 	refl_rgb[3];
+	double	tmp_rgb[3];
+	double	rgb[3];
+	double a, b, b2, d2;
+
+
+	double coefftransp = 0;
+	double coeffreflex = 0;
+	double coeffnone = 0;
+
+
+
+	color = 0;
+	reflcolor = 0;
+	refrhit = r->obj->eff[2];
+	newray.start = get_hitpoint(r->start, r->dir, dist);
+	r->dir = vectormultby_scalar(r->dir, -1);
+	ndoti = vector_dot(r->dir, r->norm);
+	ndoti2 = ndoti * ndoti;
+	if (ndoti > 0)
+	{
+		b = refrini / refrhit;
+		b2 = b * b;
+	}
+	else 
+	{
+		b = refrhit / refrini;
+		b2 = b * b;
+	}
+	d2 = 1 - b2 * (1 - ndoti2);
+	if (d2 > 0)
+	{
+		if (ndoti >= 0)
+			a = b * ndoti - sqrtf(d2);
+		else
+			a = b * ndoti + sqrtf(d2);
+		newray.dir = vector_sub(vectormultby_scalar(r->norm, a), vectormultby_scalar(r->dir, b));
+	}
+	else
+	{
+		two_ndoti = ndoti + ndoti;
+		newray.dir = vector_sub(vectormultby_scalar(r->norm, two_ndoti), r->dir);
+	}
+	tmp = new_vector(newray.dir.x * 0.001, newray.dir.y * 0.001, newray.dir.z * 0.001);
+	newray.start = vector_add(newray.start, tmp);
+	new_nearest = lenray(sc, &newray);
+	if (new_nearest > 0.001)
+	{
+
+		coeffreflex = newray.obj->eff[1] / 100;
+		// coeffreflex = r->obj->eff[1] / 100;
+
+		// coefftransp = newray.obj->eff[0] / 100;
+		coefftransp = r->obj->eff[0] / 100;
+
+		coeffnone = 1 - coefftransp - coeffreflex;
+
+		if (coeffnone < 0)
+		{
+			coeffnone = 0;
+			coefftransp = coefftransp / (coeffreflex + coefftransp);
+			coeffreflex = coeffreflex / (coeffreflex + coefftransp);
+
+		}
+
+
+		if (newray.obj && (newray.obj->type == SPHERE || newray.obj->type == PLAN || newray.obj->type == CYLINDRE || newray.obj->type == RECTANGLE || newray.obj->type == COMPLEXE))
+			color = diffuse(sc, &newray, newray.obj, new_nearest, newray.obj->c_o);
+		if (newray.obj->eff[1])
+			reflcolor = reflexion(sc, &newray, new_nearest, col, 0,	newray.obj->eff[1]);
+
+		color_composants(color, tmp_rgb);
+		color_composants(col, rgb);
+		color_composants(reflcolor, refl_rgb);
+
+		rgb[0] = rgb[0] * (1 - coefftransp) + tmp_rgb[0] * (coefftransp);
+		rgb[1] = rgb[1] * (1 - coefftransp) + tmp_rgb[1] * (coefftransp);
+		rgb[2] = rgb[2] * (1 - coefftransp) + tmp_rgb[2] * (coefftransp);
+		
+		if (!coeffreflex)
+		{
+			rgb[0] = rgb[0] * coeffnone + tmp_rgb[0] * coefftransp;// + refl_rgb[0] * coeffreflex;
+			rgb[1] = rgb[1] * coeffnone + tmp_rgb[1] * coefftransp;// + refl_rgb[1] * coeffreflex;
+			rgb[2] = rgb[2] * coeffnone + tmp_rgb[2] * coefftransp;// + refl_rgb[2] * coeffreflex;
+		}
+		else
+		{
+			rgb[0] = rgb[0] * coeffnone + /*tmp_rgb[0] * coefftransp +*/ refl_rgb[0] * coeffreflex * 1.35;
+			rgb[1] = rgb[1] * coeffnone + /*tmp_rgb[1] * coefftransp +*/ refl_rgb[1] * coeffreflex * 1.35;
+			rgb[2] = rgb[2] * coeffnone + /*tmp_rgb[2] * coefftransp +*/ refl_rgb[2] * coeffreflex * 1.35;
+		}
+
+		color = colorfromrgb(rgb);
+		newray.norm = vectormultby_scalar(r->norm, -1);
+
+		if (r->obj->name != newray.obj->name)
+		{
+			// newray.norm = r->norm;
+			// newray.norm = vectormultby_scalar(newray.norm, -1);
+			refrhit = 1;
+		}
+
+		if (newray.obj->eff[2] && newray.obj->eff[0])
+			color = refraction(sc, &newray, new_nearest, color, ret + 1, refrhit);
+	}
+	return (color);
+}
+
 double noise(t_vector hitpoint)
 {
 	double noiseCoef;
@@ -138,56 +258,118 @@ int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 {
 	t_ray	newray;
 	int		color;
+	int 	refrcolor;
+	double 	refr_rgb[3];
 	double	tmp_rgb[3];
 	double	rgb[3];
-	double new_nearest;
+	double 	new_nearest;
+	double coeffnone = 0;
+	double coeffreflex = 0;
+	double coefftransp = 0;
 
 	newray.start = get_hitpoint(r->start, r->dir, m);
 	newray.dir = vector_dir(r->dir, vectormultby_scalar(r->norm,
 		vector_dot(r->norm, r->dir) * 2));
 	new_nearest = lenray(sc, &newray);
 	color = 0;
-	if (ret < 10 && new_nearest > EPS && newray.obj)
+	refrcolor = 0;
+	if (ret < 25 && new_nearest > EPS && newray.obj)
 	{
 		if (newray.obj && (newray.obj->type))
 			color = diffuse(sc, &newray, newray.obj, new_nearest, newray.obj->c_o);
+		if (newray.obj->eff[0] && newray.obj->eff[2])
+			refrcolor = refraction(sc, &newray, new_nearest, 0, color, newray.obj->eff[2]);
 		color_composants(color, tmp_rgb);
 		color_composants(col, rgb);
-		rgb[0] = rgb[0] * (1 - (eff / 100)) + tmp_rgb[0] * (eff / 100);
-		rgb[1] = rgb[1] * (1 - (eff / 100)) + tmp_rgb[1] * (eff / 100);
-		rgb[2] = rgb[2] * (1 - (eff / 100)) + tmp_rgb[2] * (eff / 100);
+		color_composants(refrcolor, refr_rgb);
+
+		// coeffreflex = newray.obj->eff[1] / 100;
+		coeffreflex = eff / 100;
+		coefftransp = newray.obj->eff[0] / 100;
+		coeffnone = 1 - coefftransp - coeffreflex;
+
+		if (coeffnone < 0)
+		{
+			coeffnone = 0;
+			coefftransp = coefftransp / (coeffreflex + coefftransp);
+			coeffreflex = coeffreflex / (coeffreflex + coefftransp);
+
+		}
+
+
+		tmp_rgb[0] = rgb[0] * (1 - coeffreflex) + tmp_rgb[0] * coeffreflex;
+		tmp_rgb[1] = rgb[1] * (1 - coeffreflex) + tmp_rgb[1] * coeffreflex;
+		tmp_rgb[2] = rgb[2] * (1 - coeffreflex) + tmp_rgb[2] * coeffreflex;
+
+		rgb[0] = (coefftransp) * rgb[0] + (coeffreflex) * tmp_rgb[0] + coefftransp * refr_rgb[0];
+		rgb[1] = (coefftransp) * rgb[1] + (coeffreflex) * tmp_rgb[1] + coefftransp * refr_rgb[1];
+		rgb[2] = (coefftransp) * rgb[2] + (coeffreflex) * tmp_rgb[2] + coefftransp * refr_rgb[2];
+
+		// if (newray.obj->eff[0])
+		// 	printf("coeffnone = %lf, coefftransp = %lf, coeffreflex = %lf\n", coeffnone, coefftransp, coeffreflex);
+
 		col = colorfromrgb(rgb);
 		if (newray.obj->eff[1])
 			col = reflexion(sc, &newray, new_nearest, col, ret + 1,
-				(newray.obj->eff[1] > eff) ? eff : newray.obj->eff[1]);
+				newray.obj->eff[1]);
+
 	}
-	else if (new_nearest < 0 && eff == 100)
-		col = 0;
+	else if (new_nearest <= 0)
+	{
+		color_composants(col, tmp_rgb);
+		tmp_rgb[0] = tmp_rgb[0] * ( coeffreflex);
+		tmp_rgb[1] = tmp_rgb[1] * ( coeffreflex);
+		tmp_rgb[2] = tmp_rgb[2] * ( coeffreflex);
+		col = colorfromrgb(tmp_rgb);
+		// col = 0;
+	}
 	return (col);
 }
 
 double	getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1)
 {
-	int		color;
+	double	coeffreflex = 0;
+	double	coefftransp = 0;
+	double	coeffnone = 0;
+	double	reflexion3[3];
 	double	new_nearest;
-	
+	double	diffuse3[3];
+	double	refrac3[3];
+	int		diffusecolor;
+	int		color;
+	int		col;
+
 	r->dir = vector_normalize(new_vector(x1 - W_X / 2.0, W_Y / 2.0 - y1,
-		(W_Y / 2.0) / tan(70*0.5)));
+		(W_Y / 2.0) / tan(70 * 0.5)));
 	new_nearest = lenray(raytracer->sc, r);
 	color = 0;
+	col = 0;
+	diffusecolor = 0;
 	if (new_nearest >= 0)
 	{
 		if (r->obj && (r->obj->type))
 		{
-			color = diffuse(raytracer->sc, r, r->obj, new_nearest, color);
+			diffusecolor = diffuse(raytracer->sc, r, r->obj, new_nearest, r->obj->c_o);
 			if (r->obj->eff[1])
-				color = reflexion(raytracer->sc, r, new_nearest, color, 0, r->obj->eff[1]);
+				col = reflexion(raytracer->sc, r, new_nearest, diffusecolor, 0, r->obj->eff[1]);
+			if (r->obj->eff[2] && r->obj->eff[0])
+				color = refraction(raytracer->sc, r, new_nearest, 0, diffusecolor, 1);
 		}
+		coefftransp = r->obj->eff[0] / 100;
+		coeffreflex = r->obj->eff[1] / 100;
+		coeffnone = 1 - coeffreflex - coefftransp;
+		color_composants(diffusecolor, diffuse3);
+		color_composants(color, refrac3);
+		color_composants(col, reflexion3);
+		diffuse3[0] = coeffreflex * reflexion3[0] + coefftransp * refrac3[0] + coeffnone * diffuse3[0];
+		diffuse3[1] = coeffreflex * reflexion3[1] + coefftransp * refrac3[1] + coeffnone * diffuse3[1];
+		diffuse3[2] = coeffreflex * reflexion3[2] + coefftransp * refrac3[2] + coeffnone * diffuse3[2];
+		color = colorfromrgb(diffuse3);
+
 		gtk_put_pixel(raytracer->pixbuf, x1, y1, color, raytracer);
 	}
 	return (new_nearest);	
 }
-
 void *display(void *z)
 {
 	t_obj		*tmp;
@@ -256,7 +438,7 @@ void raytracing(t_gen *s)
 	while (++j < MT)
 		pthread_join(p[j], NULL);	// synchro des threads
 	j = -1;
-	browni((unsigned char *)s->data, gdk_pixbuf_get_rowstride(s->pixbuf), -3);
+	// browni((unsigned char *)s->data, gdk_pixbuf_get_rowstride(s->pixbuf), -3);
 	pixbuffer = gdk_pixbuf_get_pixels(s->pixbuf);
 	merge_chuncks(pixbuffer, s->data);	
 	gtk_put_image_to_window(GTK_IMAGE(s->pdrawarea), s->pixbuf);
