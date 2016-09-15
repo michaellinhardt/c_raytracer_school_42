@@ -251,6 +251,7 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 	total_rgb[2] /= nb_spot;
 	sqrtc(total_rgb);
 	color_normalize(rgb, total_rgb, is_ob /** noise(hitpoint)*/, 0);
+	// color_normalize(rgb, total_rgb, is_ob * noise(hitpoint), 0);
 	return (colorfromrgb(rgb));
 }
 
@@ -278,7 +279,8 @@ int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 		if (newray.obj && (newray.obj->type))
 			color = diffuse(sc, &newray, newray.obj, new_nearest, newray.obj->c_o);
 		if (newray.obj->eff[0] && newray.obj->eff[2])
-			refrcolor = refraction(sc, &newray, new_nearest, 0, color, newray.obj->eff[2]);
+			refrcolor = refraction(sc, &newray, new_nearest, 0, color, 1);
+		
 		color_composants(color, tmp_rgb);
 		color_composants(col, rgb);
 		color_composants(refrcolor, refr_rgb);
@@ -286,24 +288,24 @@ int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 		// coeffreflex = newray.obj->eff[1] / 100;
 		coeffreflex = eff / 100;
 		coefftransp = newray.obj->eff[0] / 100;
+		if (coefftransp)
+		{
+			color_composants(col, tmp_rgb);
+			coeffreflex = 0;
+		}
 		coeffnone = 1 - coefftransp - coeffreflex;
-
 		if (coeffnone < 0)
 		{
 			coeffnone = 0;
 			coefftransp = coefftransp / (coeffreflex + coefftransp);
 			coeffreflex = coeffreflex / (coeffreflex + coefftransp);
-
 		}
-
-
-		tmp_rgb[0] = rgb[0] * (1 - coeffreflex) + tmp_rgb[0] * coeffreflex;
-		tmp_rgb[1] = rgb[1] * (1 - coeffreflex) + tmp_rgb[1] * coeffreflex;
-		tmp_rgb[2] = rgb[2] * (1 - coeffreflex) + tmp_rgb[2] * coeffreflex;
-
-		rgb[0] = (coefftransp) * rgb[0] + (coeffreflex) * tmp_rgb[0] + coefftransp * refr_rgb[0];
-		rgb[1] = (coefftransp) * rgb[1] + (coeffreflex) * tmp_rgb[1] + coefftransp * refr_rgb[1];
-		rgb[2] = (coefftransp) * rgb[2] + (coeffreflex) * tmp_rgb[2] + coefftransp * refr_rgb[2];
+		rgb[0] = rgb[0] * (1 - coeffreflex) + tmp_rgb[0] * coeffreflex;
+		rgb[1] = rgb[1] * (1 - coeffreflex) + tmp_rgb[1] * coeffreflex;
+		rgb[2] = rgb[2] * (1 - coeffreflex) + tmp_rgb[2] * coeffreflex;
+		rgb[0] = (coeffnone) * rgb[0] + (coeffreflex) * tmp_rgb[0] + (coefftransp) * refr_rgb[0];
+		rgb[1] = (coeffnone) * rgb[1] + (coeffreflex) * tmp_rgb[1] + (coefftransp) * refr_rgb[1];
+		rgb[2] = (coeffnone) * rgb[2] + (coeffreflex) * tmp_rgb[2] + (coefftransp) * refr_rgb[2];
 
 		// if (newray.obj->eff[0])
 		// 	printf("coeffnone = %lf, coefftransp = %lf, coeffreflex = %lf\n", coeffnone, coefftransp, coeffreflex);
@@ -438,7 +440,8 @@ void raytracing(t_gen *s)
 	while (++j < MT)
 		pthread_join(p[j], NULL);	// synchro des threads
 	j = -1;
-	// browni((unsigned char *)s->data, gdk_pixbuf_get_rowstride(s->pixbuf), -3);
+	antialiasing((unsigned char *)s->data, gdk_pixbuf_get_rowstride(s->pixbuf), -3);
+	// abstract((unsigned char *)s->data, gdk_pixbuf_get_rowstride(s->pixbuf), -3);
 	pixbuffer = gdk_pixbuf_get_pixels(s->pixbuf);
 	merge_chuncks(pixbuffer, s->data);	
 	gtk_put_image_to_window(GTK_IMAGE(s->pdrawarea), s->pixbuf);

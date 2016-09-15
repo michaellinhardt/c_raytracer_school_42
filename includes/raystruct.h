@@ -209,5 +209,6 @@ void				browni(unsigned char *t, int rowstride, int index);
 void				vintage(unsigned char *t, int rowstride, int index);
 void				black_and_white(unsigned char *t, int rowstride, int index);
 void				lsd(unsigned char *t, int rowstride, int index);
+void				antialiasing(unsigned char *t, int rowstride, int index);
 
 #endif

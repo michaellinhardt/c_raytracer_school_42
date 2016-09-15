@@ -78,12 +78,12 @@ void	black_and_white(unsigned char *t, int rowstride, int index)
 	nbr[0][2] = 0.114;
 	nbr[0][3] = 0;
 	nbr[1][0] = 0.299;
-	nbr[1][1] = 1.587;
+	nbr[1][1] = 0.587;
 	nbr[1][2] = 0.114;
 	nbr[1][3] = 0;
 	nbr[2][0] = 0.299;
 	nbr[2][1] = 0.587;
-	nbr[2][2] = 1.114;
+	nbr[2][2] = 0.114;
 	nbr[2][3] = 0;
 	while ((index += 3) < W_Y * rowstride)
 	{

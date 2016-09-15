@@ -55,6 +55,35 @@ void	abstract(unsigned char *t, int rowstride, int index)
 	}
 }
 
+void	antialiasing(unsigned char *t, int rowstride, int index)
+{
+	unsigned char	col[3];
+	double			nbr[3][4];
+
+
+	nbr[0][0] = 1;
+	nbr[0][1] = 0;
+	nbr[0][2] = 0;
+	nbr[0][3] = 0;
+	nbr[1][0] = 0;
+	nbr[1][1] = 1;
+	nbr[1][2] = 0;
+	nbr[1][3] = 0;
+	nbr[2][0] = 0;
+	nbr[2][1] = 0;
+	nbr[2][2] = 1;
+	nbr[2][3] = 0;
+	while ((index += 3) < W_Y * rowstride)
+	{
+		col[0] = (t[index + 0] + t[index + 3] + t[index + rowstride]) / 3;
+		col[1] = (t[index + 1] + t[index + 4] + t[index + rowstride]) / 3;
+		col[2] = (t[index + 2] + t[index + 5] + t[index + rowstride]) / 3;
+		t[index + 0] = change_col(col, nbr[0]);
+		t[index + 1] = change_col(col, nbr[1]);
+		t[index + 2] = change_col(col, nbr[2]);
+	}
+}
+
 void	brightness(unsigned char *t, int rowstride, int index)
 {
 	unsigned char	col[3];
