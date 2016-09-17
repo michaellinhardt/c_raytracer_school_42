@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 19:53:30 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/09/13 05:15:44 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/09/17 17:54:45 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ int				load_interface(t_gen *raycaster);
 GdkPixbuf		*gtk_new_image(unsigned char *data, int width, int heigth);
 void			gtk_put_pixel(GdkPixbuf *pixbuf, int x, int y, int color, void *t);
 int				gtk_put_image_to_window(GtkImage *image, GdkPixbuf *pixbuf);
+
+/*
+ ** @Object model section.
+ */ 
+void			pscene_object_hydrate(t_gen *raytracer);
+void			pscene_object_update(t_gen *raytracer);
+void			pscene_object_create(t_gen *raytracer);
 
 /*
  ** @Callback section.

@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 04:57:38 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/09/13 05:20:45 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/09/17 18:26:12 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ G_MODULE_EXPORT void	on_pscene_object_select_changed(GtkWidget *pwidget,
 			raytracer->to_move = tmp;
 		tmp = tmp->next;
 	}
-	/*
-	 ** @Ajouter ici "l'hydratation" de la section objet. Dont le type de l'objet.
-	 */
+	pscene_object_hydrate(raytracer);
 	free(objname);
 }

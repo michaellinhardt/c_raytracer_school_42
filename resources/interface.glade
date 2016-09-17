@@ -193,7 +193,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkEntry">
+                                  <object class="GtkEntry" id="pscene_object_x">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="margin_right">5</property>
@@ -209,7 +209,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkEntry">
+                                  <object class="GtkEntry" id="pscene_object_y">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="margin_right">5</property>
