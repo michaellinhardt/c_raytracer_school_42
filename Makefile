@@ -33,6 +33,9 @@ SRCS = main.c\
 	  interface/scene_handler.c\
 	  interface/object_handler.c\
 	  interface/object_model.c\
+	  interface/spot_handler.c\
+	  interface/spot_model.c\
+	  interface/text_interface.c\
 	  filter_part1.c\
 	  filter_part2.c\
 	  filter_part3.c

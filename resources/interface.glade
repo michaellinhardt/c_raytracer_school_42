@@ -400,7 +400,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkEntry">
+                                  <object class="GtkEntry" id="pscene_object_name">
                                     <property name="name">pscene_object_name</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
@@ -427,7 +427,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkEntry">
+                                  <object class="GtkEntry" id="pscene_object_negative">
                                     <property name="name">pscene_object_isnegative</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
