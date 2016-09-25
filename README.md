@@ -3,6 +3,7 @@ TODOLIST:
 Bonjour ceci est un todo list.
 - Changer GTKFileChooserButton par GtkFileChooserDialog.
 - Trouver ou sont les leaks des shortcut / hotkey cf. Stack Overflow / Etudiants.
+- Penser a ajouter une section bruit de perlin / necessite recalcul
 
 enregistrer l'image   --> 's'   (dossier image, s'enregistre a la suite)  
 sauvegarder la scene  --> 'end' (dossier scene, efface la scene du même nom)  

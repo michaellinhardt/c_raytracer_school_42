@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 04:57:38 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/09/22 17:55:29 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/09/25 20:22:16 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,54 @@ void	pscene_object_update_type(GtkWidget *pwidget,
 G_MODULE_EXPORT void	on_pscene_object_create_clicked(GtkWidget *pwidget,
 		gpointer data)
 {
+	t_obj	*object;
+	t_gen	*raytracer;
+	t_obj	*tmp;
+	char	*str;
+
+	if (!(object = (t_obj *)ft_memalloc(sizeof(t_obj))))
+		return ;
+	if (!(raytracer = (t_gen *)data))
+		return ;
+	object->name = ft_strdup(gtk_entry_get_text(GTK_ENTRY(raytracer->pscene_object_name)));
+	/*
+	 ** @Modification du nom pour eviter les doublons.
+	 */
+	tmp = raytracer->sc->obj;
+	while (tmp != NULL)
+	{
+		if (!ft_strcmp(object->name, tmp->name))
+		{
+			str = ft_strjoin(object->name, "1");
+			free(object->name);
+			object->name = str;
+			object->type = tmp->type;
+			ft_memcpy(object->pos, tmp->pos, sizeof(tmp->pos));
+			ft_memcpy(object->size, tmp->size, sizeof(tmp->size));	
+			ft_memcpy(object->eff, tmp->eff, sizeof(tmp->eff));
+			object->c_o = tmp->c_o;
+			//ft_memcpy(object->comp, tmp->comp, sizeof(struct s_obj));
+			ft_memcpy(object->tri, tmp->tri, sizeof(t_vector));
+			object->nor = tmp->nor;
+			object->text = tmp->text;
+			//ft_memcpy(object->cut, tmp->cut, sizeof(t_cut));
+			object->cut = NULL;
+			object->comp = NULL;
+			object->next = NULL; 
+		}
+		/*
+		 ** Changer par un pushback.
+		 */
+		tmp = tmp->next;
+	}
+	object->next = raytracer->sc->obj;
+	raytracer->sc->obj = object;
+	on_pscene_current_scene_changed(raytracer->pscene_current_scene, raytracer);
+	// Creer un nouvel objet.
+	// Verifier un objet a deja le meme non, si oui le modifier.
+	// Verifier les proprietes?
+	// Ajouter a la liste des objets.
+	// Update de la liste deroulante de selection objet.
 	(void)pwidget;
 	(void)data;
 	return ;

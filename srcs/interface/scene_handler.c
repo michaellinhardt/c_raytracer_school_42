@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 02:15:07 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/09/22 17:19:16 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/09/25 20:22:29 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ G_MODULE_EXPORT void	on_pscene_current_scene_changed(GtkWidget *pwidget, gpointe
 		error(4, "Unable to get pointer to raytracer\n");
 		return ;
 	}
-	raytracer = (t_gen *)data;
+	if (!(raytracer = (t_gen *)data))
+		return ;
 	head = raytracer->sc;
 	tmp = raytracer->sc;
 	current = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(
@@ -95,7 +96,6 @@ G_MODULE_EXPORT void	on_pscene_current_scene_changed(GtkWidget *pwidget, gpointe
 	raytracing(raytracer);
 	raytracer->sc = head;
 	(void)pwidget;
-	(void)data;
 }
 
 G_MODULE_EXPORT void	pscene_button_load_clicked(GtkWidget *pwidget, gpointer data)
