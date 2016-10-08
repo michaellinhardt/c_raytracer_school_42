@@ -104,8 +104,8 @@ static t_obj	*lenray_final(t_obj *s, t_ray *r,
 			nearest[3] = lenray_type(r, s, tmp_near, &color);
 			nearest[4] = tmp_near[0];
 			nearest[5] = tmp_near[1];
-			if ((nearest[3] < nearest[2] && nearest[3] > 0.000001)
-				|| (nearest[2] < 0 && nearest[3] > 0.000001))
+			if ((nearest[3] < nearest[2]  && nearest[3] > EPS)
+				|| (nearest[2] < 0 && nearest[3] > EPS))
 			{
 				if (replace_nearest(s, r, nearest, norm))
 					tmp = (s->type != COMPLEXE) ? s : r->obj;
@@ -129,7 +129,7 @@ double			lenray(t_scene *sc, t_ray *r)
 	lenray_neg(sc->obj, r, nearest, &norm);
 	nearest[2] = -1;
 	tmp = lenray_final(sc->obj, r, nearest, &norm);
-	if (nearest[2] > EPS)
+	if (nearest[2] >= EPS)
 	{
 		r->norm = norm;
 		r->obj = tmp;

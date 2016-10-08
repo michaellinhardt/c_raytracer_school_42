@@ -68,10 +68,10 @@ int refraction(t_scene *sc, t_ray *r, double dist, int col, int ret, double refr
 		two_ndoti = ndoti + ndoti;
 		newray.dir = vector_sub(vectormultby_scalar(r->norm, two_ndoti), r->dir);
 	}
-	tmp = new_vector(newray.dir.x * 0.001, newray.dir.y * 0.001, newray.dir.z * 0.001);
+	tmp = new_vector(newray.dir.x * EPS, newray.dir.y * EPS, newray.dir.z * EPS);
 	newray.start = vector_add(newray.start, tmp);
 	new_nearest = lenray(sc, &newray);
-	if (new_nearest > 0.001)
+	if (new_nearest > EPS)
 	{
 
 		coeffreflex = newray.obj->eff[1] / 100;
@@ -441,7 +441,6 @@ void raytracing(t_gen *s)
 		pthread_join(p[j], NULL);	// synchro des threads
 	j = -1;
 	antialiasing((unsigned char *)s->data, gdk_pixbuf_get_rowstride(s->pixbuf), -3);
-	// abstract((unsigned char *)s->data, gdk_pixbuf_get_rowstride(s->pixbuf), -3);
 	pixbuffer = gdk_pixbuf_get_pixels(s->pixbuf);
 	merge_chuncks(pixbuffer, s->data);	
 	gtk_put_image_to_window(GTK_IMAGE(s->pdrawarea), s->pixbuf);

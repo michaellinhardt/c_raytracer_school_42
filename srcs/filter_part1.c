@@ -73,7 +73,7 @@ void	antialiasing(unsigned char *t, int rowstride, int index)
 	nbr[2][1] = 0;
 	nbr[2][2] = 1;
 	nbr[2][3] = 0;
-	while ((index += 3) < W_Y * rowstride)
+	while ((index += 3) < W_Y * rowstride - rowstride)
 	{
 		col[0] = (t[index + 0] + t[index + 3] + t[index + rowstride]) / 3;
 		col[1] = (t[index + 1] + t[index + 4] + t[index + rowstride]) / 3;

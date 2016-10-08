@@ -875,7 +875,7 @@ double intersectray_triangle(t_ray *r, t_obj *p, double *x1, double *y1)
 		c1 = vector_sub(tmp->tri[2], tmp->tri[0]);
 		test = vector_cross(r->dir, c1);
 		d = vector_dot(c0, test);
-		if (d > -0.00001 && d < 0.00001)
+		if (d > -EPS && d < EPS)
 		{
 			tmp = tmp->next;
 			continue ;

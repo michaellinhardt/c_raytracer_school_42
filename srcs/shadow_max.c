@@ -12,7 +12,7 @@
 
 #include "raystruct.h"
 
-static void	is_shadow(t_obj *s, double *nearest, t_ray r, int *is_ob)
+static void	is_shadow(t_obj *s, double *nearest, t_ray r, double *is_ob)
 {
 	double	t[3];
 	int		col;
@@ -30,11 +30,11 @@ static void	is_shadow(t_obj *s, double *nearest, t_ray r, int *is_ob)
 				if (t[1] > nearest[1])
 				{
 					s = s->next;
-					*is_ob += 1;
+					*is_ob += (1 - s->eff[0] / 100);
 					return ;
 				}
 			}
-			else if (t[2] > EPS && (*is_ob += 1))
+			else if (t[2] > EPS && (*is_ob += (1 - s->eff[0] / 100)))
 				return ;
 		}
 		s = s->next;
@@ -44,7 +44,7 @@ static void	is_shadow(t_obj *s, double *nearest, t_ray r, int *is_ob)
 double		cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *obj)
 {
 	t_ray		r;
-	int			i[3];
+	double			i[3];
 	t_vector	spot_pos;
 	double		nearest[2];
 
@@ -66,7 +66,7 @@ double		cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *obj)
 		while (s)
 		{
 			if (s->eff[3])
-				lenray_type(&r, s, nearest, &i[1]);
+				lenray_type(&r, s, nearest, (int*)&i[1]);
 			s = s->next;
 		}
 		is_shadow(obj, nearest, r, &i[2]);

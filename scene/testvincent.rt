@@ -14,7 +14,7 @@ type {point}
 			camera {pos{ 890; 525; 0}, dir{1 ;-1 ; 0}}				
 			type { cylindre }				
 			size { 7 ; 10.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}			
+			effect { 50 ; 0 ; 1.02 ; 0}			
 			color { 0xFf00e3 }				
 		}
 		simple_obj {
@@ -70,7 +70,7 @@ type {point}
 			camera {pos{870 ; 520 ; 50}, dir{-1 ; 0 ; 0 }}
 			type { plan }				
 			size { 1. ; 0.0 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0}
+			effect { 0 ; 80 ; 0 ; 0}
 			color { 0xffff00 }				
 		}
 		simple_obj {
