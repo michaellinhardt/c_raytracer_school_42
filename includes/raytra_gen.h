@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/09/25 20:22:18 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/11/01 22:55:54 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include "libft.h"
 # include "get_next_line.h"
-# include <gui.h>
 # include <mlx.h>			/* pour charger les xpm/textures */
-
+# include <gtk/gtk.h>
+# include <glib.h>
 # include <stdio.h>			/* to del */
 # include <math.h>
 

@@ -6,12 +6,14 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 19:53:30 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/09/22 17:09:59 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/11/01 22:58:38 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GUI_H
 # define GUI_H
+#include "raytra_gen.h"
+#include "raystruct.h"
 #include <glib.h>
 #include <gtk/gtk.h>
 

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 19:12:38 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/07/15 01:24:42 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/11/01 23:51:20 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ char				*ft_wconvchar(wchar_t wc, int *len);
 char				*ft_wconvstr(wchar_t *wstr, int *len);
 int					ft_sizeintu(unsigned long long n);
 int					ft_strchr_c(char const *s, int c);
+int					ft_atoi_base(const char *str, char *base);
 
 #endif

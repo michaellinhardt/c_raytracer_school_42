@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 04:57:38 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/09/25 20:22:16 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/11/01 23:39:53 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ G_MODULE_EXPORT void	on_pscene_object_create_clicked(GtkWidget *pwidget,
 	t_obj	*tmp;
 	char	*str;
 
+	gtk_widget_set_sensitive(pwidget, FALSE);
 	if (!(object = (t_obj *)ft_memalloc(sizeof(t_obj))))
 		return ;
 	if (!(raytracer = (t_gen *)data))
@@ -84,11 +85,9 @@ G_MODULE_EXPORT void	on_pscene_object_create_clicked(GtkWidget *pwidget,
 			ft_memcpy(object->size, tmp->size, sizeof(tmp->size));	
 			ft_memcpy(object->eff, tmp->eff, sizeof(tmp->eff));
 			object->c_o = tmp->c_o;
-			//ft_memcpy(object->comp, tmp->comp, sizeof(struct s_obj));
 			ft_memcpy(object->tri, tmp->tri, sizeof(t_vector));
 			object->nor = tmp->nor;
 			object->text = tmp->text;
-			//ft_memcpy(object->cut, tmp->cut, sizeof(t_cut));
 			object->cut = NULL;
 			object->comp = NULL;
 			object->next = NULL; 
@@ -100,7 +99,8 @@ G_MODULE_EXPORT void	on_pscene_object_create_clicked(GtkWidget *pwidget,
 	}
 	object->next = raytracer->sc->obj;
 	raytracer->sc->obj = object;
-	on_pscene_current_scene_changed(raytracer->pscene_current_scene, raytracer);
+	on_pscene_current_scene_changed(raytracer->pscene_current_scene, raytracer);	
+	gtk_widget_set_sensitive(pwidget, TRUE);
 	// Creer un nouvel objet.
 	// Verifier un objet a deja le meme non, si oui le modifier.
 	// Verifier les proprietes?
@@ -114,8 +114,17 @@ G_MODULE_EXPORT void	on_pscene_object_create_clicked(GtkWidget *pwidget,
 G_MODULE_EXPORT void	on_pscene_object_update_clicked(GtkWidget *pwidget,
 		gpointer data)
 {
+	t_gen	*raytracer;
+	
+	gtk_widget_set_sensitive(pwidget, FALSE);
+	if (!(raytracer = (t_gen *)data))
+		return ;
 	(void)pwidget;
 	(void)data;
+	pscene_object_update(raytracer);
+	raytracing(raytracer);
+	on_pscene_current_scene_changed(raytracer->pscene_object_select, raytracer);
+	gtk_widget_set_sensitive(pwidget, TRUE);
 	return ;
 }
 
