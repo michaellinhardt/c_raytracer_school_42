@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 04:57:38 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/11/01 23:39:53 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/11/02 04:40:02 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,7 @@ G_MODULE_EXPORT void	on_pscene_object_create_clicked(GtkWidget *pwidget,
 	}
 	object->next = raytracer->sc->obj;
 	raytracer->sc->obj = object;
-	on_pscene_current_scene_changed(raytracer->pscene_current_scene, raytracer);	
-	gtk_widget_set_sensitive(pwidget, TRUE);
+	on_pscene_current_scene_changed(raytracer->pscene_current_scene, raytracer);		gtk_widget_set_sensitive(pwidget, TRUE);
 	// Creer un nouvel objet.
 	// Verifier un objet a deja le meme non, si oui le modifier.
 	// Verifier les proprietes?
@@ -115,16 +114,19 @@ G_MODULE_EXPORT void	on_pscene_object_update_clicked(GtkWidget *pwidget,
 		gpointer data)
 {
 	t_gen	*raytracer;
-	
+	int		current;
+
 	gtk_widget_set_sensitive(pwidget, FALSE);
 	if (!(raytracer = (t_gen *)data))
 		return ;
 	(void)pwidget;
 	(void)data;
 	pscene_object_update(raytracer);
-	raytracing(raytracer);
+	raytracing(raytracer);	
+	current = gtk_combo_box_get_active(GTK_COMBO_BOX(raytracer->pscene_object_select));
 	on_pscene_current_scene_changed(raytracer->pscene_object_select, raytracer);
-	gtk_widget_set_sensitive(pwidget, TRUE);
+	gtk_widget_set_sensitive(pwidget, TRUE);	
+	gtk_combo_box_set_active(GTK_COMBO_BOX(raytracer->pscene_object_select), current);
 	return ;
 }
 
