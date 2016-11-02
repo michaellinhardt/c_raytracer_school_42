@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/11/01 22:55:54 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/11/02 02:19:49 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ typedef struct		s_gen 			/* structure generale */
 {
 	t_obj			*to_move;			/* Objet courant */	
 	t_scene			*sc;				/* Liste des scenes chargees */	
+	t_spot			*selected_spot;
 	GdkPixbuf		*pixbuf;
 	GtkWidget		*pwindow;			/* La fenetre LOL */
 	GtkWidget		*pdrawarea;
@@ -144,6 +145,15 @@ typedef struct		s_gen 			/* structure generale */
 	GtkWidget		*pscene_object_transparence;
 	GtkWidget		*pscene_object_reflexion;
 	GtkWidget		*pscene_object_refraction;
+	GtkWidget		*pscene_spot_select;
+	GtkWidget		*pscene_spot_x;
+	GtkWidget		*pscene_spot_y;
+	GtkWidget		*pscene_spot_z;
+	GtkWidget		*pscene_spot_dir_x;
+	GtkWidget		*pscene_spot_dir_y;
+	GtkWidget		*pscene_spot_dir_z;
+	GtkWidget		*pscene_spot_name;
+	GtkWidget		*pscene_spot_color;
 	char 			*data;
 	/* La ou on dessine pour les nuls */	
 	int				rep;				/* pour des booleens (keycode MLX) */

@@ -2,6 +2,8 @@ TODOLIST:
 
 Bonjour ceci est un todo list.
 - Changer GTKFileChooserButton par GtkFileChooserDialog.
+- Changer le type de l'objet.
+- Update spots.
 - Trouver ou sont les leaks des shortcut / hotkey cf. Stack Overflow / Etudiants.
 - Penser a ajouter une section bruit de perlin / necessite recalcul
 

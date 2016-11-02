@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 19:53:30 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/11/01 22:58:38 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/11/02 01:30:25 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void			pscene_object_update_type(GtkWidget *pwidget, gpointer data);
  */
 void			pscene_spot_hydrate(t_gen *raytracer);
 void			pscene_spot_update(t_gen *raytracer);
-
 /*
  ** @Callback section.
  */
@@ -56,4 +55,6 @@ void			pscene_button_save_clicked(GtkWidget *pwdiget, gpointer data);
 void			pscene_button_load_clicked(GtkWidget *pwdiget, gpointer data);
 void			on_destroy_callback(GtkWidget *pwidget, gpointer *data);
 void			on_pbutton_clicked(GtkWidget *pwidget, gpointer data);
+void			on_pscene_spot_select_changed(GtkWidget *pwidget, gpointer data);
+void			on_pscene_spot_update_button_clicked(GtkWidget *pwidget, gpointer data);
 #endif

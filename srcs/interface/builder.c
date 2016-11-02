@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 02:10:37 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/09/22 15:22:04 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/11/02 02:48:16 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,16 @@ int		load_interface(t_gen *raytracer)
 	CH_GET_WIDGET(builder, pscene_object_negative, raytracer);
 	CH_GET_WIDGET(builder, pscene_object_transparence, raytracer);
 	CH_GET_WIDGET(builder, pscene_object_reflexion, raytracer);
-	CH_GET_WIDGET(builder, pscene_object_refraction, raytracer);
+	CH_GET_WIDGET(builder, pscene_object_refraction, raytracer);	
+	CH_GET_WIDGET(builder, pscene_spot_select, raytracer);
+	CH_GET_WIDGET(builder, pscene_spot_x, raytracer);
+	CH_GET_WIDGET(builder, pscene_spot_y, raytracer);
+	CH_GET_WIDGET(builder, pscene_spot_z, raytracer);
+	CH_GET_WIDGET(builder, pscene_spot_dir_x, raytracer);
+	CH_GET_WIDGET(builder, pscene_spot_dir_y, raytracer);
+	CH_GET_WIDGET(builder, pscene_spot_dir_z, raytracer);
+	CH_GET_WIDGET(builder, pscene_spot_name, raytracer);
+	CH_GET_WIDGET(builder, pscene_spot_color, raytracer);
 	if (!(data = ft_memalloc(1680 * 24 * 1050)))
 		return (0);
 	pixbuf = gtk_new_image(data, 1680, 1050);

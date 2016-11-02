@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 02:15:07 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/09/25 20:22:29 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/11/02 03:49:44 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ G_MODULE_EXPORT void	pscene_button_load_clicked(GtkWidget *pwidget, gpointer dat
 	char			*filename;
 	GtkFileChooser	*chooser;
 	t_scene			*tmp;	
-	t_obj	*otmp;
+	t_obj			*otmp;
+	t_spot			*stmp;
 
 	(void)pwidget;
 	if (!data)
@@ -144,9 +145,17 @@ G_MODULE_EXPORT void	pscene_button_load_clicked(GtkWidget *pwidget, gpointer dat
 	}
 	/*
 	 ** @Lancement de l'affichage.
-	 */
+	 */	
+	gtk_combo_box_text_remove_all(GTK_COMBO_BOX_TEXT(raytracer->pscene_spot_select));
+	stmp = raytracer->sc->spot;
+	while (stmp)
+	{
+		gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(raytracer->pscene_spot_select), NULL, stmp->name);
+		stmp = stmp->next;
+	}
 	gtk_combo_box_set_active(GTK_COMBO_BOX(raytracer->pscene_current_scene), 0);
 	gtk_combo_box_set_active(GTK_COMBO_BOX(raytracer->pscene_object_select), 0);
+	gtk_combo_box_set_active(GTK_COMBO_BOX(raytracer->pscene_spot_select), 0);
 	g_free(filename);
 	raytracing(raytracer);
 }

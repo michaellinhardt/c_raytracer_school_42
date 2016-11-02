@@ -2,19 +2,19 @@ scene {
 	name {PLOP}
 camera {pos{890.000000;525.000000;-50.000000}, dir{0.000000;1.000000;2.000000}}
 spot {
-name {cocuou}
+name {point1}
 type {point}
 camera {pos{890.000000;525.000000;-50.000000}, dir{1.000000;1.000000;5.000000}}
 color { 0xff0000 }
 }
 spot {
-name {cocuou}
+name {point2}
 type {point}
 camera {pos{890.000000;525.000000;50.000000}, dir{1.000000;1.000000;5.000000}}
 color { 0x00ff00 }
 }
 spot {
-name {cocuou}
+name {directional1}
 type {directional}
 camera {pos{90.000000;525.000000;50.000000}, dir{-1.000000;0.000000;0.000000}}
 color { 0x0000ff }
