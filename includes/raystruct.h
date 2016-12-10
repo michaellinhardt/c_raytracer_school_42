@@ -14,6 +14,8 @@
 # define RAYSTRUCT_H
 # define W_Y 1050
 # define W_X 1680
+// # define W_Y 267
+// # define W_X 420
 # define WIN_NAME "RT"
 # define PI 3.14159265359
 # define TEXWIDTH 64
@@ -32,7 +34,7 @@
 # define MT 16
 # define THE struct s_thread
 
-# define EPS 0.0001
+# define EPS 0.001
 
 # include <fcntl.h>
 # include <unistd.h>

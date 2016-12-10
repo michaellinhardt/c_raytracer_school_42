@@ -4,15 +4,15 @@ scene {
 	spot {
 	name {cocuou}
 type {point}						
-		camera {pos{90; 600; -50}, dir{1 ; 1; 5}}
+		camera {pos{890; 535; -50}, dir{1 ; 1; 5}}
 		color { 0xFF0F00 }					
 	}
 	ambiance { 0x452d6e; 52 }					
 	objects {
 		simple_obj {
 			name { ROUGE }
-			camera {pos{ 890; 525; 0}, dir{1 ;-1 ; 0}}				
-			type { cylindre }				
+			camera {pos{ 895; 525; 0}, dir{1 ;-0.5 ; 0}}				
+			type { sphere }				
 			size { 7 ; 5.0 ; 0 }			
 			effect { 0 ; 0 ; 0 ; 0}			
 			color { 0xFf00e3 }				

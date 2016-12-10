@@ -1,5 +1,5 @@
 scene {
-	name {NAME_SCENE}
+	name {NAME_SCENE1}
 camera {pos{890.000000;525.000000;-50.000000}, dir{0.000000;1.000000;2.000000}}
 spot {
 name {cocuou}
@@ -7,15 +7,15 @@ type {point}
 camera {pos{90.000000;600.000000;-50.000000}, dir{1.000000;1.000000;5.000000}}
 color { 0xff0f00 }
 }
-ambiance { 0x452d6e ; 52 }
+ambiance { 0x452d6e ; 100 }
 objects {
 simple_obj {
 	name { ROUGE }
-camera {pos{890.000000;525.000000;0.000000}, dir{1.000000;-1.000000;0.000000}}
+camera {pos{895.000000;525.000000;0.000000}, dir{1.000000;-0.500000;0.000000}}
 type { cylindre }
 size {7.000000;5.000000;0.000000}
 effect {0.000000;0.000000;0.000000;0.000000}
-color { 0xff0000 }
+color { 0xff00e3 }
 }
 }
 }

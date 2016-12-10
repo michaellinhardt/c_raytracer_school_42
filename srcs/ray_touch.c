@@ -72,7 +72,7 @@ static char		replace_nearest(t_obj *s, t_ray *r,
 	if (nearest[3] > nearest[0] && nearest[3] < nearest[1]
 		&& nearest[0] > EPS)
 	{
-		if (nearest[5] <= nearest[1] && nearest[4] >= nearest[0])
+		if (nearest[5] < nearest[1] && nearest[4] > nearest[0])
 			return (0);
 		nearest[2] = nearest[1];
 		if ((!(s->type & COMPLEXE) && (s->type & PLAN))
@@ -84,6 +84,7 @@ static char		replace_nearest(t_obj *s, t_ray *r,
 		nearest[2] = nearest[3];
 		*norm = r->norm;
 	}
+
 	return (1);
 }
 
@@ -102,13 +103,23 @@ static t_obj	*lenray_final(t_obj *s, t_ray *r,
 		{
 			r->obj = NULL;
 			nearest[3] = lenray_type(r, s, tmp_near, &color);
+			// if (r->dir.x < 0 || r->dir.y > 0)
+				nearest[3] -= EPS;
+			// else
+				// nearest[3] += EPS;	
 			nearest[4] = tmp_near[0];
 			nearest[5] = tmp_near[1];
-			if ((nearest[3] < nearest[2]  && nearest[3] > EPS)
-				|| (nearest[2] < 0 && nearest[3] > EPS))
+			if ((nearest[3] < nearest[2] && nearest[3] > EPS)
+				|| (nearest[2] < EPS && nearest[3] > EPS))
 			{
 				if (replace_nearest(s, r, nearest, norm))
+				{
 					tmp = (s->type != COMPLEXE) ? s : r->obj;
+					if (r->dir.y > 0)
+						nearest[2] -= EPS;
+					else
+						nearest[2] += EPS;
+				}
 			}
 		}
 		s = s->next;
@@ -129,7 +140,7 @@ double			lenray(t_scene *sc, t_ray *r)
 	lenray_neg(sc->obj, r, nearest, &norm);
 	nearest[2] = -1;
 	tmp = lenray_final(sc->obj, r, nearest, &norm);
-	if (nearest[2] >= EPS)
+	if (nearest[2] > EPS)
 	{
 		r->norm = norm;
 		r->obj = tmp;
