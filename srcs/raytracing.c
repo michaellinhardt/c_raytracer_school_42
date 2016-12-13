@@ -146,9 +146,9 @@ double noise(t_ray *r, t_vector hitpoint)
 	while (level < 50)
     {
         noiseCoef += (1.0 / level)  
-            * fabs((perlin(fabs(level * 0.1 * hitpoint.x),
-            	fabs(level * 0.1 * hitpoint.y),
-            	fabs(level * 0.1 * hitpoint.z))));
+            * fabs((perlin(	fabs(level * 0.05 * hitpoint.x),
+            				fabs(level * 0.05 * hitpoint.y),
+            				fabs(level * 0.05 * hitpoint.z))));
     	level++;
     }
     if (noiseCoef > 1.0)
@@ -168,9 +168,9 @@ double noise(t_ray *r, t_vector hitpoint)
 
 
 
-	r->norm.x = (1.0f - 0.031 ) * r->norm.x + 0.031 * noiseCoefx;
- 	r->norm.y = (1.0f - 0.031 ) * r->norm.y + 0.031 * noiseCoefy;
- 	r->norm.z = (1.0f - 0.031 ) * r->norm.z + 0.031 * noiseCoefz; 
+	r->norm.x = (1.0f - 0.1 ) * r->norm.x + 0.1 * noiseCoefx;
+ 	r->norm.y = (1.0f - 0.1 ) * r->norm.y + 0.1 * noiseCoefy;
+ 	r->norm.z = (1.0f - 0.1 ) * r->norm.z + 0.1 * noiseCoefz; 
 
 
 
@@ -297,7 +297,10 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 t_color  c;
 
 (void)col;
-color_composants(tmp->c_o, c.rgb);
+if (!(tmp->text))
+	color_composants(tmp->c_o, c.rgb);
+else
+	color_composants(texture(tmp, get_hitpoint(r->start, r->dir, nearest)), c.rgb);
 color_composants(sc->amb[0], c.i_a);
 c.hitpoint = get_hitpoint(r->start, r->dir, nearest);
 c.vec_obj_eye = vector_normalize(vector_sub(r->start, c.hitpoint));
