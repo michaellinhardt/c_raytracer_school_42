@@ -14,19 +14,23 @@
 
 static double	cut_or_not(t_ray *r, t_obj *s, t_sphere *sphere, t_inter *i)
 {
+	(void)i;
 	if (s->cut)
 	{
 		if (!cut_object(s, sphere->second.dist, r, 0))
 		{
-			if (sphere->second.dist < ((-b + sqrtf(discriminant))
+			if (sphere->second.dist < ((-sphere->second.b
+				+ sqrtf(sphere->second.discriminant))
 			/ (2 * sphere->second.a)))
 			{
-				sphere->second.dist = ((-b + sqrtf(discriminant))
+				sphere->second.dist = ((-sphere->second.b
+					+ sqrtf(sphere->second.discriminant))
 				/ (2 * sphere->second.a));
 			}
 			else
 			{
-				sphere->second.dist = ((-b - sqrtf(discriminant))
+				sphere->second.dist = ((-sphere->second.b
+					- sqrtf(sphere->second.discriminant))
 				/ (2 * sphere->second.a));
 			}
 			r->norm = vector_rev(r->norm);

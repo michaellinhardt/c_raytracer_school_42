@@ -47,6 +47,7 @@ SRCS = main.c\
 	  interface/spot_handler.c\
 	  interface/spot_model.c\
 	  interface/text_interface.c\
+	  interface/filter_handler.c\
 	  filter_part1.c\
 	  filter_part2.c\
 	  filter_part3.c

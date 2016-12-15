@@ -133,7 +133,7 @@ double intersectray_cone(t_ray *r, t_obj *s, t_inter *i)
 		r->norm = vector_normalize(vector_sub(vectormultby_scalar(cone_dir,
 		vector_dot(lambda, cone_dir) / vector_dot(cone_dir, cone_dir)),lambda));
 		// r->norm = vectormultby_scalar(r->norm, -1);
-		printf("norm : %f | %f | %f \n", r->norm.x, r->norm.y,r->norm.z);
+		// printf("norm : %f | %f | %f \n", r->norm.x, r->norm.y,r->norm.z);
 		return (i->inter1);
 	}
 	if(vector_dist(get_hitpoint(r->start, r->dir, i->inter1), cone_pos) < q && vector_dist(get_hitpoint(r->start, r->dir, i->inter2), cone_pos) < q && vector_dot(tst1, tst2) < 0)// && vector_dot(tst1, cone_pos) < 0)
@@ -163,7 +163,7 @@ double intersectray_cone(t_ray *r, t_obj *s, t_inter *i)
 		  //printf("i1 : %f , i2 : %f, q: %f\n", i->inter1, i->inter2, q);
 			i->inter1 = i->inter2;
 			i->inter2 = t;
-			printf("norm : %f | %f | %f \n", r->norm.x, r->norm.y,r->norm.z);
+			// printf("norm : %f | %f | %f \n", r->norm.x, r->norm.y,r->norm.z);
 			// r->norm = vectormultby_scalar(r->norm, -1);
 			return (i->inter1);
 		}
@@ -177,7 +177,7 @@ double intersectray_cone(t_ray *r, t_obj *s, t_inter *i)
 			vector_dot(lambda, cone_dir) / vector_dot(cone_dir, cone_dir)),lambda));
 			i->inter2 = t;
 			// r->norm = vectormultby_scalar(r->norm, -1);
-			printf("norm : %f | %f | %f \n", r->norm.x, r->norm.y,r->norm.z);
+			// printf("norm : %f | %f | %f \n", r->norm.x, r->norm.y,r->norm.z);
 			
 			return (i->inter1);
 		}

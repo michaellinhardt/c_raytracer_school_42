@@ -134,6 +134,13 @@ typedef struct		s_ellipse
 	t_second_degree second;
 }					t_ellipse;
 
+typedef struct		s_sphere
+{
+	t_vector		inter;
+	t_second_degree	second;
+	t_vector		pos;
+}					t_sphere;
+
 typedef struct		s_inter
 {
 	double inter1;

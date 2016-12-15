@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 02:10:37 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/11/02 02:48:16 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/12/15 18:35:33 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@ int		load_interface(t_gen *raytracer)
 	CH_GET_WIDGET(builder, pscene_spot_dir_z, raytracer);
 	CH_GET_WIDGET(builder, pscene_spot_name, raytracer);
 	CH_GET_WIDGET(builder, pscene_spot_color, raytracer);
+	CH_GET_WIDGET(builder, pfilter_button_save, raytracer);
+	CH_GET_WIDGET(builder, pfilter_button_apply, raytracer);
+	CH_GET_WIDGET(builder, pfilter_choose_filter, raytracer);
 	if (!(data = ft_memalloc(1680 * 24 * 1050)))
 		return (0);
 	pixbuf = gtk_new_image(data, 1680, 1050);
