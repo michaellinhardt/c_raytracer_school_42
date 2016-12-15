@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/18 20:05:03 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/19 05:25:06 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/15 20:02:45 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ G_MODULE_EXPORT	gboolean	on_key_press(GtkWidget *widget, GdkEvent  *event, void 
 	else if (key->keyval == GDK_KEY_KP_8)
 		s->to_move->pos[2] += 1.0;
 	else if (key->keyval == GDK_KEY_KP_3 || key->keyval == GDK_KEY_KP_6 || key->keyval == GDK_KEY_KP_9)
-		rotate(s, key->keyval);	
-	raytracing(s);
+		rotate(s, key->keyval);
+	if (key->keyval >= GDK_KEY_KP_1 && key->keyval <= GDK_KEY_KP_9)
+		raytracing(s);
 	return 0;	
 }

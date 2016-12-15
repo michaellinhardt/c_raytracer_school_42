@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/11/02 02:19:49 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/12/15 18:34:41 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,9 @@ typedef struct		s_gen 			/* structure generale */
 	GtkWidget		*pscene_spot_dir_z;
 	GtkWidget		*pscene_spot_name;
 	GtkWidget		*pscene_spot_color;
+	GtkWidget		*pfilter_button_save;
+	GtkWidget		*pfilter_button_apply;
+	GtkWidget		*pfilter_choose_filter;
 	char 			*data;
 	/* La ou on dessine pour les nuls */	
 	int				rep;				/* pour des booleens (keycode MLX) */
