@@ -141,11 +141,6 @@ int type(int fd)
 			ft_strdel(&tmp);
 			return (CYLINDRE);
 		}
-		else if (ft_strequ(tmp, "torus"))
-		{
-			ft_strdel(&tmp);
-			return (TORUS);
-		}
 		else if (ft_strequ(tmp, "para"))
 		{
 			ft_strdel(&tmp);

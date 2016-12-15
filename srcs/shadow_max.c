@@ -12,7 +12,7 @@
 
 #include "raystruct.h"
 
-static void	is_shadow(t_obj *s, double *nearest, t_ray r, double *is_ob)
+static void	is_shadow(t_obj *s, t_inter *i, t_ray r, double *is_ob)
 {
 	double	t[3];
 	int		col;
@@ -23,11 +23,11 @@ static void	is_shadow(t_obj *s, double *nearest, t_ray r, double *is_ob)
 	{
 		if (!s->eff[3] && !(s->type & PLAN))
 		{
-			t[2] = lenray_type(&r, s, t, &col);
-			if (t[2] > nearest[0] && t[2] < nearest[1]
-				&& t[2] > EPS && nearest[0] > EPS)
+			t[2] = lenray_type(&r, s, i, &col);
+			if (t[2] > i->inter1 && t[2] < i->inter2
+				&& t[2] > EPS && i->inter1 > EPS)
 			{
-				if (t[1] > nearest[1])
+				if (t[1] > i->inter2)
 				{
 					s = s->next;
 					*is_ob += (1 - s->eff[0] / 100);
@@ -46,7 +46,7 @@ double		cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *obj)
 	t_ray		r;
 	double			i[3];
 	t_vector	spot_pos;
-	double		nearest[2];
+	t_inter		j;
 
 	i[2] = 0;
 	i[0] = 0;
@@ -61,15 +61,15 @@ double		cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *obj)
 		}
 		else if (spot->type & DIR)
 			r.dir = vector_normalize(new_vector(spot->pos[3], spot->pos[4], spot->pos[5]));
-		nearest[0] = -1;
-		nearest[1] = INT_MAX;
+		j.inter1 = -1;
+		j.inter2 = INT_MAX;
 		while (s)
 		{
 			if (s->eff[3])
-				lenray_type(&r, s, nearest, (int*)&i[1]);
+				lenray_type(&r, s, &j, (int*)&i[1]);
 			s = s->next;
 		}
-		is_shadow(obj, nearest, r, &i[2]);
+		is_shadow(obj, &j, r, &i[2]);
 		spot = spot->next;
 	}
 	return ((i[2] > 0) ? (double)(i[0] - i[2]) / i[0] : 1);

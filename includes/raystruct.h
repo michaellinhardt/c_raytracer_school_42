@@ -77,6 +77,69 @@ typedef struct		s_thread
 	t_gen			*s;	
 }					t_thread;
 
+
+typedef struct		s_second_degree
+{
+	double			discriminant;
+	double			a;
+	double			b;
+	double			c;
+	double			dist;
+}					t_second_degree;
+
+typedef struct		s_cylindre
+{
+	double			previous_value1;
+	double			previous_value2;
+	double			dot;
+	double			dot2;
+	t_vector		objetpos_raypos;
+	t_vector		pos;
+	t_vector		dir;
+	double			limit_dist;
+	t_vector		plan1_pos;
+	t_vector		plan2_pos;
+	t_vector		plan1_dir;
+	t_vector		plan2_dir;
+	t_second_degree second;
+	double			inter_plan1;
+	double			inter_plan2;
+	double			dist_pos_inter1;
+	double			dist_pos_inter2;
+	double			dist_inter2_plan;
+	double			dist_inter1_plan;
+}					t_cylindre;
+
+
+typedef struct		s_boloid
+{
+	double			m;
+	double			previous_value1;
+	double			previous_value2;
+	t_vector		pos;
+	t_vector		dir;
+	t_vector		intersection;
+	t_second_degree second;
+	t_vector		x;
+}					t_boloid;
+
+typedef struct		s_ellipse
+{
+	double			previous_value1;
+	double			previous_value2;
+	t_vector		pos;
+	t_vector		dir;
+	t_vector		intersection;
+	t_vector		newpos;
+	t_second_degree second;
+}					t_ellipse;
+
+typedef struct		s_inter
+{
+	double inter1;
+	double inter2;
+}					t_inter;
+
 /*
 **									write_img.c
 */
@@ -160,16 +223,24 @@ void				color_normalize(double *tab, double *tmp_tab, double factor, int c);
 **									intersec_ray.c  
 */
 
-double				intersectray_sphere(t_ray *r, t_obj *s, double *x1, double *y1);
-double				intersectray_plane(t_ray *r, t_obj *s, double *x1, double *y1);
-double 				intersectray_cylindre(t_ray *r, t_obj *s, double *x1, double *y1);
-double 				intersectray_carre(t_ray *r, t_obj *s, double *x1, double *y1);
-double 				intersectray_complex(t_ray *r, t_obj *s, double *x1, double *y1, int *col);
-double 				intersectray_cone(t_ray *r, t_obj *s, double *x1, double *y1);
-double 				intersectray_torus(t_ray *r, t_obj *s, double *x1, double *y1);
-double 				intersectray_boloid(t_ray *r, t_obj *s, double *x1, double *y1);
-double 				intersectray_triangle(t_ray *r, t_obj *s, double *x1, double *y1);
-double				intersectray_ellipse(t_ray *r, t_obj *s, double *x1, double *y1);
+double				intersectray_sphere(t_ray *r, t_obj *s, t_inter *i);
+double				intersectray_plane(t_ray *r, t_obj *s, t_inter *i);
+double	intersectray_cylindre(t_ray *r, t_obj *s, t_inter *i);
+
+double		cyl_touch_one_plan2(t_ray *r, t_obj *s, t_cylindre *cyl, t_inter *i);
+double		cyl_touch_one_plan(t_ray *r, t_obj *s, t_cylindre *cyl, t_inter *i);
+double		cyl_touch_two_plan(t_ray *r, t_obj *s, t_cylindre *cyl, t_inter *i);
+void		cyl_norm(t_ray *r, t_cylindre *cyl);
+double	equa_sec(double a, double b, double discriminant, t_inter *i);
+double cut_object(t_obj *obj, double dist, t_ray *r, char c);
+double intersectray_cone(t_ray *r, t_obj *s, t_inter *i);
+
+
+double 				intersectray_carre(t_ray *r, t_obj *s, t_inter *i);
+double 				intersectray_complex(t_ray *r, t_obj *s, int *col);
+double 				intersectray_boloid(t_ray *r, t_obj *s, t_inter *i);
+double 				intersectray_triangle(t_ray *r, t_obj *s, t_inter *i);
+double				intersectray_ellipse(t_ray *r, t_obj *s, t_inter *i);
 
 /*
 **									perlin.c  
@@ -181,7 +252,7 @@ double				perlin(double x, double y, double z);
 **									ray_touch.c  
 */
 
-double				lenray_type(t_ray *r, t_obj *s, double *tmp_near, int *col);
+double			lenray_type(t_ray *r, t_obj *s, t_inter *i, int *col);
 double				lenray(t_scene *sc, t_ray *r);
 
 /*

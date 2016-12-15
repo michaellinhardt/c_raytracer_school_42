@@ -30,8 +30,6 @@ static void	print_type(t_scene *s, char **to_print, char type)
 		*to_print = ft_strjoin(*to_print, "cylindre }\n");
 	if (type & COMPLEXE)
 		*to_print = ft_strjoin(*to_print, "complexe }\n");
-	if (type & TORUS)
-		*to_print = ft_strjoin(*to_print, "torus }\n");
 	if (type & BOLOID)
 		*to_print = ft_strjoin(*to_print, "para }\n");
 	if (type & TRIANGLE)

@@ -247,14 +247,14 @@ static int		ft_shadow(t_obj *s, t_color *c)
 {
 	t_ray	r;
 	double	dist[2];
-	double tmp[2];
+	t_inter	i;
 
 	r.start = new_vector(c->spot_pos.x, c->spot_pos.y, c->spot_pos.z);
 	dist[0] = vector_dist(r.start, c->hitpoint);
 	r.dir = vector_normalize(vector_sub(c->hitpoint, c->spot_pos));
 	while (s)
 	{
-		dist[1] = lenray_type(&r, s, tmp, 0);
+		dist[1] = lenray_type(&r, s, &i, 0);
 		if (dist[1] > EPS && dist[1] < dist[0] - EPS)
 			return (1);
 		s = s->next;

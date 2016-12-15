@@ -22,7 +22,18 @@ SRCS = main.c\
 	  shadow_max.c\
 	  write_scene.c\
 	  matrice_rot.c\
-	  intersec_ray.c\
+	  intersectray_plane.c\
+	  intersectray_cylindre1.c\
+	  intersectray_cylindre2.c\
+	  intersectray_triangle.c\
+	  intersectray_complex.c\
+	  intersectray_sphere.c\
+	  intersectray_carre.c\
+	  intersectray_ellipse.c\
+	  intersectray_boloid.c\
+	  intersectray_cone.c\
+	  equa_sec.c\
+	  cut_object.c\
 	  color_functions.c\
 	  perlin.c\
 	  texture.c\

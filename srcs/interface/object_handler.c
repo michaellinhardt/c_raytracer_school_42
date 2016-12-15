@@ -23,13 +23,13 @@ void	pscene_object_update_type(GtkWidget *pwidget,
 {
 	(void)pwidget;
 	(void)data;
-	int		type_name[10]  = {SPHERE, RECTANGLE, PLAN, CONE, CYLINDRE, COMPLEXE, TORUS,	BOLOID, TRIANGLE, ELLIPSE};
+	int		type_name[9]  = {SPHERE, RECTANGLE, PLAN, CONE, CYLINDRE, COMPLEXE, BOLOID, TRIANGLE, ELLIPSE};
 	int		i;
 	t_gen	*raytracer;
 
 	raytracer = (data) ? (t_gen *)data : NULL;
 	i = 0;
-	while (raytracer->to_move->type != type_name[i] && i < 10)
+	while (raytracer->to_move->type != type_name[i] && i < 9)
 		i++;
 	gtk_combo_box_text_remove_all(GTK_COMBO_BOX_TEXT(raytracer->pscene_object_type));
 	gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(raytracer->pscene_object_type), NULL,
@@ -44,8 +44,6 @@ void	pscene_object_update_type(GtkWidget *pwidget,
 		"CYLINDRE");
 	gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(raytracer->pscene_object_type), NULL,
 		"COMPLEXE");
-	gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(raytracer->pscene_object_type), NULL,
-		"TORUS");
 	gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(raytracer->pscene_object_type), NULL,
 		"BOLOID");
 	gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(raytracer->pscene_object_type), NULL,

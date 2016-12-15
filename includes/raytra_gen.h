@@ -31,7 +31,6 @@
 # define CONE 0x8
 # define CYLINDRE 0x10
 # define COMPLEXE 0x20
-# define TORUS 0x40
 # define BOLOID 0x80
 # define TRIANGLE 0x100
 # define ELLIPSE 0x200

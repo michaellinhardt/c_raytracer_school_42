@@ -123,4 +123,3 @@ void	lsd(unsigned char *t, int rowstride, int index)
 		t[index + 2] = change_col(col, nbr[2]);
 	}
 }
-
