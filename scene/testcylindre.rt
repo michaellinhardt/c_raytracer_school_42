@@ -3,19 +3,49 @@ scene {
 	camera {pos{890; 525; -50}, dir{0; 1; 2}}				
 	spot {
 	name {cocuou}
-type {point}						
-		camera {pos{90; 600; -50}, dir{1 ; 1; 5}}
-		color { 0xFF0F00 }					
+		type {point}						
+		camera {pos{890; 525; -50}, dir{1 ; 1; 5}}
+		color { 0xffffff  }					
 	}
-	ambiance { 0x452d6e; 52 }					
+	spot {
+	name {cocuou}
+		type {point}						
+		camera {pos{930; 525; -10}, dir{1 ; 1; 5}}
+		color { 0xffffff  }					
+	}
+	ambiance { 0xffffff; 40 }					
 	objects {
 		simple_obj {
 			name { ROUGE }
-			camera {pos{ 890; 525; 0}, dir{1 ;-1 ; 0}}				
-			type { cylindre }				
-			size { 7 ; 5.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}			
-			color { 0xFf00e3 }				
+			camera {pos{ 850; 525; 100}, dir{1 ;-0.5 ; 0}}				
+			type { sphere }				
+			size { 17 ; 5.0 ; 0 }			
+			effect { 0 ; 50 ; 0 ; 0}			
+			color { 0xffffff }				
 		}
+		simple_obj {
+			name { ROUGE }
+			camera {pos{ 920; 525; 100}, dir{1 ;-0.5 ; 0}}				
+			type { sphere }				
+			size { 17 ; 5.0 ; 0 }			
+			effect { 0 ; 50 ; 0 ; 0}			
+			texture { earth }				
+		}
+		simple_obj {
+			name { PLAN }
+			camera {pos{ 910; 557; 20}, dir{0 ; -1 ; 0}}				
+			type { plan }				
+			size { 7 ; 5.0 ; 0 }			
+			effect { 0 ; 0; 0 ; 0}			
+			color { 0xaaaaaa }				
+		}	
+		simple_obj {
+			name { PLANDUBAS }
+			camera {pos{ 870; 500; 20}, dir{0 ; 1 ; 0}}				
+			type { plan }				
+			size { 7 ; 5.0 ; 0 }			
+			effect { 0 ; 70 ; 0 ; 0}			
+			color { 0x0000ff }				
+		}	
 	}
 }

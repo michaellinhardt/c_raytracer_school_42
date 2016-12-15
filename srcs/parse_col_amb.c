@@ -103,7 +103,7 @@ void			color(int fd, int *color, char c, t_obj *o)
 	}
 }
 
-static void		ambiance_next(int *amb, char *temp, char *tmp)
+static void		ambiance_next(double *amb, char *temp, char *tmp)
 {
 	int i;
 
@@ -124,9 +124,10 @@ static void		ambiance_next(int *amb, char *temp, char *tmp)
 		error(3, "color");
 	if (amb[1] < 0 || amb[1] > 100)
 		error(3, "color");
+	amb[1] = amb[1] / 100;
 }
 
-void			ambiance(int *amb, char *line)
+void			ambiance(double *amb, char *line)
 {
 	char	**tab;
 	char	*tmp;

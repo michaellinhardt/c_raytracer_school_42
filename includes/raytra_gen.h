@@ -110,7 +110,7 @@ typedef struct		s_scene
 	char			*name;
 	char			nb;					/* numero de la scene */
 	double			cam[6];				/*camera position [0-2] x y z ; direction [3-5] x y z*/
-	int				amb[2];				/* ambiance ; amb[0] == RGB ; amb[1] == % intensité */
+	double			amb[2];				/* ambiance ; amb[0] == RGB ; amb[1] == % intensité */
 	t_spot			*spot;
 	t_obj			*obj;
 	void			*next;

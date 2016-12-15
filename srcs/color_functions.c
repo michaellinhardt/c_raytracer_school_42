@@ -14,9 +14,16 @@
 
 void		color_composants(int color, double *ret)
 {
-	ret[0] = (double)((color & 0xFF0000) >> 16) / 255.0;
-	ret[1] = (double)((color & 0xFF00) >> 8) / 255.0;
-	ret[2] = (double)((color & 0xFF)) / 255.0;
+	int r;
+	int g;
+	int b;
+
+	r = (color & 0xFF0000) >> 16;
+	g = (color & 0xFF00) >> 8;
+	b = (color & 0xFF);
+	ret[0] = (double)r / 255.0;
+	ret[1] = (double)g / 255.0;
+	ret[2] = (double)b / 255.0;
 }
 
 int			colorfromrgb(double *rgb)
@@ -28,6 +35,12 @@ int			colorfromrgb(double *rgb)
 	r = rgb[0] * 255;
 	g = rgb[1] * 255;
 	b = rgb[2] * 255;
+	if (r < 0)
+		r = 0;
+	if (g < 0)
+		g = 0;
+	if (b < 0)
+		b = 0;
 	if (r > 255)
 		r = 255;
 	if (g > 255)

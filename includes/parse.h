@@ -24,7 +24,7 @@ typedef struct		s_line
 void				camera(int fd, double *cam, char c);
 int					verif_double(char *str);
 int					verif_str(char *str, int i);
-void				ambiance(int *amb, char *line);
+void				ambiance(double *amb, char *line);
 void				color(int fd, int *color, char c, t_obj *o);
 void				size(int fd, double *size);
 void				effect(int fd, double *eff);

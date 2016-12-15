@@ -21,7 +21,7 @@ int		texture_earth(double u, double v, char *str, void *mlx)
 
 	if (str)
 	{
-		test = mlx_xpm_file_to_image(mlx, "./resources/earth.xpm",
+		test = mlx_xpm_file_to_image(mlx, "./resources/hexpattern.xpm",
 			&s.heigh, &s.weigh);
 		s.data = mlx_get_data_addr(test, &s.y_line, &s.x_line, &px);
 		free(test);

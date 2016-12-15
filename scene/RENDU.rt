@@ -1,0 +1,125 @@
+scene {
+	name {RENDU1}
+camera {pos{890.000000;525.000000;0.000000}, dir{0.000000;1.000000;2.000000}}
+spot {
+name {co1cuou}
+type {point}
+camera {pos{890.000000;525.000000;0.000000}, dir{1.000000;1.000000;5.000000}}
+color { 0xffffff }
+}
+ambiance { 0xffffff ; 0 }
+objects {
+simple_obj {
+	name { plan miroir derriere }
+camera {pos{890.000000;537.500000;-35.000000}, dir{0.000000;0.000000;1.000000}}
+type { plan }
+size {0.300000;40.000000;0.000000}
+effect {0.000000;100.000000;0.000000;0.000000}
+color { 0x2266ff }
+}
+simple_obj {
+	name { plan miroir devant }
+camera {pos{890.000000;537.500000;35.000000}, dir{0.000000;0.000000;1.000000}}
+type { plan }
+size {0.300000;40.000000;0.000000}
+effect {0.000000;100.000000;0.000000;0.000000}
+color { 0x2266ff }
+}
+simple_obj {
+	name { Cylindre arriere haut }
+camera {pos{890.000000;537.500000;-35.000000}, dir{1.000000;0.000000;0.000000}}
+type { cylindre }
+size {0.300000;40.000000;0.000000}
+effect {0.000000;0.000000;0.000000;0.000000}
+color { 0x2266ff }
+}
+simple_obj {
+	name { Cylindre arriere bas }
+camera {pos{890.000000;512.500000;-35.000000}, dir{1.000000;0.000000;0.000000}}
+type { cylindre }
+size {0.300000;40.000000;0.000000}
+effect {0.000000;0.000000;0.000000;0.000000}
+color { 0x2266ff }
+}
+simple_obj {
+	name { Cylindre arriere gauche }
+camera {pos{870.000000;525.000000;-35.000000}, dir{0.000000;1.000000;0.000000}}
+type { cylindre }
+size {0.300000;25.000000;0.000000}
+effect {0.000000;0.000000;0.000000;0.000000}
+color { 0x2266ff }
+}
+simple_obj {
+	name { Cylindre arriere droit }
+camera {pos{910.000000;525.000000;-35.000000}, dir{0.000000;1.000000;0.000000}}
+type { cylindre }
+size {0.300000;25.000000;0.000000}
+effect {0.000000;0.000000;0.000000;0.000000}
+color { 0x2266ff }
+}
+simple_obj {
+	name { Cylindre droite bas }
+camera {pos{910.000000;512.500000;0.000000}, dir{0.000000;0.000000;1.000000}}
+type { cylindre }
+size {0.300000;70.000000;0.000000}
+effect {0.000000;0.000000;0.000000;0.000000}
+color { 0x2266ff }
+}
+simple_obj {
+	name { Cylindre gauche bas }
+camera {pos{870.000000;512.500000;0.000000}, dir{0.000000;0.000000;1.000000}}
+type { cylindre }
+size {0.300000;70.000000;0.000000}
+effect {0.000000;0.000000;0.000000;0.000000}
+color { 0x2266ff }
+}
+simple_obj {
+	name { Cylindre gauche haut }
+camera {pos{870.000000;537.500000;0.000000}, dir{0.000000;0.000000;1.000000}}
+type { cylindre }
+size {0.300000;70.000000;0.000000}
+effect {0.000000;0.000000;0.000000;0.000000}
+color { 0x2266ff }
+}
+simple_obj {
+	name { Cylindre droite haut }
+camera {pos{910.000000;537.500000;0.000000}, dir{0.000000;0.000000;1.000000}}
+type { cylindre }
+size {0.300000;70.000000;0.000000}
+effect {0.000000;0.000000;0.000000;0.000000}
+color { 0x2266ff }
+}
+simple_obj {
+	name { Cylindre avant haut }
+camera {pos{890.000000;537.500000;35.000000}, dir{1.000000;0.000000;0.000000}}
+type { cylindre }
+size {0.300000;40.000000;0.000000}
+effect {0.000000;0.000000;0.000000;0.000000}
+color { 0x2266ff }
+}
+simple_obj {
+	name { Cylindre avant bas }
+camera {pos{890.000000;512.500000;35.000000}, dir{1.000000;0.000000;0.000000}}
+type { cylindre }
+size {0.300000;40.000000;0.000000}
+effect {0.000000;0.000000;0.000000;0.000000}
+color { 0x2266ff }
+}
+simple_obj {
+	name { Cylindre avant gauche }
+camera {pos{870.000000;525.000000;35.000000}, dir{0.000000;1.000000;0.000000}}
+type { cylindre }
+size {0.300000;25.000000;0.000000}
+effect {0.000000;0.000000;0.000000;0.000000}
+color { 0x2266ff }
+}
+simple_obj {
+	name { Cylindre avant droit }
+camera {pos{910.000000;525.000000;35.000000}, dir{0.000000;1.000000;0.000000}}
+type { cylindre }
+size {0.300000;25.000000;0.000000}
+effect {0.000000;0.000000;0.000000;0.000000}
+color { 0x2266ff }
+}
+}
+}

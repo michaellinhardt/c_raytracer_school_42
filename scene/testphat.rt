@@ -4,7 +4,7 @@ scene {
 	spot {	
 	name {co1cuou}
 type {point}						
-		camera {pos{890; 625; -50}, dir{1 ; 1; 5}}
+		camera {pos{890; 525; -50}, dir{1 ; 1; 5}}
 		color { 0xFFffff }					
 	}
 	ambiance { 0x452d6e; 52 }					
@@ -70,7 +70,7 @@ type {point}
 			camera {pos{ 878; 525; 200}, dir{11 ; 0 ; 0}}				
 			type { plan }				
 			size { 0 ; 0 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0}	
+			effect { 0 ; 80 ; 0 ; 0}	
 			color { 0xFF0000 }				
 		}		
 		simple_obj {
@@ -78,7 +78,7 @@ type {point}
 			camera {pos{ 902; 525; 200}, dir{-1 ; 0 ; 0}}				
 			type { plan }				
 			size { 0 ; 0 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0}	
+			effect { 0 ; 80 ; 0 ; 0}	
 			color { 0xFFFFFF }				
 		}		
 		simple_obj {
@@ -94,7 +94,7 @@ type {point}
 			camera {pos{ 900; 535; 200}, dir{0 ; 1 ; 0}}				
 			type { plan }				
 			size { 0 ; 0 ; 0 }			
-			effect { 0 ;100 ; 0 ; 0}	
+			effect { 0 ;80 ; 0 ; 0}	
 			color { 0xFFFFFF }				
 		}
 		simple_obj {
@@ -102,7 +102,7 @@ type {point}
 			camera {pos{ 900; 515; 200}, dir{0 ; 1 ; 0}}				
 			type { plan }				
 			size { 0 ; 0 ; 0 }			
-			effect { 0 ;100 ; 0 ; 0}	
+			effect { 0 ;80 ; 0 ; 0}	
 			color { 0xFF00FF }				
 		}		
 	}
