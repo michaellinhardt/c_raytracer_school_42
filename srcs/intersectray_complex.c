@@ -1,74 +1,77 @@
 #include "raystruct.h"
 
-double intersectray_complex(t_ray *r, t_obj *p, int *col)
+void	inter_complex_with_eff(t_ray *r, t_obj *p, int *col, t_complex *c)
 {
-	double		t;
-	t_obj		*tmp;
-	t_obj		*temp;
-	double		nearest[2];
-	t_inter		i;
-	t_vector	norm;
-	double		new_nearest;
-
-	tmp = p->comp;
-	nearest[0] = -1;
-	nearest[1] = INT_MAX;
-	while (tmp)
+	c->tmp = p->comp;
+	c->nearest[0] = -1;
+	c->nearest[1] = INT_MAX;
+	while (c->tmp)
 	{
-		if (tmp->eff[3])
+		if (c->tmp->eff[3])
 		{
-			i.inter1 = -1;
-			i.inter2 = INT_MAX;
-			t = lenray_type(r, tmp, &i, col);
-			if (t > EPS && i.inter1 != -1)
-				if (nearest[0] == -1 || (i.inter1 < nearest[0]) || i.inter2 > nearest[1])
+			c->i.inter1 = -1;
+			c->i.inter2 = INT_MAX;
+			c->t = lenray_type(r, c->tmp, &c->i, col);
+			if (c->t > EPS && c->i.inter1 != -1)
+				if (c->nearest[0] == -1 || (c->i.inter1 < c->nearest[0]) ||
+				c->i.inter2 > c->nearest[1])
 				{
-					if (nearest[0] == -1 || i.inter1 < nearest[0])
-						nearest[0] = i.inter1;
-					if (nearest[1] == INT_MAX || i.inter2 > nearest[1])
-						nearest[1] = i.inter2;
-					norm = r->norm;
+					if (c->nearest[0] == -1 || c->i.inter1 < c->nearest[0])
+						c->nearest[0] = c->i.inter1;
+					if (c->nearest[1] == INT_MAX || c->i.inter2 > c->nearest[1])
+						c->nearest[1] = c->i.inter2;
+					c->norm = r->norm;
 				}
 		}
-		tmp = tmp->next;
+		c->tmp = c->tmp->next;
 	}
-	tmp = p->comp;
-	temp = NULL;
-	new_nearest = -1;
-	while (tmp) //pour toute la liste d'objets
+	c->tmp = p->comp;
+	c->temp = NULL;
+}
+
+double	intersectray_complex(t_ray *r, t_obj *p, int *col)
+{
+	t_complex c;
+
+	inter_complex_with_eff(r, p, col, &c);
+	c.new_nearest = -1;
+	while (c.tmp)
 	{
-		if (!tmp->eff[3])
+		if (!c.tmp->eff[3])
 		{
-			t = lenray_type(r, tmp, &i, col);
-			if ((t < new_nearest && t > EPS)|| (new_nearest < 0 && t > EPS))
+			c.t = lenray_type(r, c.tmp, &c.i, col);
+			if ((c.t < c.new_nearest && c.t > EPS) || 
+			(c.new_nearest < 0 && c.t > EPS))
 			{
-				if (t > nearest[0] && t < nearest[1] && nearest[0] > 0)
+				if (c.t > c.nearest[0] && c.t < c.nearest[1] &&
+				c.nearest[0] > 0)
 				{
-					if (i.inter2 <= nearest[1] && i.inter1 >= nearest[0])
+					if (c.i.inter2 <= c.nearest[1] &&
+					c.i.inter1 >= c.nearest[0])
 					{
-						tmp = tmp->next;
+						c.tmp = c.tmp->next;
 						continue;
 					}
-					new_nearest = nearest[1];
-					temp = tmp;
-					r->obj = tmp;
-					norm = vector_rev(norm);
+					c.new_nearest = c.nearest[1];
+					c.temp = c.tmp;
+					r->obj = c.tmp;
+					c.norm = vector_rev(c.norm);
 				}
 				else
 				{
-					new_nearest = t;
-					temp = tmp;
-					r->obj = tmp;
-					norm = r->norm;
+					c.new_nearest = c.t;
+					c.temp = c.tmp;
+					r->obj = c.tmp;
+					c.norm = r->norm;
 				}
 			}
 		}
-		tmp = tmp->next;
+		c.tmp = c.tmp->next;
 	}
-	if (new_nearest > EPS)
+	if (c.new_nearest > EPS)
 	{
-		*col = temp->c_o;
-		r->norm = norm;
+		*col = c.temp->c_o;
+		r->norm = c.norm;
 	}
-	return ((new_nearest != -1) ? new_nearest : 0); 
+	return ((c.new_nearest != -1) ? c.new_nearest : 0);
 }

@@ -1,60 +1,51 @@
 #include "raystruct.h"
 
-double intersectray_triangle(t_ray *r, t_obj *p, t_inter *i)
+double	intersectray_triangle(t_ray *r, t_obj *p, t_inter *i)
 {
-	double t;
-	double d;
-	double near;
-	t_obj		*tmp;
-	t_vector new;
-	t_vector test;
-	t_vector c0;
-	t_vector c1;
-	t_vector c2;
-	t_vector c3;
+	t_triangle	tr;	
 	
-	tmp = p->comp;
-	near = INT_MAX;
-	while (tmp)
+	tr.tmp = p->comp;
+	tr.near = INT_MAX;
+	while (tr.tmp)
 	{
-		c0 = vector_sub(tmp->tri[1], tmp->tri[0]);
-		c1 = vector_sub(tmp->tri[2], tmp->tri[0]);
-		test = vector_cross(r->dir, c1);
-		d = vector_dot(c0, test);
-		if (d > -EPS && d < EPS)
+		tr.c0 = vector_sub(tr.tmp->tri[1], tr.tmp->tri[0]);
+		tr.c1 = vector_sub(tr.tmp->tri[2], tr.tmp->tri[0]);
+		tr.test = vector_cross(r->dir, tr.c1);
+		tr.d = vector_dot(tr.c0, tr.test);
+		if (tr.d > -EPS && tr.d < EPS)
 		{
-			tmp = tmp->next;
+			tr.tmp = tr.tmp->next;
 			continue ;
 		}
-		t = 1.0 / d;
-		c2 = vector_sub(r->start, tmp->tri[0]);
-		double u = t * vector_dot(c2, test);
-		if (u < 0.0 || u > 1.0)
+		tr.t = 1.0 / tr.d;
+		tr.c2 = vector_sub(r->start, tr.tmp->tri[0]);
+		tr.u = tr.t * vector_dot(tr.c2, tr.test);
+		if (tr.u < 0.0 || tr.u > 1.0)
 		{
-			tmp = tmp->next;
+			tr.tmp = tr.tmp->next;
 			continue ;	
 		}
-		c3 = vector_cross(c2, c0);
-		double v = t * vector_dot(r->dir, c3);
-		if (v < 0.0 || u + v > 1.0)
+		tr.c3 = vector_cross(tr.c2, tr.c0);
+		tr.v = tr.t * vector_dot(r->dir, tr.c3);
+		if (tr.v < 0.0 || tr.u + tr.v > 1.0)
 		{
-			tmp = tmp->next;
+			tr.tmp = tr.tmp->next;
 			continue ;	
 		}
-		t = t * vector_dot(c1, c3);
-		if (t > 0.01 && t < near)
+		tr.t = tr.t * vector_dot(tr.c1, tr.c3);
+		if (tr.t > 0.01 && tr.t < tr.near)
 		{
-			new = tmp->nor;
-			near = t;
+			tr.new_norm = tr.tmp->nor;
+			tr.near = tr.t;
 		}
-		tmp = tmp->next;
+		tr.tmp = tr.tmp->next;
 	}
-	if (near > EPS && near < INT_MAX)
+	if (tr.near > EPS && tr.near < INT_MAX)
 	{
-		r->norm = new;
-		i->inter1 = near;
+		r->norm = tr.new_norm;
+		i->inter1 = tr.near;
 		r->norm = vector_normalize(r->norm);
-		return (near);
+		return (tr.near);
 	}
 	return (0);
 }

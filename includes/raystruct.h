@@ -141,11 +141,75 @@ typedef struct		s_sphere
 	t_vector		pos;
 }					t_sphere;
 
+typedef struct		s_triangle
+{
+	double			t;
+	double			d;
+	double			u;
+	double			v;
+	double			near;
+	t_obj			*tmp;
+	t_vector 		new_norm;
+	t_vector 		test;
+	t_vector 		c0;
+	t_vector 		c1;
+	t_vector 		c2;
+	t_vector 		c3;
+}					t_triangle;
+
 typedef struct		s_inter
 {
 	double inter1;
 	double inter2;
 }					t_inter;
+typedef struct		s_complex
+{
+	double		t;
+	t_obj		*tmp;
+	t_obj		*temp;
+	double		nearest[2];
+	t_inter		i;
+	t_vector	norm;
+	double		new_nearest;
+}					t_complex;
+
+typedef struct		s_cone
+{
+	double			previous_value1;
+	double			previous_value2;
+	t_second_degree	second;
+	double			k;
+	t_vector		pos;
+	t_vector		dir;
+	t_vector		x;
+	t_vector		inter_pos;
+	t_vector		lambda;
+	double			size_cone;
+	double			dist_plan;
+	t_vector		plan_pos;
+	t_vector		plan_dir;
+	t_vector		test1;
+	t_vector		test2;
+	double			dist_inter1;
+	double			dist_inter2;
+}					t_cone;
+
+
+typedef struct		s_carre
+{
+	double	t_min;
+	double	tmax;
+	double	t;
+	double	tymin;
+	double	tymax;
+	double	tzmin;
+	double	tzmax;
+	double	dist;
+	t_vector hitpoint;
+	t_vector rec_pos;
+	t_vector calc;
+}					t_carre;
+
 
 /*
 **									write_img.c
