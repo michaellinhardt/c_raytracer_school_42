@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 19:53:30 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/11/02 01:30:25 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/12/16 19:10:33 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "raystruct.h"
 #include <glib.h>
 #include <gtk/gtk.h>
+#include <gdk/gdk.h>
 
 typedef struct	s_gen t_gen;
 
@@ -43,6 +44,10 @@ void			pscene_object_update_type(GtkWidget *pwidget, gpointer data);
  */
 void			pscene_spot_hydrate(t_gen *raytracer);
 void			pscene_spot_update(t_gen *raytracer);
+/*
+ ** @Filter model section.
+ */
+void			pfilter_model_hydrate(t_gen *raytracer);
 /*
  ** @Callback section.
  */

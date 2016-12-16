@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/17 17:52:47 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/11/01 23:50:32 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/12/16 19:08:25 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void		pscene_object_update(t_gen *raytracer)
 	object->size[0] = ft_atoi(gtk_entry_get_text(GTK_ENTRY(raytracer->pscene_object_size_x)));
 	object->size[1] = ft_atoi(gtk_entry_get_text(GTK_ENTRY(raytracer->pscene_object_size_y)));
 	object->size[2] = ft_atoi(gtk_entry_get_text(GTK_ENTRY(raytracer->pscene_object_size_z)));
-	object->c_o = ft_atoi_base(gtk_entry_get_text(GTK_ENTRY(raytracer->pscene_object_color)), "0123456789ABCDEF");
+	object->c_o = ft_atoi_base(gtk_entry_get_text(GTK_ENTRY(raytracer->pscene_object_color)),
+		"0123456789ABCDEF");
 	object->eff[3] = ft_atoi(gtk_entry_get_text(GTK_ENTRY(raytracer->pscene_object_negative)));
 	object->eff[0] = ft_atoi(gtk_entry_get_text(GTK_ENTRY(raytracer->pscene_object_transparence)));
 	object->eff[1] = ft_atoi(gtk_entry_get_text(GTK_ENTRY(raytracer->pscene_object_reflexion)));

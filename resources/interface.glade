@@ -892,7 +892,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkComboBox" id="pfilter_choose_filter">
+                                  <object class="GtkComboBoxText" id="pfilter_choose_filter">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="margin_bottom">5</property>

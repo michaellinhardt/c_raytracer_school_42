@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 02:15:07 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/11/02 04:37:15 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/12/16 19:18:38 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,6 @@ G_MODULE_EXPORT void	pscene_button_load_clicked(GtkWidget *pwidget, gpointer dat
 	tmp = NULL;
 	raytracer = (t_gen *)data;
 	raytracer->to_move = NULL;
-	(void)chooser;
-	(void)filename;
 	chooser = GTK_FILE_CHOOSER(raytracer->pscene_choosefile);
 	filename = gtk_file_chooser_get_filename(chooser);
 	parse_scene(raytracer, filename);
@@ -145,7 +143,8 @@ G_MODULE_EXPORT void	pscene_button_load_clicked(GtkWidget *pwidget, gpointer dat
 	}
 	/*
 	 ** @Lancement de l'affichage.
-	 */	
+	 */
+	pfilter_model_hydrate(raytracer);
 	gtk_combo_box_text_remove_all(GTK_COMBO_BOX_TEXT(raytracer->pscene_spot_select));
 	stmp = raytracer->sc->spot;
 	while (stmp)
