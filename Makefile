@@ -42,6 +42,7 @@ SRCS = main.c\
 	  intersectray_boloid.c\
 	  intersectray_cone.c\
 	  equa_sec.c\
+	  ft_shadow.c\
 	  cut_object.c\
 	  color_functions.c\
 	  perlin.c\

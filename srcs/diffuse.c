@@ -6,32 +6,11 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 15:39:57 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/12/18 17:28:40 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/18 22:07:17 by bbrunell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raystruct.h"
-
-static int		ft_shadow(t_obj *s, t_color *c, t_scene *sc)
-{
-	t_ray	r;
-	double	dist[2];
-
-	r.start = new_vector(c->spot_pos.x, c->spot_pos.y, c->spot_pos.z);
-	dist[0] = vector_dist(r.start, c->hitpoint);
-	r.dir = vector_normalize(vector_sub(c->hitpoint, c->spot_pos));
-	while (s)
-	{
-		if (!s->eff[3])
-		{
-			dist[1] = lenray(sc, &r);
-			if (dist[1] > EPS && dist[1] < dist[0] - EPS)
-				return (1);
-		}
-		s = s->next;
-	}
-	return (0);
-}
 
 static void		diffuse_shadow_specular_end(t_color *c,
 	t_ray *r, double *speculaire, double *obj_dotn)
@@ -44,6 +23,8 @@ static void		diffuse_shadow_specular_end(t_color *c,
 	c->i_l[c->i] = (*obj_dotn > 0 && *obj_dotn <= 90) ? c->i_l[c->i] : 0;
 	*speculaire = vector_dot(c->mirror_vec_light, c->vec_obj_eye);
 	*speculaire = (*speculaire > 0 && *speculaire <= 90) ? *speculaire : 0;
+	if (c->spot->type & DIR)
+		speculaire = 0;
 }
 
 static double	diffuse_shadow_specular(t_ray *r, t_color *c, t_scene *sc,
@@ -57,18 +38,14 @@ t_obj *tmp)
 	c->spot->pos[2]);
 	color_composants(c->spot->c_s, c->i_l);
 	if (c->spot->type & POINT)
-	{
-		c->spot_pos = new_vector(c->spot->pos[0], c->spot->pos[1],
-			c->spot->pos[2]);
 		c->vec_obj_light = vector_dir(c->spot_pos, c->hitpoint);
-	}
 	else if (c->spot->type & DIR)
 		c->vec_obj_light = vectormultby_scalar(vector_normalize(
 			new_vector(c->spot->pos[3], c->spot->pos[4], c->spot->pos[5])), -1);
 	c->dot_light_norm = vector_dot(c->vec_obj_light, r->norm);
 	c->i_l[c->i] = (ft_shadow(sc->obj, c, sc) == 0) ? c->i_l[c->i] : 0;
-	if (vector_dot(r->norm, vector_normalize(vector_sub(c->hitpoint,
-	c->spot_pos))) > 0 && tmp->type == PLAN)
+	if (vector_dot(r->norm, vectormultby_scalar(c->vec_obj_light, -1)) > 0 &&
+	tmp->type == PLAN)
 		return (0);
 	diffuse_shadow_specular_end(c, r, &speculaire, &obj_dotn);
 	return (c->i_l[c->i] = 0 ? 0 : c->i_l[c->i] * (c->rgb[c->i] *
@@ -77,18 +54,13 @@ t_obj *tmp)
 
 static void		diffuse_end(t_ray *r, t_obj *tmp, t_color *c, t_scene *sc)
 {
-	int		len;
-
-	len = 0;
-	while (c->spot && ++len)
-		c->spot = c->spot->next;
 	while (++c->i < 3)
 	{
 		c->spot = sc->spot;
 		c->col = 0;
 		while (c->spot)
 		{
-			c->col = c->col + diffuse_shadow_specular(r, c, sc, tmp) / len;
+			c->col = c->col + diffuse_shadow_specular(r, c, sc, tmp);
 			c->spot = c->spot->next;
 		}
 		c->intensity[c->i] = sc->amb[1] * c->rgb[c->i] * c->i_a[c->i] + c->col;

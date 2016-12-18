@@ -393,6 +393,7 @@ void				antialiasing(unsigned char *t, int rowstride, int index);
 int					texture(t_obj *tmp, t_vector hitpoint);
 double				noise(t_ray *r, t_vector hitpoint, double bump_mapping);
 double				getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1);
+int					ft_shadow(t_obj *s, t_color *c, t_scene *sc);
 
 
 
