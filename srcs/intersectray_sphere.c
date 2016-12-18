@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersectray_sphere.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrunell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 20:08:10 by bbrunell          #+#    #+#             */
-/*   Updated: 2016/12/15 20:08:13 by bbrunell         ###   ########.fr       */
+/*   Updated: 2016/12/18 12:32:30 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static double	cut_or_not(t_ray *r, t_obj *s, t_sphere *sphere, t_inter *i)
 	{
 		if (!cut_object(s, sphere->second.dist, r, 0))
 		{
+			return (0);
 			if (sphere->second.dist < ((-sphere->second.b
 				+ sqrtf(sphere->second.discriminant))
 			/ (2 * sphere->second.a)))
@@ -34,8 +35,6 @@ static double	cut_or_not(t_ray *r, t_obj *s, t_sphere *sphere, t_inter *i)
 				/ (2 * sphere->second.a));
 			}
 			r->norm = vector_rev(r->norm);
-			if (!cut_object(s, sphere->second.dist, r, 1))
-				return (0);
 		}
 	}
 	return (sphere->second.dist);

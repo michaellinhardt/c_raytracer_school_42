@@ -14,7 +14,7 @@ scene {
 			camera {pos{1060 ; 550 ; 0}, dir{-10 ; 0 ; 0 }}
 			type { plan }				
 			size { 1. ; 0.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}			
+			effect { 0 ; 0 ; 0 ; 0;0;0}			
 			color { 0x00FF00 }				
 		}
 		simple_obj {
@@ -22,7 +22,7 @@ scene {
 			camera {pos{0 ; 550 ; 0}, dir{10 ; 0 ; 0 }}
 			type { plan }				
 			size { 1. ; 0.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}			
+			effect { 0 ; 0 ; 0 ; 0;0;0}			
 			color { 0xFF0000 }				
 		}
 		complex_obj {
@@ -32,21 +32,21 @@ scene {
 				camera {pos{ 890; 535; 22}, dir{1 ;1 ; 0}}				
 				type { sphere }				
 				size { 7 ; 5.0 ; 0 }			
-				effect { 0 ; 0 ; 0 ; 0}			
+				effect { 0 ; 0 ; 0 ; 0;0;0}			
 				color { 0xFF0000 }				
 			}
 			simple_obj {
 				camera {pos{ 895; 530; 18}, dir{1 ;1 ; 0}}				
 				type { sphere }				
 				size { 7 ; 5.0 ; 0 }			
-				effect { 0 ; 0 ; 0 ; 1}			
+				effect { 0 ; 0 ; 0 ; 1;0;0}			
 				color { 0x00ff00 }				
 			}
 			simple_obj {
 				camera {pos{ 890; 525; 22}, dir{1 ;1 ; 0}}				
 				type { sphere }				
 				size { 7 ; 5.0 ; 0 }			
-				effect { 0 ; 100 ; 0 ; 0}			
+				effect { 0 ; 100 ; 0 ; 0;0;0}			
 				color { 0x0000FF }				
 			}
 		}
