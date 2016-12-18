@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/21 05:00:54 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/17 19:27:30 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/18 02:36:27 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,6 @@ static void		color_mid(char *tmp, char *line, int *color)
 		error(3, "color");
 }
 
-void			color_text(char *str, t_obj *o)
-{
-	char *tmp;
-
-	tmp = ft_strsub(str, 9, ft_strlen(str) - 10);
-	ft_strdel(&str);
-	str = ft_strtrim(tmp);
-	ft_strdel(&tmp);
-	if (ft_strequ(str, "earth"))
-		o->text ^= EARTH;
-	else if (ft_strequ(str, "fire"))
-		o->text ^= FIRE;
-	else if (ft_strequ(str, "black"))
-		o->text ^= BLACK;
-	else if (ft_strequ(str, "ice"))
-		o->text ^= ICE;
-	else
-		error(3, "color");
-	ft_strdel(&str);
-}
-
 void			color(int fd, int *color, char c, t_obj *o)
 {
 	char	*line;
@@ -92,14 +71,11 @@ void			color(int fd, int *color, char c, t_obj *o)
 		error(3, "color");
 	if (c)
 	{
-		if (get_next_line(fd, &line) > 0 && (tmp = ft_strtrim(line))
-			&& !ft_strncmp(tmp, "}", 1))
-		{
-			ft_strdel(&line);
-			ft_strdel(&tmp);
-		}
-		else
+		if (get_next_line(fd, &line) < 0 || !(tmp = ft_strtrim(line))
+			|| ft_strncmp(tmp, "}", 1))
 			error(3, "color");
+		ft_strdel(&line);
+		ft_strdel(&tmp);
 	}
 }
 

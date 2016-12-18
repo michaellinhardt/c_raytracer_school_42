@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/18 21:33:26 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/18 00:19:21 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -318,6 +318,13 @@ double				intersectray_ellipse(t_ray *r, t_obj *s, t_inter *i);
 */
 
 double				perlin(double x, double y, double z);
+
+/*
+**									perlin_next.c  
+*/
+
+void				init_var_d(double *d, double x, double y, double z);
+void				init_var_i(int *i, double x, double y, double z);
 
 /*
 **									ray_touch.c  

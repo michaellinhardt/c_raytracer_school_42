@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/21 06:18:57 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/24 17:20:47 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/18 02:47:37 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,11 @@ static void		effect_mid(double *eff, char **temp, char *tmp)
 	}
 	free(temp);
 	temp = NULL;
-	if (i != 4 || eff[0] < 0 || eff[1] < 0 || eff[2] < 0
+	if (i != 6 || eff[0] < 0 || eff[1] < 0 || eff[2] < 0
 		|| eff[0] > 100 || eff[1] > 100 || eff[2] > 100
-		|| (eff[3] != 0 && eff[3] != 1))
+		|| (eff[3] != 0 && eff[3] != 1)
+		|| (eff[4] != 0 && eff[4] != 1)
+		|| (eff[5] != 0 && eff[5] != 1))
 		error(3, "effect object");
 }
 

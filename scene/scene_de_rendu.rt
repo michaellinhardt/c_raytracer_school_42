@@ -5,13 +5,13 @@ scene {
 		name {co1cuou}
 			type {point}				
 			camera {pos{820; 560; 0}, dir{1 ; 1; 5}}
-			color { 0x5599ff}					
+			color { 0xffffff}					
 	}
 	spot {			
 		name {co1cuou}
 			type {point}				
 			camera {pos{960; 560; 0}, dir{1 ; 1; 5}}
-			color { 0xff9955}					
+			color { 0xffffff}					
 	}
 	ambiance { 0x452d6e; 52 }					
 	objects {
@@ -20,7 +20,7 @@ scene {
 			camera {pos{870 ; 540 ; 50}, dir{0 ; 0 ; -1 }}
 			type { plan }				
 			size { 1. ; 0.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}
+			effect { 0 ; 50 ; 0 ; 0; 1; 1}
 			color { 0x0077ff }				
 		}
 		simple_obj {
@@ -28,7 +28,7 @@ scene {
 			camera {pos{870 ; 540 ; -20}, dir{0 ; 0 ; 1 }}
 			type { plan }				
 			size { 1. ; 0.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}
+			effect { 0 ; 0 ; 0 ; 0; 1 ; 0}
 			color { 0xffff00 }				
 		}
 		simple_obj {
@@ -36,7 +36,7 @@ scene {
 			camera {pos{890 ; 525 ; 35}, dir{0 ; 0 ; -1 }}
 			type { sphere }				
 			size { 3 ; 0.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}
+			effect { 0 ; 0 ; 0 ; 0 ; 0 ; 0}
 			color { 0xff0000 }				
 		}
 		simple_obj {
@@ -44,7 +44,7 @@ scene {
 			camera {pos{ 890; 525; 35}, dir{1 ; -0.5 ; 1}}				
 			type { cylindre }				
 			size { 1 ; 25 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0}			
+			effect { 0 ; 100 ; 0 ; 0 ; 0 ;0}			
 			color { 0x000000 }				
 		}
 		simple_obj {
@@ -52,7 +52,7 @@ scene {
 			camera {pos{ 890; 525; 35}, dir{1 ; 0.5 ; 0}}				
 			type { cylindre }				
 			size { 1 ; 25 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0}			
+			effect { 0 ; 100 ; 0 ; 0; 0 ; 0}			
 			color { 0x000000 }				
 		}
 		simple_obj {
@@ -60,7 +60,7 @@ scene {
 			camera {pos{ 910; 525; 35}, dir{0 ; 1 ; 0}}				
 			type { cylindre }				
 			size { 1 ; 25 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0}			
+			effect { 0 ; 100 ; 0 ; 0; 0 ;0}			
 			color { 0x000000 }				
 		}
 }

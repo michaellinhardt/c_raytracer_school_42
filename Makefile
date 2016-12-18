@@ -7,17 +7,21 @@ LIBFT_INCLUDES = libft/includes
 SRCS = main.c\
 	  error.c\
 	  parse.c\
+	  parse_next.c\
 	  parse_cam.c\
 	  parse_fct.c\
 	  parse_col_amb.c\
 	  parse_size_eff.c\
 	  parse_objects.c\
+	  parse_objects_next.c\
 	  raytracing.c\
 	  ray_touch.c\
 	  write_img.c\
 	  mouse_functions.c\
 	  key_functions.c\
 	  vector_functions.c\
+	  vector_functions_next.c\
+	  vector_functions_bis.c\
 	  threads.c\
 	  shadow_max.c\
 	  write_scene.c\
@@ -36,7 +40,10 @@ SRCS = main.c\
 	  cut_object.c\
 	  color_functions.c\
 	  perlin.c\
+	  perlin_next.c\
 	  texture.c\
+	  add_vector_triangle.c\
+	  parse_lst_triangle.c\
 	  parse_triangle.c\
 	  interface/builder.c\
 	  interface/draw.c\
