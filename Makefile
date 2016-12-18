@@ -17,8 +17,6 @@ SRCS = main.c\
 	  raytracing.c\
 	  ray_touch.c\
 	  write_img.c\
-	  mouse_functions.c\
-	  key_functions.c\
 	  vector_functions.c\
 	  vector_functions_next.c\
 	  vector_functions_bis.c\

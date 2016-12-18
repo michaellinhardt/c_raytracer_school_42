@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/12/18 07:24:11 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/18 07:46:45 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 
 # include "libft.h"
 # include "get_next_line.h"
-# include <mlx.h>			/* pour charger les xpm/textures */
+# include <mlx.h>
 # include <gtk/gtk.h>
 # include <glib.h>
-# include <stdio.h>			/* to del */
 # include <math.h>
 
 /*
@@ -34,7 +33,6 @@
 # define BOLOID 0x80
 # define TRIANGLE 0x100
 # define ELLIPSE 0x200
-
 
 /*
 **	BOOL pour les textures
@@ -54,9 +52,6 @@
 
 # define SAVE 0x1
 
-# define DEBUG 0
-
-
 typedef struct		s_vector
 {
 	double				x;
@@ -72,33 +67,33 @@ typedef struct		s_cut
 
 typedef struct		s_tex
 {
-	char 			*data;
-	int 			heigh;
-	int 			weigh;
-	int 			y_line;
-	int 			x_line;
+	char			*data;
+	int				heigh;
+	int				weigh;
+	int				y_line;
+	int				x_line;
 }					t_tex;
 
 typedef struct		s_spot
 {
 	char			*name;
-	int				type;				/* cf MACRO */
-	double			pos[6];			/* spot position [0-2] x y z ; direction [3-5] x y z*/
-	int				c_s;				/* color 0xRGB */
+	int				type;
+	double			pos[6];
+	int				c_s;
 	void			*next;
 }					t_spot;
 
 typedef struct		s_obj
 {
 	char			*name;
-	int				type;				/* cf MACRO */
-	double			pos[6];				/* obj position [0-2] x y z ; direction [3-5] x y z*/
-	double			size[3];			/* cf doc les gars, quel doc ? ressource/doc.txt ...*/
-	double			eff[6];				/* les valeurs max ? eff[0] = transparence , [1] = reflexion, [2] = refraction, [3] == negatif */
-	int				c_o;				/* color 0xRGB */
-	struct s_obj	*comp;				/* pour les objets complexes */
-	t_vector		tri[3];				/* pour les .obj */
-	t_vector		nor;				/* pour les .obj */
+	int				type;
+	double			pos[6];
+	double			size[3];
+	double			eff[6];
+	int				c_o;
+	struct s_obj	*comp;
+	t_vector		tri[3];
+	t_vector		nor;
 	int				text;
 	t_cut			*cut;
 	void			*next;
@@ -107,21 +102,21 @@ typedef struct		s_obj
 typedef struct		s_scene
 {
 	char			*name;
-	char			nb;					/* numero de la scene */
-	double			cam[6];				/*camera position [0-2] x y z ; direction [3-5] x y z*/
-	double			amb[2];				/* ambiance ; amb[0] == RGB ; amb[1] == % intensité */
+	char			nb;
+	double			cam[6];
+	double			amb[2];
 	t_spot			*spot;
 	t_obj			*obj;
 	void			*next;
 }					t_scene;
 
-typedef struct		s_gen 			/* structure generale */
+typedef struct		s_gen
 {
-	t_obj			*to_move;			/* Objet courant */	
-	t_scene			*sc;				/* Liste des scenes chargees */	
+	t_obj			*to_move;
+	t_scene			*sc;
 	t_spot			*selected_spot;
 	GdkPixbuf		*pixbuf;
-	GtkWidget		*pwindow;			/* La fenetre LOL */
+	GtkWidget		*pwindow;
 	GtkWidget		*pdrawarea;
 	GtkWidget		*pscene_choosefile;
 	GtkWidget		*pscene_current_scene;
@@ -156,10 +151,9 @@ typedef struct		s_gen 			/* structure generale */
 	GtkWidget		*pfilter_button_save;
 	GtkWidget		*pfilter_button_apply;
 	GtkWidget		*pfilter_choose_filter;
-	char 			*data;
-	/* La ou on dessine pour les nuls */	
-	int				rep;				/* pour des booleens (keycode MLX) */
-	char			nb;					/* nombre de scene */
+	char			*data;
+	int				rep;
+	char			nb;
 }					t_gen;
 
 void				error(int i, char *str);
