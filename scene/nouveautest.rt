@@ -4,13 +4,13 @@
 	spot {
 		name {cocuou}
 		type {point}						
-		camera {pos{15; 0; 0}, dir{1 ; 1; 5}}
+		camera {pos{15; 10; 0}, dir{1 ; 1; 5}}
 		color { 0xffffff }					
 	}
 	spot {
 		name {cocuou}
 		type {point}						
-		camera {pos{-15; 0; 0}, dir{1 ; 1; 5}}
+		camera {pos{-15; 10; 0}, dir{1 ; 1; 5}}
 		color { 0xffffff }					
 	}
 	ambiance { 0x452d6e; 0 }					

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/12/18 06:54:07 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/18 09:02:33 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,14 +238,14 @@ t_obj *tmp)
 	c->spot->pos[2]);
 	color_composants(c->spot->c_s, c->i_l);
 	if (c->spot->type & POINT)
-			{
-				c->spot_pos = new_vector(c->spot->pos[0], c->spot->pos[1], c->spot->pos[2]);
-				c->vec_obj_light = vector_dir(c->spot_pos, c->hitpoint);
-			}
-			else if (c->spot->type & DIR)
-			{
-				c->vec_obj_light = vector_normalize(new_vector(c->spot->pos[3], c->spot->pos[4], c->spot->pos[5]));
-			}
+	{
+		c->spot_pos = new_vector(c->spot->pos[0], c->spot->pos[1], c->spot->pos[2]);
+		c->vec_obj_light = vector_dir(c->spot_pos, c->hitpoint);
+	}
+	else if (c->spot->type & DIR)
+	{
+		c->vec_obj_light = vector_normalize(new_vector(c->spot->pos[3], c->spot->pos[4], c->spot->pos[5]));
+	}
 	c->vec_obj_light = vector_normalize(vector_sub(c->spot_pos, c->hitpoint));
 	c->dot_light_norm = vector_dot(c->vec_obj_light, r->norm);
 	c->i_l[c->i] = (ft_shadow(sc->obj, c, sc) == 0) ? c->i_l[c->i] : 0;
@@ -269,7 +269,7 @@ t_obj *tmp)
 int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 {
 	t_color  c;
-	// (void)col;
+	int 	len;
 
 	c.hitpoint = get_hitpoint(r->start, r->dir, nearest);
 	if (!(tmp->type & COMPLEXE))
@@ -281,13 +281,20 @@ int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 	if (tmp->type == PLAN && vector_dot(c.vec_obj_eye, r->norm) < 0)
 	  r->norm = vectormultby_scalar(r->norm, -1);
 	c.i = 0;
+	len = 0;
+	c.spot = sc->spot;
+	while (c.spot)
+	{
+	    c.spot = c.spot->next;
+		++len;
+	}
 	while (c.i < 3)
 	{
 	  c.spot = sc->spot;
 	  c.col = 0;
 	  while (c.spot)
 	  {
-	    c.col = c.col + diffuse_shadow_specular(r, &c, sc, tmp);
+	    c.col = c.col + diffuse_shadow_specular(r, &c, sc, tmp) / len;
 	    c.spot = c.spot->next;
 
 	  }
