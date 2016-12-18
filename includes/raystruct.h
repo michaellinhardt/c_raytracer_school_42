@@ -358,6 +358,9 @@ double				intersectray_complex(t_ray *r, t_obj *s, int *col);
 double				intersectray_boloid(t_ray *r, t_obj *s, t_inter *i);
 double				intersectray_triangle(t_ray *r, t_obj *s, t_inter *i);
 double				intersectray_ellipse(t_ray *r, t_obj *s, t_inter *i);
+double				touch_cone_or_plan(t_ray *r, t_obj *s, t_inter *i, t_cone *c);
+double				inter1_or_plan(t_ray *r, t_obj *s, t_inter *i, t_cone *c);
+double				inter2_or_plan(t_ray *r, t_obj *s, t_inter *i, t_cone *c);
 
 /*
 **									perlin.c

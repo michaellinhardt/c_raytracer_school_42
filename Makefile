@@ -40,6 +40,7 @@ SRCS = main.c\
 	  intersectray_ellipse.c\
 	  intersectray_boloid.c\
 	  intersectray_cone.c\
+	  intersectray_cone2.c\
 	  equa_sec.c\
 	  ft_shadow.c\
 	  cut_object.c\
