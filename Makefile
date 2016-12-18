@@ -21,6 +21,10 @@ SRCS = main.c\
 	  vector_functions_next.c\
 	  vector_functions_bis.c\
 	  threads.c\
+	  diffuse.c\
+	  refraction.c\
+	  reflexion.c\
+	  getnearest.c\
 	  shadow_max.c\
 	  write_scene.c\
 	  write_scene_spot.c\

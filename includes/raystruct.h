@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/12/18 00:19:21 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/18 17:26:03 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define RAYSTRUCT_H
 # define W_Y 1050
 # define W_X 1680
-// # define W_Y 267
-// # define W_X 420
 # define WIN_NAME "RT"
 # define PI 3.14159265359
 # define TEXWIDTH 64
@@ -40,10 +38,28 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <pthread.h>
+# include <gui.h>
 
 # include "mlx.h"
 # include "libft.h"
-#include "raytra_gen.h"
+# include "raytra_gen.h"
+
+typedef struct	s_color
+{
+	t_spot		*spot;
+	t_vector	hitpoint;
+	t_vector	mirror_vec_light;
+	t_vector	vec_obj_eye;
+	t_vector	vec_obj_light;
+	t_vector	spot_pos;
+	double		dot_light_norm;
+	double		intensity[3];
+	double		i_a[3];
+	double		i_l[3];
+	double		rgb[3];
+	double		col;
+	int			i;
+}				t_color;
 
 typedef struct		s_ray
 {
@@ -210,6 +226,17 @@ typedef struct		s_carre
 	t_vector calc;
 }					t_carre;
 
+typedef struct		s_reflex
+{
+	t_ray			nw;
+	int				c[2];
+	int				j[2];
+	double			r_rgb[3];
+	double			t_rgb[3];
+	double			r[3];
+	double			n[4];
+	double			e[2];
+}					t_reflex;
 
 /*
 **									write_img.c
@@ -232,8 +259,9 @@ int					key_reaction(int keycode);
 **									raytracing.c
 */
 void				raytracing(t_gen *s);
-int					diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col);
-int					reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff);
+int					diffuse(t_scene *sc, t_ray *r, double nearest, int col);
+int					reflexion(t_scene *sc, t_ray *r, int *i, double *d);
+int					refraction(t_scene *sc, t_ray *r, int *j, double *e);
 
 /*
 **									vector_functions.c
@@ -361,5 +389,11 @@ void				vintage(unsigned char *t, int rowstride, int index);
 void				black_and_white(unsigned char *t, int rowstride, int index);
 void				lsd(unsigned char *t, int rowstride, int index);
 void				antialiasing(unsigned char *t, int rowstride, int index);
+
+int					texture(t_obj *tmp, t_vector hitpoint);
+double				noise(t_ray *r, t_vector hitpoint, double bump_mapping);
+double				getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1);
+
+
 
 #endif
