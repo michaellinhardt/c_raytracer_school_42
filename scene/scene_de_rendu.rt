@@ -44,7 +44,7 @@ scene {
 			camera {pos{ 890; 525; 35}, dir{1 ; -0.5 ; 1}}				
 			type { cylindre }				
 			size { 1 ; 25 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0 ; 0 ;0}			
+			effect { 0 ; 00 ; 0 ; 0 ; 0 ;0}			
 			color { 0x000000 }				
 		}
 		simple_obj {
@@ -52,7 +52,7 @@ scene {
 			camera {pos{ 890; 525; 35}, dir{1 ; 0.5 ; 0}}				
 			type { cylindre }				
 			size { 1 ; 25 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0; 0 ; 0}			
+			effect { 0 ; 000 ; 0 ; 0; 0 ; 0}			
 			color { 0x000000 }				
 		}
 		simple_obj {
@@ -60,7 +60,7 @@ scene {
 			camera {pos{ 910; 525; 35}, dir{0 ; 1 ; 0}}				
 			type { cylindre }				
 			size { 1 ; 25 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0; 0 ;0}			
+			effect { 0 ; 000 ; 0 ; 0; 0 ;0}			
 			color { 0x000000 }				
 		}
 }

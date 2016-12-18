@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/08/24 17:25:54 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/18 06:54:07 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,7 +320,7 @@ while (c.i < 3)
   c.intensity[c.i] = sc->amb[1] * c.rgb[c.i] * c.i_a[c.i] + c.col;
   c.i++;
 }
-color_normalize(c.intensity, c.intensity, noise(r, c.hitpoint), 0);
+// color_normalize(c.intensity, c.intensity, noise(r, c.hitpoint), 0);
 return (colorfromrgb(c.intensity));
 }
 

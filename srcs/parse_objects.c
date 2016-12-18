@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/21 06:34:57 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/12/18 02:09:08 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/18 04:22:21 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static t_obj	*simple_obj(int fd, char *line, char c)
 		effect(fd, o->eff);
 		color(fd, &o->c_o, 0, o);
 		line = cut(fd, o);
+		ft_strdel(&line);
 	}
 	else
 	{

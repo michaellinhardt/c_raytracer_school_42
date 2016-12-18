@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 00:43:52 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/12/18 02:02:00 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/18 07:27:16 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,28 +71,28 @@ char				*parse_vnormal(int fd, char *l, t_line **v)
 
 void				init_tab(t_line *v, double tab[][3])
 {
-	int		i;
-	int		j;
+	int		i[2];
 	char	**tmp;
 	char	*temp;
 
-	i = 1;
-	while (v && (j = -1))
+	i[0] = 1;
+	while (v && (i[1] = -1))
 	{
 		tmp = ft_strsplit(v->str, ' ');
-		while (tmp[++j] && j < 3)
+		while (tmp[++i[1]] && i[1] < 3)
 		{
-			temp = ft_strtrim(tmp[j]);
+			temp = ft_strtrim(tmp[i[1]]);
 			if (verif_double(temp))
-				tab[i][j] = ft_atob(temp);
+				tab[i[0]][i[1]] = ft_atob(temp);
 			else
-				error(3, "objects");
+				error(3, "obijects");
 			ft_strdel(&temp);
-			ft_strdel(&tmp[j]);
+			ft_strdel(&tmp[i[1]]);
 		}
-		if (++i && j != 3)
+		if (++i[0] && i[1] != 3)
 			error(3, "objects");
-		ft_strdel(tmp);
+		free(tmp);
+		tmp = NULL;
 		ft_strdel(&v->str);
 		v = v->next;
 	}

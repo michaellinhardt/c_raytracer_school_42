@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 23:38:00 by tiboitel          #+#    #+#             */
-/*   Updated: 2016/11/02 00:34:27 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/12/18 07:29:01 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int		power(int n, int pow)
 	a = power(n, pow / 2);
 	if (pow % 2 == 0)
 		return (a * a);
-	else 
+	else
 		return (n * a * a);
 }
 

@@ -6,263 +6,46 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/25 05:39:29 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/24 19:38:17 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/18 07:24:42 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raytra_gen.h"
 
-static void	print_type(t_scene *s, char **to_print, char type)
+static void			print_simple_first(char c, char **to_print,
+	char **tmp, t_obj *obj)
 {
-	char *tmp;
-
-	tmp = *to_print;
-	(void)s;
-	if (type & RECTANGLE)
-		*to_print = ft_strjoin(*to_print, "rectangle }\n");
-	if (type & SPHERE)
-		*to_print = ft_strjoin(*to_print, "sphere }\n");
-	if (type & PLAN)
-		*to_print = ft_strjoin(*to_print, "plan }\n");
-	if (type & CONE)
-		*to_print = ft_strjoin(*to_print, "cone }\n");
-	if (type & CYLINDRE)
-		*to_print = ft_strjoin(*to_print, "cylindre }\n");
-	if (type & COMPLEXE)
-		*to_print = ft_strjoin(*to_print, "complexe }\n");
-	if (type & BOLOID)
-		*to_print = ft_strjoin(*to_print, "para }\n");
-	if (type & TRIANGLE)
-		*to_print = ft_strjoin(*to_print, "triangle }\n");
-	if (type & ELLIPSE)
-		*to_print = ft_strjoin(*to_print, "ellipse }\n");
-	ft_strdel(&tmp);
-}
-
-static void	print_spot_type(t_scene *s, char **to_print, char type)
-{
-	char *tmp;
-
-	tmp = *to_print;
-	(void)s;
-	if (type & DIR)
-		*to_print = ft_strjoin(*to_print, "type {directional}\n");
-	if (type & POINT)
-		*to_print = ft_strjoin(*to_print, "type {point}\n");
-	ft_strdel(&tmp);
-}
-
-static void	print_spot_name(t_scene *s, char **to_print, char* name)
-{
-	char *tmp;
-
-	tmp = *to_print;
-	*to_print = ft_strjoin(*to_print, "name {");
-	ft_strdel(&tmp);
-	tmp = *to_print;
-	*to_print = ft_strjoin(*to_print, name);
-	ft_strdel(&tmp);
-	tmp = *to_print;
-	*to_print = ft_strjoin(*to_print, "}\n");
-	ft_strdel(&tmp);
-	(void)s;
-}
-
-static void	print_cam(t_scene *s, char **to_print, double *cam, char c)
-{
-	char *tmp;
-	char *temp;
-	int i;
-
-	(void)s;
-	tmp = *to_print;
-	if (!c)
-		*to_print = ft_strjoin(*to_print, "camera {pos{");
-	else
-		*to_print = ft_strjoin(*to_print, "cut {pos{");
-	ft_strdel(&tmp);
-	i = 0;
-	while (i < 3)
-	{ 
-		tmp = *to_print;
-		temp = ft_putfloat(cam[i], 0);
-		*to_print = ft_strjoin(*to_print, temp);
-		ft_strdel(&tmp);
-		ft_strdel(&temp);
-		tmp = *to_print;
-		if (i != 2)
-			*to_print = ft_strjoin(*to_print, ";");
-		else
-			*to_print = ft_strjoin(*to_print, "}, dir{");
-		ft_strdel(&tmp);
-		++i;
-	}
-	while (i < 6)
-	{ 
-		tmp = *to_print;
-		temp = ft_putfloat(cam[i], 0);
-		*to_print = ft_strjoin(*to_print, temp);
-		ft_strdel(&tmp);
-		ft_strdel(&temp);
-		tmp = *to_print;
-		if (i != 5)
-			*to_print = ft_strjoin(*to_print, ";");
-		else
-		{
-			*to_print = ft_strjoin(*to_print, "}}\n");
-			break ;
-		}
-		ft_strdel(&tmp);
-		++i;
-	}
-	ft_strdel(&tmp);
-	ft_strdel(&temp);
-}
-static void	print_cut(t_scene *s, char **to_print, t_cut *cut, char c)
-{
-	while (cut)
-	{
-		print_cam(s, to_print, cut->pos, c);
-		cut = cut->next;
-	}
-}
-static void	print_col(t_scene *s, char **to_print, int col)
-{
-	char *tmp;
-	char *temp;
-
-	(void)s;
-	tmp = *to_print;
-	*to_print = ft_strjoin(*to_print, "color { 0x");
-	ft_strdel(&tmp);
-	tmp = *to_print;
-	if ((col & 0xff0000))
-	{
-		temp = ft_itoa_base((col & 0xff0000) >> 16, 16, 0);
-		if (ft_strlen(temp) != 2)
-		{
-			*to_print = ft_strjoin(*to_print, "0");
-			ft_strdel(&tmp);
-			tmp = *to_print;
-		}
-		*to_print = ft_strjoin(*to_print, temp);
-		ft_strdel(&temp);
-	}
-	else
-		*to_print = ft_strjoin(*to_print, "00");
-	ft_strdel(&tmp);
-	tmp = *to_print;
-	if ((col & 0xff00))
-	{
-		temp = ft_itoa_base((col & 0xff00) >> 8, 16, 0);
-		if (ft_strlen(temp) != 2)
-		{
-			*to_print = ft_strjoin(*to_print, "0");
-			ft_strdel(&tmp);
-			tmp = *to_print;
-		}
-		*to_print = ft_strjoin(*to_print, temp);
-		ft_strdel(&temp);
-	}
-	else
-		*to_print = ft_strjoin(*to_print, "00");
-	ft_strdel(&tmp);
-	tmp = *to_print;
-	if ((col & 0xff))
-	{
-		temp = ft_itoa_base((col & 0xff), 16, 0);
-		if (ft_strlen(temp) != 2)
-		{
-			*to_print = ft_strjoin(*to_print, "0");
-			ft_strdel(&tmp);
-			tmp = *to_print;
-		}
-		*to_print = ft_strjoin(*to_print, temp);
-		ft_strdel(&temp);
-	}
-	else
-		*to_print = ft_strjoin(*to_print, "00");
-	ft_strdel(&tmp);
-	tmp = *to_print;
-	*to_print = ft_strjoin(*to_print, " }\n");
-	ft_strdel(&tmp);
-}
-
-static void	print_text(t_scene *s, char **to_print, int col)
-{
-	char *tmp;
-
-	(void)s;
-	tmp = *to_print;
-	if (col & EARTH)
-		*to_print = ft_strjoin(*to_print, "texture { earth ");
-	else if (col & FIRE)
-		*to_print = ft_strjoin(*to_print, "texture { fire ");
-	else if (col & BLACK)
-		*to_print = ft_strjoin(*to_print, "texture { black ");
-	else if (col & ICE)
-		*to_print = ft_strjoin(*to_print, "texture { ice ");
-	ft_strdel(&tmp);
-}
-
-static void	print_size_eff(t_scene *s, char **to_print, double *size, char c)
-{
-	char	*tmp;
-	char	*temp;
-	int		i;
-
-	(void)s;
-	tmp = *to_print;
-	if (!c)
-		*to_print = ft_strjoin(*to_print, "size {");	
-	else
-		*to_print = ft_strjoin(*to_print, "effect {");	
-	ft_strdel(&tmp);
-	i = 0;
-	while (i < 3 + c)
-	{ 
-		tmp = *to_print;
-		temp = ft_putfloat(size[i], 0);
-		*to_print = ft_strjoin(*to_print, temp);
-		ft_strdel(&tmp);
-		ft_strdel(&temp);
-		tmp = *to_print;
-		if (i != 3 + c - 1)
-			*to_print = ft_strjoin(*to_print, ";");
-		else
-			*to_print = ft_strjoin(*to_print, "}\n");
-		ft_strdel(&tmp);
-		++i;
-	}
-}
-
-static void	print_simple(t_scene *s, char **to_print, t_obj *obj, char c)
-{
-	char *tmp;
-
-	tmp = *to_print;
 	if (!c)
 	{
-		*to_print = ft_strjoin(*to_print, "simple_obj {\n\tname { ");	
-		ft_strdel(&tmp);
-		tmp = *to_print;
-		*to_print = ft_strjoin(*to_print, obj->name);	
-		ft_strdel(&tmp);
-		tmp = *to_print;
-		*to_print = ft_strjoin(*to_print, " }\n");	
+		*to_print = ft_strjoin(*to_print, "simple_obj {\n\tname { ");
+		ft_strdel(tmp);
+		*tmp = *to_print;
+		*to_print = ft_strjoin(*to_print, obj->name);
+		ft_strdel(tmp);
+		*tmp = *to_print;
+		*to_print = ft_strjoin(*to_print, " }\n");
 	}
 	else
-		*to_print = ft_strjoin(*to_print, "simple_obj {\n");	
-	ft_strdel(&tmp);
+		*to_print = ft_strjoin(*to_print, "simple_obj {\n");
+	ft_strdel(tmp);
+}
+
+static void			print_simple(t_scene *s, char **to_print,
+	t_obj *obj, char c)
+{
+	char *tmp;
+
+	tmp = *to_print;
+	print_simple_first(c, to_print, &tmp, obj);
 	print_cam(s, to_print, obj->pos, 0);
 	tmp = *to_print;
-	*to_print = ft_strjoin(*to_print, "type { ");	
+	*to_print = ft_strjoin(*to_print, "type { ");
 	ft_strdel(&tmp);
 	print_type(s, to_print, obj->type);
 	print_size_eff(s, to_print, obj->size, 0);
-	print_size_eff(s, to_print, obj->eff, 1);
+	print_size_eff(s, to_print, obj->eff, 3);
 	if (!obj->text)
-		print_col(s, to_print, obj->c_o);
+		print_col(to_print, obj->c_o, NULL);
 	else
 	{
 		print_text(s, to_print, obj->text);
@@ -270,29 +53,29 @@ static void	print_simple(t_scene *s, char **to_print, t_obj *obj, char c)
 		*to_print = ft_strjoin(*to_print, "}\n");
 		ft_strdel(&tmp);
 	}
-	if (obj->cut)
-		print_cut(s, to_print, obj->cut, 1);
+	(obj->cut) ? print_cut(s, to_print, obj->cut, 1) : 1;
 	tmp = *to_print;
-	*to_print = ft_strjoin(*to_print, "}\n");	
+	*to_print = ft_strjoin(*to_print, "}\n");
 	ft_strdel(&tmp);
 }
-static void	print_complexe(t_scene *s, char **to_print, t_obj *obj)
+
+static void			print_complexe(t_scene *s, char **to_print, t_obj *obj)
 {
 	char *tmp;
 
 	(void)s;
 	tmp = *to_print;
-	*to_print = ft_strjoin(*to_print, "complex_obj {\n\tname { ");	
+	*to_print = ft_strjoin(*to_print, "complex_obj {\n\tname { ");
 	ft_strdel(&tmp);
 	tmp = *to_print;
-	*to_print = ft_strjoin(*to_print, obj->name);	
+	*to_print = ft_strjoin(*to_print, obj->name);
 	ft_strdel(&tmp);
 	tmp = *to_print;
-	*to_print = ft_strjoin(*to_print, " }\n");	
+	*to_print = ft_strjoin(*to_print, " }\n");
 	ft_strdel(&tmp);
 	print_cam(s, to_print, obj->pos, 0);
 	tmp = *to_print;
-	*to_print = ft_strjoin(*to_print, "type { ");	
+	*to_print = ft_strjoin(*to_print, "type { ");
 	ft_strdel(&tmp);
 	print_type(s, to_print, obj->type);
 	while (obj->comp)
@@ -301,141 +84,50 @@ static void	print_complexe(t_scene *s, char **to_print, t_obj *obj)
 		obj->comp = obj->comp->next;
 	}
 	tmp = *to_print;
-	*to_print = ft_strjoin(*to_print, "}\n");	
+	*to_print = ft_strjoin(*to_print, "}\n");
 	ft_strdel(&tmp);
 }
 
-static void	print_amb(t_scene *s, char **to_print, int col)
+static void			print_first(char **tp, t_scene *s)
 {
-	char *tmp;
-	char *temp;
-
-	(void)s;
-	tmp = *to_print;
-	*to_print = ft_strjoin(*to_print, "ambiance { 0x");
-	ft_strdel(&tmp);
-	tmp = *to_print;
-	if ((col & 0xff0000))
-	{
-		temp = ft_itoa_base((col & 0xff0000) >> 16, 16, 0);
-		if (ft_strlen(temp) != 2)
-		{
-			*to_print = ft_strjoin(*to_print, "0");
-			ft_strdel(&tmp);
-			tmp = *to_print;
-		}
-		*to_print = ft_strjoin(*to_print, temp);
-		ft_strdel(&temp);
-	}
-	else
-		*to_print = ft_strjoin(*to_print, "00");
-	ft_strdel(&tmp);
-	tmp = *to_print;
-	if ((col & 0xff00))
-	{
-		temp = ft_itoa_base((col & 0xff00) >> 8, 16, 0);
-		if (ft_strlen(temp) != 2)
-		{
-			*to_print = ft_strjoin(*to_print, "0");
-			ft_strdel(&tmp);
-			tmp = *to_print;
-		}
-		*to_print = ft_strjoin(*to_print, temp);
-		ft_strdel(&temp);
-	}
-	else
-		*to_print = ft_strjoin(*to_print, "00");
-	ft_strdel(&tmp);
-	tmp = *to_print;
-	if ((col & 0xff))
-	{
-		temp = ft_itoa_base((col & 0xff), 16, 0);
-		if (ft_strlen(temp) != 2)
-		{
-			*to_print = ft_strjoin(*to_print, "0");
-			ft_strdel(&tmp);
-			tmp = *to_print;
-		}
-		*to_print = ft_strjoin(*to_print, temp);
-		ft_strdel(&temp);
-	}
-	else
-		*to_print = ft_strjoin(*to_print, "00");
-	ft_strdel(&tmp);
-	tmp = *to_print;
-	*to_print = ft_strjoin(*to_print, " ; ");
-	ft_strdel(&tmp);
-	tmp = *to_print;
-	temp = ft_itoa(s->amb[1]);
-	*to_print = ft_strjoin(*to_print, temp);
-	ft_strdel(&tmp);
-	ft_strdel(&temp);
-	tmp = *to_print;
-	*to_print = ft_strjoin(*to_print, " }\n");
-	ft_strdel(&tmp);
+	ft_strdel(&tp[1]);
+	ft_strdel(&tp[0]);
+	tp[0] = ft_strdup("scene {\n\tname {");
+	tp[1] = tp[0];
+	tp[0] = ft_strjoin(tp[0], s->name);
+	ft_strdel(&tp[1]);
+	tp[1] = tp[0];
+	tp[0] = ft_strjoin(tp[0], "1");
+	ft_strdel(&tp[1]);
+	tp[1] = tp[0];
+	tp[0] = ft_strjoin(tp[0], "}\n");
+	ft_strdel(&tp[1]);
+	print_spot(s, &tp[0], &tp[1]);
 }
 
-
-void	print_scene(t_scene *s)
+void				print_scene(t_scene *s)
 {
-	char *to_print;
-	char *tmp;
-	t_spot *spot;
-	t_obj *obj;
-	int fd;
+	char	*tp[2];
+	t_obj	*obj;
+	int		fd;
 
-	if (!s)
+	if (!s || !(tp[1] = ft_strjoin("./scene/", s->name)))
 		return ;
-	if (access("scene", R_OK | W_OK) < 0)
-		system("mkdir scene");
-	tmp = ft_strjoin("./scene/", s->name);
-	to_print = ft_strjoin(tmp, ".rt");
-	fd = open(to_print, O_CREAT | O_RDWR | O_TRUNC, 0755);
-	ft_strdel(&tmp);
-	ft_strdel(&to_print);
-	to_print = ft_strdup("scene {\n\tname {");
-	tmp = to_print;
-	to_print = ft_strjoin(to_print, s->name);
-	ft_strdel(&tmp);
-	tmp = to_print;
-	to_print = ft_strjoin(to_print, "1");
-	ft_strdel(&tmp);
-	tmp = to_print;
-	to_print = ft_strjoin(to_print, "}\n");
-	ft_strdel(&tmp);
-	print_cam(s, &to_print, s->cam, 0);
-	spot = s->spot;
-	while (spot)
-	{
-		tmp = to_print;
-		to_print = ft_strjoin(to_print, "spot {\n");
-		ft_strdel(&tmp);
-		print_spot_name(s, &to_print, spot->name);
-		print_spot_type(s, &to_print, spot->type);
-		print_cam(s, &to_print, spot->pos,0);
-		print_col(s, &to_print, spot->c_s);
-		tmp = to_print;
-		to_print = ft_strjoin(to_print, "}\n");
-		ft_strdel(&tmp);
-		spot = spot->next;
-	}
-	print_amb(s, &to_print, s->amb[0]);
-	tmp = to_print;
-	to_print = ft_strjoin(to_print, "objects {\n");
-	ft_strdel(&tmp);
+	(access("scene", R_OK | W_OK) < 0) ? system("mkdir scene") : 1;
+	tp[0] = ft_strjoin(tp[1], ".rt");
+	fd = open(tp[0], O_CREAT | O_RDWR | O_TRUNC, 0755);
+	print_first(tp, s);
 	obj = s->obj;
 	while (obj)
 	{
-		if (!(obj->type & COMPLEXE))
-			print_simple(s, &to_print, obj,0);
-		else
-			print_complexe(s, &to_print, obj);
-		obj = obj->next;		
+		(!(obj->type & COMPLEXE)) ? print_simple(s, &tp[0], obj, 0)
+		: print_complexe(s, &tp[0], obj);
+		obj = obj->next;
 	}
-	tmp = to_print;
-	to_print = ft_strjoin(to_print, "}\n}\n");
-	ft_strdel(&tmp);
-	write(fd, to_print, ft_strlen(to_print));
-	ft_strdel(&to_print);
+	tp[1] = tp[0];
+	tp[0] = ft_strjoin(tp[0], "}\n}\n");
+	ft_strdel(&tp[1]);
+	write(fd, tp[0], ft_strlen(tp[0]));
+	ft_strdel(&tp[0]);
 	close(fd);
 }

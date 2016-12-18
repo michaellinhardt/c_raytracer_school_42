@@ -25,6 +25,9 @@ SRCS = main.c\
 	  threads.c\
 	  shadow_max.c\
 	  write_scene.c\
+	  write_scene_spot.c\
+	  write_scene_col.c\
+	  write_scene_type.c\
 	  matrice_rot.c\
 	  intersectray_plane.c\
 	  intersectray_cylindre1.c\
