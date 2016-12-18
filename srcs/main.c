@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:09:09 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/17 22:32:20 by tiboitel         ###   ########.fr       */
+/*   Updated: 2016/12/18 18:33:41 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int		usage(int fd)
 
 void	init_struct(t_gen *s)
 {
-	static void *mlx;
-	char *line;
+	static void	*mlx;
+	char		*line;
 
-	mlx = mlx_init();	
+	mlx = mlx_init();
 	line = NULL;
 	ft_strdel(&line);
 	texture_earth(0, 0, "oui", mlx);

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 16:52:24 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/12/18 12:03:06 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/18 18:31:40 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ static char		replace_nearest(t_obj *s, t_ray *r,
 			return (0);
 		nearest[2] = nearest[1];
 		if ((!(s->type & COMPLEXE) && (s->type & PLAN))
-			|| (r->obj && (!(r->obj->type & COMPLEXE) && (r->obj->type & PLAN))))
+			|| (r->obj && (!(r->obj->type & COMPLEXE)
+				&& (r->obj->type & PLAN))))
 			*norm = vector_rev(*norm);
 	}
 	else
@@ -82,12 +83,11 @@ static char		replace_nearest(t_obj *s, t_ray *r,
 		nearest[2] = nearest[3];
 		*norm = r->norm;
 	}
-
 	return (1);
 }
 
 static t_obj	*lenray_final(t_obj *s, t_ray *r,
-	double *nearest, t_vector *norm)
+	double *n, t_vector *norm)
 {
 	t_inter		i;
 	int			color;
@@ -100,25 +100,15 @@ static t_obj	*lenray_final(t_obj *s, t_ray *r,
 		if (!s->eff[3])
 		{
 			r->obj = NULL;
-			nearest[3] = lenray_type(r, s, &i, &color);
-			// if (r->dir.x < 0 || r->dir.y > 0)
-				nearest[3] -= EPS;
-			// else
-				// nearest[3] += EPS;	
-			nearest[4] = i.inter1;
-			nearest[5] = i.inter2;
-			if ((nearest[3] < nearest[2] && nearest[3] > EPS)
-				|| (nearest[2] < EPS && nearest[3] > EPS))
-			{
-				if (replace_nearest(s, r, nearest, norm))
+			n[3] = lenray_type(r, s, &i, &color) - EPS;
+			n[4] = i.inter1;
+			n[5] = i.inter2;
+			if ((n[3] < n[2] && n[3] > EPS) || (n[2] < EPS && n[3] > EPS))
+				if (replace_nearest(s, r, n, norm))
 				{
 					tmp = (s->type != COMPLEXE) ? s : r->obj;
-					if (r->dir.y > 0)
-						nearest[2] -= EPS;
-					else
-						nearest[2] += EPS;
+					n[2] = (r->dir.y > 0) ? n[2] - EPS : n[2] + EPS;
 				}
-			}
 		}
 		s = s->next;
 	}
