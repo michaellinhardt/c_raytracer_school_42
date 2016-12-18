@@ -44,7 +44,7 @@ scene {
 			camera {pos{891.5 ; 530 ; 20}, dir{0 ; 0 ; 1 }}
 			type { cylindre }				
 			size { 1 ; 1000 ; 10 }			
-			effect { 100 ; 0 ; 2.33 ; 0}
+			effect { 100 ; 0 ; 0 ; 0}
 			color { 0xcccc00 }				
 		}
 		simple_obj {
@@ -118,38 +118,6 @@ scene {
 			size { 3 ; 0 ; 0 }			
 			effect { 0 ; 100 ; 0 ; 0}
 			color { 0xff0000 }				
-		}
-		simple_obj {
-			name { sphere }
-			camera {pos{890 ; 540 ; 35}, dir{1 ; 1 ; 1 }}
-			type { cone }				
-			size { 10 ; 45 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0}
-			color { 0x0000ff }				
-		}
-		simple_obj {
-			name { sphere }
-			camera {pos{890 ; 540 ; 35}, dir{-1 ; -1 ; 1 }}
-			type { cone }				
-			size { 10 ; 45 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0}
-			color { 0x00ff00 }				
-		}
-		simple_obj {
-			name { sphere }
-			camera {pos{890 ; 540 ; 35}, dir{1 ; -1 ; -1 }}
-			type { cone }				
-			size { 10 ; 45 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0}
-			color { 0x00ffff }				
-		}
-		simple_obj {
-			name { sphere }
-			camera {pos{890 ; 540 ; 35}, dir{-1 ; 1 ; -1 }}
-			type { cone }				
-			size { 10 ; 45 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0}
-			color { 0xff00ff }				
 		}
 }
 }

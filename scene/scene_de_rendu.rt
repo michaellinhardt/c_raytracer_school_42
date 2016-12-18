@@ -4,7 +4,7 @@ scene {
 	spot {			
 		name {co1cuou}
 			type {point}				
-			camera {pos{820; 560; 0}, dir{1 ; 1; 5}}
+			camera {pos{890; 525; 0}, dir{1 ; 1; 5}}
 			color { 0xffffff}					
 	}
 	spot {			
@@ -44,7 +44,11 @@ scene {
 			camera {pos{ 890; 525; 35}, dir{1 ; -0.5 ; 1}}				
 			type { cylindre }				
 			size { 1 ; 25 ; 0 }			
+<<<<<<< Updated upstream
 			effect { 0 ; 00 ; 0 ; 0 ; 0 ;0}			
+=======
+			effect { 0 ; 100 ; 0 ; 1 ; 0 ; 0}			
+>>>>>>> Stashed changes
 			color { 0x000000 }				
 		}
 		simple_obj {
@@ -61,6 +65,14 @@ scene {
 			type { cylindre }				
 			size { 1 ; 25 ; 0 }			
 			effect { 0 ; 000 ; 0 ; 0; 0 ;0}			
+			color { 0x000000 }				
+		}
+		simple_obj {
+			name { Le cylindre de l'ingenieur }
+			camera {pos{ 890 ; 525 ; 33.7}, dir{1 ; -0.5 ; -2}}				
+			type { cylindre }				
+			size { 0.33 ; 25 ; 0 }			
+			effect { 0 ; 0 ; 0 ; 1; 0 ;0}			
 			color { 0x000000 }				
 		}
 }

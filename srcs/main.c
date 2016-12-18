@@ -52,6 +52,9 @@ int		main(void)
 {
 	t_gen s;
 
+	s.view_angle[0] = 0;
+	s.view_angle[1] = 0;
+	s.view_angle[2] = 0;
 	load_interface(&s);
 	init_struct(&s);
 	gtk_widget_show_all(s.pwindow);

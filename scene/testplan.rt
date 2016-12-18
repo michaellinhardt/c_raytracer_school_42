@@ -3,14 +3,8 @@ scene {
 	camera {pos{890; 525; -50}, dir{0; 1; 2}}				
 	spot {	
 	name {cocuou}
-type {point}						
-		camera {pos{890; 525; -50}, dir{1 ; 1; 5}}
-		color { 0xFFFFFF }					
-	}
-	spot {	
-	name {co1cuou}
-type {point}						
-		camera {pos{90; 600; -50}, dir{1 ; 1; 5}}
+	type { point }						
+		camera {pos{890; 525; -50}, dir{1 ; 0; 1}}
 		color { 0xFFFFFF }					
 	}
 	ambiance { 0x452d6e; 52 }					
@@ -42,17 +36,17 @@ type {point}
 				color { 0xFF0000 }				
 			}
 			simple_obj {
-				camera {pos{ 895; 520; 18}, dir{1 ;1 ; 0}}				
+				camera {pos{ 895; 530; 18}, dir{1 ;1 ; 0}}				
 				type { sphere }				
 				size { 7 ; 5.0 ; 0 }			
-				effect { 0 ; 50 ; 0 ; 1}			
+				effect { 0 ; 0 ; 0 ; 1}			
 				color { 0x00ff00 }				
 			}
 			simple_obj {
 				camera {pos{ 890; 525; 22}, dir{1 ;1 ; 0}}				
 				type { sphere }				
 				size { 7 ; 5.0 ; 0 }			
-				effect { 0 ; 50 ; 0 ; 0}			
+				effect { 0 ; 100 ; 0 ; 0}			
 				color { 0x0000FF }				
 			}
 		}

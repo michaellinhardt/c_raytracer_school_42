@@ -1,37 +1,51 @@
  scene {								
 	name { NAME_SCENE        	 }
-	camera {pos{890; 525; -50}, dir{0; 1; 2}}				
+	camera {pos{0; 0; 0}, dir{0; 0; 1}}				
 	spot {
-	name {cocuou}
-type {point}						
-		camera {pos{890; 525; -50}, dir{1 ; 1; 5}}
-		color { 0xFF0F00 }					
+		name {cocuou}
+		type {point}						
+		camera {pos{15; 0; 0}, dir{1 ; 1; 5}}
+		color { 0xffffff }					
+	}
+	spot {
+		name {cocuou}
+		type {point}						
+		camera {pos{-15; 0; 0}, dir{1 ; 1; 5}}
+		color { 0xffffff }					
 	}
 	ambiance { 0x452d6e; 0 }					
 	objects {
 		simple_obj {
-			name { ROUGE }
-			camera {pos{ 890; 525; 0}, dir{1 ;-0.5 ; 0}}				
-			type { sphere }				
-			size { 7 ; 5.0 ; 0 }			
-			effect { 100 ; 0 ; 1.02 ; 0}			
-			color { 0xFf00e3 }				
-		}
-		simple_obj {
-			name { ROUGE }
-			camera {pos{ 890; 525; 20}, dir{ 0 ; 0 ; -1}}				
+			name { PLAN FACE }
+			camera {pos{ 0; 0; 60}, dir{ 0 ; 0 ; -1}}				
 			type { plan }				
 			size { 7 ; 5.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}			
+			effect { 0 ; 0 ; 0 ; 0 ; 0 ; 0}			
 			color { 0xFf0000 }				
 		}
 		simple_obj {
-			name { ROUGE }
-			camera {pos{ 890; 525; -120}, dir{ 0 ; 0 ; 1}}				
+			name { PLAN DERRIERE }
+			camera {pos{ 0; 0; -60}, dir{ 0 ; 0 ; 1}}				
 			type { plan }				
 			size { 7 ; 5.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}			
-			color { 0x0000ff }				
+			effect { 0 ; 0 ; 0 ; 0; 0 ; 0}			
+			color { 0xFfd700 }				
+		}
+		simple_obj {
+			name { SPHERE BLEUE }
+			camera {pos{ 0; 0; 40}, dir{ 0 ; 0 ; 1}}				
+			type { sphere }				
+			size { 7 ; 5.0 ; 0 }			
+			effect { 0 ; 000 ; 0 ; 0; 0 ; 0}	
+			color { 0x0000ff }			
+		}
+		simple_obj {
+			name { SPHERE NEGATIVE }
+			camera {pos{ 0; -5; 40}, dir{ 0 ; 0 ; 1}}				
+			type { sphere }				
+			size { 7 ; 5.0 ; 0 }			
+			effect { 0 ; 000 ; 0 ; 1; 0 ; 0}	
+			color { 0x0000ff }			
 		}
 	}
 }

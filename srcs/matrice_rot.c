@@ -11,14 +11,16 @@
 /* ************************************************************************** */
 
 #include "raystruct.h"
+#define RAD_TO_DEG (180 / PI)
+#define DEG_TO_RAD (PI / 180)
 
 t_vector	matricerot_x(t_vector v, double angle)
 {
 	t_vector result;
 
 	result.x = v.x;
-	result.y = v.y * cos(angle) + v.z * -sin(angle);
-	result.z = v.y * sin(angle) + v.z * cos(angle);
+	result.y = v.y * cos(DEG_TO_RAD * angle) + v.z * -sin(DEG_TO_RAD * angle);
+	result.z = v.y * sin(DEG_TO_RAD * angle) + v.z * cos(DEG_TO_RAD * angle);
 	return (result);
 }
 
@@ -26,9 +28,9 @@ t_vector	matricerot_y(t_vector v, double angle)
 {
 	t_vector result;
 
-	result.x = v.x * cos(angle) + v.z * sin(angle);
+	result.x = v.x * cos(DEG_TO_RAD * angle) + v.z * sin(DEG_TO_RAD * angle);
 	result.y = v.y;
-	result.z = v.x * -sin(angle) + v.z * cos(angle);
+	result.z = v.x * -sin(DEG_TO_RAD * angle) + v.z * cos(DEG_TO_RAD * angle);
 	return (result);
 }
 
@@ -36,8 +38,8 @@ t_vector	matricerot_z(t_vector v, double angle)
 {
 	t_vector result;
 
-	result.x = v.x * cos(angle) + v.y * -sin(angle);
-	result.y = v.x * sin(angle) + v.y * cos(angle);
+	result.x = v.x * cos(DEG_TO_RAD * angle) + v.y * -sin(DEG_TO_RAD * angle);
+	result.y = v.x * sin(DEG_TO_RAD * angle) + v.y * cos(DEG_TO_RAD * angle);
 	result.z = v.z;
 	return (result);
 }

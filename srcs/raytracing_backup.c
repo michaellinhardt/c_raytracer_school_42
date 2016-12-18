@@ -328,7 +328,7 @@ int 	reflexion(t_scene *sc, t_ray *r, double m, int col, int ret, double eff)
 	return (col);
 }
 
-double	getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1)
+double	getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1, t_vector ray_direction)
 {
 	double	coeffreflex = 0;
 	double	coefftransp = 0;
@@ -343,9 +343,7 @@ double	getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1)
 	// double ebloui;
 	// t_vector poscam;
 	// t_vector dirlight;
-
-	r->dir = vector_normalize(new_vector(x1 - W_X / 2.0, W_Y / 2.0 - y1,
-		(W_Y / 2.0) / tan(70 * 0.5)));
+	r->dir = vector_normalize(ray_direction);
 	new_nearest = lenray(raytracer->sc, r);
 	color = 0;
 	col = 0;
@@ -385,18 +383,27 @@ void *display(void *z)
 	t_ray r;
 	int x;
 	int y;
-
+	t_vector ray_direction;
 	mt = (t_thread*)z;
 	r.start = new_vector(mt->s->sc->cam[0], mt->s->sc->cam[1], mt->s->sc->cam[2]);
 	tmp = mt->s->sc->obj;
 	t = mt->t;
 	y = mt->lim[1] - 1;
+
+	double imageAspectRatio = (double)W_X / (double)W_Y; // assuming width > height 
+
 	while (++y < mt->lim[3])
 	{
 		x = mt->lim[0] - 1;
+		double Py = (1 - 2 * ((y + 0.5) / (double)W_Y) * tan(70 / 2 * M_PI / 180)); 
 		while (++x < mt->lim[2])
-			getnearesthit(&r, mt->s, x, y);
+		{
+			double Px = (2 * ((x + 0.5) / (double)W_X) - 1) * tan(70 / 2 * M_PI / 180) * imageAspectRatio; 
+			ray_direction = vector_sub(new_vector(Px, Py, -1), r.start); // note that this just equal to Vec3f(Px, Py, -1); 
+			getnearesthit(&r, mt->s, x, y, ray_direction);
+		}
 	}
+	// printf("%lf, %lf, %lf\n", mt->s->dir_rot.x, mt->s->dir_rot.y, mt->s->dir_rot.z);
 	return (NULL);
 }
 

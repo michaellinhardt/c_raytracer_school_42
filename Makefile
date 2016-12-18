@@ -5,6 +5,7 @@ INCLUDES = includes/
 LIBFT_INCLUDES = libft/includes
 
 SRCS = main.c\
+	  raytracing.c\
 	  error.c\
 	  parse.c\
 	  parse_next.c\
@@ -14,7 +15,6 @@ SRCS = main.c\
 	  parse_size_eff.c\
 	  parse_objects.c\
 	  parse_objects_next.c\
-	  raytracing.c\
 	  ray_touch.c\
 	  write_img.c\
 	  vector_functions.c\
@@ -68,7 +68,7 @@ GTK_FLAGS = `pkg-config --cflags gtk+-3.0`
 
 GTK_LIBS = `pkg-config --libs gtk+-3.0`
 
-WFLAGS = -Wall -Werror -Wextra -g -march=native $(GTK_FLAGS)
+WFLAGS = -Wall -Werror -Wextra -g -march=native $(GTK_FLAGS) -O3
 
 LFLAGS = -L libft/ -lft -lm -lmlx -framework OpenGL -framework AppKit $(GTK_LIBS)
 

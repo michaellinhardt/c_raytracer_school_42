@@ -76,24 +76,11 @@ int refraction(t_scene *sc, t_ray *r, double dist, int col, int ret, double refr
 	{
 
 		coeffreflex = newray.obj->eff[1] / 100;
-		// coeffreflex = r->obj->eff[1] / 100;
-
-		// coefftransp = newray.obj->eff[0] / 100;
 		coefftransp = r->obj->eff[0] / 100;
-
 		coeffnone = 1 - coefftransp - coeffreflex;
 
-		// if (coeffnone < 0)
-		// {
-		// 	coeffnone = 0;
-		// 	coefftransp = coefftransp / (coeffreflex + coefftransp);
-		// 	coeffreflex = coeffreflex / (coeffreflex + coefftransp);
 
-		// }
-
-
-		if (newray.obj && (newray.obj->type == SPHERE || newray.obj->type == PLAN || newray.obj->type == CYLINDRE || newray.obj->type == RECTANGLE || newray.obj->type == COMPLEXE))
-			color = diffuse(sc, &newray, newray.obj, new_nearest, newray.obj->c_o);
+		color = diffuse(sc, &newray, newray.obj, new_nearest, newray.obj->c_o); // CEST ICI QUE CA DECONNE
 		if (newray.obj->eff[1])
 			reflcolor = reflexion(sc, &newray, new_nearest, col, 0,	newray.obj->eff[1]);
 
@@ -101,32 +88,20 @@ int refraction(t_scene *sc, t_ray *r, double dist, int col, int ret, double refr
 		color_composants(col, rgb);
 		color_composants(reflcolor, refl_rgb);
 
-		rgb[0] = rgb[0] * (1 - coefftransp) + tmp_rgb[0] * (coefftransp);
-		rgb[1] = rgb[1] * (1 - coefftransp) + tmp_rgb[1] * (coefftransp);
-		rgb[2] = rgb[2] * (1 - coefftransp) + tmp_rgb[2] * (coefftransp);
+		rgb[0] = rgb[0] * (coefftransp) + tmp_rgb[0] * (1 - coefftransp);
+		rgb[1] = rgb[1] * (coefftransp) + tmp_rgb[1] * (1 - coefftransp);
+		rgb[2] = rgb[2] * (coefftransp) + tmp_rgb[2] * (1 - coefftransp);
 		
-		// if (!coeffreflex)
-		// {
-			rgb[0] = rgb[0] * coeffnone + tmp_rgb[0] * coefftransp + refl_rgb[0] * coeffreflex;
-			rgb[1] = rgb[1] * coeffnone + tmp_rgb[1] * coefftransp + refl_rgb[1] * coeffreflex;
-			rgb[2] = rgb[2] * coeffnone + tmp_rgb[2] * coefftransp + refl_rgb[2] * coeffreflex;
-		// }
-		// else
-		// {
-			// rgb[0] = rgb[0] * coeffnone + /*tmp_rgb[0] * coefftransp +*/ refl_rgb[0] * coeffreflex * 1.35;
-			// rgb[1] = rgb[1] * coeffnone + /*tmp_rgb[1] * coefftransp +*/ refl_rgb[1] * coeffreflex * 1.35;
-			// rgb[2] = rgb[2] * coeffnone + /*tmp_rgb[2] * coefftransp +*/ refl_rgb[2] * coeffreflex * 1.35;
-		// }
+		rgb[0] = rgb[0] * coeffnone + tmp_rgb[0] * coefftransp + refl_rgb[0] * coeffreflex;
+		rgb[1] = rgb[1] * coeffnone + tmp_rgb[1] * coefftransp + refl_rgb[1] * coeffreflex;
+		rgb[2] = rgb[2] * coeffnone + tmp_rgb[2] * coefftransp + refl_rgb[2] * coeffreflex;
+
 
 		color = colorfromrgb(rgb);
 		newray.norm = vectormultby_scalar(r->norm, -1);
 
 		if (r->obj->name != newray.obj->name)
-		{
-			// newray.norm = r->norm;
-			// newray.norm = vectormultby_scalar(newray.norm, -1);
 			refrhit = 1;
-		}
 
 		if (newray.obj->eff[2] && newray.obj->eff[0])
 			color = refraction(sc, &newray, new_nearest, color, ret + 1, refrhit);
@@ -134,11 +109,13 @@ int refraction(t_scene *sc, t_ray *r, double dist, int col, int ret, double refr
 	return (color);
 }
 
-double noise(t_ray *r, t_vector hitpoint)
+double noise(t_ray *r, t_vector hitpoint, double bump_mapping)
 {
 	double noiseCoef;
 	int level;
-
+	float noiseCoefx;
+	float noiseCoefy;
+	float noiseCoefz;
 
 	// (void)r;
 	noiseCoef = 0;
@@ -146,40 +123,25 @@ double noise(t_ray *r, t_vector hitpoint)
 	while (level < 50)
     {
         noiseCoef += (1.0 / level)  
-            * fabs((perlin(	fabs(level * 0.05 * hitpoint.x),
-            				fabs(level * 0.05 * hitpoint.y),
-            				fabs(level * 0.05 * hitpoint.z))));
+            * fabs((perlin(	fabs(level * 0.15 * hitpoint.x),
+            				fabs(level * 0.15 * hitpoint.y),
+            				fabs(level * 0.15 * hitpoint.z))));
     	level++;
     }
     if (noiseCoef > 1.0)
-    	noiseCoef = 1;
+   	noiseCoef = 1;
 
-
-	float noiseCoefx = perlin(hitpoint.x, hitpoint.y, hitpoint.z);
- 	float noiseCoefy = perlin(hitpoint.y, hitpoint.z, hitpoint.x);
- 	float noiseCoefz = perlin(hitpoint.z, hitpoint.x, hitpoint.y);
-    // r->norm.x = noiseCoefx;
-    // r->norm.y = noiseCoefy;
-    // r->norm.z = noiseCoefz;
-
-
-
-
-
-
-
-	r->norm.x = (1.0f - 0.1 ) * r->norm.x + 0.1 * noiseCoefx;
- 	r->norm.y = (1.0f - 0.1 ) * r->norm.y + 0.1 * noiseCoefy;
- 	r->norm.z = (1.0f - 0.1 ) * r->norm.z + 0.1 * noiseCoefz; 
-
-
-
-
-
- 	if (r->obj->eff[0])
-    	r->norm = vectormultby_scalar(r->norm, -1);
-
-    r->norm = vector_normalize(r->norm);
+   if (bump_mapping)
+	{
+		noiseCoefx = perlin(hitpoint.x, hitpoint.y, hitpoint.z);
+	 	noiseCoefy = perlin(hitpoint.y, hitpoint.z, hitpoint.x);
+	 	noiseCoefz = perlin(hitpoint.z, hitpoint.x, hitpoint.y);
+	
+		r->norm.x = (1.0f - 0.25 ) * r->norm.x + 0.25 * noiseCoefx;
+	 	r->norm.y = (1.0f - 0.25 ) * r->norm.y + 0.25 * noiseCoefy;
+	 	r->norm.z = (1.0f - 0.25 ) * r->norm.z + 0.25 * noiseCoefz; 
+	    r->norm = vector_normalize(r->norm);
+	}
 
     return (noiseCoef);
 }
@@ -243,20 +205,23 @@ typedef struct    s_color
 	int       i;
 }         t_color;
 
-static int		ft_shadow(t_obj *s, t_color *c)
+static int		ft_shadow(t_obj *s, t_color *c, t_scene *sc)
 {
 	t_ray	r;
 	double	dist[2];
-	t_inter	i;
+	// t_inter	i;
 
 	r.start = new_vector(c->spot_pos.x, c->spot_pos.y, c->spot_pos.z);
 	dist[0] = vector_dist(r.start, c->hitpoint);
 	r.dir = vector_normalize(vector_sub(c->hitpoint, c->spot_pos));
 	while (s)
 	{
-		dist[1] = lenray_type(&r, s, &i, 0);
-		if (dist[1] > EPS && dist[1] < dist[0] - EPS)
-			return (1);
+		if (!s->eff[3])
+		{
+			dist[1] = lenray(sc, &r);
+			if (dist[1] > EPS && dist[1] < dist[0] - EPS)
+				return (1);
+		}
 		s = s->next;
 	}
 	return (0);
@@ -272,9 +237,18 @@ t_obj *tmp)
 	c->spot_pos = new_vector(c->spot->pos[0], c->spot->pos[1],
 	c->spot->pos[2]);
 	color_composants(c->spot->c_s, c->i_l);
+	if (c->spot->type & POINT)
+			{
+				c->spot_pos = new_vector(c->spot->pos[0], c->spot->pos[1], c->spot->pos[2]);
+				c->vec_obj_light = vector_dir(c->spot_pos, c->hitpoint);
+			}
+			else if (c->spot->type & DIR)
+			{
+				c->vec_obj_light = vector_normalize(new_vector(c->spot->pos[3], c->spot->pos[4], c->spot->pos[5]));
+			}
 	c->vec_obj_light = vector_normalize(vector_sub(c->spot_pos, c->hitpoint));
 	c->dot_light_norm = vector_dot(c->vec_obj_light, r->norm);
-	c->i_l[c->i] = (ft_shadow(sc->obj, c) == 0) ? c->i_l[c->i] : 0;
+	c->i_l[c->i] = (ft_shadow(sc->obj, c, sc) == 0) ? c->i_l[c->i] : 0;
 	if (vector_dot(r->norm, vector_normalize(vector_sub(c->hitpoint,
 	c->spot_pos))) > 0 && tmp->type == PLAN)
 		return (0);
@@ -294,34 +268,45 @@ t_obj *tmp)
 
 int diffuse(t_scene *sc, t_ray *r, t_obj *tmp, double nearest, int col)
 {
-t_color  c;
+	t_color  c;
+	// (void)col;
 
-(void)col;
-if (!(tmp->text))
-	color_composants(tmp->c_o, c.rgb);
-else
-	color_composants(texture(tmp, get_hitpoint(r->start, r->dir, nearest)), c.rgb);
-color_composants(sc->amb[0], c.i_a);
-c.hitpoint = get_hitpoint(r->start, r->dir, nearest);
-c.vec_obj_eye = vector_normalize(vector_sub(r->start, c.hitpoint));
-if (tmp->type == PLAN && vector_dot(c.vec_obj_eye, r->norm) < 0)
-  r->norm = vectormultby_scalar(r->norm, -1);
-c.i = 0;
-while (c.i < 3)
-{
-  c.spot = sc->spot;
-  c.col = 0;
-  while (c.spot)
-  {
-    c.col = c.col + diffuse_shadow_specular(r, &c, sc, tmp);
-    c.spot = c.spot->next;
+	c.hitpoint = get_hitpoint(r->start, r->dir, nearest);
+	if (!(tmp->type & COMPLEXE))
+		color_composants( (!(tmp->text)) ? tmp->c_o : texture(tmp, c.hitpoint), c.rgb);
+	else
+		color_composants(col, c.rgb);
+	color_composants(sc->amb[0], c.i_a);
+	c.vec_obj_eye = vector_normalize(vector_sub(r->start, c.hitpoint));
+	if (tmp->type == PLAN && vector_dot(c.vec_obj_eye, r->norm) < 0)
+	  r->norm = vectormultby_scalar(r->norm, -1);
+	c.i = 0;
+	while (c.i < 3)
+	{
+	  c.spot = sc->spot;
+	  c.col = 0;
+	  while (c.spot)
+	  {
+	    c.col = c.col + diffuse_shadow_specular(r, &c, sc, tmp);
+	    c.spot = c.spot->next;
 
-  }
-  c.intensity[c.i] = sc->amb[1] * c.rgb[c.i] * c.i_a[c.i] + c.col;
-  c.i++;
-}
-// color_normalize(c.intensity, c.intensity, noise(r, c.hitpoint), 0);
-return (colorfromrgb(c.intensity));
+	  }
+	  c.intensity[c.i] = sc->amb[1] * c.rgb[c.i] * c.i_a[c.i] + c.col;
+	  c.i++;
+	}
+
+
+
+
+
+	if (tmp->eff[4])
+		color_normalize(c.intensity, c.intensity, noise(r, c.hitpoint, tmp->eff[5]), 0);
+
+
+
+
+
+	return (colorfromrgb(c.intensity));
 }
 
 
@@ -413,8 +398,13 @@ double	getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1)
 	// t_vector poscam;
 	// t_vector dirlight;
 
-	r->dir = vector_normalize(new_vector(x1 - W_X / 2.0, W_Y / 2.0 - y1,
-		(W_Y / 2.0) / tan(70 * 0.5)));
+	r->dir = vector_normalize(new_vector(x1 - W_X / 2.0, W_Y / 2.0 - y1, (W_Y / 2.0) / tan(70 * 0.5)));
+	if (raytracer->view_angle[0])
+		r->dir = matricerot_x(r->dir, raytracer->view_angle[0]);
+	if (raytracer->view_angle[1])
+		r->dir = matricerot_y(r->dir, raytracer->view_angle[1]);
+	if (raytracer->view_angle[2])
+		r->dir = matricerot_z(r->dir, raytracer->view_angle[2]);
 	new_nearest = lenray(raytracer->sc, r);
 	color = 0;
 	col = 0;
@@ -440,6 +430,7 @@ double	getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1)
 		diffuse3[0] = coeffreflex * reflexion3[0] + coefftransp * refrac3[0] + coeffnone * diffuse3[0];
 		diffuse3[1] = coeffreflex * reflexion3[1] + coefftransp * refrac3[1] + coeffnone * diffuse3[1];
 		diffuse3[2] = coeffreflex * reflexion3[2] + coefftransp * refrac3[2] + coeffnone * diffuse3[2];
+
 		color = colorfromrgb(diffuse3);
 
 		gtk_put_pixel(raytracer->pixbuf, x1, y1, color, raytracer);
@@ -455,11 +446,16 @@ void *display(void *z)
 	int x;
 	int y;
 
+
 	mt = (t_thread*)z;
 	r.start = new_vector(mt->s->sc->cam[0], mt->s->sc->cam[1], mt->s->sc->cam[2]);
+
+	r.dir = new_vector(mt->s->sc->cam[3], mt->s->sc->cam[4], mt->s->sc->cam[5]);
+
 	tmp = mt->s->sc->obj;
 	t = mt->t;
 	y = mt->lim[1] - 1;
+
 	while (++y < mt->lim[3])
 	{
 		x = mt->lim[0] - 1;
@@ -493,6 +489,7 @@ void raytracing(t_gen *s)
 	int				j;
 	pthread_t		p[MT];
 	unsigned char	*pixbuffer;
+
 
 	s->pixbuf = NULL;
 	if (!c)

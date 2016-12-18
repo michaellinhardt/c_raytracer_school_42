@@ -154,6 +154,7 @@ typedef struct		s_gen
 	char			*data;
 	int				rep;
 	char			nb;
+	double			view_angle[3];
 }					t_gen;
 
 void				error(int i, char *str);
