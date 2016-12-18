@@ -25,7 +25,6 @@ SRCS = main.c\
 	  refraction.c\
 	  reflexion.c\
 	  getnearest.c\
-	  shadow_max.c\
 	  write_scene.c\
 	  write_scene_spot.c\
 	  write_scene_col.c\

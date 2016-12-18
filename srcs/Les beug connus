@@ -1,7 +1,0 @@
-Les bugs connus :
-
-- raffraichissement de la page a chaque key event
-- raffraichissement de la page a quand on veux modifier la position d'un objet avec les bouton exemple : quand on veut taper une position de 1200 cela raffraichi la page pour 1 pour 2, pour 0, et je crois que ca deplace aussi l'objet si il y en a un objet de selection , comme si on utilise les touche de deplacement
-- modif pas pris en compte quand on modifie deux objets
-
-a completer...

@@ -6,11 +6,12 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/12/18 17:26:03 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/18 18:18:50 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYSTRUCT_H
+
 # define RAYSTRUCT_H
 # define W_Y 1050
 # define W_X 1680
@@ -44,28 +45,28 @@
 # include "libft.h"
 # include "raytra_gen.h"
 
-typedef struct	s_color
+typedef struct		s_color
 {
-	t_spot		*spot;
-	t_vector	hitpoint;
-	t_vector	mirror_vec_light;
-	t_vector	vec_obj_eye;
-	t_vector	vec_obj_light;
-	t_vector	spot_pos;
-	double		dot_light_norm;
-	double		intensity[3];
-	double		i_a[3];
-	double		i_l[3];
-	double		rgb[3];
-	double		col;
-	int			i;
-}				t_color;
+	t_spot			*spot;
+	t_vector		hitpoint;
+	t_vector		mirror_vec_light;
+	t_vector		vec_obj_eye;
+	t_vector		vec_obj_light;
+	t_vector		spot_pos;
+	double			dot_light_norm;
+	double			intensity[3];
+	double			i_a[3];
+	double			i_l[3];
+	double			rgb[3];
+	double			col;
+	int				i;
+}					t_color;
 
 typedef struct		s_ray
 {
-	t_vector 		start;
-	t_vector 		dir;
-	t_vector 		norm;
+	t_vector		start;
+	t_vector		dir;
+	t_vector		norm;
 	t_obj			*obj;
 	double			inter[2];
 }					t_ray;
@@ -81,7 +82,7 @@ typedef struct		s_general
 	void			*img;
 	void			*win;
 	void			*mlx;
-	int 			color;
+	int				color;
 	THE				*z;
 }					t_id;
 
@@ -90,9 +91,8 @@ typedef struct		s_thread
 	int				nb;
 	int				lim[4];
 	t_id			*t;
-	t_gen			*s;	
+	t_gen			*s;
 }					t_thread;
-
 
 typedef struct		s_second_degree
 {
@@ -125,7 +125,6 @@ typedef struct		s_cylindre
 	double			dist_inter2_plan;
 	double			dist_inter1_plan;
 }					t_cylindre;
-
 
 typedef struct		s_boloid
 {
@@ -165,12 +164,12 @@ typedef struct		s_triangle
 	double			v;
 	double			near;
 	t_obj			*tmp;
-	t_vector 		new_norm;
-	t_vector 		test;
-	t_vector 		c0;
-	t_vector 		c1;
-	t_vector 		c2;
-	t_vector 		c3;
+	t_vector		new_norm;
+	t_vector		test;
+	t_vector		c0;
+	t_vector		c1;
+	t_vector		c2;
+	t_vector		c3;
 }					t_triangle;
 
 typedef struct		s_inter
@@ -210,20 +209,19 @@ typedef struct		s_cone
 	double			dist_inter2;
 }					t_cone;
 
-
 typedef struct		s_carre
 {
-	double	t_min;
-	double	tmax;
-	double	t;
-	double	tymin;
-	double	tymax;
-	double	tzmin;
-	double	tzmax;
-	double	dist;
-	t_vector hitpoint;
-	t_vector rec_pos;
-	t_vector calc;
+	double			t_min;
+	double			tmax;
+	double			t;
+	double			tymin;
+	double			tymax;
+	double			tzmin;
+	double			tzmax;
+	double			dist;
+	t_vector		hitpoint;
+	t_vector		rec_pos;
+	t_vector		calc;
 }					t_carre;
 
 typedef struct		s_reflex
@@ -238,6 +236,29 @@ typedef struct		s_reflex
 	double			e[2];
 }					t_reflex;
 
+typedef struct		s_refra
+{
+	t_ray			nw;
+	t_vector		tmp;
+	int				color;
+	int				ref;
+	double			rf;
+	double			ndoti;
+	double			two;
+	double			ndot;
+	double			nn;
+	double			r_rb[3];
+	double			t_r[3];
+	double			r[3];
+	double			co[3];
+	int				i[2];
+	double			d[2];
+	double			a;
+	double			b;
+	double			b2;
+	double			d2;
+}					t_refra;
+
 /*
 **									write_img.c
 */
@@ -245,7 +266,7 @@ typedef struct		s_reflex
 void				print_bmp(char *str, t_id t, t_gen *s);
 
 /*
-**	key and mouse functions 		key_functions.c
+**	key and mouse functions			key_functions.c
 **									mouse_functions.c
 */
 
@@ -267,19 +288,19 @@ int					refraction(t_scene *sc, t_ray *r, int *j, double *e);
 **									vector_functions.c
 */
 
-double 				vector_dot(t_vector v1, t_vector v2);
-t_vector 			vector_add(t_vector v1, t_vector v2);
+double				vector_dot(t_vector v1, t_vector v2);
+t_vector			vector_add(t_vector v1, t_vector v2);
 t_vector			vector_cross(t_vector v1, t_vector v2);
-t_vector 			vectordivby_scalar(t_vector v, double scalar);
-t_vector 			vector_sub(t_vector v1, t_vector v2);
-t_vector 			vector_mult(t_vector v1, t_vector v2);
-double 				vector_magnitude(t_vector v);
-t_vector 			vector_normalize(t_vector v);
+t_vector			vectordivby_scalar(t_vector v, double scalar);
+t_vector			vector_sub(t_vector v1, t_vector v2);
+t_vector			vector_mult(t_vector v1, t_vector v2);
+double				vector_magnitude(t_vector v);
+t_vector			vector_normalize(t_vector v);
 t_vector			vectormultby_scalar(t_vector v, double scalar);
-t_vector 			new_vector(double x, double y, double z);
-double 				vector_dist(t_vector v1, t_vector v2);
-t_vector 			vector_dir(t_vector v1, t_vector v2);
-t_vector 			get_hitpoint(t_vector start, t_vector dir, double dist);
+t_vector			new_vector(double x, double y, double z);
+double				vector_dist(t_vector v1, t_vector v2);
+t_vector			vector_dir(t_vector v1, t_vector v2);
+t_vector			get_hitpoint(t_vector start, t_vector dir, double dist);
 t_vector			vector_rev(t_vector v);
 
 /*
@@ -289,80 +310,77 @@ t_vector			vector_rev(t_vector v);
 void				init_threads(t_thread *t, t_id *t_g, t_gen *s);
 
 /*
-**									shadow_max.c
-*/
-
-double				cast_shadow(t_obj *s, t_vector hitpoint, t_spot *spot, t_obj *object);
-
-/*
 **									write_scene.c
 */
 
 void				print_scene(t_scene *s);
-
 
 /*
 **									matrice_rot.c
 */
 
 t_vector			matricerot_x(t_vector v, double angle);
-t_vector 			matricerot_y(t_vector v, double angle);
+t_vector			matricerot_y(t_vector v, double angle);
 t_vector			matricerot_z(t_vector v, double angle);
 
 /*
-**									color_functions.c  
+**									color_functions.c
 */
 
 void				mlx_image_put_pixel(t_id *g, int x, int y, int color);
 void				color_composants(int color, double *ret);
 int					colorfromrgb(double *tab);
-void				color_normalize(double *tab, double *tmp_tab, double factor, int c);
+void				color_normalize(double *tab,
+	double *tmp_tab, double factor, int c);
 
 /*
-**									intersec_ray.c  
+**									intersec_ray.c
 */
 
 double				intersectray_sphere(t_ray *r, t_obj *s, t_inter *i);
 double				intersectray_plane(t_ray *r, t_obj *s, t_inter *i);
-double	intersectray_cylindre(t_ray *r, t_obj *s, t_inter *i);
+double				intersectray_cylindre(t_ray *r, t_obj *s, t_inter *i);
 
-double		cyl_touch_one_plan2(t_ray *r, t_obj *s, t_cylindre *cyl, t_inter *i);
-double		cyl_touch_one_plan(t_ray *r, t_obj *s, t_cylindre *cyl, t_inter *i);
-double		cyl_touch_two_plan(t_ray *r, t_obj *s, t_cylindre *cyl, t_inter *i);
-void		cyl_norm(t_ray *r, t_cylindre *cyl);
-double	equa_sec(double a, double b, double discriminant, t_inter *i);
-double cut_object(t_obj *obj, double dist, t_ray *r, char c);
-double intersectray_cone(t_ray *r, t_obj *s, t_inter *i);
+double				cyl_touch_one_plan2(t_ray *r, t_obj *s,
+	t_cylindre *cyl, t_inter *i);
+double				cyl_touch_one_plan(t_ray *r, t_obj *s,
+	t_cylindre *cyl, t_inter *i);
+double				cyl_touch_two_plan(t_ray *r, t_obj *s,
+	t_cylindre *cyl, t_inter *i);
+void				cyl_norm(t_ray *r, t_cylindre *cyl);
+double				equa_sec(double a, double b,
+	double discriminant, t_inter *i);
+double				cut_object(t_obj *obj, double dist, t_ray *r, char c);
+double				intersectray_cone(t_ray *r, t_obj *s, t_inter *i);
 
-
-double 				intersectray_carre(t_ray *r, t_obj *s, t_inter *i);
-double 				intersectray_complex(t_ray *r, t_obj *s, int *col);
-double 				intersectray_boloid(t_ray *r, t_obj *s, t_inter *i);
-double 				intersectray_triangle(t_ray *r, t_obj *s, t_inter *i);
+double				intersectray_carre(t_ray *r, t_obj *s, t_inter *i);
+double				intersectray_complex(t_ray *r, t_obj *s, int *col);
+double				intersectray_boloid(t_ray *r, t_obj *s, t_inter *i);
+double				intersectray_triangle(t_ray *r, t_obj *s, t_inter *i);
 double				intersectray_ellipse(t_ray *r, t_obj *s, t_inter *i);
 
 /*
-**									perlin.c  
+**									perlin.c
 */
 
 double				perlin(double x, double y, double z);
 
 /*
-**									perlin_next.c  
+**									perlin_next.c
 */
 
 void				init_var_d(double *d, double x, double y, double z);
 void				init_var_i(int *i, double x, double y, double z);
 
 /*
-**									ray_touch.c  
+**									ray_touch.c
 */
 
-double			lenray_type(t_ray *r, t_obj *s, t_inter *i, int *col);
+double				lenray_type(t_ray *r, t_obj *s, t_inter *i, int *col);
 double				lenray(t_scene *sc, t_ray *r);
 
 /*
-**									texture.c  
+**									texture.c
 */
 
 int					texture_earth(double u, double v, char *str, void *mlx);
@@ -394,7 +412,5 @@ int					texture(t_obj *tmp, t_vector hitpoint);
 double				noise(t_ray *r, t_vector hitpoint, double bump_mapping);
 double				getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1);
 int					ft_shadow(t_obj *s, t_color *c, t_scene *sc);
-
-
 
 #endif

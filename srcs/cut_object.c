@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cut_object.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/17 16:54:30 by ocarta-l          #+#    #+#             */
+/*   Updated: 2016/12/18 18:24:01 by ocarta-l         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "raystruct.h"
 
-double cut_object(t_obj *obj, double dist, t_ray *r, char c)
+double		cut_object(t_obj *obj, double dist, t_ray *r, char c)
 {
 	t_ray	tmp;
 	t_cut	*cut;
@@ -10,8 +22,7 @@ double cut_object(t_obj *obj, double dist, t_ray *r, char c)
 
 	new_plan = *obj;
 	new_plan.type = 0;
-	i.inter1 = 0;
-	i.inter2 = 0;
+	ft_bzero(&i, sizeof(t_inter));
 	new_plan.type ^= PLAN;
 	cut = obj->cut;
 	new_plan.cut = NULL;
@@ -23,9 +34,7 @@ double cut_object(t_obj *obj, double dist, t_ray *r, char c)
 		new_plan.pos[1] += obj->pos[1];
 		new_plan.pos[2] += obj->pos[2];
 		t = intersectray_plane(&tmp, &new_plan, &i);
-		if (!c && t > EPS && t < dist)
-			return (0);
-		if (c && t > EPS && t > dist)
+		if ((!c && t > EPS && t < dist) || (c && t > EPS && t > dist))
 			return (0);
 		cut = cut->next;
 	}
