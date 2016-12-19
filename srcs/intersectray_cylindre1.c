@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intersectray_cylindre1.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbrunell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/19 12:23:32 by bbrunell          #+#    #+#             */
+/*   Updated: 2016/12/19 12:23:35 by bbrunell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "raystruct.h"
 
 int		init_and_solve2nd_degree(t_ray *r, t_obj *s, t_cylindre *cyl,
@@ -104,4 +116,3 @@ t_inter *i)
 		return (cyl_touch_one_plan(r, s, &cyl, i));
 	return (touch_nothing_or_two_plan(r, s, &cyl, i));
 }
-
