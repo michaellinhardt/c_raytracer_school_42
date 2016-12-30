@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/12/30 22:39:50 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/31 00:07:03 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,16 @@ typedef struct		s_ray
 
 typedef struct		s_general
 {
-	char			c;
-	double			bpp;
-	int				bit_per_pixel;
+	// char			c;
+	// double			bpp;
+	// int				bit_per_pixel;
 	int				s_line;
-	int				endian;
-	char			*data;
-	void			*img;
-	void			*win;
-	void			*mlx;
-	int				color;
+	// int				endian;
+	// char			*data;
+	// void			*img;
+	// void			*win;
+	// void			*mlx;
+	// int				color;
 	THE				*z;
 }					t_id;
 
