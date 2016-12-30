@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 17:22:00 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/12/18 17:22:44 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/30 22:17:09 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ double			getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1)
 		d[1] = co[0] * ref[1] + co[1] * re[1] + co[2] * d[1];
 		d[2] = co[0] * ref[2] + co[1] * re[2] + co[2] * d[2];
 		c[1] = colorfromrgb(d);
-		gtk_put_pixel(raytracer->pixbuf, x1, y1, c[1], raytracer);
+		// mlx_put_pixel_to_image; char* = raytracer->data , color = c[1]
 	}
 	return (co[3]);
 }

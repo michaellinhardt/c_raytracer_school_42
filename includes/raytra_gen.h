@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/12/18 07:46:45 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/30 22:39:47 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 # define RAYTRA_GEN_H
 
 # include "libft.h"
+# include "mlx_struct.h"
 # include "get_next_line.h"
 # include <mlx.h>
-# include <gtk/gtk.h>
-# include <glib.h>
+// # include <gtk/gtk.h>
+// # include <glib.h>
 # include <math.h>
 
 /*
@@ -112,49 +113,12 @@ typedef struct		s_scene
 
 typedef struct		s_gen
 {
-	t_obj			*to_move;
 	t_scene			*sc;
-	t_spot			*selected_spot;
-	GdkPixbuf		*pixbuf;
-	GtkWidget		*pwindow;
-	GtkWidget		*pdrawarea;
-	GtkWidget		*pscene_choosefile;
-	GtkWidget		*pscene_current_scene;
-	GtkWidget		*pscene_object_select;
-	GtkWidget		*pscene_object_type;
-	GtkWidget		*pscene_object_create;
-	GtkWidget		*pscene_object_update;
-	GtkWidget		*pscene_object_x;
-	GtkWidget		*pscene_object_y;
-	GtkWidget		*pscene_object_z;
-	GtkWidget		*pscene_object_dir_x;
-	GtkWidget		*pscene_object_dir_y;
-	GtkWidget		*pscene_object_dir_z;
-	GtkWidget		*pscene_object_size_x;
-	GtkWidget		*pscene_object_size_y;
-	GtkWidget		*pscene_object_size_z;
-	GtkWidget		*pscene_object_color;
-	GtkWidget		*pscene_object_name;
-	GtkWidget		*pscene_object_negative;
-	GtkWidget		*pscene_object_transparence;
-	GtkWidget		*pscene_object_reflexion;
-	GtkWidget		*pscene_object_refraction;
-	GtkWidget		*pscene_spot_select;
-	GtkWidget		*pscene_spot_x;
-	GtkWidget		*pscene_spot_y;
-	GtkWidget		*pscene_spot_z;
-	GtkWidget		*pscene_spot_dir_x;
-	GtkWidget		*pscene_spot_dir_y;
-	GtkWidget		*pscene_spot_dir_z;
-	GtkWidget		*pscene_spot_name;
-	GtkWidget		*pscene_spot_color;
-	GtkWidget		*pfilter_button_save;
-	GtkWidget		*pfilter_button_apply;
-	GtkWidget		*pfilter_choose_filter;
 	char			*data;
-	int				rep;
+	t_mlx			mlx;
+	int				rep; //
 	char			nb;
-	double			view_angle[3];
+	double			view_angle[3]; // check with vincent
 }					t_gen;
 
 void				error(int i, char *str);

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/12/18 18:18:50 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/30 22:39:50 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <pthread.h>
-# include <gui.h>
+// # include <gui.h>
 
-# include "mlx.h"
 # include "libft.h"
 # include "raytra_gen.h"
 

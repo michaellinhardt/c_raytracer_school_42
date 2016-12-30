@@ -51,17 +51,6 @@ SRCS = main.c\
 	  add_vector_triangle.c\
 	  parse_lst_triangle.c\
 	  parse_triangle.c\
-	  interface/builder.c\
-	  interface/draw.c\
-	  interface/hook.c\
-	  interface/scene_handler.c\
-	  interface/object_handler.c\
-	  interface/object_model.c\
-	  interface/spot_handler.c\
-	  interface/spot_model.c\
-	  interface/text_interface.c\
-	  interface/filter_handler.c\
-	  interface/filter_model.c\
 	  filter_part1.c\
 	  filter_part2.c\
 	  filter_part3.c
@@ -69,13 +58,9 @@ SRCS = main.c\
 
 SRC = $(addprefix $(SRCSPATH), $(SRCS))
 
-GTK_FLAGS = `pkg-config --cflags gtk+-3.0`
+WFLAGS = -Wall -Werror -Wextra -march=native -O3
 
-GTK_LIBS = `pkg-config --libs gtk+-3.0`
-
-WFLAGS = -Wall -Werror -Wextra -g -march=native $(GTK_FLAGS) -O3
-
-LFLAGS = -L libft/ -lft -lm -lmlx -framework OpenGL -framework AppKit $(GTK_LIBS)
+LFLAGS = -L libft/ -lft -lm -lmlx -framework OpenGL -framework AppKit 
 
 CC = gcc -g
 
@@ -104,10 +89,6 @@ clean_si :
 fclean : clean
 	rm -f $(NAME)
 	make -C libft fclean
-
-sdl_install :
-	curl https://dl.dropboxusercontent.com/u/22561204/SDL/Archive.zip > /tmp/Archive.zip
-	unzip -o /tmp/Archive.zip -d ~/Library/Frameworks/
 
 re : fclean all
 

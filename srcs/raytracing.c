@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/12/18 17:33:06 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/30 22:43:45 by ocarta-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void			*display(void *z)
 	return (NULL);
 }
 
+/* to del
+
 static void		merge_chuncks(void *dest, void const *src)
 {
 	size_t			size;
@@ -82,8 +84,9 @@ static void		merge_chuncks(void *dest, void const *src)
 	dest -= size;
 }
 
-static void		lanch_raytracing(pthread_t *p, t_gen *s, t_id t,
-	unsigned char **pixbuffer)
+*/
+
+static void		lanch_raytracing(pthread_t *p, t_id t)
 {
 	int	j;
 
@@ -93,8 +96,6 @@ static void		lanch_raytracing(pthread_t *p, t_gen *s, t_id t,
 	j = -1;
 	while (++j < MT)
 		pthread_join(p[j], NULL);
-	*pixbuffer = gdk_pixbuf_get_pixels(s->pixbuf);
-	merge_chuncks(*pixbuffer, s->data);
 }
 
 void			raytracing(t_gen *s)
@@ -102,23 +103,19 @@ void			raytracing(t_gen *s)
 	static t_id		t;
 	static char		c = 0;
 	pthread_t		p[MT];
-	unsigned char	*pixbuffer;
 
-	s->pixbuf = NULL;
 	if (!c)
 	{
 		(!(t.z = ft_memalloc(sizeof(t_thread) * MT))) ? error(2, "Malloc") : 1;
 		init_threads(t.z, &t, s);
 		c = 1;
-		if (!(s->data = (char *)ft_memalloc(W_X * 3 * W_Y)))
+		if (!(s->data = (char *)ft_memalloc(W_X * 4 * W_Y)))
 			return ;
 	}
 	else
-		ft_bzero(s->data, W_X * 3 * W_Y);
-	if (!(s->pixbuf = gtk_new_image((unsigned char *)(s->data), W_X, W_Y)))
-		error(4, "Unable to initialize pixbuf for GtkImage :'(\n");
-	lanch_raytracing(p, s, t, &pixbuffer);
-	gtk_put_image_to_window(GTK_IMAGE(s->pdrawarea), s->pixbuf);
-	free(pixbuffer);
-	g_object_unref(s->pixbuf);
+		ft_bzero(s->data, W_X * 4 * W_Y);
+	lanch_raytracing(p, t);
+	/*
+	** put image to windows ... or not
+	*/ 
 }

@@ -1,6 +1,9 @@
 #ifndef MLX_STRUCT_H
 # define MLX_STRUCT_H
 
+# include "mlx_conf.h"
+
+
 enum	e_menu {
 	NONE,
 	SCENE,
