@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raystruct.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/12/31 00:07:03 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/31 01:03:54 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@
 # include <pthread.h>
 // # include <gui.h>
 
-# include "libft.h"
 # include "raytra_gen.h"
+# include "mlx_funcs.h"
 
 typedef struct		s_color
 {

@@ -1,6 +1,8 @@
 #ifndef MLX_CONF_H
 # define MLX_CONF_H
 
+# define WIN_TITLE "Awsome RT bitchhhh"
+
 /*
 ** GESTION DU TEMPS D'ARRET DE LA BOUCLE SI RIEN N'EST A AFFICHER
 ** Cela évite de spam le processeur du PC pour RIEN

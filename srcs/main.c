@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:09:09 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/12/30 22:42:45 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/31 01:07:18 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "raystruct.h"
 
 /* to del
-int			usage(int fd) 
+int			usage(int fd)
 {
 	char *line;
 
@@ -30,16 +30,6 @@ int			usage(int fd)
 	return (1);
 }
 */
-
-static void	init_mlx(t_gen *s)
-{
-	if (!(s->mlx.mlx = mlx_init()))
-		error(2, "Mlx");
-	if (!(s->mlx.win = mlx_new_window(s->mlx.mlx, W_X, W_Y, "Awesome Playlist - FDF")))
-		error(2, "Mlx");
-	// if (!(s->mlx.img = mlx_new_image(s->mlx.mlx, W_X, W_Y)))
-	// 	error(2, "Mlx");
-}
 
 static void	init_struct(t_gen *s)
 {
@@ -63,8 +53,8 @@ int		main(void)
 	s.view_angle[0] = 0;
 	s.view_angle[1] = 0;
 	s.view_angle[2] = 0;
-	init_mlx(&s);
 	init_struct(&s);
+	mlx_start(&s, &s.mlx);
 
 /*
 ** void 	parse_scene(t_gen *s, char *argv) ; argv = nom du fichier ; ajouter au debut de la liste chainee
@@ -72,6 +62,5 @@ int		main(void)
 ** void		raytracing(t_gen *s) ; lance le raytracer sur le premier maillon t_scene de t_gen
 */
 
-	mlx_loop(s.mlx.mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/12/30 22:39:47 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/31 01:05:44 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RAYTRA_GEN_H
 
 # include "libft.h"
+# include "mlx_conf.h"
 # include "mlx_struct.h"
 # include "get_next_line.h"
 # include <mlx.h>
