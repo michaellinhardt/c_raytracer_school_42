@@ -10,6 +10,8 @@ int				red_cross(void)
 static void		init_project(t_gen *d, t_mlx *m)
 {
 	// layer(0, 2);
+
+	parse_scene(d, "./scene/scene_de_rendu.rt");
 	m->draw_rt = 1;
 	loop(m, 1);
 }

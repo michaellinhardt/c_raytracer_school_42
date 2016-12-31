@@ -1,4 +1,4 @@
-#include "raytra_gen.h"
+#include "raystruct.h"
 
 int		loop(t_mlx *m, char etat)
 {
@@ -26,5 +26,17 @@ int		loop_hook(t_gen *d)
 		return (0);
 	if (m->loopstop != 0 && --m->loopstop < 1 && m->loop != 0)
 		loop(&d->mlx, 0);
+	if (m->draw_rt)
+	{
+		raytracing(d);
+		m->draw_rt = 0;
+		loop(m, 0);
+
+
+		d->mlx.layer.img = mlx_new_img(&d->mlx, &d->mlx.layer, W_X, W_Y);
+		ft_memcpy(d->mlx.layer.str, d->data, W_X * W_Y * 4);
+		itow(&d->mlx, d->mlx.layer.img, 0, 0);
+	}
+	ft_printf("fini\n");
 	return (0);
 }

@@ -56,6 +56,7 @@ SRCS = 	main.c\
 		filter_part3.c \
 		mlx_hook.c \
 		mlx_loop.c \
+		mlx_img.c \
 		mlx_start.c
 
 

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 17:22:00 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/12/30 22:17:09 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2016/12/31 03:27:09 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void		getnearesthit_mid(t_ray *r,
 	co[2] = 1 - co[0] - co[1];
 }
 
-double			getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1)
+double			getnearesthit(t_ray *r, t_gen *raytracer, double x, double y)
 {
 	double	ref[3];
 	double	co[4];
@@ -78,7 +78,7 @@ double			getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1)
 	double	re[3];
 	int		c[3];
 
-	init_getnearesthit(r, raytracer, x1, y1);
+	init_getnearesthit(r, raytracer, x, y);
 	co[3] = lenray(raytracer->sc, r);
 	if (co[3] >= EPS)
 	{
@@ -90,6 +90,7 @@ double			getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1)
 		d[1] = co[0] * ref[1] + co[1] * re[1] + co[2] * d[1];
 		d[2] = co[0] * ref[2] + co[1] * re[2] + co[2] * d[2];
 		c[1] = colorfromrgb(d);
+		pixel_to_char(raytracer, c[1], x, y);
 		// mlx_put_pixel_to_image; char* = raytracer->data , color = c[1]
 	}
 	return (co[3]);

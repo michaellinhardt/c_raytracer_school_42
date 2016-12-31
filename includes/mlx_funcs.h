@@ -13,5 +13,9 @@ int			loop(t_mlx *m, char etat);
 int			loopstop(t_mlx *m, char total);
 int			loop_hook(t_gen *d);
 
+void		pixel_to_char(t_gen *s, int color, int x, int y);
+void		*mlx_new_img(t_mlx *m, t_img *img, int width, int heigh);
+void		*mlx_xpmtostruct(t_mlx *m, t_img *img, char *file);
+int			itow(t_mlx *m, void *img, int x, int y);
 
 #endif

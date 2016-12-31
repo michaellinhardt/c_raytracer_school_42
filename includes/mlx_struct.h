@@ -62,6 +62,7 @@ typedef struct		s_mlx
 	enum e_scene	scene;
 	char			img_isload[SCENE_MAX];
 	t_img			scene_img[SCENE_MAX][SCENE_IMG_MAX];
+	t_img			layer;
 	int				winx;
 	int				winy;
 }					t_mlx;
