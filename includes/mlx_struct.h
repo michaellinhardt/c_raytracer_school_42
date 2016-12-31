@@ -54,12 +54,13 @@ typedef struct		s_mlx
 {
 	void			*mlx;
 	void			*win;
+	char			draw_rt;
+	char			draw_menu;
 	t_input			input;
 	char			loop;
 	char			loopstop;
 	enum e_scene	scene;
 	char			img_isload[SCENE_MAX];
-	t_img			layer;
 	t_img			scene_img[SCENE_MAX][SCENE_IMG_MAX];
 	int				winx;
 	int				winy;

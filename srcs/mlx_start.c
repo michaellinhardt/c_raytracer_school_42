@@ -1,14 +1,20 @@
 # include "raystruct.h"
 # include "raytra_gen.h"
 
-int		red_cross(void)
+int				red_cross(void)
 {
 	exit(0);
 	return (0);
 }
 
+static void		init_project(t_gen *d, t_mlx *m)
+{
+	// layer(0, 2);
+	m->draw_rt = 1;
+	loop(m, 1);
+}
 
-void	mlx_start(t_gen *d, t_mlx *m)
+void			mlx_start(t_gen *d, t_mlx *m)
 {
 	ft_bzero(m, sizeof(t_mlx));
 	m->winx = W_X;
@@ -24,7 +30,6 @@ void	mlx_start(t_gen *d, t_mlx *m)
 	mlx_hook(m->win, 6, (1L << 0), mouseo_hook, d);
 	mlx_hook(m->win, 17, (1L << 17), &red_cross, d);
 	mlx_loop_hook(m->mlx, loop_hook, d);
-	// layer(0, 2);
-	loop(m, 1);
+	init_project(d, m);
 	mlx_loop(m->mlx);
 }
