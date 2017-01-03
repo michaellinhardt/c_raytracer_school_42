@@ -20,7 +20,7 @@ int			itow(t_mlx *m, void *img, int x, int y);
 
 void		scene_img_load(t_mlx *m);
 void		scene_img_init(t_mlx *m, int i);
-void		img_init(t_img *img);
+void		anim_init(t_img *img);
 void		scene_build(t_mlx *m, t_img *lay, t_img *img, int i);
 void		scene(t_gen *d, t_mlx *m);
 
