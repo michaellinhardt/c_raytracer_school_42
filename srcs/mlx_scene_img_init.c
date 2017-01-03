@@ -14,6 +14,7 @@ void			scene_init_0_intro(t_mlx *m, t_img *img)
 	img->anim.tempo = 1;
 	img->mouse.bot[0] = m->winx;
 	img->mouse.bot[1] = m->winy;
+	img->mouse.action = &scene_0_skip;
 }
 
 void			scene_img_init(t_mlx *m, int i)

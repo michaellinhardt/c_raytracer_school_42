@@ -9,6 +9,8 @@ int			keyp_hook(int key, t_gen *d);
 int			mousep_hook(int btn, int x, int y, t_gen *d);
 int			mouser_hook(int btn, int x, int y, t_gen *d);
 
+void		mouse_release(t_mlx *m, int btn, int x, int y);
+
 int			loop(t_mlx *m, char etat);
 int			loopstop(t_mlx *m, char total);
 int			loop_hook(t_gen *d);

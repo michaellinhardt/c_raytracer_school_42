@@ -58,10 +58,12 @@ SRCS = 	main.c \
 		mlx_loop.c \
 		mlx_img.c \
 		mlx_layer.c \
+		mlx_mouse_release.c \
 		mlx_scene.c \
 		mlx_scene_img_load.c \
 		mlx_scene_img_init.c \
 		mlx_scene_build.c \
+		mlx_scene_0_skip.c \
 		mlx_scene_0_intro.c \
 		mlx_start.c
 
