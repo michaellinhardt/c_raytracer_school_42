@@ -35,6 +35,7 @@ typedef struct		s_img_mouse
 	int				top[2];
 	int				bot[2];
 	int				over_id;
+	int				click_id;
 }					t_img_mouse;
 
 typedef struct		s_img_anim
