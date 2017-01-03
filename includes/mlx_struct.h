@@ -14,40 +14,71 @@ enum	e_scene {
 	RT
 };
 
+enum	e_anim {
+	HIDE,
+	STATIC,
+	FADE_IN,
+	FADE_OUT
+};
+
+typedef struct		s_img_mouse
+{
+	char			btn;
+	void			(*action)(void *m);
+	int				top[2];
+	int				bot[2];
+}					t_img_mouse;
+
+typedef struct		s_img_anim
+{
+	enum e_anim		id;
+	int				speed;
+}					t_img_anim;
+
+
 typedef struct		s_img
 {
-	char			name[255];
 	void			*img;
 	char			*str;
 	int				*ptr;
+	int				i;
 	int				bpp;
 	int				sl;
 	int				end;
 	int				width;
 	int				heigh;
-	int				fade;
-	int				i;
-	int				pos[2];
-	int				top[2];
-	int				bot[2];
+	// int				fade;
+	// t_img_anim		anim;
+	// t_img_mouse		mouse;
+	// int				pos[2];
 }					t_img;
 
-typedef struct		s_input
+typedef struct		s_input_mouse
 {
-	char			mode;
-	char			mleft;
-	char			mright;
+	char			left;
+	char			right;
+	int				wheelup;
+	int				wheeldown;
+	int				over_x;
+	int				over_y;
+	int				release_x;
+	int				release_y;
+}					t_input_mouse;
+
+typedef struct		s_input_key
+{
 	char			left;
 	char			right;
 	char			up;
 	char			down;
 	char			shift;
-	int				wheelup;
-	int				wheeldown;
-	int				mo_x;
-	int				mo_y;
-	int				mr_x;
-	int				mr_y;
+}					t_input_key;
+
+typedef struct		s_input
+{
+	char			mode;
+	t_input_key		key;
+	t_input_mouse	mouse;
 }					t_input;
 
 typedef struct		s_mlx
@@ -66,5 +97,6 @@ typedef struct		s_mlx
 	int				winx;
 	int				winy;
 }					t_mlx;
+
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_shadow.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrunell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbrunell <bbrunell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 22:04:03 by bbrunell          #+#    #+#             */
-/*   Updated: 2016/12/18 22:04:08 by bbrunell         ###   ########.fr       */
+/*   Updated: 2017/01/03 15:01:30 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int			ft_shadow(t_obj *s, t_color *c, t_scene *sc)
 			s = s->next;
 		}
 	}
-	if (c->spot->type & DIR)
+	if (c->spot->type & DIIR)
 		return (ft_shadow_spot_dir(s, c, sc));
 	return (0);
 }

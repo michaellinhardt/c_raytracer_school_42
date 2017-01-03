@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/12/31 01:05:44 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/01/03 15:03:21 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 // # include <gtk/gtk.h>
 // # include <glib.h>
 # include <math.h>
+# include <dirent.h>
 
 /*
 **	BOOL pour les objets
@@ -49,7 +50,7 @@
 **	BOOL pour les spots
 */
 
-# define DIR 0x1
+# define DIIR 0x1
 # define POINT 0x2
 
 # define SAVE 0x1

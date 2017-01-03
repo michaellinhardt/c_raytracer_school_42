@@ -7,10 +7,10 @@ int				red_cross(void)
 	return (0);
 }
 
-static void		init_project(t_gen *d, t_mlx *m)
+static void		init_project(t_mlx *m)
 {
-	layer(1, 2);
-	layer(2, 2);
+	layer(m, 1, 2);
+	layer(m, 2, 2);
 	// parse_scene(d, "./scene/mika.rt");
 	// m->draw_rt = 1;
 	loop(m, 1);
@@ -32,6 +32,6 @@ void			mlx_start(t_gen *d, t_mlx *m)
 	mlx_hook(m->win, 6, (1L << 0), mouseo_hook, d);
 	mlx_hook(m->win, 17, (1L << 17), &red_cross, d);
 	mlx_loop_hook(m->mlx, loop_hook, d);
-	init_project(d, m);
+	init_project(m);
 	mlx_loop(m->mlx);
 }
