@@ -34,7 +34,7 @@ typedef struct		s_img_mouse
 	void			(*action)(void *m);
 	int				top[2];
 	int				bot[2];
-	int				switch_id;
+	int				over_id;
 }					t_img_mouse;
 
 typedef struct		s_img_anim

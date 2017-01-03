@@ -5,9 +5,10 @@ int		mouseo_hook(int x, int y, t_gen *d)
 {
 	if (d->mlx.scene == INTRO)
 		return (0);
+	mouse_over(&d->mlx, x, y);
+	return (0);
 	d->mlx.input.mouse.over_x = x;
 	d->mlx.input.mouse.over_y = y;
-	return (0);
 }
 
 int		keyr_hook(int key, t_gen *d)
