@@ -3,8 +3,6 @@
 
 int		mouseo_hook(int x, int y, t_gen *d)
 {
-	if (d->mlx.scene == INTRO)
-		return (0);
 	d->mlx.input.mouse.over_x = x;
 	d->mlx.input.mouse.over_y = y;
 	return (0);
@@ -16,6 +14,12 @@ int		keyr_hook(int key, t_gen *d)
 		exit (0);
 	else if (d->mlx.scene > INTRO)
 	{
+		if (key == 49 && (d->mlx.menu.draw *= -1))
+		{
+			if (d->mlx.menu.draw == 1)
+				layer(&d->mlx, 1, 1);
+			scene_init_1_rt_menu(&d->mlx);
+		}
 		(key == 123) ? d->mlx.input.key.left = 0 : 0;
 		(key == 124) ? d->mlx.input.key.right = 0 : 0;
 		(key == 125) ? d->mlx.input.key.down = 0 : 0;

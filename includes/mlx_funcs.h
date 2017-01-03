@@ -22,8 +22,8 @@ void		*mlx_xpmtostruct(t_mlx *m, t_img *img, char *file);
 int			itow(t_mlx *m, void *img, int x, int y);
 
 void		scene_img_load(t_mlx *m);
-void		scene_img_init(t_mlx *m, int i);
-void		anim_init(t_img *img);
+void		scene_img_init(t_mlx *m);
+void		anim_init(t_img *img, enum e_anim anim);
 void		scene_build(t_mlx *m, t_img *lay, t_img *img, int i);
 void		scene(t_gen *d, t_mlx *m);
 
@@ -32,6 +32,7 @@ void		layer_add(t_mlx *m, t_img *l, t_img *i);
 
 void		scene_init_0_intro(t_mlx *m, t_img *img);
 void		scene_init_1_rt(t_mlx *m, t_img *img);
+void		scene_init_1_rt_menu(t_mlx *m);
 
 void		scene_0_intro(t_mlx *m);
 void		scene_0_skip(void *m);

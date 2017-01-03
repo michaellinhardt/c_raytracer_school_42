@@ -46,6 +46,6 @@ void		scene_img_load(t_mlx *m)
 	if (m->img_isload[m->scene] == 1)
 		return ;
 	scene_img_folder(m, (DIR *)NULL, (struct dirent *)NULL);
-	scene_img_init(m, -1);
+	scene_img_init(m);
 	m->img_isload[m->scene] = 1;
 }

@@ -47,6 +47,7 @@ typedef struct		s_img_anim
 typedef struct		s_img
 {
 	enum e_status	status;
+	char			menu_id;
 	void			*img;
 	char			*str;
 	int				*ptr;
@@ -90,12 +91,18 @@ typedef struct		s_input
 	t_input_mouse	mouse;
 }					t_input;
 
+typedef struct		s_menu
+{
+	char			draw;
+	char			id;
+}					t_menu;
+
 typedef struct		s_mlx
 {
 	void			*mlx;
 	void			*win;
 	char			draw_rt;
-	char			draw_menu;
+	t_menu			menu;
 	t_input			input;
 	char			loop;
 	char			loopstop;

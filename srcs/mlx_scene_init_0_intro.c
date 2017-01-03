@@ -10,4 +10,5 @@ void			scene_init_0_intro(t_mlx *m, t_img *img)
 	img->mouse.bot[1] = m->winy;
 	img->mouse.btn = 3;
 	img->mouse.action = &scene_0_skip;
+	anim_init(img, FADE_IN);
 }
