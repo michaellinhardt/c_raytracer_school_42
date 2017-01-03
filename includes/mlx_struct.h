@@ -22,6 +22,7 @@ enum	e_anim {
 
 enum	e_status {
 	DISABLED,
+	MENU,
 	IMG,
 	IMG_ANIM,
 	OBJECT
