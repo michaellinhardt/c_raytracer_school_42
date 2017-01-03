@@ -1,4 +1,5 @@
 #include "raytra_gen.h"
+#include "raystruct.h"
 
 void	mouse_over(t_mlx *m, int x, int y)
 {
@@ -16,9 +17,8 @@ void	mouse_over(t_mlx *m, int x, int y)
 		&& x >= img->mouse.top[0] && x <= img->mouse.bot[0]
 		&& y >= img->mouse.top[1] && y <= img->mouse.bot[1])
 		{
-
+			layer_add(m, layer(m, 2, 0)
+			, &m->scene_img[m->scene][img->mouse.over_id]);
 		}
 	}
-	(void)x;
-	(void)y;
 }
