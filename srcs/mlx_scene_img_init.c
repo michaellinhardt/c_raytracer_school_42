@@ -11,7 +11,9 @@ void			scene_init_0_intro(t_mlx *m, t_img *img)
 	(void)m;
 	(void)img;
 	img = &m->scene_img[0][0];
-	img->status = IMG;
+	img->status = OBJECT;
+	img->anim.id = FADE_IN;
+	img->anim.tempo = 1;
 	// img = &m->scene_img[0][0];
 	// img->mouse.bot[0] = m->winx;
 	// img->mouse.bot[1] = m->winy;
