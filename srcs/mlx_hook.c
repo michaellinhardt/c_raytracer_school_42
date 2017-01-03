@@ -1,4 +1,5 @@
 #include "raytra_gen.h"
+#include "raystruct.h"
 
 int		mouseo_hook(int x, int y, t_gen *d)
 {
@@ -47,6 +48,6 @@ int		mouser_hook(int btn, int x, int y, t_gen *d)
 	(btn == 2) ? d->mlx.input.mouse.right = 0 : 0;
 	d->mlx.input.mouse.release_x = x;
 	d->mlx.input.mouse.release_y = y;
-	// mouse_release(&d->mlx, btn, x, y);
+	mouse_release(&d->mlx, btn, x, y);
 	return (0);
 }

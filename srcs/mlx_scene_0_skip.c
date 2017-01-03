@@ -1,7 +1,9 @@
 #include "raystruct.h"
 
-void			scene_0_skip(t_mlx *m)
+void			scene_0_skip(void *ptr)
 {
-	(void)m;
-	ft_printf("zbra\n");
+	t_mlx	*m;
+
+	m = ptr;
+	ft_printf("zbra, win size: %d\n", m->winx);
 }
