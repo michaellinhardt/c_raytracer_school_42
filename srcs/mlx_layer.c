@@ -15,6 +15,46 @@ static void		reset_img(t_mlx *m, t_img *img, int reset)
 		ptr[img->i] = color;
 }
 
+static void		anim_eval(t_img *img)
+{
+	if (img->anim.id == FADE_IN && img->fade > 0)
+	{
+		img->fade -= img->anim.tempo;
+		if (img->fade < 0)
+			img->fade = 0;
+	}
+	if (img->anim.id == FADE_OUT && img->fade < 255)
+	{
+		img->fade += img->anim.tempo;
+		if (img->fade > 255)
+			img->fade = 255;
+	}
+}
+
+void			layer_add(t_mlx *m, t_img *l, t_img *i)
+{
+	int		*layer;
+	int		*img;
+	int		x;
+	int		y;
+
+	layer = (int *)l->str;
+	img = (int *)i->str;
+	l->i = (m->winx * i->pos[1] + i->pos[0]) - 1;
+	y = -1;
+	anim_eval(i);
+	while (++y < i->heigh)
+	{
+		x = -1;
+		while (++x < i->width)
+		{
+			i->str[(y * i->width + x) * 4 + 3] = i->fade;
+			layer[++(l->i)] = img[y * i->width + x];
+		}
+		l->i = l->i - i->width + m->winx;
+	}
+}
+
 t_img			*layer(t_mlx *m, int id, int reset)
 {
 	static t_img	l[LAYER_MAX];

@@ -41,12 +41,11 @@ void		scene_img_folder(t_mlx *m, DIR *dir, struct dirent *f)
 	closedir(dir);
 }
 
-void		scene_img(t_mlx *m)
+void		scene_img_load(t_mlx *m)
 {
 	if (m->img_isload[m->scene] == 1)
 		return ;
 	scene_img_folder(m, (DIR *)NULL, (struct dirent *)NULL);
-	scene_img_init(m);
+	scene_img_init(m, -1);
 	m->img_isload[m->scene] = 1;
-	exit(0);
 }

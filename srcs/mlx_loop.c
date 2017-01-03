@@ -26,9 +26,11 @@ int		loop_hook(t_gen *d)
 		return (0);
 	if (m->loopstop != 0 && --m->loopstop < 1 && m->loop != 0)
 		loop(&d->mlx, 0);
-	scene_img(&d->mlx);
-	scene(d, m);
+	scene_img_load(&d->mlx);
+	scene_build(m, layer(m, 1, 1), (t_img *)NULL, -1);
+	itow(m, layer(m, 1, 0)->img, 0, 0);
 	return (0);
+	scene(d, m);
 	if (m->draw_rt)
 	{
 		raytracing(d);

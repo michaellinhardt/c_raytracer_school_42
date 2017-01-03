@@ -1,22 +1,17 @@
 # include "raystruct.h"
 
-void			scene_img_init_scene(t_mlx *m, t_img *img, int i)
+void			img_init(t_img *img)
 {
-	(void)m;
-	(void)img;
-	(void)i;
-	// while (m->scene_img[m->scene][++i].img)
-	// {
-	// 	img = &m->scene_img[0][i];
-	// 	if (img->anim.id == FADE_IN)
-	// 		img->fade = 255;
-	// }
+	if (img->anim.id == FADE_IN)
+		img->fade = 255;
 }
 
-void			scene_img_init_0_intro(t_mlx *m, t_img *img)
+void			scene_init_0_intro(t_mlx *m, t_img *img)
 {
 	(void)m;
 	(void)img;
+	img = &m->scene_img[0][0];
+	img->status = IMG;
 	// img = &m->scene_img[0][0];
 	// img->mouse.bot[0] = m->winx;
 	// img->mouse.bot[1] = m->winy;
@@ -25,9 +20,10 @@ void			scene_img_init_0_intro(t_mlx *m, t_img *img)
 	// img->anim.id = S0I0_ANIM_ID;
 }
 
-void			scene_img_init(t_mlx *m)
+void			scene_img_init(t_mlx *m, int i)
 {
 	if (m->scene == INTRO)
-		scene_img_init_0_intro(m, (t_img *)NULL);
-	scene_img_init_scene(m, (t_img *)NULL, -1);
+		scene_init_0_intro(m, (t_img *)NULL);
+	while (m->scene_img[m->scene][++i].img)
+		img_init(&m->scene_img[0][i]);
 }

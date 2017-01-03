@@ -15,10 +15,16 @@ enum	e_scene {
 };
 
 enum	e_anim {
-	HIDE,
 	STATIC,
 	FADE_IN,
 	FADE_OUT
+};
+
+enum	e_status {
+	DISABLED,
+	IMG,
+	IMG_ANIM,
+	OBJECT
 };
 
 typedef struct		s_img_mouse
@@ -32,12 +38,12 @@ typedef struct		s_img_mouse
 typedef struct		s_img_anim
 {
 	enum e_anim		id;
-	int				speed;
+	int				tempo;
 }					t_img_anim;
-
 
 typedef struct		s_img
 {
+	enum e_status	status;
 	void			*img;
 	char			*str;
 	int				*ptr;
@@ -47,10 +53,10 @@ typedef struct		s_img
 	int				end;
 	int				width;
 	int				heigh;
-	// int				fade;
-	// t_img_anim		anim;
-	// t_img_mouse		mouse;
-	// int				pos[2];
+	int				fade;
+	t_img_anim		anim;
+	t_img_mouse		mouse;
+	int				pos[2];
 }					t_img;
 
 typedef struct		s_input_mouse
