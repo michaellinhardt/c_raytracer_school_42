@@ -8,22 +8,12 @@ void			anim_init(t_img *img)
 		img->fade = 0;
 }
 
-void			scene_init_0_intro(t_mlx *m, t_img *img)
-{
-	img = &m->scene_img[0][0];
-	img->status = OBJECT;
-	img->anim.id = FADE_IN;
-	img->anim.tempo = 5;
-	img->mouse.bot[0] = m->winx;
-	img->mouse.bot[1] = m->winy;
-	img->mouse.btn = 3;
-	img->mouse.action = &scene_0_skip;
-}
-
 void			scene_img_init(t_mlx *m, int i)
 {
 	if (m->scene == INTRO)
 		scene_init_0_intro(m, (t_img *)NULL);
+	else if (m->scene == RT)
+		scene_init_1_rt(m, (t_img *)NULL);
 	while (m->scene_img[m->scene][++i].img)
 		if (m->scene_img[m->scene][i].status > IMG)
 			anim_init(&m->scene_img[0][i]);
