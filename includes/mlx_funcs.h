@@ -30,5 +30,6 @@ t_img		*layer(t_mlx *m, int id, int reset);
 void		layer_add(t_mlx *m, t_img *l, t_img *i);
 
 void		scene_0_intro(t_gen *d, t_mlx *m);
+void		scene_0_skip(t_mlx *m);
 
 #endif

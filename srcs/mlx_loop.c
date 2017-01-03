@@ -28,6 +28,7 @@ int		loop_hook(t_gen *d)
 		loop(&d->mlx, 0);
 	scene_img_load(&d->mlx);
 	scene_build(m, layer(m, 1, 1), (t_img *)NULL, -1);
+	itow(m, layer(m, 0, 0)->img, 0, 0);
 	itow(m, layer(m, 1, 0)->img, 0, 0);
 	return (0);
 	scene(d, m);
