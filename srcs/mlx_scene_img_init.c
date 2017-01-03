@@ -4,6 +4,8 @@ void			anim_init(t_img *img)
 {
 	if (img->anim.id == FADE_IN)
 		img->fade = 255;
+	else if (img->anim.id == FADE_OUT)
+		img->fade = 0;
 }
 
 void			scene_init_0_intro(t_mlx *m, t_img *img)

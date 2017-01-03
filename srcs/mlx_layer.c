@@ -20,14 +20,20 @@ static void		anim_eval(t_img *img)
 	if (img->anim.id == FADE_IN && img->fade > 0)
 	{
 		img->fade -= img->anim.tempo;
-		if (img->fade < 0)
+		if (img->fade <= 0)
+		{
 			img->fade = 0;
+			img->anim.id = STATIC;
+		}
 	}
 	if (img->anim.id == FADE_OUT && img->fade < 255)
 	{
 		img->fade += img->anim.tempo;
-		if (img->fade > 255)
+		if (img->fade >= 255)
+		{
 			img->fade = 255;
+			img->anim.id = STATIC;
+		}
 	}
 }
 
