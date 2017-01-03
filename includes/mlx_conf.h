@@ -20,4 +20,6 @@
 # define SCENE_IMG_MAX 50
 # define LAYER_MAX 5
 
+# define BTN_MARGIN 10
+
 #endif

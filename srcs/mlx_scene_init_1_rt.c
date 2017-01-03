@@ -2,12 +2,11 @@
 
 void			scene_init_1_rt(t_mlx *m, t_img *img)
 {
-	img = &m->scene_img[0][0];
-	img->status = OBJECT;
+	img = &m->scene_img[1][0];
+	img->status = IMG_ANIM;
 	img->anim.id = FADE_IN;
-	img->anim.tempo = 5;
-	img->mouse.bot[0] = m->winx;
-	img->mouse.bot[1] = m->winy;
-	img->mouse.btn = 3;
-	img->mouse.action = &scene_0_skip;
+	img->anim.tempo = 6;
+	img->pos[1] = m->winy - img->heigh - BTN_MARGIN;
+	img->pos[0] = BTN_MARGIN;
+	anim_init(img);
 }

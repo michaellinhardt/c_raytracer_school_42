@@ -66,6 +66,7 @@ SRCS = 	main.c \
 		mlx_scene_init_1_rt.c \
 		mlx_scene_build.c \
 		mlx_scene_0_intro.c \
+		mlx_scene_1_rt.c \
 		mlx_start.c
 
 
