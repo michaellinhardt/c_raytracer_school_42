@@ -26,6 +26,8 @@ int		loop_hook(t_gen *d)
 		return (0);
 	if (m->loopstop != 0 && --m->loopstop < 1 && m->loop != 0)
 		loop(&d->mlx, 0);
+	scene(d, m);
+	return (0);
 	if (m->draw_rt)
 	{
 		raytracing(d);

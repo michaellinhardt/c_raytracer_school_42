@@ -18,4 +18,10 @@ void		*mlx_new_img(t_mlx *m, t_img *img, int width, int heigh);
 void		*mlx_xpmtostruct(t_mlx *m, t_img *img, char *file);
 int			itow(t_mlx *m, void *img, int x, int y);
 
+void		scene(t_gen *d, t_mlx *m);
+
+t_img		*layer(int id, int reset);
+
+void		scene_0_intro(t_gen *d, t_mlx *m);
+
 #endif
