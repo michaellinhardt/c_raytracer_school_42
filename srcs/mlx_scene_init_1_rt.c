@@ -12,7 +12,7 @@ void			scene_init_1_rt(t_mlx *m, t_img *img)
 	layer(m, 1, 1);
 	layer(m, 2, 1);
 	layer(m, 3, 1);
-	m->menu.draw = -1;
+	m->menu.draw = 1;
 
 	img = &m->scene_img[1][0];
 	img->status = MENU;

@@ -39,7 +39,6 @@ static void		build_list(t_mlx *m, t_flst *new, DIR *dir, struct dirent *f)
 	closedir(dir);
 }
 
-
 void			btn_load_menu(void *ptr)
 {
 	t_mlx	*m;
