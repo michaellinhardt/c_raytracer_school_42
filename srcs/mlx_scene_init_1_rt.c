@@ -20,7 +20,7 @@ void			scene_init_1_rt(t_mlx *m, t_img *img)
 	img->pos[1] = m->winy - img->heigh - BTN_MARGIN;
 	img->pos[0] = BTN_MARGIN;
 	img->mouse.btn = 1;
-	img->mouse.action = NULL;
+	img->mouse.action = &btn_load_menu;
 	img->mouse.over_id = 1;
 	img->mouse.click_id = 2;
 	m->scene_img[1][1].pos[0] = img->pos[0];

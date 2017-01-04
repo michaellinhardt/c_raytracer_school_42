@@ -12,7 +12,6 @@ static void		init_project(t_mlx *m)
 	layer(m, 1, 2);
 	layer(m, 2, 2);
 	// parse_scene(d, "./scene/mika.rt");
-	// m->draw_rt = 1;
 	loop(m, 1);
 	m->scene++;
 }

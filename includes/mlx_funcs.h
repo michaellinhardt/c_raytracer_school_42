@@ -35,8 +35,10 @@ void		scene_init_1_rt(t_mlx *m, t_img *img);
 void		scene_init_1_rt_menu(t_mlx *m);
 
 void		scene_0_intro(t_mlx *m);
-void		scene_0_skip(void *m);
+void		scene_0_skip(void *ptr);
 
 void		scene_1_rt(t_mlx *m);
+
+void		btn_load_menu(void *ptr);
 
 #endif
