@@ -23,4 +23,7 @@
 # define MENU_MAX 5
 # define BTN_MARGIN 10
 
+# define PATH_XPM "./xpm"
+# define PATH_SCENE "./scene"
+
 #endif

@@ -97,19 +97,28 @@ typedef struct		s_menu
 	char			id;
 }					t_menu;
 
+typedef struct		s_flst
+{
+	char			*path;
+	int				area[6];
+	int				id;
+	struct s_flst	*p;
+	struct s_flst	*n;
+}					t_flst;
+
 typedef struct		s_mlx
 {
 	void			*mlx;
 	void			*win;
 	char			draw_rt;
 	t_menu			menu;
+	t_flst			*flst;
 	t_input			input;
 	char			loop;
 	char			loopstop;
 	enum e_scene	scene;
 	char			img_isload[SCENE_MAX];
 	t_img			scene_img[SCENE_MAX][SCENE_IMG_MAX];
-	t_img			layer;
 	int				winx;
 	int				winy;
 }					t_mlx;

@@ -28,7 +28,7 @@ int			scene_img_file(t_mlx *m, DIR *dir, struct dirent *f, char *path)
 
 void		scene_img_folder(t_mlx *m, DIR *dir, struct dirent *f)
 {
-	if (!(dir = opendir("./xpm")))
+	if (!(dir = opendir(PATH_XPM)))
 		error(2, "Open xpm dir..");
 	while ((f = readdir(dir)))
 	{

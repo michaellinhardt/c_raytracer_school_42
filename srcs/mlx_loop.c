@@ -30,17 +30,17 @@ int		loop_hook(t_gen *d)
 	scene_build(m, layer(m, 1, 0), (t_img *)NULL, -1);
 	scene(d, m);
 	return (0);
-	if (m->draw_rt)
-	{
-		raytracing(d);
-		m->draw_rt = 0;
-		loop(m, 0);
-
-
-		d->mlx.layer.img = mlx_new_img(&d->mlx, &d->mlx.layer, W_X, W_Y);
-		ft_memcpy(d->mlx.layer.str, d->data, W_X * W_Y * 4);
-		itow(&d->mlx, d->mlx.layer.img, 0, 0);
-	}
-	ft_printf("fini\n");
+	// if (m->draw_rt)
+	// {
+	// 	raytracing(d);
+	// 	m->draw_rt = 0;
+	// 	loop(m, 0);
+	//
+	//
+	// 	d->mlx.layer.img = mlx_new_img(&d->mlx, &d->mlx.layer, W_X, W_Y);
+	// 	ft_memcpy(d->mlx.layer.str, d->data, W_X * W_Y * 4);
+	// 	itow(&d->mlx, d->mlx.layer.img, 0, 0);
+	// }
+	// ft_printf("fini\n");
 	return (0);
 }
