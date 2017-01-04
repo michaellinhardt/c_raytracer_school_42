@@ -39,7 +39,7 @@ static void		build_list(t_mlx *m, t_flst *new, DIR *dir, struct dirent *f)
 	closedir(dir);
 }
 
-void			btn_load_menu(void *ptr)
+void			menu_load_btn_open(void *ptr)
 {
 	t_mlx	*m;
 
@@ -47,5 +47,5 @@ void			btn_load_menu(void *ptr)
 	free_list(m->flst, (t_flst *)NULL);
 	m->flst = NULL;
 	build_list(m, m->flst, NULL, NULL);
-
+	m->menu.id = LOAD_FILE;
 }

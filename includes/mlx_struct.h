@@ -3,6 +3,7 @@
 
 enum	e_menu {
 	NONE,
+	LOAD_FILE,
 	SCENE,
 	SPOT,
 	OBJ,
@@ -47,7 +48,7 @@ typedef struct		s_img_anim
 typedef struct		s_img
 {
 	enum e_status	status;
-	char			menu_id;
+	enum e_menu		menu;
 	void			*img;
 	char			*str;
 	int				*ptr;
@@ -94,7 +95,7 @@ typedef struct		s_input
 typedef struct		s_menu
 {
 	char			draw;
-	char			id;
+	enum e_menu		id;
 }					t_menu;
 
 typedef struct		s_flst
@@ -105,6 +106,11 @@ typedef struct		s_flst
 	struct s_flst	*p;
 	struct s_flst	*n;
 }					t_flst;
+
+/*
+**	menu.id 0 = menu general uniquement,
+**	menu.id 1 = load file,
+*/
 
 typedef struct		s_mlx
 {

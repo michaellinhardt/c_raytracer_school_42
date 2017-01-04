@@ -39,6 +39,7 @@ void		scene_0_skip(void *ptr);
 
 void		scene_1_rt(t_mlx *m);
 
-void		btn_load_menu(void *ptr);
+void		menu_load_btn_open(void *ptr);
+void		menu_load_draw(t_mlx *m, t_img *lay);
 
 #endif
