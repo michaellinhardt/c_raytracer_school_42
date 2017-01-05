@@ -3,6 +3,7 @@
 void			anim_init(t_img *img, enum e_anim anim)
 {
 	img->anim.id = anim;
+	img->anim.tempo = MENU_FADE_TEMPO;
 	if (img->anim.id == FADE_IN)
 		img->fade = 255;
 	else if (img->anim.id == FADE_OUT)

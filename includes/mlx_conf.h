@@ -23,6 +23,11 @@
 # define MENU_MAX 5
 # define BTN_MARGIN 10
 
+# define MENU_FADE_TEMPO 6
+
+# define MENU_LOAD_X_MAX 2
+# define MENU_LOAD_Y_MAX 1
+
 # define PATH_XPM "./xpm"
 # define PATH_SCENE "./scene"
 
