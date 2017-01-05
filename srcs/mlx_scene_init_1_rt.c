@@ -59,7 +59,7 @@ void			scene_init_1_rt(t_mlx *m, t_img *img)
 	img->menu = LOAD_FILE;
 	img->pos[0] = m->winx * 0.1;
 	img->pos[1] = (m->winy / 2) - (img->heigh / 2);
-	set_type_action(img, DISABLED, 1, NULL);
+	set_type_action(img, DISABLED, 1, &menu_load_btn_prev);
 	set_over_click(m, img, 5, 6);
 	set_area(img);
 

@@ -31,4 +31,8 @@
 # define PATH_XPM "./xpm"
 # define PATH_SCENE "./scene"
 
+# define MENU_LOAD_START_X W_X * 0.15
+# define MENU_LOAD_START_Y W_Y * 0.15
+# define MENU_LOAD_MARGIN 20
+
 #endif

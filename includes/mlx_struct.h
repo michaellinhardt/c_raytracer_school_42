@@ -101,7 +101,8 @@ typedef struct		s_menu
 typedef struct		s_flst
 {
 	char			*path;
-	int				area[6];
+	int				top[2];
+	int				bot[2];
 	int				id;
 	struct s_flst	*p;
 	struct s_flst	*n;

@@ -12,3 +12,16 @@ void			menu_load_btn_next(void *ptr)
 	while (m->flst->id != target)
 		m->flst = m->flst->n;
 }
+
+void			menu_load_btn_prev(void *ptr)
+{
+	t_mlx	*m;
+	int		target;
+
+	m = ptr;
+	target = m->flst->id - (MENU_LOAD_X_MAX * MENU_LOAD_Y_MAX);
+	if (target < 1)
+		target = 1;
+	while (m->flst->id != target)
+		m->flst = m->flst->p;
+}
