@@ -16,7 +16,7 @@ void			menu_load_draw(t_mlx *m, t_flst *lst, int x, int y)
 		x = -1;
 	}
 	if (lst && lst->n)
-		m->scene_img[1][7].status = MENU;
+		m->scene_img[1][7].status = MENU, ft_printf("there is next\n");
 	else
 		m->scene_img[1][7].status = DISABLED;
 	ft_printf("--\n");

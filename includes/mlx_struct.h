@@ -119,6 +119,7 @@ typedef struct		s_mlx
 	char			draw_rt;
 	t_menu			menu;
 	t_flst			*flst;
+	int				total_file;
 	t_input			input;
 	char			loop;
 	char			loopstop;

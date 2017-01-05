@@ -54,7 +54,8 @@ SRCS = 	main.c \
 		filter_part1.c \
 		filter_part2.c \
 		filter_part3.c \
-		mlx_menu_load_btn.c \
+		mlx_menu_load_btn_open.c \
+		mlx_menu_load_btn_nav.c \
 		mlx_menu_load_draw.c \
 		mlx_hook.c \
 		mlx_loop.c \

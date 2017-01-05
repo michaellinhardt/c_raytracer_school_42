@@ -42,10 +42,17 @@ static void		build_list(t_mlx *m, t_flst *new, DIR *dir, struct dirent *f)
 void			menu_load_btn_open(void *ptr)
 {
 	t_mlx	*m;
+	t_flst	*lst;
+	int		total;
 
 	m = ptr;
 	free_list(m->flst, (t_flst *)NULL);
 	m->flst = NULL;
 	build_list(m, m->flst, NULL, NULL);
+	lst = m->flst;
+	total = 0;
+	while (++total && lst && (lst->id = total))
+		lst = lst->n;
+	m->total_file = total;
 	m->menu.id = LOAD_FILE;
 }

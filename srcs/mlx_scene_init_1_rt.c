@@ -37,6 +37,7 @@ void			scene_init_1_rt_menu(t_mlx *m)
 {
 	anim_init(&m->scene_img[1][0], FADE_IN); // load btn
 	anim_init(&m->scene_img[1][4], FADE_IN); // arrow left off
+	anim_init(&m->scene_img[1][7], FADE_IN); // arrow left off
 }
 
 void			scene_init_1_rt(t_mlx *m, t_img *img)
@@ -66,7 +67,7 @@ void			scene_init_1_rt(t_mlx *m, t_img *img)
 	img->menu = LOAD_FILE;
 	img->pos[0] = m->winx * 0.95;
 	img->pos[1] = (m->winy / 2) - (img->heigh / 2);
-	set_type_action(img, DISABLED, 1, NULL);
+	set_type_action(img, DISABLED, 1, &menu_load_btn_next);
 	set_over_click(m, img, 8, 9);
 	set_area(img);
 
