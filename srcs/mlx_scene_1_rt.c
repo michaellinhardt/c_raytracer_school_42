@@ -27,6 +27,7 @@ void			scene_1_rt(t_mlx *m)
 		itow(m, layer(m, 1, 0)->img, 0, 0); // la ou est dessineé le menu
 		itow(m, layer(m, 2, 0)->img, 0, 0); // leffet mouse over
 		itow(m, layer(m, 3, 0)->img, 0, 0); // leffet click
+		scene_text(m);
 	}
 	else
 	{

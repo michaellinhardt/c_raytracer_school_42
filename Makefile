@@ -71,7 +71,9 @@ SRCS = 	main.c \
 		mlx_scene_build.c \
 		mlx_scene_0_intro.c \
 		mlx_scene_1_rt.c \
+		mlx_scene_text.c \
 		mlx_start.c
+#		mlx_debug_line.c
 
 
 SRC = $(addprefix $(SRCSPATH), $(SRCS))

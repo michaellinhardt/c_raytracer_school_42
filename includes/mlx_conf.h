@@ -22,17 +22,34 @@
 
 # define MENU_MAX 5
 # define BTN_MARGIN 10
-
 # define MENU_FADE_TEMPO 6
 
-# define MENU_LOAD_X_MAX 2
-# define MENU_LOAD_Y_MAX 1
+# define PATH_XPM "./xpm/"
+# define PATH_SCENE "./scene/"
 
-# define PATH_XPM "./xpm"
-# define PATH_SCENE "./scene"
+/*
+** Nombre de vignette par ligne et nombre de ligne
+** modifiable a souhait, dans la mesure du raisonnable
+*/
+# define MENU_LOAD_X_MAX 4
+# define MENU_LOAD_Y_MAX 3
 
-# define MENU_LOAD_START_X W_X * 0.15
-# define MENU_LOAD_START_Y W_Y * 0.15
-# define MENU_LOAD_MARGIN 20
+/*
+** Valeur pour calculer le positionnement du menu load
+** .. ne pas trop jouer avec :)
+*/
+# define MENU_LOAD_ID_IMG_PREVIEW 10
+# define MENU_LOAD_START_X W_X * 0.18
+# define MENU_LOAD_START_Y W_Y * 0.10
+# define MENU_LOAD_END_X W_X * 0.90
+# define MENU_LOAD_END_Y W_Y * 0.90
+# define MENU_LOAD_SIZE_X MENU_LOAD_END_X - MENU_LOAD_START_X
+# define MENU_LOAD_SIZE_Y MENU_LOAD_END_Y - MENU_LOAD_START_Y
+# define MENU_LOAD_TEXT_MARGIN_X 5
+# define MENU_LOAD_TEXT_MARGIN_Y 5
+# define MENU_LOAD_PREVIEW_NAME_SIZE_MAX 18
+
+# define MENU_LOAD_MARGIN_X 20
+# define MENU_LOAD_MARGIN_Y 20
 
 #endif

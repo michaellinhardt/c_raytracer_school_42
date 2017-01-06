@@ -6,7 +6,7 @@ int			scene_img_file(t_mlx *m, DIR *dir, struct dirent *f, char *path)
 	char	*file;
 	char	*tmp;
 
-	folder = ft_strjoin("./xpm/", path);
+	folder = ft_strjoin(PATH_XPM, path);
 	if (!(dir = opendir(folder)))
 		error(3, "Cant open xpm sub dir.");
 	while ((f = readdir(dir)))
