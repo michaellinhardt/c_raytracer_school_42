@@ -11,6 +11,7 @@ int			mouser_hook(int btn, int x, int y, t_gen *d);
 
 void		mouse_release(t_gen *d, int btn, int x, int y);
 void		mouse_over(t_mlx *m, int x, int y);
+int			area(t_img *img, t_flst *elem, int x, int y);
 
 int			loop(t_mlx *m, char etat);
 int			loopstop(t_mlx *m, char total);
