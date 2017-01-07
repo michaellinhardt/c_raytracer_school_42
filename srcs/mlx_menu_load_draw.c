@@ -67,7 +67,6 @@ void			menu_load_draw(t_mlx *m, t_flst *lst, int x, int y)
 	{
 		while (lst && ++x < MENU_LOAD_X_MAX)
 		{
-			// ft_printf("elem: %s\n", lst->path);
 			set_elem(m, lst, x, y);
 			lst = lst->n;
 		}
@@ -77,5 +76,4 @@ void			menu_load_draw(t_mlx *m, t_flst *lst, int x, int y)
 		m->scene_img[1][7].status = MENU;
 	else
 		m->scene_img[1][7].status = DISABLED;
-	// ft_printf("--\n");
 }

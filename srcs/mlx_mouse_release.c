@@ -1,12 +1,36 @@
 #include "raytra_gen.h"
 #include "raystruct.h"
 
-void	mouse_release(t_mlx *m, int btn, int x, int y)
+static int		preview_clic(t_mlx *m, t_flst *elem, int x, int y)
+{
+	int		i;
+	t_img	*img;
+
+	i = MENU_LOAD_X_MAX * MENU_LOAD_Y_MAX;
+	img = &m->scene_img[m->scene][MENU_LOAD_ID_IMG_PREVIEW_CLIC];
+	while (elem && --i >= 0)
+	{
+		if (x >= elem->top[0] && x <= elem->bot[0] && y >= elem->top[1]
+		&& y <= elem->bot[1])
+		{
+			img->pos[0] = elem->top[0];
+			img->pos[1] = elem->top[1];
+			layer_add(m, layer(m, 3, 0), img);
+		}
+		elem = elem->n;
+	}
+	return (0);
+}
+
+void			mouse_release(t_mlx *m, int btn, int x, int y)
 {
 	int		i;
 	t_img	*img;
 
 	i = -1;
+	if (m->scene == RT && m->menu.id == LOAD_FILE && m->menu.draw == 1
+	&& btn == 1 && preview_clic(m, m->flst, x, y))
+		return ;
 	while (m->scene_img[m->scene][++i].img)
 	{
 		if ((img = &m->scene_img[m->scene][i])->status == MENU
@@ -21,6 +45,7 @@ void	mouse_release(t_mlx *m, int btn, int x, int y)
 					, &m->scene_img[m->scene][img->mouse.click_id]);
 			if (img->mouse.action)
 				img->mouse.action((void *)m);
+			return ;
 		}
 	}
 }
