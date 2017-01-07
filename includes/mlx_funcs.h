@@ -39,7 +39,7 @@ void		scene_init_1_rt_menu(t_mlx *m);
 void		scene_0_intro(t_mlx *m);
 void		scene_0_skip(void *ptr);
 
-void		scene_1_rt(t_mlx *m);
+void		scene_1_rt(t_gen *d, t_mlx *m);
 
 void		menu_load_btn_next(void *ptr);
 void		menu_load_btn_prev(void *ptr);

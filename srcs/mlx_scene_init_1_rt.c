@@ -33,11 +33,16 @@ static void		set_over_click(t_mlx *m, t_img *img, int over, int click)
 	}
 }
 
+/*
+** 	anim_init(&m->scene_img[1][0], FADE_IN); // load btn
+** 	anim_init(&m->scene_img[1][4], FADE_IN); // arrow left off
+** 	anim_init(&m->scene_img[1][7], FADE_IN); // arrow left off
+*/
 void			scene_init_1_rt_menu(t_mlx *m)
 {
-	anim_init(&m->scene_img[1][0], FADE_IN); // load btn
-	anim_init(&m->scene_img[1][4], FADE_IN); // arrow left off
-	anim_init(&m->scene_img[1][7], FADE_IN); // arrow left off
+	anim_init(&m->scene_img[1][0], FADE_IN);
+	anim_init(&m->scene_img[1][4], FADE_IN);
+	anim_init(&m->scene_img[1][7], FADE_IN);
 }
 
 void			scene_init_1_rt(t_mlx *m, t_img *img)
@@ -46,7 +51,6 @@ void			scene_init_1_rt(t_mlx *m, t_img *img)
 	layer(m, 1, 1);
 	layer(m, 2, 1);
 	layer(m, 3, 1);
-	m->menu.draw = 1;
 
 	img = &m->scene_img[1][0];
 	img->pos[1] = m->winy - img->heigh - BTN_MARGIN;
@@ -72,4 +76,6 @@ void			scene_init_1_rt(t_mlx *m, t_img *img)
 	set_area(img);
 
 	scene_init_1_rt_menu(m);
+	m->menu.draw = 1;
+	menu_load_btn_open((void *)m);
 }
