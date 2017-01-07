@@ -1,5 +1,5 @@
 scene {
-	name {RENDU1}
+	name {RENDU}
 camera {pos{890.000000;525.000000;0.000000}, dir{0.000000;1.000000;2.000000}}
 spot {
 name {co1cuou}

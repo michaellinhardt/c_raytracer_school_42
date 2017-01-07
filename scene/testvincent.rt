@@ -1,123 +1,123 @@
-scene {								
-	name { NAME_SCENE        	 }
-	camera {pos{890; 535; 0}, dir{0; 1; 2}}				
-	spot {			
+scene {
+	name { test vincent        	 }
+	camera {pos{890; 535; 0}, dir{0; 1; 2}}
+	spot {
 		name {co1cuou}
-			type {point}				
+			type {point}
 			camera {pos{890; 535; 0}, dir{1 ; 1; 5}}
-			color { 0xffffff}					
+			color { 0xffffff}
 	}
-	spot {			
+	spot {
 		name {co1cuou}
-			type {point}				
+			type {point}
 			camera {pos{890; 535; 50}, dir{1 ; 1; 5}}
-			color { 0xffffff}					
+			color { 0xffffff}
 	}
-	ambiance { 0xffffff; 0 }					
+	ambiance { 0xffffff; 0 }
 	objects {
 		simple_obj {
 			name { BLANC BAS }
 			camera {pos{880 ; 520 ; 200}, dir{0 ; -1 ; 0 }}
-			type { plan }				
-			size { 1. ; 0.0 ; 0 }			
+			type { plan }
+			size { 1. ; 0.0 ; 0 }
 			effect { 0 ; 000 ; 0 ; 0}
-			color { 0xcccccc }				
+			color { 0xcccccc }
 		}
 		simple_obj {
 			name { PLAN HAUT }
 			camera {pos{870 ; 550 ; 50}, dir{0 ; 1 ; 0 }}
-			type { plan }				
-			size { 1. ; 0.0 ; 0 }			
+			type { plan }
+			size { 1. ; 0.0 ; 0 }
 			effect { 0 ; 000 ; 0 ; 0}
-			color { 0xcc0000 }				
+			color { 0xcc0000 }
 		}
 		simple_obj {
 			name { Cylindre }
 			camera {pos{888.5 ; 530 ; 20}, dir{0 ; 0 ; 1 }}
-			type { cylindre }				
-			size { 1 ; 1000 ; 10 }			
+			type { cylindre }
+			size { 1 ; 1000 ; 10 }
 			effect { 0 ; 100 ; 0 ; 0}
-			color { 0xcccc00 }				
+			color { 0xcccc00 }
 		}
 		simple_obj {
 			name { Cylindre }
 			camera {pos{891.5 ; 530 ; 20}, dir{0 ; 0 ; 1 }}
-			type { cylindre }				
-			size { 1 ; 1000 ; 10 }			
+			type { cylindre }
+			size { 1 ; 1000 ; 10 }
 			effect { 100 ; 0 ; 0 ; 0}
-			color { 0xcccc00 }				
+			color { 0xcccc00 }
 		}
 		simple_obj {
 			name { DIT AGONALE UN }
 			camera {pos{890 ; 540 ; 35}, dir{01 ; 1 ; -1 }}
-			type { cylindre }				
-			size { 1 ; 1000 ; 10 }			
+			type { cylindre }
+			size { 1 ; 1000 ; 10 }
 			effect { 0 ; 50 ; 0 ; 0}
-			color { 0xffffff }				
+			color { 0xffffff }
 		}
 		simple_obj {
 			name { DIT AGONALE DEUX }
 			camera {pos{890 ; 540 ; 35}, dir{1 ; 1 ; 1 }}
-			type { cylindre }				
-			size { 1 ; 1000 ; 10 }			
+			type { cylindre }
+			size { 1 ; 1000 ; 10 }
 			effect { 0 ; 50 ; 0 ; 0}
-			color { 0x0099ff }				
+			color { 0x0099ff }
 		}
 		simple_obj {
 			name { sphere }
 			camera {pos{890 ; 540 ; 35}, dir{0 ; 0 ; 1 }}
-			type { sphere }				
-			size { 3 ; 0 ; 0 }			
+			type { sphere }
+			size { 3 ; 0 ; 0 }
 			effect { 0 ; 100 ; 0 ; 0}
-			color { 0xcccc00 }				
+			color { 0xcccc00 }
 		}
 		simple_obj {
 			name { PLAN GAUCHE }
 			camera {pos{870 ; 550 ; 50}, dir{ 1 ; 0 ; 0 }}
-			type { plan }				
-			size { 1. ; 0.0 ; 0 }			
+			type { plan }
+			size { 1. ; 0.0 ; 0 }
 			effect { 0 ; 000 ; 0 ; 0}
-			color { 0x0000ff }				
+			color { 0x0000ff }
 		}
 		simple_obj {
 			name { PLAN DROTE }
 			camera {pos{910 ; 550 ; 50}, dir{ -1 ; 0 ; 0 }}
-			type { plan }				
-			size { 1. ; 0.0 ; 0 }			
+			type { plan }
+			size { 1. ; 0.0 ; 0 }
 			effect { 0 ; 000 ; 0 ; 0}
-			color { 0x00ff00 }				
+			color { 0x00ff00 }
 		}
 		simple_obj {
 			name { sphere }
 			camera {pos{910 ; 530 ; 35}, dir{0 ; 0 ; 1 }}
-			type { sphere }				
-			size { 3 ; 0 ; 0 }			
+			type { sphere }
+			size { 3 ; 0 ; 0 }
 			effect { 0 ; 100 ; 0 ; 0}
-			color { 0xcccc00 }				
+			color { 0xcccc00 }
 		}
 		simple_obj {
 			name { sphere }
 			camera {pos{870 ; 540 ; 35}, dir{0 ; 0 ; 1 }}
-			type { sphere }				
-			size { 3 ; 0 ; 0 }			
+			type { sphere }
+			size { 3 ; 0 ; 0 }
 			effect { 0 ; 100; 0 ; 0}
-			color { 0xcccc00 }				
+			color { 0xcccc00 }
 		}
 		simple_obj {
 			name { sphere }
 			camera {pos{870 ; 530 ; 35}, dir{0 ; 0 ; 1 }}
-			type { sphere }				
-			size { 3 ; 0 ; 0 }			
+			type { sphere }
+			size { 3 ; 0 ; 0 }
 			effect { 0 ; 100 ; 0 ; 0}
-			color { 0xcccc00 }				
+			color { 0xcccc00 }
 		}
 		simple_obj {
 			name { sphere }
 			camera {pos{910 ; 540 ; 35}, dir{0 ; 0 ; 1 }}
-			type { sphere }				
-			size { 3 ; 0 ; 0 }			
+			type { sphere }
+			size { 3 ; 0 ; 0 }
 			effect { 0 ; 100 ; 0 ; 0}
-			color { 0xff0000 }				
+			color { 0xff0000 }
 		}
 }
 }

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:09:09 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/12/31 01:24:38 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/01/07 05:00:48 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,17 @@ int			usage(int fd)
 
 static void	init_struct(t_gen *s)
 {
-	char		*line;
+	// char		*line;
 
-	line = NULL;
-	ft_strdel(&line);
-	texture_earth(0, 0, "oui", s->mlx.mlx);
-	texture_fire(0, 0, "oui", s->mlx.mlx);
-	texture_black(0, 0, "oui", s->mlx.mlx);
-	texture_ice(0, 0, "oui", s->mlx.mlx);
+	// line = NULL;
+	// ft_strdel(&line);
+	ft_bzero(s, sizeof(t_gen));
+	texture_earth(0, 0, "oui", &s->mlx.mlx);
+	texture_fire(0, 0, "oui", &s->mlx.mlx);
+	texture_black(0, 0, "oui", &s->mlx.mlx);
+	texture_ice(0, 0, "oui", &s->mlx.mlx);
 	s->sc = NULL;
+	s->sc_off = NULL;
 	s->nb = 0;
 	s->rep = 0;
 }

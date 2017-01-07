@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2017/01/03 15:03:21 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/01/07 04:33:43 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct		s_obj
 typedef struct		s_scene
 {
 	char			*name;
+	char			*path_save;
 	char			nb;
 	double			cam[6];
 	double			amb[2];
@@ -116,6 +117,7 @@ typedef struct		s_scene
 typedef struct		s_gen
 {
 	t_scene			*sc;
+	t_scene			*sc_off;
 	char			*data;
 	t_mlx			mlx;
 	int				rep; //

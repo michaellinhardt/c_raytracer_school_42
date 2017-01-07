@@ -1,104 +1,104 @@
-scene {								
-	name { NAME_SCENE        	 }
+scene {
+	name { test plan correct        	 }
 	camera {pos{890; 525; -50}, dir{0; 1; 2}}
-	spot {	
+	spot {
 	name {co1cuou}
-type {point}						
+type {point}
 		camera {pos{890; 625; -50}, dir{1 ; 1; 5}}
-		color { 0xFFffff }					
+		color { 0xFFffff }
 	}
-	ambiance { 0x452d6e; 52 }					
+	ambiance { 0x452d6e; 52 }
 	objects {
 		simple_obj {
 			name { SPHERE GAUCHE RELECTIVE }
-			camera {pos{ 880; 527; 10}, dir{0 ;0 ; 0}}				
-			type { sphere }				
-			size { 7 ; 0.0 ; 0 }			
-			effect { 0 ; 20 ; 0 ; 0}			
-			color { 0xFFFFFF }				
+			camera {pos{ 880; 527; 10}, dir{0 ;0 ; 0}}
+			type { sphere }
+			size { 7 ; 0.0 ; 0 }
+			effect { 0 ; 20 ; 0 ; 0}
+			color { 0xFFFFFF }
 		}
 		simple_obj {
 			name { SPHERE DROITE REFLECTIVE }
-			camera {pos{ 900; 529; 10}, dir{0 ;0 ; 0}}				
-			type { sphere }				
-			size { 7 ; 0.0 ; 0 }			
-			effect { 0 ; 20 ; 0 ; 0}			
-			color { 0xFFFFFF }				
+			camera {pos{ 900; 529; 10}, dir{0 ;0 ; 0}}
+			type { sphere }
+			size { 7 ; 0.0 ; 0 }
+			effect { 0 ; 20 ; 0 ; 0}
+			color { 0xFFFFFF }
 		}
 		simple_obj {
 			name { PLAN DU HAUT VERT }
-			camera {pos{ 900; 535; 200}, dir{0 ; 1 ; 0}}				
-			type { plan }				
-			size { 0 ; 0 ; 0 }			
-			effect { 0 ;00 ; 0 ; 0}	
-			color { 0x00FF00 }				
+			camera {pos{ 900; 535; 200}, dir{0 ; 1 ; 0}}
+			type { plan }
+			size { 0 ; 0 ; 0 }
+			effect { 0 ;00 ; 0 ; 0}
+			color { 0x00FF00 }
 		}
 		simple_obj {
 			name { PLAN DU BAS }
-			camera {pos{ 900; 515; 200}, dir{0 ; 1 ; 0}}				
-			type { plan }				
-			size { 0 ; 0 ; 0 }			
-			effect { 0 ;00 ; 0 ; 0}	
-			color { 0x0000FF }				
-		}		
+			camera {pos{ 900; 515; 200}, dir{0 ; 1 ; 0}}
+			type { plan }
+			size { 0 ; 0 ; 0 }
+			effect { 0 ;00 ; 0 ; 0}
+			color { 0x0000FF }
+		}
 		simple_obj {
 			name { PLAN DE GAUCHE }
-			camera {pos{ 880; 525; 0}, dir{1 ; 0 ; 0}}				
-			type { plan }				
-			size { 0 ; 0 ; 0 }			
-			effect { 0 ;100 ; 0 ; 0}	
-			color { 0xFFFFFF }				
-		}		
+			camera {pos{ 880; 525; 0}, dir{1 ; 0 ; 0}}
+			type { plan }
+			size { 0 ; 0 ; 0 }
+			effect { 0 ;100 ; 0 ; 0}
+			color { 0xFFFFFF }
+		}
 	}
 }
-scene {								
+scene {
 	name { KILLINGINTHENAMEMODAFUCKA        	 }
 	camera {pos{890; 525; -50}, dir{0; 1; 2}}
-	spot {							
+	spot {
 		camera {pos{890; 625; -50}, dir{1 ; 1; 5}}
-		color { 0xFFffff }					
+		color { 0xFFffff }
 	}
-	ambiance { 0x452d6e; 52 }					
+	ambiance { 0x452d6e; 52 }
 	objects {
 		simple_obj {
 			name { SPHERE GAUCHE RELECTIVE }
-			camera {pos{ 880; 527; 10}, dir{0 ;0 ; 0}}				
-			type { sphere }				
-			size { 7 ; 0.0 ; 0 }			
-			effect { 0 ; 20 ; 0 ; 0}			
-			color { 0xFFFFFF }				
+			camera {pos{ 880; 527; 10}, dir{0 ;0 ; 0}}
+			type { sphere }
+			size { 7 ; 0.0 ; 0 }
+			effect { 0 ; 20 ; 0 ; 0}
+			color { 0xFFFFFF }
 		}
 		simple_obj {
 			name { SPHERE DROITE REFLECTIVE }
-			camera {pos{ 900; 529; 10}, dir{0 ;0 ; 0}}				
-			type { sphere }				
-			size { 7 ; 0.0 ; 0 }			
-			effect { 0 ; 20 ; 0 ; 0}			
-			color { 0xFFFFFF }				
+			camera {pos{ 900; 529; 10}, dir{0 ;0 ; 0}}
+			type { sphere }
+			size { 7 ; 0.0 ; 0 }
+			effect { 0 ; 20 ; 0 ; 0}
+			color { 0xFFFFFF }
 		}
 		simple_obj {
 			name { PLAN DU HAUT VERT }
-			camera {pos{ 900; 535; 200}, dir{0 ; 1 ; 0}}				
-			type { plan }				
-			size { 0 ; 0 ; 0 }			
-			effect { 0 ;00 ; 0 ; 0}	
-			color { 0x00FF00 }				
+			camera {pos{ 900; 535; 200}, dir{0 ; 1 ; 0}}
+			type { plan }
+			size { 0 ; 0 ; 0 }
+			effect { 0 ;00 ; 0 ; 0}
+			color { 0x00FF00 }
 		}
 		simple_obj {
 			name { PLAN DU BAS }
-			camera {pos{ 900; 515; 200}, dir{0 ; 1 ; 0}}				
-			type { plan }				
-			size { 0 ; 0 ; 0 }			
-			effect { 0 ;00 ; 0 ; 0}	
-			color { 0x0000FF }				
-		}		
+			camera {pos{ 900; 515; 200}, dir{0 ; 1 ; 0}}
+			type { plan }
+			size { 0 ; 0 ; 0 }
+			effect { 0 ;00 ; 0 ; 0}
+			color { 0x0000FF }
+		}
 		simple_obj {
 			name { PLAN DE GAUCHE }
-			camera {pos{ 880; 525; 0}, dir{1 ; 0 ; 0}}				
-			type { plan }				
-			size { 0 ; 0 ; 0 }			
-			effect { 0 ;100 ; 0 ; 0}	
-			color { 0xFFFFFF }				
-		}		
+			camera {pos{ 880; 525; 0}, dir{1 ; 0 ; 0}}
+			type { plan }
+			size { 0 ; 0 ; 0 }
+			effect { 0 ;100 ; 0 ; 0}
+			color { 0xFFFFFF }
+		}
 	}
 }
