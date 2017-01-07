@@ -12,7 +12,7 @@ int		keyr_hook(int key, t_gen *d)
 {
 	if (key == 53)
 		exit (0);
-	else if (d->mlx.scene > INTRO)
+	else if (d->mlx.scene > INTRO && d->mlx.draw_rt == 0)
 	{
 		if (key == 49 && (d->mlx.menu.draw *= -1))
 		{
@@ -32,6 +32,8 @@ int		keyr_hook(int key, t_gen *d)
 
 int		keyp_hook(int key, t_gen *d)
 {
+	if (d->mlx.draw_rt > 0)
+		return (0);
 	(key == 123) ? d->mlx.input.key.left = 1 : 0;
 	(key == 124) ? d->mlx.input.key.right = 1 : 0;
 	(key == 125) ? d->mlx.input.key.down = 1 : 0;
@@ -41,6 +43,8 @@ int		keyp_hook(int key, t_gen *d)
 
 int		mousep_hook(int btn, int x, int y, t_gen *d)
 {
+	if (d->mlx.draw_rt > 0)
+		return (0);
 	(void)x;
 	(void)y;
 	(btn == 1) ? d->mlx.input.mouse.left = 1 : 0;
@@ -50,6 +54,8 @@ int		mousep_hook(int btn, int x, int y, t_gen *d)
 
 int		mouser_hook(int btn, int x, int y, t_gen *d)
 {
+	if (d->mlx.draw_rt > 0)
+		return (0);
 	(btn == 1) ? d->mlx.input.mouse.left = 0 : 0;
 	(btn == 2) ? d->mlx.input.mouse.right = 0 : 0;
 	d->mlx.input.mouse.release_x = x;

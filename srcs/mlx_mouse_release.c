@@ -47,7 +47,7 @@ static int		load_clic(t_gen *d, t_flst *elem, int x, int y)
 		{
 			img->pos[0] = elem->top[0];
 			img->pos[1] = elem->top[1];
-			layer_add(&d->mlx, layer(&d->mlx, 3, (d->mlx.menu.draw = 0)), img);
+			layer_add(&d->mlx, layer(&d->mlx, 3, (d->mlx.menu.draw *= -1)), img);
 			path = ft_strjoin(PATH_SCENE, elem->path);
 			parse_scene(d, path);
 			purge_scene(d, d->sc, path, nb);
