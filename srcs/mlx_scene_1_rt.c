@@ -26,18 +26,13 @@ void			scene_1_rt(t_mlx *m)
 {
 	itow(m, layer(m, 0, 0)->img, 0, 0);
 	if (m->menu.draw == 1)
-	{
 		layer(m, 2, 1);
-		perma_fade(m, layer(m, 3, 0));
-		mouse_over(m, m->input.mouse.over_x, m->input.mouse.over_y);
-		itow(m, layer(m, 1, 0)->img, 0, 0);
-		itow(m, layer(m, 2, 0)->img, 0, 0);
-		itow(m, layer(m, 3, 0)->img, 0, 0);
-		scene_text(m);
-	}
-	else
-	{
-		perma_fade(m, layer(m, 1, 0));
-		itow(m, layer(m, 1, 0)->img, 0, 0);
-	}
+	mouse_over(m, m->input.mouse.over_x, m->input.mouse.over_y);
+	itow(m, layer(m, 1, 0)->img, 0, 0);
+	itow(m, layer(m, 2, 0)->img, 0, 0);
+	itow(m, layer(m, 3, 0)->img, 0, 0);
+	perma_fade(m, layer(m, 1, 0));
+	perma_fade(m, layer(m, 2, 0));
+	perma_fade(m, layer(m, 3, 0));
+	scene_text(m);
 }

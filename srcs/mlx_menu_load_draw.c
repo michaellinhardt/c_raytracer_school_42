@@ -16,10 +16,7 @@ static void		calc_margin(t_mlx *m, int *marginx, int *marginy)
 static t_img	*set_img(t_mlx *m, t_flst *elem, t_img *img)
 {
 	elem->over = 0;
-	if (m->input.mouse.over_x >= elem->top[0]
-	&& m->input.mouse.over_x <= elem->bot[0]
-	&& m->input.mouse.over_y >= elem->top[1]
-	&& m->input.mouse.over_y <= elem->bot[1])
+	if (area(NULL, elem, m->input.mouse.over_x, m->input.mouse.over_y))
 	{
 		elem->over = 1;
 		img = &m->scene_img[1][MENU_LOAD_ID_IMG_PREVIEW_OVER];

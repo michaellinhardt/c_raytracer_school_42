@@ -9,16 +9,15 @@ void	mouse_over(t_mlx *m, int x, int y)
 	i = -1;
 	while (m->scene_img[m->scene][++i].img)
 	{
-
-		// verification temporaire en attendant la structure menu,
-		// le temps de tester le switch sur mouse over
 		if ((img = &m->scene_img[m->scene][i])->status > DISABLED
-		&& img->mouse.over_id > 0
-		&& x >= img->mouse.top[0] && x <= img->mouse.bot[0]
-		&& y >= img->mouse.top[1] && y <= img->mouse.bot[1])
+		&& img->mouse.over_id > 0 && area(img, NULL, x, y))
 		{
+			if (img->status == MENU && (m->menu.draw == 0
+			|| (m->menu.draw == 1 && img->menu != NONE
+			&& img->menu != m->menu.id)))
+				continue ;
 			layer_add(m, layer(m, 2, 0)
-			, &m->scene_img[m->scene][img->mouse.over_id]);
+				, &m->scene_img[m->scene][img->mouse.over_id]);
 		}
 	}
 }

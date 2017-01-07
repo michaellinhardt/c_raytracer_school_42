@@ -65,6 +65,8 @@ t_img			*layer(t_mlx *m, int id, int reset)
 {
 	static t_img	l[LAYER_MAX];
 
+	if (id == 1 && reset == 1)
+		ft_printf("reset layer 1\n");
 	if (id > LAYER_MAX - 1 || id < 0)
 		error(3, "macro LAYER_MAX or layer() param");
 	if (!l[id].img)
