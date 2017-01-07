@@ -22,7 +22,7 @@
 
 # define MENU_MAX 5
 # define BTN_MARGIN 10
-# define MENU_FADE_TEMPO 6
+# define MENU_FADE_TEMPO 15
 
 # define PATH_XPM "./resources/scene_img/"
 # define PATH_SCENE "./scene/"
@@ -54,7 +54,7 @@
 # define MENU_LOAD_PREVIEW_PATH "./resources/menu_load_preview/"
 # define MENU_LOAD_PREVIEW_DECALLAGE_X 7
 # define MENU_LOAD_PREVIEW_DECALLAGE_Y 7
-# define MENU_LOAD_WAIT_BEFORE_LOAD 50
+# define MENU_LOAD_WAIT_BEFORE_LOAD 40
 
 # define MENU_LOAD_MARGIN_X 20
 # define MENU_LOAD_MARGIN_Y 20

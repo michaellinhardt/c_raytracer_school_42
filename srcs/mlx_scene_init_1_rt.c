@@ -41,6 +41,8 @@ static void		set_over_click(t_mlx *m, t_img *img, int over, int click)
 void			scene_init_1_rt_menu(t_mlx *m)
 {
 	anim_init(&m->scene_img[1][0], FADE_IN);
+	anim_init(&m->scene_img[1][14], FADE_IN);
+	anim_init(&m->scene_img[1][17], FADE_IN);
 	anim_init(&m->scene_img[1][4], FADE_IN);
 	anim_init(&m->scene_img[1][7], FADE_IN);
 }
@@ -51,6 +53,10 @@ void			scene_init_1_rt(t_mlx *m, t_img *img)
 	layer(m, 1, 1);
 	layer(m, 2, 1);
 	layer(m, 3, 1);
+	img = layer(m, 4, 2);
+	img->i = -4;
+	while ((img->i += 4) < (img->sl * m->winy))
+			img->str[img->i + 3] = (unsigned char)50;
 
 	// LOAD BTN
 	img = &m->scene_img[1][0];
@@ -66,6 +72,22 @@ void			scene_init_1_rt(t_mlx *m, t_img *img)
 	img->pos[1] = m->scene_img[1][0].pos[1] - BTN_MARGIN - img->heigh;
 	set_type_action(img, MENU, 1, &menu_save_btn_open);
 	set_over_click(m, img, 15, 16);
+	set_area(img);
+
+	// SPOT BTN
+	img = &m->scene_img[1][17];
+	img->pos[0] = m->scene_img[1][14].pos[0];
+	img->pos[1] = m->scene_img[1][14].pos[1] - BTN_MARGIN - img->heigh;
+	set_type_action(img, MENU, 1, &menu_spot_btn_open);
+	set_over_click(m, img, 18, 19);
+	set_area(img);
+
+	// OBJECT BTN
+	img = &m->scene_img[1][20];
+	img->pos[0] = m->scene_img[1][17].pos[0];
+	img->pos[1] = m->scene_img[1][17].pos[1] - BTN_MARGIN - img->heigh;
+	set_type_action(img, MENU, 1, &menu_object_btn_open);
+	set_over_click(m, img, 21, 22);
 	set_area(img);
 
 	img = &m->scene_img[1][4];

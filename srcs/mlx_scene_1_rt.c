@@ -2,7 +2,7 @@
 
 static void		perma_fade(t_mlx *m, t_img *i)
 {
-	static int	speed = 10;
+	static int	speed = 20;
 	int			fade;
 
 	i->i = -4;
@@ -47,7 +47,10 @@ void			scene_1_rt(t_gen *d, t_mlx *m)
 		ft_memcpy(layer(m, 0, 0)->str, d->data, W_X * W_Y * 4);
 	itow(m, layer(m, 0, 0)->img, 0, 0);
 	if (m->menu.draw == 1)
+	{
+		itow(m, layer(m, 4, 0)->img, 0, 0);
 		layer(m, 2, 1);
+	}
 	mouse_over(m, m->input.mouse.over_x, m->input.mouse.over_y);
 	itow(m, layer(m, 1, 0)->img, 0, 0);
 	itow(m, layer(m, 2, 0)->img, 0, 0);
