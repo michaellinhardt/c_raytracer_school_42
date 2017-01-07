@@ -18,21 +18,16 @@ static void		free_list(t_mlx *m, t_flst *flst, t_flst *destroy)
 	}
 }
 
-static int		is_regular_file(const char *path)
+static void		load_preview(t_mlx *m, t_flst *elem)
 {
 	struct stat		path_stat;
 
 	ft_bzero(&path_stat, sizeof(struct stat));
-	stat(path, &path_stat);
-	return S_ISREG(path_stat.st_mode);
+	stat(elem->path_preview, &path_stat);
+	if (S_ISREG(path_stat.st_mode) != 1)
+		return ;
+	mlx_xpmtostruct(m, &elem->preview, elem->path_preview);
 }
-
-// static void		load_preview(t_mlx *m, t_flst *elem)
-// {
-// 	ft_printf("is_file %s: %d\n", elem->path, is_regular_file(elem->path));
-// 	(void)m;
-// 	(void)elem;
-// }
 
 static void		build_list(t_mlx *m, t_flst *new, DIR *dir, struct dirent *f)
 {
@@ -55,7 +50,7 @@ static void		build_list(t_mlx *m, t_flst *new, DIR *dir, struct dirent *f)
 		&& (!(new->p = NULL)))
 			m->flst = new;
 		m->flst->path_preview = ft_strjoin(MENU_LOAD_PREVIEW_PATH, f->d_name);
-		ft_printf("is file %s: %d\n", m->flst->path_preview, is_regular_file(m->flst->path_preview));
+		load_preview(m, m->flst);
 	}
 	closedir(dir);
 }

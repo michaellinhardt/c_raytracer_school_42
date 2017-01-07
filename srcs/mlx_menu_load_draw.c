@@ -49,8 +49,12 @@ static void		set_elem(t_mlx *m, t_flst *elem, int x, int y)
 	elem->bot[0] = elem->top[0] + sizex;
 	elem->bot[1] = elem->top[1] + sizey;
 	layer_add(m, layer(m, 1, 0), set_img(m, elem, (t_img *)NULL));
-	mlx_string_put(m->mlx, m->win, elem->top[0],
-	elem->bot[1] + 10, 0xFFFFFF, elem->path);
+	if (elem->preview.img)
+	{
+		elem->preview.pos[0] = elem->top[0] + MENU_LOAD_PREVIEW_DECALLAGE_X;
+		elem->preview.pos[1] = elem->top[1] + MENU_LOAD_PREVIEW_DECALLAGE_Y;
+		layer_add(m, layer(m, 1, 0), &elem->preview);
+	}
 }
 
 void			menu_load_draw(t_mlx *m, t_flst *lst, int x, int y)
