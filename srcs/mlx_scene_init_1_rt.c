@@ -52,11 +52,20 @@ void			scene_init_1_rt(t_mlx *m, t_img *img)
 	layer(m, 2, 1);
 	layer(m, 3, 1);
 
+	// LOAD BTN
 	img = &m->scene_img[1][0];
-	img->pos[1] = m->winy - img->heigh - BTN_MARGIN;
 	img->pos[0] = BTN_MARGIN;
+	img->pos[1] = m->winy - img->heigh - BTN_MARGIN;
 	set_type_action(img, MENU, 1, &menu_load_btn_open);
 	set_over_click(m, img, 1, 2);
+	set_area(img);
+
+	// SAVE BTN
+	img = &m->scene_img[1][14];
+	img->pos[0] = m->scene_img[1][0].pos[0];
+	img->pos[1] = m->scene_img[1][0].pos[1] - BTN_MARGIN - img->heigh;
+	set_type_action(img, MENU, 1, &menu_save_btn_open);
+	set_over_click(m, img, 15, 16);
 	set_area(img);
 
 	img = &m->scene_img[1][4];
@@ -74,6 +83,8 @@ void			scene_init_1_rt(t_mlx *m, t_img *img)
 	set_type_action(img, DISABLED, 1, &menu_load_btn_next);
 	set_over_click(m, img, 8, 9);
 	set_area(img);
+
+
 
 	scene_init_1_rt_menu(m);
 	m->menu.draw = 1;

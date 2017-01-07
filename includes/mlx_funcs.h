@@ -46,4 +46,6 @@ void		menu_load_btn_prev(void *ptr);
 void		menu_load_btn_open(void *ptr);
 void		menu_load_draw(t_mlx *m, t_flst *lst, int x, int y);
 
+void		menu_save_btn_open(void *ptr);
+
 #endif
