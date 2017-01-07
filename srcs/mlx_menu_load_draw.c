@@ -13,6 +13,24 @@ static void		calc_margin(t_mlx *m, int *marginx, int *marginy)
 	/ (MENU_LOAD_Y_MAX + 1);
 }
 
+static t_img	*set_img(t_mlx *m, t_flst *elem, t_img *img)
+{
+	elem->over = 0;
+	if (m->input.mouse.over_x >= elem->top[0]
+	&& m->input.mouse.over_x <= elem->bot[0]
+	&& m->input.mouse.over_y >= elem->top[1]
+	&& m->input.mouse.over_y <= elem->bot[1])
+	{
+		elem->over = 1;
+		img = &m->scene_img[1][MENU_LOAD_ID_IMG_PREVIEW_OVER];
+	}
+	else
+		img = &m->scene_img[1][MENU_LOAD_ID_IMG_PREVIEW];
+	img->pos[0] = elem->top[0];
+	img->pos[1] = elem->top[1];
+	return (img);
+}
+
 static void		set_elem(t_mlx *m, t_flst *elem, int x, int y)
 {
 	static int		marginx = -1;
@@ -30,9 +48,7 @@ static void		set_elem(t_mlx *m, t_flst *elem, int x, int y)
 	elem->top[1] = MENU_LOAD_START_Y + ((y + 1) * marginy) + (y * sizey);
 	elem->bot[0] = elem->top[0] + sizex;
 	elem->bot[1] = elem->top[1] + sizey;
-	m->scene_img[1][MENU_LOAD_ID_IMG_PREVIEW].pos[0] = elem->top[0];
-	m->scene_img[1][MENU_LOAD_ID_IMG_PREVIEW].pos[1] = elem->top[1];
-	layer_add(m, layer(m, 1, 0), &m->scene_img[1][MENU_LOAD_ID_IMG_PREVIEW]);
+	layer_add(m, layer(m, 1, 0), set_img(m, elem, (t_img *)NULL));
 	mlx_string_put(m->mlx, m->win, elem->top[0],
 	elem->bot[1] + 10, 0xFFFFFF, elem->path);
 }

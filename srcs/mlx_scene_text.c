@@ -2,16 +2,12 @@
 
 static void	scene_text_menu_load(t_mlx *m, t_flst *elem, int i, int color)
 {
-	static int		max = -1;
 	char			name[MENU_LOAD_PREVIEW_NAME_SIZE_MAX];
 	size_t			len;
 
-	if (max == -1)
-		max = MENU_LOAD_X_MAX * MENU_LOAD_Y_MAX;
-	while (elem && ++i < max)
+	while (elem && ++i < MENU_LOAD_X_MAX * MENU_LOAD_Y_MAX)
 	{
-		len = ft_strlen(elem->path);
-		if (len > MENU_LOAD_PREVIEW_NAME_SIZE_MAX)
+		if ((len = ft_strlen(elem->path)) > MENU_LOAD_PREVIEW_NAME_SIZE_MAX)
 		{
 			ft_memset(name, '.', MENU_LOAD_PREVIEW_NAME_SIZE_MAX);
 			ft_memcpy(name, elem->path, MENU_LOAD_PREVIEW_NAME_SIZE_MAX - 2);
@@ -20,10 +16,7 @@ static void	scene_text_menu_load(t_mlx *m, t_flst *elem, int i, int color)
 		else
 			ft_memcpy(name, elem->path, len);
 		name[len] = '\0';
-		if (m->input.mouse.over_x >= elem->top[0]
-		&& m->input.mouse.over_x <= elem->bot[0]
-		&& m->input.mouse.over_y >= elem->top[1]
-		&& m->input.mouse.over_y <= elem->bot[1])
+		if (elem->over)
 			color = 0xFF0000;
 		else
 			color = 0xFFFFFF;

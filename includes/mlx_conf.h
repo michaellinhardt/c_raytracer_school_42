@@ -24,7 +24,7 @@
 # define BTN_MARGIN 10
 # define MENU_FADE_TEMPO 6
 
-# define PATH_XPM "./xpm/"
+# define PATH_XPM "./resources/scene_img/"
 # define PATH_SCENE "./scene/"
 
 /*
@@ -39,6 +39,7 @@
 ** .. ne pas trop jouer avec :)
 */
 # define MENU_LOAD_ID_IMG_PREVIEW 10
+# define MENU_LOAD_ID_IMG_PREVIEW_OVER 11
 # define MENU_LOAD_START_X W_X * 0.18
 # define MENU_LOAD_START_Y W_Y * 0.10
 # define MENU_LOAD_END_X W_X * 0.90
@@ -48,6 +49,7 @@
 # define MENU_LOAD_TEXT_MARGIN_X 5
 # define MENU_LOAD_TEXT_MARGIN_Y 5
 # define MENU_LOAD_PREVIEW_NAME_SIZE_MAX 18
+# define MENU_LOAD_PREVIEW_PATH "./resources/menu_load_preview/"
 
 # define MENU_LOAD_MARGIN_X 20
 # define MENU_LOAD_MARGIN_Y 20

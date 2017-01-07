@@ -101,9 +101,12 @@ typedef struct		s_menu
 typedef struct		s_flst
 {
 	char			*path;
+	char			*path_preview;
 	int				top[2];
 	int				bot[2];
 	int				id;
+	int				over;
+	t_img			preview;
 	struct s_flst	*p;
 	struct s_flst	*n;
 }					t_flst;
