@@ -62,6 +62,7 @@ typedef struct		s_img
 	t_img_anim		anim;
 	t_img_mouse		mouse;
 	int				pos[2];
+	char			set_alpha;
 }					t_img;
 
 typedef struct		s_input_mouse

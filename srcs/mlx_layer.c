@@ -12,7 +12,7 @@ static void		reset_img(t_mlx *m, t_img *img, int reset)
 	img->i = -1;
 	ptr = (int *)img->str;
 	while (++img->i < m->winx * m->winy)
-		ptr[img->i] = color;
+		img->ptr[img->i] = color;
 }
 
 static void		anim_eval(t_img *img)
@@ -37,6 +37,22 @@ static void		anim_eval(t_img *img)
 	}
 }
 
+static void		set_alpha(t_img *img, int color)
+{
+	img->i = -1;
+	while (++img->i < img->width * img->heigh)
+	{
+		if (img->i == 0)
+		{
+			color = img->ptr[img->i];
+			// ft_printf("force alpha, color: %d\n", color);
+		}
+		// if (img->ptr[img->i] == color)
+			img->ptr[img->i] = 0xFFFFFFFF;
+	}
+	img->set_alpha = 0;
+}
+
 void			layer_add(t_mlx *m, t_img *l, t_img *i)
 {
 	int		*layer;
@@ -49,6 +65,8 @@ void			layer_add(t_mlx *m, t_img *l, t_img *i)
 	l->i = (m->winx * i->pos[1] + i->pos[0]) - 1;
 	y = -1;
 	anim_eval(i);
+	if (i->set_alpha == 1)
+		set_alpha(i, -1);
 	while (++y < i->heigh)
 	{
 		x = -1;
