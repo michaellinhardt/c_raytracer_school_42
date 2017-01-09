@@ -43,12 +43,9 @@ static void		set_alpha(t_img *img, int color)
 	while (++img->i < img->width * img->heigh)
 	{
 		if (img->i == 0)
-		{
 			color = img->ptr[img->i];
-			// ft_printf("force alpha, color: %d\n", color);
-		}
-		// if (img->ptr[img->i] == color)
-			img->ptr[img->i] = 0xFFFFFFFF;
+		if (img->ptr[img->i] == color)
+			img->ptr[img->i] = 0xFF666999;
 	}
 	img->set_alpha = 0;
 }
@@ -59,6 +56,7 @@ void			layer_add(t_mlx *m, t_img *l, t_img *i)
 	int		*img;
 	int		x;
 	int		y;
+	int		pos;
 
 	layer = (int *)l->str;
 	img = (int *)i->str;
@@ -72,7 +70,8 @@ void			layer_add(t_mlx *m, t_img *l, t_img *i)
 		x = -1;
 		while (++x < i->width)
 		{
-			i->str[(y * i->width + x) * 4 + 3] = i->fade;
+			if (i->ptr[(pos = y * i->width + x)] != (int)0xFF666999)
+				i->str[pos * 4 + 3] = i->fade;
 			layer[++(l->i)] = img[y * i->width + x];
 		}
 		l->i = l->i - i->width + m->winx;
