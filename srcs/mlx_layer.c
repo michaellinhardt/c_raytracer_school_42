@@ -40,9 +40,11 @@ static void		anim_eval(t_img *img)
 static void		set_alpha(t_img *img, int color)
 {
 	img->i = -1;
+	if (img->set_alpha > 0)
+		color = img->set_alpha;
 	while (++img->i < img->width * img->heigh)
 	{
-		if (img->i == 0)
+		if (img->i == 0 && img->set_alpha == -1)
 			color = img->ptr[img->i];
 		if (img->ptr[img->i] == color)
 			img->ptr[img->i] = 0xFF666999;
@@ -63,8 +65,8 @@ void			layer_add(t_mlx *m, t_img *l, t_img *i)
 	l->i = (m->winx * i->pos[1] + i->pos[0]) - 1;
 	y = -1;
 	anim_eval(i);
-	if (i->set_alpha == 1)
-		set_alpha(i, -1);
+	if (i->set_alpha != 0)
+		set_alpha(i, i->set_alpha);
 	while (++y < i->heigh)
 	{
 		x = -1;
