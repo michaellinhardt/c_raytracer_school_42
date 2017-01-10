@@ -22,7 +22,7 @@ static void		draw_rt(t_gen *d, t_mlx *m)
 		return ;
 	else if (++m->draw_rt == 2)
 	{
-		anim_init(&m->scene_img[1][MENU_LOAD_ID_IMG_LOADING], FADE_IN);
+		anim_init(&m->scene_img[1][ID_IMG_LOADING], FADE_IN);
 	}
 	else if (m->draw_rt == MENU_LOAD_WAIT_BEFORE_LOAD)
 	{
@@ -31,7 +31,7 @@ static void		draw_rt(t_gen *d, t_mlx *m)
 		m->draw_rt = 0;
 		m->need_copy_data = 0;
 	}
-	layer_add(m, layer(m, 2, 0), &m->scene_img[1][MENU_LOAD_ID_IMG_LOADING]);
+	layer_add(m, layer(m, 2, 0), &m->scene_img[1][ID_IMG_LOADING]);
 }
 
 /*
@@ -52,15 +52,10 @@ void			scene_1_rt(t_gen *d, t_mlx *m)
 		layer(m, 2, 1);
 	}
 	mouse_over(m, m->input.mouse.over_x, m->input.mouse.over_y);
+
 	itow(m, layer(m, 1, 0)->img, 0, 0);
 	itow(m, layer(m, 2, 0)->img, 0, 0);
 	itow(m, layer(m, 3, 0)->img, 0, 0);
-
-	// m->scene_img[1][23].set_alpha = 1;
-	// m->scene_img[1][23].pos[0] = m->scene_img[1][0].pos[0];
-	// m->scene_img[1][23].pos[1] = m->scene_img[1][0].pos[1];
-	// layer_add(m, layer(m, 3, 0), &m->scene_img[1][23]);
-
 
 	perma_fade(m, layer(m, 1, 0));
 	perma_fade(m, layer(m, 2, 0));

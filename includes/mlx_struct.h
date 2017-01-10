@@ -59,10 +59,12 @@ typedef struct		s_img
 	int				width;
 	int				heigh;
 	int				fade;
+	int				fade_max;
+	int				fade_min;
 	t_img_anim		anim;
 	t_img_mouse		mouse;
 	int				pos[2];
-	char			set_alpha;
+	int				set_alpha;
 }					t_img;
 
 typedef struct		s_input_mouse

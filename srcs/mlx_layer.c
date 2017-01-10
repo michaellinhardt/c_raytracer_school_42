@@ -35,20 +35,28 @@ static void		anim_eval(t_img *img)
 			img->anim.id = STATIC;
 		}
 	}
+	if (img->fade < img->fade_min)
+		img->fade = img->fade_min;
+	else if (img->fade_max > 0 && img->fade > img->fade_max)
+		img->fade = img->fade_max;
 }
 
-static void		set_alpha(t_img *img, int color)
+static void		set_alpha(t_img *img)
 {
-	img->i = -1;
-	if (img->set_alpha > 0)
+	int		pixel;
+	int		color;
+
+	if (img->set_alpha == 0)
+		return ;
+	else if (img->set_alpha > 0)
 		color = img->set_alpha;
-	while (++img->i < img->width * img->heigh)
-	{
-		if (img->i == 0 && img->set_alpha == -1)
-			color = img->ptr[img->i];
+	else
+		color = img->ptr[0];
+	img->i = -1;
+	pixel = img->width * img->heigh;
+	while (++img->i < pixel)
 		if (img->ptr[img->i] == color)
 			img->ptr[img->i] = 0xFF666999;
-	}
 	img->set_alpha = 0;
 }
 
@@ -65,17 +73,17 @@ void			layer_add(t_mlx *m, t_img *l, t_img *i)
 	l->i = (m->winx * i->pos[1] + i->pos[0]) - 1;
 	y = -1;
 	anim_eval(i);
-	if (i->set_alpha != 0)
-		set_alpha(i, i->set_alpha);
+	set_alpha(i);
 	while (++y < i->heigh)
 	{
 		x = -1;
 		while (++x < i->width)
-		{
-			if (i->ptr[(pos = y * i->width + x)] != (int)0xFF666999)
+			if ((l->i += 1)
+			&& i->ptr[(pos = y * i->width + x)] != (int)0xFF666999)
+			{
 				i->str[pos * 4 + 3] = i->fade;
-			layer[++(l->i)] = img[y * i->width + x];
-		}
+				layer[l->i] = img[y * i->width + x];
+			}
 		l->i = l->i - i->width + m->winx;
 	}
 }

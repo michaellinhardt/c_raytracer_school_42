@@ -38,7 +38,7 @@ static int		load_clic(t_gen *d, t_flst *elem, int x, int y)
 	char	nb;
 
 	i = MENU_LOAD_X_MAX * MENU_LOAD_Y_MAX;
-	img = &d->mlx.scene_img[d->mlx.scene][MENU_LOAD_ID_IMG_PREVIEW_CLIC];
+	img = &d->mlx.scene_img[d->mlx.scene][ID_IMG_PREVIEW_CLIC];
 	if (!(nb = 0) && d->sc)
 		nb = d->sc->nb;
 	while (elem && --i >= 0)

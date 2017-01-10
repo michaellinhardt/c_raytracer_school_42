@@ -38,13 +38,29 @@
 ** Valeur pour calculer le positionnement du menu load
 ** .. ne pas trop jouer avec :)
 */
-# define MENU_LOAD_ID_IMG_PREVIEW 10
-# define MENU_LOAD_ID_IMG_PREVIEW_OVER 11
-# define MENU_LOAD_ID_IMG_PREVIEW_CLIC 12
-# define MENU_LOAD_ID_IMG_LEFT_ARROW 4
-# define MENU_LOAD_ID_IMG_RIGHT_ARROW 4
 
-# define MENU_LOAD_ID_IMG_LOADING 13
+# define ID_IMG_MENU_CADRE 0
+# define ID_IMG_MENU_CADRE_LIGHTNING 1
+# define ID_IMG_MENU_CADRE_LOGO 2
+
+# define ID_IMG_BTN_LOAD 3
+# define ID_IMG_BTN_LOAD_OVER 4
+# define ID_IMG_BTN_LOAD_CLICK 5
+# define ID_IMG_BTN_SAVE 6
+# define ID_IMG_BTN_SAVE_OVER 7
+# define ID_IMG_BTN_SAVE_CLICK 8
+
+
+
+
+# define ID_IMG_PREVIEW 10
+# define ID_IMG_PREVIEW_OVER 11
+# define ID_IMG_PREVIEW_CLIC 12
+
+# define ID_IMG_LEFT_ARROW 4
+# define ID_IMG_RIGHT_ARROW 4
+
+# define ID_IMG_LOADING 13
 # define MENU_LOAD_START_X W_X * 0.18
 # define MENU_LOAD_START_Y W_Y * 0.07
 # define MENU_LOAD_END_X W_X * 0.90

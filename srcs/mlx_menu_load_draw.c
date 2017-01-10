@@ -5,8 +5,8 @@ static void		calc_margin(t_mlx *m, int *marginx, int *marginy)
 	int		imagex;
 	int		imagey;
 
-	imagex = m->scene_img[1][MENU_LOAD_ID_IMG_PREVIEW].width;
-	imagey = m->scene_img[1][MENU_LOAD_ID_IMG_PREVIEW].heigh;
+	imagex = m->scene_img[1][ID_IMG_PREVIEW].width;
+	imagey = m->scene_img[1][ID_IMG_PREVIEW].heigh;
 	*marginx = (MENU_LOAD_SIZE_X - (MENU_LOAD_X_MAX * imagex))
 	/ (MENU_LOAD_X_MAX + 1);
 	*marginy = (MENU_LOAD_SIZE_Y - (MENU_LOAD_Y_MAX * imagey))
@@ -19,10 +19,10 @@ static t_img	*set_img(t_mlx *m, t_flst *elem, t_img *img)
 	if (area(NULL, elem, m->input.mouse.over_x, m->input.mouse.over_y))
 	{
 		elem->over = 1;
-		img = &m->scene_img[1][MENU_LOAD_ID_IMG_PREVIEW_OVER];
+		img = &m->scene_img[1][ID_IMG_PREVIEW_OVER];
 	}
 	else
-		img = &m->scene_img[1][MENU_LOAD_ID_IMG_PREVIEW];
+		img = &m->scene_img[1][ID_IMG_PREVIEW];
 	img->pos[0] = elem->top[0];
 	img->pos[1] = elem->top[1];
 	return (img);
@@ -38,8 +38,8 @@ static void		set_elem(t_mlx *m, t_flst *elem, int x, int y)
 	if (marginx == -1)
 	{
 		calc_margin(m, &marginx, &marginy);
-		sizex = m->scene_img[1][MENU_LOAD_ID_IMG_PREVIEW].width;
-		sizey = m->scene_img[1][MENU_LOAD_ID_IMG_PREVIEW].heigh;
+		sizex = m->scene_img[1][ID_IMG_PREVIEW].width;
+		sizey = m->scene_img[1][ID_IMG_PREVIEW].heigh;
 	}
 	elem->top[0] = MENU_LOAD_START_X + ((x + 1) * marginx) + (x * sizex);
 	elem->top[1] = MENU_LOAD_START_Y + ((y + 1) * marginy) + (y * sizey);
@@ -57,9 +57,9 @@ static void		set_elem(t_mlx *m, t_flst *elem, int x, int y)
 void			menu_load_draw(t_mlx *m, t_flst *lst, int x, int y)
 {
 	if (lst->p)
-		m->scene_img[1][MENU_LOAD_ID_IMG_LEFT_ARROW].status = MENU;
+		m->scene_img[1][ID_IMG_LEFT_ARROW].status = MENU;
 	else
-		m->scene_img[1][MENU_LOAD_ID_IMG_LEFT_ARROW].status = DISABLED;
+		m->scene_img[1][ID_IMG_LEFT_ARROW].status = DISABLED;
 	while (++y < MENU_LOAD_Y_MAX)
 	{
 		while (lst && ++x < MENU_LOAD_X_MAX)
@@ -70,7 +70,7 @@ void			menu_load_draw(t_mlx *m, t_flst *lst, int x, int y)
 		x = -1;
 	}
 	if (lst && lst->n)
-		m->scene_img[1][MENU_LOAD_ID_IMG_RIGHT_ARROW].status = MENU;
+		m->scene_img[1][ID_IMG_RIGHT_ARROW].status = MENU;
 	else
-		m->scene_img[1][MENU_LOAD_ID_IMG_RIGHT_ARROW].status = DISABLED;
+		m->scene_img[1][ID_IMG_RIGHT_ARROW].status = DISABLED;
 }

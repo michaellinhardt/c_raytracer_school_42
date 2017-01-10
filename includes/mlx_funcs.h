@@ -37,10 +37,10 @@ void		scene_init_1_rt(t_mlx *m, t_img *img);
 void		scene_init_1_rt_img(t_mlx *m, t_img *img);
 void		scene_init_1_rt_menu(t_mlx *m);
 
-// void		set_type_action(t_img *img, enum e_status status, int btn
-// 			, void (*action)(void *ptr));
-// void		set_area(t_img *img);
-// static void	set_over_click(t_mlx *m, t_img *img, int over, int click);
+void		set_type_action(t_img *img, enum e_status status, int btn
+			, void (*action)(void *ptr));
+void		set_area(t_img *img);
+void		set_over_click(t_mlx *m, t_img *img, int over, int click);
 
 void		scene_0_intro(t_mlx *m);
 void		scene_0_skip(void *ptr);

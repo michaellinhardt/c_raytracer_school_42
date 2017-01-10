@@ -52,4 +52,40 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	// set_type_action(img, DISABLED, 1, &menu_load_btn_next);
 	// set_over_click(m, img, 8, 9);
 	// set_area(img);
+
+	img = &m->scene_img[1][ID_IMG_MENU_CADRE];
+	img->fade_min = 180;
+	set_type_action(img, MENU, 0, NULL);
+
+	img = &m->scene_img[1][ID_IMG_MENU_CADRE_LIGHTNING];
+	img->pos[0] = (m->winx / 2) - (img->width / 2);
+	img->pos[1] = 4;
+	img->fade_min = 80;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
+
+	img = &m->scene_img[1][ID_IMG_MENU_CADRE_LOGO];
+	img->pos[0] = (m->winx / 2) - (img->width / 2);
+	img->pos[1] = 22;
+	img->fade_min = 100;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
+
+	img = &m->scene_img[1][ID_IMG_BTN_LOAD];
+	img->pos[0] = 530;
+	img->pos[1] = 11;
+	img->fade_min = 60;
+	img->set_alpha = -1;
+	set_area(img);
+	set_type_action(img, MENU, 1, &menu_load_btn_open);
+	set_over_click(m, img, ID_IMG_BTN_LOAD_OVER, ID_IMG_BTN_LOAD_CLICK);
+
+	img = &m->scene_img[1][ID_IMG_BTN_SAVE];
+	img->pos[0] = 1095;
+	img->pos[1] = m->scene_img[1][ID_IMG_BTN_LOAD].pos[1];
+	img->fade_min = 60;
+	img->set_alpha = -1;
+	set_area(img);
+	set_type_action(img, MENU, 1, &menu_save_btn_open);
+	set_over_click(m, img, ID_IMG_BTN_SAVE_OVER, ID_IMG_BTN_SAVE_CLICK);
 }
