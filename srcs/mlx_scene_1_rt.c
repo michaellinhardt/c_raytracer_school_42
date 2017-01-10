@@ -56,10 +56,10 @@ void			scene_1_rt(t_gen *d, t_mlx *m)
 	itow(m, layer(m, 2, 0)->img, 0, 0);
 	itow(m, layer(m, 3, 0)->img, 0, 0);
 
-	m->scene_img[1][23].set_alpha = 1;
-	m->scene_img[1][23].pos[0] = m->scene_img[1][0].pos[0];
-	m->scene_img[1][23].pos[1] = m->scene_img[1][0].pos[1];
-	layer_add(m, layer(m, 3, 0), &m->scene_img[1][23]);
+	// m->scene_img[1][23].set_alpha = 1;
+	// m->scene_img[1][23].pos[0] = m->scene_img[1][0].pos[0];
+	// m->scene_img[1][23].pos[1] = m->scene_img[1][0].pos[1];
+	// layer_add(m, layer(m, 3, 0), &m->scene_img[1][23]);
 
 
 	perma_fade(m, layer(m, 1, 0));

@@ -57,9 +57,9 @@ static void		set_elem(t_mlx *m, t_flst *elem, int x, int y)
 void			menu_load_draw(t_mlx *m, t_flst *lst, int x, int y)
 {
 	if (lst->p)
-		m->scene_img[1][4].status = MENU;
+		m->scene_img[1][MENU_LOAD_ID_IMG_LEFT_ARROW].status = MENU;
 	else
-		m->scene_img[1][4].status = DISABLED;
+		m->scene_img[1][MENU_LOAD_ID_IMG_LEFT_ARROW].status = DISABLED;
 	while (++y < MENU_LOAD_Y_MAX)
 	{
 		while (lst && ++x < MENU_LOAD_X_MAX)
@@ -70,7 +70,7 @@ void			menu_load_draw(t_mlx *m, t_flst *lst, int x, int y)
 		x = -1;
 	}
 	if (lst && lst->n)
-		m->scene_img[1][7].status = MENU;
+		m->scene_img[1][MENU_LOAD_ID_IMG_RIGHT_ARROW].status = MENU;
 	else
-		m->scene_img[1][7].status = DISABLED;
+		m->scene_img[1][MENU_LOAD_ID_IMG_RIGHT_ARROW].status = DISABLED;
 }
