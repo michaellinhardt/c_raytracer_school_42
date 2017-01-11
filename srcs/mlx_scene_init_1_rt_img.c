@@ -81,4 +81,40 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	set_type_action(img, MENU, 1, &menu_camera_btn_open);
 	set_over_click(m, img, ID_IMG_BTN_CAMERA_OVER, ID_IMG_BTN_CAMERA_CLICK);
 
+	img = &m->scene_img[1][ID_IMG_BTN_ARROW_LEFT_OFF];
+	img->pos[0] = 8;
+	img->pos[1] = (m->winy / 2) - (img->heigh / 2);
+	img->fade_min = 80;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
+
+	img = &m->scene_img[1][ID_IMG_BTN_ARROW_LEFT];
+	img->menu = LOAD_FILE;
+	img->pos[0] = m->scene_img[1][ID_IMG_BTN_ARROW_LEFT_OFF].pos[0];
+	img->pos[1] = m->scene_img[1][ID_IMG_BTN_ARROW_LEFT_OFF].pos[1];
+	img->fade_min = 80;
+	img->set_alpha = -1;
+	set_area(img);
+	set_type_action(img, MENU, 1, &menu_btn_left);
+	set_over_click(m, img
+		, ID_IMG_BTN_ARROW_LEFT_OVER, ID_IMG_BTN_ARROW_LEFT_CLICK);
+
+	img = &m->scene_img[1][ID_IMG_BTN_ARROW_RIGHT_OFF];
+	img->pos[0] = m->winx - img->width - 8;
+	img->pos[1] = (m->winy / 2) - (img->heigh / 2);
+	img->fade_min = 80;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
+
+	img = &m->scene_img[1][ID_IMG_BTN_ARROW_RIGHT];
+	img->menu = LOAD_FILE;
+	img->pos[0] = m->scene_img[1][ID_IMG_BTN_ARROW_RIGHT_OFF].pos[0];
+	img->pos[1] = m->scene_img[1][ID_IMG_BTN_ARROW_RIGHT_OFF].pos[1];
+	img->fade_min = 80;
+	img->set_alpha = -1;
+	set_area(img);
+	set_type_action(img, MENU, 1, &menu_btn_right);
+	set_over_click(m, img
+		, ID_IMG_BTN_ARROW_RIGHT_OVER, ID_IMG_BTN_ARROW_RIGHT_CLICK);
+
 }
