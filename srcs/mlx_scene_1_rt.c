@@ -26,6 +26,7 @@ static void		draw_rt(t_gen *d, t_mlx *m)
 	}
 	else if (m->draw_rt == MENU_LOAD_WAIT_BEFORE_LOAD)
 	{
+		m->scene_img[1][ID_IMG_MENU_CADRE].fade_min = 190;
 		raytracing(d);
 		ft_bzero(&m->input, sizeof(t_input));
 		m->draw_rt = 0;

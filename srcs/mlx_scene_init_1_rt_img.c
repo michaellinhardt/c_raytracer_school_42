@@ -7,7 +7,7 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	(void)img;
 
 	img = &m->scene_img[1][ID_IMG_MENU_CADRE];
-	img->fade_min = 200;
+	img->fade_min = 110;
 	img->set_alpha = 0xFF000000;
 	set_type_action(img, MENU, 0, NULL);
 

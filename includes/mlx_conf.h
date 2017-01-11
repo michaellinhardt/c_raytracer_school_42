@@ -27,18 +27,6 @@
 # define PATH_XPM "./resources/scene_img/"
 # define PATH_SCENE "./scene/"
 
-/*
-** Nombre de vignette par ligne et nombre de ligne
-** modifiable a souhait, dans la mesure du raisonnable
-*/
-# define MENU_LOAD_X_MAX 4
-# define MENU_LOAD_Y_MAX 3
-
-/*
-** Valeur pour calculer le positionnement du menu load
-** .. ne pas trop jouer avec :)
-*/
-
 # define ID_IMG_MENU_CADRE 0
 # define ID_IMG_MENU_CADRE_LIGHTNING 1
 # define ID_IMG_MENU_CADRE_LOGO 2
@@ -84,10 +72,13 @@
 
 # define ID_IMG_LOADING 33
 
-# define MENU_LOAD_START_X W_X * 0.15
-# define MENU_LOAD_START_Y W_Y * 0.15
-# define MENU_LOAD_END_X W_X * 0.85
-# define MENU_LOAD_END_Y W_Y * 0.85
+# define MENU_LOAD_X_MAX 4
+# define MENU_LOAD_Y_MAX 3
+# define MENU_LOAD_START_X W_X * 0.10
+# define MENU_LOAD_START_Y W_Y * 0.08
+# define MENU_LOAD_END_X W_X * 0.90
+# define MENU_LOAD_END_Y W_Y * 0.90
+
 # define MENU_LOAD_SIZE_X MENU_LOAD_END_X - MENU_LOAD_START_X
 # define MENU_LOAD_SIZE_Y MENU_LOAD_END_Y - MENU_LOAD_START_Y
 # define MENU_LOAD_TEXT_MARGIN_X 5
