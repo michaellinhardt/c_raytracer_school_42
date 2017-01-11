@@ -78,7 +78,7 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	img->fade_min = 40;
 	img->set_alpha = -1;
 	set_area(img);
-	set_type_action(img, MENU, 0, NULL);
+	set_type_action(img, MENU, 1, &menu_camera_btn_open);
 	set_over_click(m, img, ID_IMG_BTN_CAMERA_OVER, ID_IMG_BTN_CAMERA_CLICK);
 
 }

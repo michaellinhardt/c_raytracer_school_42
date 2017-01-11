@@ -56,5 +56,6 @@ void		menu_save_btn_open(void *ptr);
 void		menu_spot_btn_open(void *ptr);
 void		menu_object_btn_open(void *ptr);
 void		menu_scene_btn_open(void *ptr);
+void		menu_camera_btn_open(void *ptr);
 
 #endif

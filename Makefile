@@ -54,6 +54,7 @@ SRCS = 	main.c \
 		filter_part1.c \
 		filter_part2.c \
 		filter_part3.c \
+		mlx_menu_camera_btn_open.c \
 		mlx_menu_object_btn_open.c \
 		mlx_menu_scene_btn_open.c \
 		mlx_menu_save_btn_open.c \
