@@ -41,14 +41,14 @@ static void		anim_eval(t_img *img)
 		img->fade = img->fade_max;
 }
 
-static void		set_alpha(t_img *img)
+void			layer_set_alpha(t_img *img)
 {
 	int		pixel;
 	int		color;
 
 	if (img->set_alpha == 0)
 		return ;
-	else if (img->set_alpha > 0)
+	else if (img->set_alpha != -1)
 		color = img->set_alpha;
 	else
 		color = img->ptr[0];
@@ -73,7 +73,7 @@ void			layer_add(t_mlx *m, t_img *l, t_img *i)
 	l->i = (m->winx * i->pos[1] + i->pos[0]) - 1;
 	y = -1;
 	anim_eval(i);
-	set_alpha(i);
+	layer_set_alpha(i);
 	while (++y < i->heigh)
 	{
 		x = -1;

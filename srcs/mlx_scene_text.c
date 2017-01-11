@@ -28,7 +28,6 @@ static void	scene_text_menu_load(t_mlx *m, t_flst *elem, int i, int color)
 
 void		scene_text(t_mlx *m)
 {
-	return ;
 	if (m->scene == RT && m->menu.id == LOAD_FILE && m->menu.draw == 1)
 		scene_text_menu_load(m, m->flst, -1, 0);
 }

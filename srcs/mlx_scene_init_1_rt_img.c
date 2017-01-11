@@ -7,7 +7,8 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	(void)img;
 
 	img = &m->scene_img[1][ID_IMG_MENU_CADRE];
-	img->fade_min = 180;
+	img->fade_min = 200;
+	img->set_alpha = 0xFF000000;
 	set_type_action(img, MENU, 0, NULL);
 
 	img = &m->scene_img[1][ID_IMG_MENU_CADRE_LIGHTNING];
@@ -95,7 +96,7 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	img->fade_min = 80;
 	img->set_alpha = -1;
 	set_area(img);
-	set_type_action(img, MENU, 1, &menu_btn_left);
+	set_type_action(img, DISABLED, 1, &menu_btn_left);
 	set_over_click(m, img
 		, ID_IMG_BTN_ARROW_LEFT_OVER, ID_IMG_BTN_ARROW_LEFT_CLICK);
 
@@ -113,8 +114,29 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	img->fade_min = 80;
 	img->set_alpha = -1;
 	set_area(img);
-	set_type_action(img, MENU, 1, &menu_btn_right);
+	set_type_action(img, DISABLED, 1, &menu_btn_right);
 	set_over_click(m, img
 		, ID_IMG_BTN_ARROW_RIGHT_OVER, ID_IMG_BTN_ARROW_RIGHT_CLICK);
+
+	img = &m->scene_img[1][ID_IMG_PREVIEW_NO_IMG];
+	img->fade_min = 50;
+	img->set_alpha = -1;
+	layer_set_alpha(img);
+
+	img = &m->scene_img[1][ID_IMG_PREVIEW];
+	img->fade_min = 100;
+	img->set_alpha = -1;
+	layer_set_alpha(img);
+
+	img = &m->scene_img[1][ID_IMG_PREVIEW_OVER];
+	img->fade_min = 50;
+	img->set_alpha = -1;
+	layer_set_alpha(img);
+
+	img = &m->scene_img[1][ID_IMG_PREVIEW_CLIC];
+	img->fade_min = 50;
+	img->set_alpha = -1;
+	layer_set_alpha(img);
+
 
 }

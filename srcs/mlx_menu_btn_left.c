@@ -5,6 +5,7 @@ void			menu_btn_left(void *ptr)
 	t_mlx	*m;
 
 	m = ptr;
-	ft_printf("btn left\n");
+	if (m->scene == RT && m->menu.id == LOAD_FILE && m->menu.draw == 1)
+		menu_load_btn_prev(ptr);
 	(void)m;
 }

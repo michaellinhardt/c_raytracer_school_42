@@ -28,6 +28,23 @@ static t_img	*set_img(t_mlx *m, t_flst *elem, t_img *img)
 	return (img);
 }
 
+static void		push_elem(t_mlx *m, t_flst *elem, t_img *img)
+{
+	if (elem->preview.img)
+	{
+		img = &elem->preview;
+		img->pos[0] = elem->top[0] + 7;
+		img->pos[1] = elem->top[1] + 7;
+	}
+	else
+	{
+		img = &m->scene_img[1][ID_IMG_PREVIEW_NO_IMG];
+		img->pos[0] = elem->top[0] + 46;
+		img->pos[1] = elem->top[1] + 19;
+	}
+	layer_add(m, layer(m, 1, 0), img);
+}
+
 static void		set_elem(t_mlx *m, t_flst *elem, int x, int y)
 {
 	static int		marginx = -1;
@@ -46,21 +63,15 @@ static void		set_elem(t_mlx *m, t_flst *elem, int x, int y)
 	elem->bot[0] = elem->top[0] + sizex;
 	elem->bot[1] = elem->top[1] + sizey;
 	layer_add(m, layer(m, 1, 0), set_img(m, elem, (t_img *)NULL));
-	if (elem->preview.img)
-	{
-		elem->preview.pos[0] = elem->top[0] + MENU_LOAD_PREVIEW_DECALLAGE_X;
-		elem->preview.pos[1] = elem->top[1] + MENU_LOAD_PREVIEW_DECALLAGE_Y;
-		layer_add(m, layer(m, 1, 0), &elem->preview);
-	}
+	push_elem(m, elem, (t_img *)NULL);
 }
 
 void			menu_load_draw(t_mlx *m, t_flst *lst, int x, int y)
 {
-	return ;
 	if (lst->p)
-		m->scene_img[1][ID_IMG_LEFT_ARROW].status = MENU;
+		m->scene_img[1][ID_IMG_BTN_ARROW_LEFT].status = MENU;
 	else
-		m->scene_img[1][ID_IMG_LEFT_ARROW].status = DISABLED;
+		m->scene_img[1][ID_IMG_BTN_ARROW_LEFT].status = DISABLED;
 	while (++y < MENU_LOAD_Y_MAX)
 	{
 		while (lst && ++x < MENU_LOAD_X_MAX)
@@ -71,7 +82,7 @@ void			menu_load_draw(t_mlx *m, t_flst *lst, int x, int y)
 		x = -1;
 	}
 	if (lst && lst->n)
-		m->scene_img[1][ID_IMG_RIGHT_ARROW].status = MENU;
+		m->scene_img[1][ID_IMG_BTN_ARROW_RIGHT].status = MENU;
 	else
-		m->scene_img[1][ID_IMG_RIGHT_ARROW].status = DISABLED;
+		m->scene_img[1][ID_IMG_BTN_ARROW_RIGHT].status = DISABLED;
 }

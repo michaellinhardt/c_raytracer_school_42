@@ -31,6 +31,7 @@ void		scene(t_gen *d, t_mlx *m);
 
 t_img		*layer(t_mlx *m, int id, int reset);
 void		layer_add(t_mlx *m, t_img *l, t_img *i);
+void		layer_set_alpha(t_img *img);
 
 void		scene_init_0_intro(t_mlx *m, t_img *img);
 void		scene_init_1_rt(t_mlx *m, t_img *img);
