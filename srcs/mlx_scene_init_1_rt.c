@@ -39,18 +39,14 @@ void			set_over_click(t_mlx *m, t_img *img, int over, int click)
 	}
 }
 
-/*
-** 	anim_init(&m->scene_img[1][0], FADE_IN); // load btn
-*/
 void			scene_init_1_rt_menu(t_mlx *m)
 {
-	anim_init(&m->scene_img[1][ID_IMG_MENU_CADRE], FADE_IN);
-	anim_init(&m->scene_img[1][ID_IMG_MENU_CADRE_LIGHTNING], FADE_IN);
-	anim_init(&m->scene_img[1][ID_IMG_MENU_CADRE_LOGO], FADE_IN);
-	// anim_init(&m->scene_img[1][14], FADE_IN);
-	// anim_init(&m->scene_img[1][17], FADE_IN);
-	// anim_init(&m->scene_img[1][4], FADE_IN);
-	// anim_init(&m->scene_img[1][7], FADE_IN);
+	int		i;
+
+	i = -1;
+	while (++i <= ID_MAX_AUTO_INIT)
+		if (m->scene_img[1][i].status > DISABLED)
+			anim_init(&m->scene_img[1][i], FADE_IN);
 }
 
 void			scene_init_1_rt(t_mlx *m, t_img *img)

@@ -56,6 +56,7 @@ static void		set_elem(t_mlx *m, t_flst *elem, int x, int y)
 
 void			menu_load_draw(t_mlx *m, t_flst *lst, int x, int y)
 {
+	return ;
 	if (lst->p)
 		m->scene_img[1][ID_IMG_LEFT_ARROW].status = MENU;
 	else
