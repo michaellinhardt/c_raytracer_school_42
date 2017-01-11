@@ -82,7 +82,6 @@ SRCS = 	main.c \
 		mlx_scene_text.c \
 		mlx_check_area.c \
 		mlx_start.c
-#		mlx_debug_line.c
 
 
 SRC = $(addprefix $(SRCSPATH), $(SRCS))
@@ -101,12 +100,12 @@ all : $(NAME)
 	$(CC) -c $(WFLAGS) -I $(LIBFT_INCLUDES) -I $(INCLUDES) $< -o $@
 
 $(NAME) : $(OBJ)
-#	make -C libft
+	make -C libft
 	$(CC) -o $(NAME) $(OBJ) $(WFLAGS) $(LFLAGS) -I $(INCLUDES)
 
 clean :
 	rm -rf $(OBJ)
-#	make -C libft clean
+	make -C libft clean
 
 img :
 	@mkdir image
@@ -117,7 +116,7 @@ clean_si :
 
 fclean : clean
 	rm -f $(NAME)
-#make -C libft fclean
+	make -C libft fclean
 
 re : fclean all
 
