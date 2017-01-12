@@ -1,25 +1,25 @@
-scene {								
-	name { NAME_SCENE        	 }
+scene {
+	name { 3d test	 }
 	camera {pos{890; 525; -50}, dir{0; 1; 2}}
 	spot {
 	name {cocuou}
-type {point}					
+type {point}
 		camera {pos{890; 605; -50}, dir{1 ; 1; 5}}
-		color { 0xFFffff }					
+		color { 0xFFffff }
 	}
-	spot {	
+	spot {
 	name {cocuou1}
-type {point}						
+type {point}
 		camera {pos{890; 605; 00}, dir{1 ; 1; 5}}
-		color { 0xFF0000 }					
+		color { 0xFF0000 }
 	}
-	ambiance { 0x452d6e; 52 }					
+	ambiance { 0x452d6e; 52 }
 	objects {
 		simple_obj {
 			name { 3d }
-			camera {pos{ 900; 520; 20}, dir{0 ;0 ; 0}}				
-			type { triangle }				
-		color { 0xaf5c30 }					
+			camera {pos{ 900; 520; 20}, dir{0 ;0 ; 0}}
+			type { triangle }
+		color { 0xaf5c30 }
 			{
 				# Blender v2.77 (sub 0) OBJ File: ''
 # www.blender.org

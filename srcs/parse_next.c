@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 02:30:01 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/12/18 02:31:08 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2017/01/03 15:02:15 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int		return_type_spot(char **tmp)
 	if (ft_strequ(*tmp, "directional"))
 	{
 		ft_strdel(tmp);
-		return (DIR);
+		return (DIIR);
 	}
 	else if (ft_strequ(*tmp, "point"))
 	{

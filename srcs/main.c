@@ -6,15 +6,15 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:09:09 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/12/18 18:33:41 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2017/01/07 05:00:48 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raytra_gen.h"
 #include "raystruct.h"
-#include <gui.h>
 
-int		usage(int fd)
+/* to del
+int			usage(int fd)
 {
 	char *line;
 
@@ -29,35 +29,40 @@ int		usage(int fd)
 	}
 	return (1);
 }
+*/
 
-void	init_struct(t_gen *s)
+static void	init_struct(t_gen *s)
 {
-	static void	*mlx;
-	char		*line;
+	// char		*line;
 
-	mlx = mlx_init();
-	line = NULL;
-	ft_strdel(&line);
-	texture_earth(0, 0, "oui", mlx);
-	texture_fire(0, 0, "oui", mlx);
-	texture_black(0, 0, "oui", mlx);
-	texture_ice(0, 0, "oui", mlx);
+	// line = NULL;
+	// ft_strdel(&line);
+	ft_bzero(s, sizeof(t_gen));
+	texture_earth(0, 0, "oui", &s->mlx.mlx);
+	texture_fire(0, 0, "oui", &s->mlx.mlx);
+	texture_black(0, 0, "oui", &s->mlx.mlx);
+	texture_ice(0, 0, "oui", &s->mlx.mlx);
 	s->sc = NULL;
-	s->to_move = NULL;
+	s->sc_off = NULL;
 	s->nb = 0;
 	s->rep = 0;
 }
 
 int		main(void)
 {
-	t_gen s;
+	t_gen	s;
 
 	s.view_angle[0] = 0;
 	s.view_angle[1] = 0;
 	s.view_angle[2] = 0;
-	load_interface(&s);
 	init_struct(&s);
-	gtk_widget_show_all(s.pwindow);
-	gtk_main();
+	mlx_start(&s, &s.mlx);
+
+/*
+** void 	parse_scene(t_gen *s, char *argv) ; argv = nom du fichier ; ajouter au debut de la liste chainee
+**
+** void		raytracing(t_gen *s) ; lance le raytracer sur le premier maillon t_scene de t_gen
+*/
+
 	return (0);
 }

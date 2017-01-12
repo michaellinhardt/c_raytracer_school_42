@@ -1,36 +1,36 @@
-scene {								
-	name { NAME_SCENE        	 }
-	camera {pos{890; 525; -50}, dir{0; 1; 2}}				
-	spot {		
+scene {
+	name { test n cylindre        	 }
+	camera {pos{890; 525; -50}, dir{0; 1; 2}}
+	spot {
 	name {cocuou}
-type {point}					
+type {point}
 		camera {pos{90; 600; -50}, dir{1 ; 1; 5}}
-		color { 0xFF0F00 }					
+		color { 0xFF0F00 }
 	}
-	spot {	
+	spot {
 	name {co1cuou}
-type {point}						
+type {point}
 		camera {pos{987; 600; -50}, dir{1 ; 1; 5}}
-		color { 0xFFFFF0 }					
+		color { 0xFFFFF0 }
 	}
-	ambiance { 0x452d6e; 52 }					
+	ambiance { 0x452d6e; 52 }
 	objects {
 		simple_obj {
 			name { ROUGE }
-			camera {pos{ 890; 525; 0}, dir{1 ;-1 ; 0}}				
-			type { cylindre }				
-			size { 7 ; 5.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 1}			
-			color { 0xFF0000 }				
+			camera {pos{ 890; 525; 0}, dir{1 ;-1 ; 0}}
+			type { cylindre }
+			size { 7 ; 5.0 ; 0 }
+			effect { 0 ; 0 ; 0 ; 1}
+			color { 0xFF0000 }
 			cut { pos{1;22.1;-98}, dir{1;02;35} }
 		}
 		simple_obj {
 			name { BLEU }
-			camera {pos{ 890; 525; -3}, dir{1 ;-1 ; 0}}				
-			type { sphere }				
-			size { 9 ; 5.0 ; 0 }			
-			effect { 0 ; 0 ; 0 ; 0}			
-			color { 0xFF0000 }				
+			camera {pos{ 890; 525; -3}, dir{1 ;-1 ; 0}}
+			type { sphere }
+			size { 9 ; 5.0 ; 0 }
+			effect { 0 ; 0 ; 0 ; 0}
+			color { 0xFF0000 }
 			cut { pos{1;22.1;-98}, dir{1;02;35} }
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 15:39:57 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/12/18 22:07:17 by bbrunell         ###   ########.fr       */
+/*   Updated: 2017/01/03 15:01:22 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void		diffuse_shadow_specular_end(t_color *c,
 	c->i_l[c->i] = (*obj_dotn > 0 && *obj_dotn <= 90) ? c->i_l[c->i] : 0;
 	*speculaire = vector_dot(c->mirror_vec_light, c->vec_obj_eye);
 	*speculaire = (*speculaire > 0 && *speculaire <= 90) ? *speculaire : 0;
-	if (c->spot->type & DIR)
+	if (c->spot->type & DIIR)
 		speculaire = 0;
 }
 
@@ -39,7 +39,7 @@ t_obj *tmp)
 	color_composants(c->spot->c_s, c->i_l);
 	if (c->spot->type & POINT)
 		c->vec_obj_light = vector_dir(c->spot_pos, c->hitpoint);
-	else if (c->spot->type & DIR)
+	else if (c->spot->type & DIIR)
 		c->vec_obj_light = vectormultby_scalar(vector_normalize(
 			new_vector(c->spot->pos[3], c->spot->pos[4], c->spot->pos[5])), -1);
 	c->dot_light_norm = vector_dot(c->vec_obj_light, r->norm);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raystruct.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/12/18 18:18:50 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2017/01/07 01:58:06 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <pthread.h>
-# include <gui.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+// # include <gui.h>
 
-# include "mlx.h"
-# include "libft.h"
 # include "raytra_gen.h"
+# include "mlx_funcs.h"
 
 typedef struct		s_color
 {
@@ -73,16 +74,16 @@ typedef struct		s_ray
 
 typedef struct		s_general
 {
-	char			c;
-	double			bpp;
-	int				bit_per_pixel;
+	// char			c;
+	// double			bpp;
+	// int				bit_per_pixel;
 	int				s_line;
-	int				endian;
-	char			*data;
-	void			*img;
-	void			*win;
-	void			*mlx;
-	int				color;
+	// int				endian;
+	// char			*data;
+	// void			*img;
+	// void			*win;
+	// void			*mlx;
+	// int				color;
 	THE				*z;
 }					t_id;
 

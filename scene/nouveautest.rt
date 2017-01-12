@@ -1,29 +1,29 @@
- scene {								
-	name { NAME_SCENE        	 }
-	camera {pos{0; 0; 0}, dir{0; 0; 1}}				
+ scene {
+	name { nouveautest       	 }
+	camera {pos{0; 0; 0}, dir{0; 0; 1}}
 	spot {
 		name {cocuou}
-		type {point}						
+		type {point}
 		camera {pos{0; 00; 50}, dir{1 ; 1; 5}}
-		color { 0xffffff }					
+		color { 0xffffff }
 	}
-	ambiance { 0x452d6e; 60 }					
+	ambiance { 0x452d6e; 60 }
 	objects {
 		simple_obj {
 			name { PLAN FACE }
-			camera {pos{ 0; 0; 60}, dir{ 1 ; 0 ; -1}}				
-			type { plan }				
-			size { 7 ; 5.0 ; 0 }			
-			effect { 0 ; 100 ; 0 ; 0 ; 0 ; 0}			
-			color { 0xffffff }				
+			camera {pos{ 0; 0; 60}, dir{ 1 ; 0 ; -1}}
+			type { plan }
+			size { 7 ; 5.0 ; 0 }
+			effect { 0 ; 100 ; 0 ; 0 ; 0 ; 0}
+			color { 0xffffff }
 		}
 		simple_obj {
 			name { SPHERE BLEUE }
-			camera {pos{ 0; 0; 40}, dir{ 0 ; 0 ; 1}}				
-			type { sphere }				
-			size { 7 ; 5.0 ; 0 }			
-			effect { 0 ; 000 ; 0 ; 0; 0 ; 0}	
-			color { 0x0000ff }			
+			camera {pos{ 0; 0; 40}, dir{ 0 ; 0 ; 1}}
+			type { sphere }
+			size { 7 ; 5.0 ; 0 }
+			effect { 0 ; 000 ; 0 ; 0; 0 ; 0}
+			color { 0x0000ff }
 			cut {pos{-2.000000;-0.500000;-0.500000}, dir{-1.000000;-1.000000;0.5000000}}
 		}
 	}

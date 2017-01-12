@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 07:15:29 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/12/18 07:18:32 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2017/01/03 15:02:23 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void			print_spot_type(t_scene *s, char **to_print, char type)
 
 	tmp = *to_print;
 	(void)s;
-	if (type & DIR)
+	if (type & DIIR)
 		*to_print = ft_strjoin(*to_print, "type {directional}\n");
 	if (type & POINT)
 		*to_print = ft_strjoin(*to_print, "type {point}\n");
