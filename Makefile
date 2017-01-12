@@ -55,19 +55,19 @@ SRCS = 	main.c \
 		filter_part2.c \
 		filter_part3.c \
 		mlx_menu_free_list.c \
+		mlx_menu_draw.c \
 		mlx_menu_btn_left.c \
 		mlx_menu_btn_right.c \
-		mlx_menu_camera_btn_open.c \
 		mlx_menu_object_btn_open.c \
+		mlx_menu_object_clic.c \
 		mlx_menu_scene_btn_open.c \
-		mlx_menu_scene_draw.c \
 		mlx_menu_scene_clic.c \
-		mlx_menu_save_btn_open.c \
-		mlx_menu_spot_btn_open.c \
 		mlx_menu_load_btn_open.c \
 		mlx_menu_load_btn_nav.c \
-		mlx_menu_load_draw.c \
 		mlx_menu_load_clic.c \
+		mlx_menu_save_btn_open.c \
+		mlx_menu_camera_btn_open.c \
+		mlx_menu_spot_btn_open.c \
 		mlx_hook.c \
 		mlx_loop.c \
 		mlx_img.c \

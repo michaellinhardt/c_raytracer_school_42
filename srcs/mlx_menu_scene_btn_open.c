@@ -12,14 +12,16 @@ static void		build_list(t_mlx *m, t_flst *new, t_scene *sc)
 	{
 		if (!(new = (t_flst *)ft_memalloc(sizeof(t_flst))))
 			error(2, "malloc t_flst struct");
-		new->path = ft_strdup(sc->name);
+		if (sc->name)
+			new->path = ft_strdup(sc->name);
+		else
+			new->path = ft_strdup("Unknow..");
 		if (!m->flst && (m->flst = new) && (!(new->p = (t_flst *)NULL)))
 				new->n = (t_flst *)NULL;
 		else if ((m->flst->p = new)
 		&& (new->n = m->flst)
 		&& (!(new->p = NULL)))
 			m->flst = new;
-		m->flst->scene = sc;
 		load_preview(m, m->flst);
 		sc = sc->next;
 	}

@@ -49,22 +49,23 @@ void		scene_0_skip(void *gen, void *mlx);
 void		scene_1_rt(t_gen *d, t_mlx *m);
 
 void		menu_list_free(t_mlx *m, t_flst *flst, t_flst *destroy);
+void		menu_draw(t_mlx *m, t_flst *lst, int x, int y);
 
 void		menu_load_btn_next(void *gen, void *mlx);
 void		menu_load_btn_prev(void *gen, void *mlx);
 void		menu_load_btn_open(void *gen, void *mlx);
-void		menu_load_draw(t_mlx *m, t_flst *lst, int x, int y);
 void		menu_load_clic(t_gen *d, t_mlx *m, t_flst *elem);
 
 void		menu_scene_btn_open(void *gen, void *mlx);
-void		menu_scene_draw(t_mlx *m, t_flst *lst, int x, int y);
 void		menu_scene_clic(t_gen *d, t_mlx *m, t_flst *elem);
+
+void		menu_object_btn_open(void *gen, void *mlx);
+void		menu_object_clic(t_gen *d, t_mlx *m, t_flst *elem);
 
 void		menu_btn_left(void *gen, void *mlx);
 void		menu_btn_right(void *gen, void *mlx);
 void		menu_save_btn_open(void *gen, void *mlx);
 void		menu_spot_btn_open(void *gen, void *mlx);
-void		menu_object_btn_open(void *gen, void *mlx);
 void		menu_camera_btn_open(void *gen, void *mlx);
 
 #endif
