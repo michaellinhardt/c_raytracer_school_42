@@ -1,78 +1,32 @@
 #include "raytra_gen.h"
 #include "raystruct.h"
 
-static void		purge_scene(t_gen *d, t_scene *sc, char *path, char nb)
+static void		call_clic(t_gen *d, t_mlx *m, t_flst *elem, enum e_menu menu)
 {
-	t_scene		*prev;
-	t_scene		*next;
-
-	prev = (t_scene *)NULL;
-	while (sc)
-	{
-		next = sc->next;
-		if (sc->nb <= nb && !ft_strcmp(sc->path_save, path))
-		{
-			if (!prev && ((sc->next = d->sc_off) || 1))
-			{
-				d->sc_off = sc;
-				d->sc = next;
-				sc = next;
-				continue ;
-			}
-			prev->next = next;
-			sc->next = d->sc_off;
-			d->sc_off = sc;
-		}
-		else if (sc->nb > nb)
-			sc->path_save = ft_strdup(path);
-		prev = sc;
-		sc = next;
-	}
+	if (menu == LOAD_FILE)
+		menu_load_clic(d, m, elem);
 }
 
 static int		load_clic(t_gen *d, t_flst *elem, int x, int y)
 {
 	int		i;
 	t_img	*img;
-	char	*path;
-	char	nb;
 
 	i = MENU_LOAD_X_MAX * MENU_LOAD_Y_MAX;
 	img = &d->mlx.scene_img[d->mlx.scene][ID_IMG_PREVIEW_CLIC];
-	if (!(nb = 0) && d->sc)
-		nb = d->sc->nb;
 	while (elem && --i >= 0)
 	{
-		if (area(NULL, elem, x, y) && (d->mlx.draw_rt = 1))
+		if (area(NULL, elem, x, y))
 		{
 			img->pos[0] = elem->top[0];
 			img->pos[1] = elem->top[1];
 			layer_add(&d->mlx, layer(&d->mlx, 3, (d->mlx.menu.draw *= -1)), img);
-			path = ft_strjoin(PATH_SCENE, elem->path);
-			parse_scene(d, path);
-			purge_scene(d, d->sc, path, nb);
-			ft_strdel(&path);
+			call_clic(d, &d->mlx, elem, d->mlx.menu.id);
 			return (1);
 		}
 		elem = elem->n;
 	}
 	return (0);
-	// ft_printf("\n--------\n");
-	// ft_printf("scene actuellement dans la liste:\n");
-	// t_scene *sc;
-	// sc = d->sc;
-	// while (sc)
-	// {
-	// 	ft_printf("\t\t(%d) %s -> %s\n", sc->nb, sc->name, sc->path_save);
-	// 	sc = sc->next;
-	// }
-	// ft_printf("scene actuellement morte:\n");
-	// sc = d->sc_off;
-	// while (sc)
-	// {
-	// 	ft_printf("\t\t(%d) %s -> %s\n", sc->nb, sc->name, sc->path_save);
-	// 	sc = sc->next;
-	// }
 }
 
 void			mouse_release(t_gen *d, int btn, int x, int y)
@@ -81,8 +35,9 @@ void			mouse_release(t_gen *d, int btn, int x, int y)
 	t_img	*img;
 
 	i = -1;
-	if (d->mlx.scene == RT && d->mlx.menu.id == LOAD_FILE
-	 && d->mlx.menu.draw == 1 && btn == 1 && load_clic(d, d->mlx.flst, x, y))
+	if (d->mlx.scene == RT && d->mlx.flst
+	&& (d->mlx.menu.id >= LOAD_FILE || d->mlx.menu.id <= LOAD_SPOT)
+	&& d->mlx.menu.draw == 1 && btn == 1 && load_clic(d, d->mlx.flst, x, y))
 		return ;
 	while (d->mlx.scene_img[d->mlx.scene][++i].img)
 	{

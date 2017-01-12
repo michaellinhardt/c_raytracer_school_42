@@ -4,7 +4,9 @@
 enum	e_menu {
 	NONE,
 	LOAD_FILE,
-	LOAD_SCENE
+	LOAD_SCENE,
+	LOAD_OBJECT,
+	LOAD_SPOT
 };
 
 enum	e_scene {
