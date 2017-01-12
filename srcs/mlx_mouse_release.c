@@ -57,22 +57,22 @@ static int		load_clic(t_gen *d, t_flst *elem, int x, int y)
 		elem = elem->n;
 	}
 	return (0);
-	ft_printf("\n--------\n");
-	ft_printf("scene actuellement dans la liste:\n");
-	t_scene *sc;
-	sc = d->sc;
-	while (sc)
-	{
-		ft_printf("\t\t(%d) %s -> %s\n", sc->nb, sc->name, sc->path_save);
-		sc = sc->next;
-	}
-	ft_printf("scene actuellement morte:\n");
-	sc = d->sc_off;
-	while (sc)
-	{
-		ft_printf("\t\t(%d) %s -> %s\n", sc->nb, sc->name, sc->path_save);
-		sc = sc->next;
-	}
+	// ft_printf("\n--------\n");
+	// ft_printf("scene actuellement dans la liste:\n");
+	// t_scene *sc;
+	// sc = d->sc;
+	// while (sc)
+	// {
+	// 	ft_printf("\t\t(%d) %s -> %s\n", sc->nb, sc->name, sc->path_save);
+	// 	sc = sc->next;
+	// }
+	// ft_printf("scene actuellement morte:\n");
+	// sc = d->sc_off;
+	// while (sc)
+	// {
+	// 	ft_printf("\t\t(%d) %s -> %s\n", sc->nb, sc->name, sc->path_save);
+	// 	sc = sc->next;
+	// }
 }
 
 void			mouse_release(t_gen *d, int btn, int x, int y)

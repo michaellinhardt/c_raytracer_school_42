@@ -48,6 +48,7 @@ void		scene_0_skip(void *ptr);
 
 void		scene_1_rt(t_gen *d, t_mlx *m);
 
+void		menu_list_free(t_mlx *m, t_flst *flst, t_flst *destroy);
 void		menu_load_btn_next(void *ptr);
 void		menu_load_btn_prev(void *ptr);
 void		menu_load_btn_open(void *ptr);

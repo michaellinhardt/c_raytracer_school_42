@@ -54,6 +54,7 @@ SRCS = 	main.c \
 		filter_part1.c \
 		filter_part2.c \
 		filter_part3.c \
+		mlx_menu_free_list.c \
 		mlx_menu_btn_left.c \
 		mlx_menu_btn_right.c \
 		mlx_menu_camera_btn_open.c \
@@ -100,12 +101,12 @@ all : $(NAME)
 	$(CC) -c $(WFLAGS) -I $(LIBFT_INCLUDES) -I $(INCLUDES) $< -o $@
 
 $(NAME) : $(OBJ)
-	make -C libft
+#	make -C libft
 	$(CC) -o $(NAME) $(OBJ) $(WFLAGS) $(LFLAGS) -I $(INCLUDES)
 
 clean :
 	rm -rf $(OBJ)
-	make -C libft clean
+#	make -C libft clean
 
 img :
 	@mkdir image
@@ -116,7 +117,7 @@ clean_si :
 
 fclean : clean
 	rm -f $(NAME)
-	make -C libft fclean
+#	make -C libft fclean
 
 re : fclean all
 

@@ -99,6 +99,7 @@ typedef struct		s_menu
 {
 	char			draw;
 	enum e_menu		id;
+	struct s_scene	*scene;
 }					t_menu;
 
 typedef struct		s_flst
@@ -113,11 +114,6 @@ typedef struct		s_flst
 	struct s_flst	*p;
 	struct s_flst	*n;
 }					t_flst;
-
-/*
-**	menu.id 0 = menu general uniquement,
-**	menu.id 1 = load file,
-*/
 
 typedef struct		s_mlx
 {
