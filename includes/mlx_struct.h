@@ -106,6 +106,8 @@ typedef struct		s_flst
 	char			*path;
 	char			*path_preview;
 	struct s_scene	*scene;
+	struct s_spot	*spot;
+	struct s_obj	*obj;
 	int				top[2];
 	int				bot[2];
 	int				id;

@@ -22,6 +22,7 @@ static void		build_list(t_mlx *m, t_flst *new, t_scene *sc)
 		&& (new->n = m->flst)
 		&& (!(new->p = NULL)))
 			m->flst = new;
+		m->flst->scene = sc;
 		load_preview(m, m->flst);
 		sc = sc->next;
 	}

@@ -22,6 +22,7 @@ static void		build_list(t_mlx *m, t_flst *new, t_obj *obj)
 		&& (new->n = m->flst)
 		&& (!(new->p = NULL)))
 			m->flst = new;
+		m->flst->obj = obj;
 		load_preview(m, m->flst);
 		obj = obj->next;
 	}

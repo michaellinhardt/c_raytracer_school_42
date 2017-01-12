@@ -22,6 +22,7 @@ static void		build_list(t_mlx *m, t_flst *new, t_spot *spot)
 		&& (new->n = m->flst)
 		&& (!(new->p = NULL)))
 			m->flst = new;
+		m->flst->spot = spot;
 		load_preview(m, m->flst);
 		spot = spot->next;
 	}

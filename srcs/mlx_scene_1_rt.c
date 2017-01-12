@@ -18,6 +18,7 @@ static void		perma_fade(t_mlx *m, t_img *i)
 
 static void		draw_rt(t_gen *d, t_mlx *m)
 {
+	static int		len = (W_X * W_Y * 4);
 	if (!d->sc || (d->sc && d->sc->data))
 		return ;
 	if (++m->loading == 1)
@@ -27,8 +28,9 @@ static void		draw_rt(t_gen *d, t_mlx *m)
 		m->scene_img[1][ID_IMG_MENU_CADRE].fade_min = 190;
 		raytracing(d);
 		ft_bzero(&m->input, sizeof(t_input));
-		d->sc->data = ft_strdup(d->data);
-		ft_memcpy(layer(m, 0, 0)->str, d->data, W_X * W_Y * 4);
+		d->sc->data = ft_strnew(len);
+		ft_memcpy(d->sc->data, d->data, len);
+		ft_memcpy(layer(m, 0, 0)->str, d->sc->data, len);
 		m->loading = 0;
 	}
 	layer_add(m, layer(m, 2, 0), &m->scene_img[1][ID_IMG_LOADING]);
