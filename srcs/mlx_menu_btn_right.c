@@ -1,11 +1,12 @@
 #include "raystruct.h"
 
-void			menu_btn_right(void *ptr)
+void			menu_btn_right(void *gen, void *mlx)
 {
 	t_mlx	*m;
 
-	m = ptr;
+	m = mlx;
 	if (m->scene == RT && m->menu.id == LOAD_FILE && m->menu.draw == 1)
-		menu_load_btn_next(ptr);
-	(void)m;
+		menu_load_btn_next(gen, mlx);
+	(void)gen;
+	(void)mlx;
 }

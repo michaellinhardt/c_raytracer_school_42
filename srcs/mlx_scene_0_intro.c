@@ -9,14 +9,16 @@ void			scene_0_intro(t_mlx *m)
 		m->scene++;
 }
 
-void			scene_0_skip(void *ptr)
+void			scene_0_skip(void *gen, void *mlx)
 {
 	t_mlx	*m;
 
-	m = ptr;
+	m = mlx;
 	if (m->scene_img[0][0].anim.id != FADE_OUT)
 	{
 		m->scene_img[0][0].anim.id = FADE_OUT;
 		m->scene_img[0][0].anim.tempo = 7;
 	}
+	(void)gen;
+	(void)mlx;
 }

@@ -1,10 +1,12 @@
 #include "raystruct.h"
 
-void			menu_object_btn_open(void *ptr)
+void			menu_object_btn_open(void *gen, void *mlx)
 {
 	t_mlx	*m;
 
-	m = ptr;
+	m = mlx;
 	ft_printf("object btn open\n");
 	(void)m;
+	(void)gen;
+	(void)mlx;
 }

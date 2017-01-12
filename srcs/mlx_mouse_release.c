@@ -95,7 +95,7 @@ void			mouse_release(t_gen *d, int btn, int x, int y)
 				layer_add(&d->mlx, layer(&d->mlx, 3, 0)
 					, &d->mlx.scene_img[d->mlx.scene][img->mouse.click_id]);
 			if (img->mouse.action)
-				img->mouse.action((void *)&d->mlx);
+				img->mouse.action((void *)d, (void *)&d->mlx);
 			return ;
 		}
 	}

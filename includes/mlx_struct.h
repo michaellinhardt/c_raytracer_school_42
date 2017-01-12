@@ -4,10 +4,7 @@
 enum	e_menu {
 	NONE,
 	LOAD_FILE,
-	SCENE,
-	SPOT,
-	OBJ,
-	ETC
+	LOAD_SCENE
 };
 
 enum	e_scene {
@@ -32,7 +29,7 @@ enum	e_status {
 typedef struct		s_img_mouse
 {
 	char			btn;
-	void			(*action)(void *m);
+	void			(*action)(void *gen, void *mlx);
 	int				top[2];
 	int				bot[2];
 	int				over_id;
@@ -106,6 +103,7 @@ typedef struct		s_flst
 {
 	char			*path;
 	char			*path_preview;
+	struct s_scene	*scene;
 	int				top[2];
 	int				bot[2];
 	int				id;

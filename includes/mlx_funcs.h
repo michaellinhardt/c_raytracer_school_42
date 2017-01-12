@@ -22,8 +22,8 @@ void		*mlx_new_img(t_mlx *m, t_img *img, int width, int heigh);
 void		*mlx_xpmtostruct(t_mlx *m, t_img *img, char *file);
 int			itow(t_mlx *m, void *img, int x, int y);
 
-void		scene_img_load(t_mlx *m);
-void		scene_img_init(t_mlx *m);
+void		scene_img_load(t_gen *d, t_mlx *m);
+void		scene_img_init(t_gen *d, t_mlx *m);
 void		anim_init(t_img *img, enum e_anim anim);
 void		scene_build(t_mlx *m, t_img *lay, t_img *img, int i);
 void		scene_text(t_mlx *m);
@@ -34,32 +34,36 @@ void		layer_add(t_mlx *m, t_img *l, t_img *i);
 void		layer_set_alpha(t_img *img);
 
 void		scene_init_0_intro(t_mlx *m, t_img *img);
-void		scene_init_1_rt(t_mlx *m, t_img *img);
+void		scene_init_1_rt(t_gen *d, t_mlx *m, t_img *img);
 void		scene_init_1_rt_img(t_mlx *m, t_img *img);
 void		scene_init_1_rt_menu(t_mlx *m);
 
 void		set_type_action(t_img *img, enum e_status status, int btn
-			, void (*action)(void *ptr));
+			, void (*action)(void *gen, void *mlx));
 void		set_area(t_img *img);
 void		set_over_click(t_mlx *m, t_img *img, int over, int click);
 
 void		scene_0_intro(t_mlx *m);
-void		scene_0_skip(void *ptr);
+void		scene_0_skip(void *gen, void *mlx);
 
 void		scene_1_rt(t_gen *d, t_mlx *m);
 
 void		menu_list_free(t_mlx *m, t_flst *flst, t_flst *destroy);
-void		menu_load_btn_next(void *ptr);
-void		menu_load_btn_prev(void *ptr);
-void		menu_load_btn_open(void *ptr);
+
+void		menu_load_btn_next(void *gen, void *mlx);
+void		menu_load_btn_prev(void *gen, void *mlx);
+void		menu_load_btn_open(void *gen, void *mlx);
 void		menu_load_draw(t_mlx *m, t_flst *lst, int x, int y);
 
-void		menu_btn_left(void *ptr);
-void		menu_btn_right(void *ptr);
-void		menu_save_btn_open(void *ptr);
-void		menu_spot_btn_open(void *ptr);
-void		menu_object_btn_open(void *ptr);
-void		menu_scene_btn_open(void *ptr);
-void		menu_camera_btn_open(void *ptr);
+void		menu_scene_btn_open(void *gen, void *mlx);
+void		menu_scene_draw(t_mlx *m, t_flst *lst, int x, int y);
+
+
+void		menu_btn_left(void *gen, void *mlx);
+void		menu_btn_right(void *gen, void *mlx);
+void		menu_save_btn_open(void *gen, void *mlx);
+void		menu_spot_btn_open(void *gen, void *mlx);
+void		menu_object_btn_open(void *gen, void *mlx);
+void		menu_camera_btn_open(void *gen, void *mlx);
 
 #endif

@@ -1,10 +1,12 @@
 #include "raystruct.h"
 
-void			menu_camera_btn_open(void *ptr)
+void			menu_camera_btn_open(void *gen, void *mlx)
 {
 	t_mlx	*m;
 
-	m = ptr;
+	m = mlx;
 	ft_printf("camera btn open\n");
 	(void)m;
+	(void)gen;
+	(void)mlx;
 }

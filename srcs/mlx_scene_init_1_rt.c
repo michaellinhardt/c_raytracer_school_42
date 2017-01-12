@@ -2,7 +2,7 @@
 # include "raystruct.h"
 
 void			set_type_action(t_img *img, enum e_status status, int btn
-			, void (*action)(void *ptr))
+			, void (*action)(void *gen, void *mlx))
 {
 	img->status = status;
 	img->mouse.btn = btn;
@@ -49,7 +49,7 @@ void			scene_init_1_rt_menu(t_mlx *m)
 			anim_init(&m->scene_img[1][i], FADE_IN);
 }
 
-void			scene_init_1_rt(t_mlx *m, t_img *img)
+void			scene_init_1_rt(t_gen *d, t_mlx *m, t_img *img)
 {
 	layer(m, 0, 2);
 	layer(m, 1, 1);
@@ -62,5 +62,5 @@ void			scene_init_1_rt(t_mlx *m, t_img *img)
 	scene_init_1_rt_img(m, img);
 	scene_init_1_rt_menu(m);
 	m->menu.draw = 1;
-	menu_load_btn_open((void *)m);
+	menu_load_btn_open((void *)d, (void *)m);
 }

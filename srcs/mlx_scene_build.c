@@ -6,6 +6,8 @@ void		scene_build(t_mlx *m, t_img *lay, t_img *img, int i)
 		layer(m, 1, 1);
 	if (m->scene == RT && m->menu.id == LOAD_FILE && m->menu.draw == 1)
 		menu_load_draw(m, m->flst, -1, -1);
+	else if (m->scene == RT && m->menu.id == LOAD_SCENE && m->menu.draw == 1)
+		menu_scene_draw(m, m->flst, -1, -1);
 	while (m->scene_img[m->scene][++i].img)
 	{
 		if (((img = &m->scene_img[m->scene][i])->status > MENU)
