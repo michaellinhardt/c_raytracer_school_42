@@ -61,6 +61,7 @@ SRCS = 	main.c \
 		mlx_menu_object_btn_open.c \
 		mlx_menu_scene_btn_open.c \
 		mlx_menu_scene_draw.c \
+		mlx_menu_scene_clic.c \
 		mlx_menu_save_btn_open.c \
 		mlx_menu_spot_btn_open.c \
 		mlx_menu_load_btn_open.c \
