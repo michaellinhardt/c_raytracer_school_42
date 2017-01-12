@@ -52,7 +52,7 @@ void			menu_object_btn_open(void *gen, void *mlx)
 	d = gen;
 	m = mlx;
 	if (!d->sc)
-		return ;
+		ft_printf("pas de scene..\n");
 	else if (d->sc && !d->sc->obj)
 		ft_printf("object btn new\n");
 	else

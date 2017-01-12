@@ -62,10 +62,12 @@ void		menu_scene_clic(t_gen *d, t_mlx *m, t_flst *elem);
 void		menu_object_btn_open(void *gen, void *mlx);
 void		menu_object_clic(t_gen *d, t_mlx *m, t_flst *elem);
 
+void		menu_spot_btn_open(void *gen, void *mlx);
+void		menu_spot_clic(t_gen *d, t_mlx *m, t_flst *elem);
+
 void		menu_btn_left(void *gen, void *mlx);
 void		menu_btn_right(void *gen, void *mlx);
 void		menu_save_btn_open(void *gen, void *mlx);
-void		menu_spot_btn_open(void *gen, void *mlx);
 void		menu_camera_btn_open(void *gen, void *mlx);
 
 #endif

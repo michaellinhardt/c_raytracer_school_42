@@ -9,6 +9,8 @@ static void		call_clic(t_gen *d, t_mlx *m, t_flst *elem, enum e_menu menu)
 		menu_scene_clic(d, m, elem);
 	else if (menu == LOAD_OBJECT)
 		menu_object_clic(d, m, elem);
+	else if (menu == LOAD_SPOT)
+		menu_spot_clic(d, m, elem);
 }
 
 static int		load_clic(t_gen *d, t_flst *elem, int x, int y)
