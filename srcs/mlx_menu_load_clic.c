@@ -41,5 +41,6 @@ void		menu_load_clic(t_gen *d, t_mlx *m, t_flst *elem)
 	parse_scene(d, path);
 	purge_scene(d, d->sc, path, nb);
 	ft_strdel(&path);
-	m->draw_rt = 1;
+	ft_strdel(&d->sc->data);
+	(void)m;
 }

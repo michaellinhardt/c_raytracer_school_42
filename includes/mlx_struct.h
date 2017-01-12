@@ -119,11 +119,10 @@ typedef struct		s_mlx
 {
 	void			*mlx;
 	void			*win;
-	char			draw_rt;
-	char			need_copy_data;
 	t_menu			menu;
 	t_flst			*flst;
 	int				total_file;
+	int				loading;
 	t_input			input;
 	char			loop;
 	char			loopstop;
