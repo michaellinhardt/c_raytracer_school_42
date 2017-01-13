@@ -27,6 +27,7 @@ int		loop_hook(t_gen *d)
 	if (m->loopstop != 0 && --m->loopstop < 1 && m->loop != 0)
 		loop(&d->mlx, 0);
 	scene_img_load(d, &d->mlx);
+	scene_btn(d, m, (t_img *)NULL);
 	scene_build(m, layer(m, 1, 0), (t_img *)NULL, -1);
 	scene(d, m);
 	return (0);

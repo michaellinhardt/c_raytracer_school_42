@@ -31,6 +31,7 @@ static void		draw_rt(t_gen *d, t_mlx *m)
 		d->sc->data = ft_strnew(len);
 		ft_memcpy(d->sc->data, d->data, len);
 		ft_memcpy(layer(m, 0, 0)->str, d->sc->data, len);
+		m->menu.scene = d->sc;
 		m->loading = 0;
 	}
 	layer_add(m, layer(m, 2, 0), &m->scene_img[1][ID_IMG_LOADING]);

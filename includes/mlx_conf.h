@@ -71,6 +71,12 @@
 # define ID_MAX_AUTO_INIT 32
 # define ID_IMG_LOADING 33
 
+# define ID_IMG_BTN_SCENE_OFF 34
+# define ID_IMG_BTN_OBJECT_OFF 35
+# define ID_IMG_BTN_SPOT_OFF 36
+# define ID_IMG_BTN_CAMERA_OFF 37
+
+
 # define MENU_LOAD_X_MAX 4
 # define MENU_LOAD_Y_MAX 3
 # define MENU_LOAD_START_X W_X * 0.10

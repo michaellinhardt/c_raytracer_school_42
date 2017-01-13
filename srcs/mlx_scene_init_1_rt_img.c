@@ -45,7 +45,7 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 
 	img = &m->scene_img[1][ID_IMG_BTN_SCENE];
 	img->pos[0] = 677;
-	img->pos[1] = 965;
+	img->pos[1] = 960;
 	img->fade_min = 40;
 	img->set_alpha = -1;
 	set_area(img);
@@ -55,7 +55,7 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	img = &m->scene_img[1][ID_IMG_BTN_OBJECT];
 	img->pos[0] = m->scene_img[1][ID_IMG_BTN_SCENE].pos[0]
 	+ (img->width * 1) + (BOT_BTN_X_DECALLAGE * 1);
-	img->pos[1] = 965;
+	img->pos[1] = m->scene_img[1][ID_IMG_BTN_SCENE].pos[1];
 	img->fade_min = 40;
 	img->set_alpha = -1;
 	set_area(img);
@@ -65,7 +65,7 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	img = &m->scene_img[1][ID_IMG_BTN_SPOT];
 	img->pos[0] = m->scene_img[1][ID_IMG_BTN_SCENE].pos[0]
 	+ (img->width * 2) + (BOT_BTN_X_DECALLAGE * 2);
-	img->pos[1] = 965;
+	img->pos[1] = m->scene_img[1][ID_IMG_BTN_SCENE].pos[1];
 	img->fade_min = 40;
 	img->set_alpha = -1;
 	set_area(img);
@@ -75,7 +75,7 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	img = &m->scene_img[1][ID_IMG_BTN_CAMERA];
 	img->pos[0] = m->scene_img[1][ID_IMG_BTN_SCENE].pos[0]
 	+ (img->width * 3) + (BOT_BTN_X_DECALLAGE * 3);
-	img->pos[1] = 965;
+	img->pos[1] = m->scene_img[1][ID_IMG_BTN_SCENE].pos[1];
 	img->fade_min = 40;
 	img->set_alpha = -1;
 	set_area(img);
@@ -138,5 +138,35 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	img->set_alpha = -1;
 	layer_set_alpha(img);
 
+
+	// BOUTON OFF
+	img = &m->scene_img[1][ID_IMG_BTN_SCENE_OFF];
+	img->pos[0] = m->scene_img[1][ID_IMG_BTN_SCENE].pos[0];
+	img->pos[1] = m->scene_img[1][ID_IMG_BTN_SCENE].pos[1];
+	img->fade_min = m->scene_img[1][ID_IMG_BTN_SCENE].fade_min;
+	img->set_alpha = -1;
+	set_type_action(img, DISABLED, 0, NULL);
+
+
+	img = &m->scene_img[1][ID_IMG_BTN_OBJECT_OFF];
+	img->pos[0] = m->scene_img[1][ID_IMG_BTN_OBJECT].pos[0];
+	img->pos[1] = m->scene_img[1][ID_IMG_BTN_OBJECT].pos[1];
+	img->fade_min = m->scene_img[1][ID_IMG_BTN_OBJECT].fade_min;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
+
+	img = &m->scene_img[1][ID_IMG_BTN_SPOT_OFF];
+	img->pos[0] = m->scene_img[1][ID_IMG_BTN_SPOT].pos[0];
+	img->pos[1] = m->scene_img[1][ID_IMG_BTN_SPOT].pos[1];
+	img->fade_min = m->scene_img[1][ID_IMG_BTN_SPOT].fade_min;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
+
+	img = &m->scene_img[1][ID_IMG_BTN_CAMERA_OFF];
+	img->pos[0] = m->scene_img[1][ID_IMG_BTN_CAMERA].pos[0];
+	img->pos[1] = m->scene_img[1][ID_IMG_BTN_CAMERA].pos[1];
+	img->fade_min = m->scene_img[1][ID_IMG_BTN_CAMERA].fade_min;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
 
 }

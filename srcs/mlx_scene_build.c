@@ -1,6 +1,6 @@
 #include "raystruct.h"
 
-void		scene_build(t_mlx *m, t_img *lay, t_img *img, int i)
+void			scene_build(t_mlx *m, t_img *lay, t_img *img, int i)
 {
 	if (m->menu.draw == 1)
 		layer(m, 1, 1);

@@ -99,6 +99,8 @@ typedef struct		s_menu
 	char			draw;
 	enum e_menu		id;
 	struct s_scene	*scene;
+	struct s_scene	*spot;
+	struct s_scene	*obj;
 }					t_menu;
 
 typedef struct		s_flst
