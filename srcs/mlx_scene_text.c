@@ -7,6 +7,8 @@ static void	scene_text_menu_load(t_mlx *m, t_flst *elem, int i, int color)
 
 	while (elem && ++i < MENU_LOAD_X_MAX * MENU_LOAD_Y_MAX)
 	{
+		if (!elem->path && ((elem = elem->n) || 1))
+			continue ;
 		if ((len = ft_strlen(elem->path)) > MENU_LOAD_PREVIEW_NAME_SIZE_MAX)
 		{
 			ft_memset(name, '.', MENU_LOAD_PREVIEW_NAME_SIZE_MAX);
@@ -28,6 +30,8 @@ static void	scene_text_menu_load(t_mlx *m, t_flst *elem, int i, int color)
 
 void		scene_text(t_mlx *m)
 {
+	if (!m->flst)
+		return ;
 	if (m->scene == RT && m->menu.draw == 1
 	&& (m->menu.id >= LOAD_FILE || m->menu.id <= LOAD_SPOT))
 		scene_text_menu_load(m, m->flst, -1, 0);

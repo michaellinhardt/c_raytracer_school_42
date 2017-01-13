@@ -5,6 +5,7 @@ enum	e_menu {
 	NONE,
 	LOAD_FILE,
 	LOAD_SCENE,
+	LOAD_SCENE_ADD,
 	LOAD_OBJECT,
 	LOAD_SPOT,
 	LOAD_CAMERA
@@ -99,6 +100,7 @@ typedef struct		s_menu
 {
 	char			draw;
 	enum e_menu		id;
+	enum e_menu		next;
 	struct s_scene	*scene;
 	struct s_scene	*spot;
 	struct s_scene	*obj;

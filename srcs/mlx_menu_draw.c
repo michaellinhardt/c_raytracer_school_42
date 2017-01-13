@@ -68,7 +68,7 @@ static void		set_elem(t_mlx *m, t_flst *elem, int x, int y)
 
 void			menu_draw(t_mlx *m, t_flst *lst, int x, int y)
 {
-	if (lst->p)
+	if (lst && lst->p)
 		m->scene_img[1][ID_IMG_BTN_ARROW_LEFT].status = MENU;
 	else
 		m->scene_img[1][ID_IMG_BTN_ARROW_LEFT].status = DISABLED;

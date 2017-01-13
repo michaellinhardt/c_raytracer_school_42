@@ -16,4 +16,5 @@ void			menu_list_free(t_mlx *m, t_flst *flst, t_flst *destroy)
 		destroy->p = NULL;
 		ft_memdel((void **)&destroy);
 	}
+	m->flst = (t_flst *)NULL;
 }

@@ -86,7 +86,9 @@
 # define ID_IMG_BTN_EDIT_ADD_OVER 43
 # define ID_IMG_BTN_EDIT_ADD_CLICK 44
 
-# define ID_MAX_AUTO_INIT 41
+# define ID_IMG_MENU_ADD_SCENE_BOX 45
+
+# define ID_MAX_AUTO_INIT 45
 
 # define MENU_LOAD_X_MAX 4
 # define MENU_LOAD_Y_MAX 3
