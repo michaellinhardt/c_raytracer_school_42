@@ -16,9 +16,12 @@ static void	btn_switch(t_mlx *m, int boolean, int trueval, int falseval)
 
 void		scene_btn(t_gen *d, t_mlx *m, t_img *img)
 {
-	btn_switch(m, (!m->menu.scene || !m->menu.obj ? 1 : 0), ID_IMG_BTN_OBJECT_OFF, ID_IMG_BTN_OBJECT);
-	btn_switch(m, (!m->menu.scene || !m->menu.spot ? 1 : 0), ID_IMG_BTN_SPOT_OFF, ID_IMG_BTN_SPOT);
-	btn_switch(m, (!m->menu.scene ? 1 : 0), ID_IMG_BTN_CAMERA_OFF, ID_IMG_BTN_CAMERA);
+	btn_switch(m, (!m->menu.scene || !m->menu.obj ? 1 : 0)
+								, ID_IMG_BTN_OBJECT_OFF, ID_IMG_BTN_OBJECT);
+	btn_switch(m, (!m->menu.scene || !m->menu.spot ? 1 : 0)
+									, ID_IMG_BTN_SPOT_OFF, ID_IMG_BTN_SPOT);
+	btn_switch(m, (!m->menu.scene ? 1 : 0)
+								, ID_IMG_BTN_CAMERA_OFF, ID_IMG_BTN_CAMERA);
 	(void)d;
 	(void)m;
 	(void)img;

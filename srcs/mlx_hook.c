@@ -18,7 +18,8 @@ int		keyr_hook(int key, t_gen *d)
 		exit (0);
 	else if (d->mlx.scene > INTRO)
 	{
-		if (key == 49 && (d->mlx.menu.draw *= -1))
+		// 49 = espace
+		if (key == 261 && (d->mlx.menu.draw *= -1))
 		{
 			if (d->mlx.menu.draw == 1)
 			{

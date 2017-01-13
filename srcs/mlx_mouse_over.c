@@ -20,4 +20,5 @@ void	mouse_over(t_mlx *m, int x, int y)
 				, &m->scene_img[m->scene][img->mouse.over_id]);
 		}
 	}
+	menu_draw_actif(m, (t_img *)NULL);
 }

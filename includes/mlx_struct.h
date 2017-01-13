@@ -6,7 +6,8 @@ enum	e_menu {
 	LOAD_FILE,
 	LOAD_SCENE,
 	LOAD_OBJECT,
-	LOAD_SPOT
+	LOAD_SPOT,
+	LOAD_CAMERA
 };
 
 enum	e_scene {

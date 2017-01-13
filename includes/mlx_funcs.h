@@ -27,6 +27,7 @@ void		scene_img_init(t_gen *d, t_mlx *m);
 void		anim_init(t_img *img, enum e_anim anim);
 void		scene_btn(t_gen *d, t_mlx *m, t_img *img);
 void		scene_build(t_mlx *m, t_img *lay, t_img *img, int i);
+void		menu_draw_actif(t_mlx *m, t_img *img);
 void		scene_text(t_mlx *m);
 void		scene(t_gen *d, t_mlx *m);
 
@@ -56,6 +57,8 @@ void		menu_load_btn_next(void *gen, void *mlx);
 void		menu_load_btn_prev(void *gen, void *mlx);
 void		menu_load_btn_open(void *gen, void *mlx);
 void		menu_load_clic(t_gen *d, t_mlx *m, t_flst *elem);
+
+void		menu_edit_add_btn_open(void *gen, void *mlx);
 
 void		menu_scene_btn_open(void *gen, void *mlx);
 void		menu_scene_clic(t_gen *d, t_mlx *m, t_flst *elem);

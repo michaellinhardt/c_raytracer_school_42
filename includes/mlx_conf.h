@@ -68,7 +68,6 @@
 # define ID_IMG_PREVIEW_OVER 31
 # define ID_IMG_PREVIEW_CLIC 32
 
-# define ID_MAX_AUTO_INIT 32
 # define ID_IMG_LOADING 33
 
 # define ID_IMG_BTN_SCENE_OFF 34
@@ -81,6 +80,13 @@
 # define ID_IMG_BTN_EDIT_MOD_OFF 39
 # define ID_IMG_BTN_EDIT_DEL_OFF 40
 
+# define ID_IMG_BTN_SELECTED 41
+
+# define ID_IMG_BTN_EDIT_ADD 42
+# define ID_IMG_BTN_EDIT_ADD_OVER 43
+# define ID_IMG_BTN_EDIT_ADD_CLICK 44
+
+# define ID_MAX_AUTO_INIT 41
 
 # define MENU_LOAD_X_MAX 4
 # define MENU_LOAD_Y_MAX 3
