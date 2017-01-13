@@ -208,4 +208,37 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	img->set_alpha = -1;
 	set_type_action(img, DISABLED, 0, NULL);
 
+	img = &m->scene_img[1][ID_IMG_MENU_ADD_SCENE_BOX];
+	img->pos[0] = (m->winx / 2) - (img->width / 2);
+	img->pos[1] = (m->winy / 2) - (img->heigh / 2);
+	img->menu = LOAD_SCENE_ADD;
+	img->fade_min = 100;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
+
+	img = &m->scene_img[1][ID_IMG_BTN_SCENE_ADD_OK];
+	img->pos[0] = m->scene_img[1][ID_IMG_MENU_ADD_SCENE_BOX].pos[0]
+	+ m->scene_img[1][ID_IMG_MENU_ADD_SCENE_BOX].width - img->width * 2 - 20;
+	img->pos[1] = m->scene_img[1][ID_IMG_MENU_ADD_SCENE_BOX].pos[1]
+	+ m->scene_img[1][ID_IMG_MENU_ADD_SCENE_BOX].heigh - img->heigh - 5;
+	img->menu = LOAD_SCENE_ADD;
+	img->fade_min = 40;
+	img->set_alpha = -1;
+	set_area(img);
+	set_type_action(img, MENU, 1, &menu_scene_add_btn_ok);
+	set_over_click(m, img
+		, ID_IMG_BTN_SCENE_ADD_OK_OVER, ID_IMG_BTN_SCENE_ADD_OK_CLICK);
+
+	img = &m->scene_img[1][ID_IMG_BTN_SCENE_ADD_CANCEL];
+	img->pos[0] = m->scene_img[1][ID_IMG_MENU_ADD_SCENE_BOX].pos[0]
+	+ m->scene_img[1][ID_IMG_MENU_ADD_SCENE_BOX].width - img->width - 10;
+	img->pos[1] = m->scene_img[1][ID_IMG_MENU_ADD_SCENE_BOX].pos[1]
+	+ m->scene_img[1][ID_IMG_MENU_ADD_SCENE_BOX].heigh - img->heigh - 5;
+	img->menu = LOAD_SCENE_ADD;
+	img->fade_min = 40;
+	img->set_alpha = -1;
+	set_area(img);
+	set_type_action(img, MENU, 1, &menu_scene_add_btn_cancel);
+	set_over_click(m, img
+		, ID_IMG_BTN_SCENE_ADD_CANCEL_OVER, ID_IMG_BTN_SCENE_ADD_CANCEL_CLICK);
 }

@@ -33,13 +33,25 @@ void			menu_draw_actif(t_mlx *m, t_img *img)
 	menu_draw_actif_sub(m, (t_img *)NULL);
 }
 
-void			scene_build(t_mlx *m, t_img *lay, t_img *img, int i)
+static void		menu_special_draw(t_gen *d, t_mlx *m)
 {
+	(void)d;
+	(void)m;
+}
+
+void			scene_build(t_gen *d, t_mlx *m, t_img *lay, t_img *img)
+{
+	int		i;
+
+	i = -1;
 	if (m->menu.draw == 1)
 		layer(m, 1, 1);
 	if (m->scene == RT && m->menu.draw == 1
 	&& m->menu.id >= LOAD_FILE && m->menu.id <= LOAD_SPOT)
+	{
 		menu_draw(m, m->flst, -1, -1);
+		menu_special_draw(d, m);
+	}
 	while (m->scene_img[m->scene][++i].img)
 	{
 		if (((img = &m->scene_img[m->scene][i])->status > MENU)

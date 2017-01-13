@@ -27,6 +27,10 @@
 # define PATH_XPM "./resources/scene_img/"
 # define PATH_SCENE "./scene/"
 
+# define MENU_TEXT_COLOR 0xFFFFFF
+
+# define TXT_SCENE_ADD_NAME "Nom de la nouvelle scene:"
+
 # define ID_IMG_MENU_CADRE 0
 # define ID_IMG_MENU_CADRE_LIGHTNING 1
 # define ID_IMG_MENU_CADRE_LOGO 2
@@ -88,7 +92,15 @@
 
 # define ID_IMG_MENU_ADD_SCENE_BOX 45
 
-# define ID_MAX_AUTO_INIT 45
+# define ID_IMG_BTN_SCENE_ADD_OK 46
+# define ID_IMG_BTN_SCENE_ADD_OK_OVER 47
+# define ID_IMG_BTN_SCENE_ADD_OK_CLICK 48
+
+# define ID_IMG_BTN_SCENE_ADD_CANCEL 49
+# define ID_IMG_BTN_SCENE_ADD_CANCEL_OVER 50
+# define ID_IMG_BTN_SCENE_ADD_CANCEL_CLICK 51
+
+# define ID_MAX_AUTO_INIT 51
 
 # define MENU_LOAD_X_MAX 4
 # define MENU_LOAD_Y_MAX 3

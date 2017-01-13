@@ -1,6 +1,6 @@
 #include "raystruct.h"
 
-static void	scene_text_menu_load(t_mlx *m, t_flst *elem, int i, int color)
+static void		scene_text_menu_load(t_mlx *m, t_flst *elem, int i, int color)
 {
 	char			name[MENU_LOAD_PREVIEW_NAME_SIZE_MAX];
 	size_t			len;
@@ -28,11 +28,20 @@ static void	scene_text_menu_load(t_mlx *m, t_flst *elem, int i, int color)
 	}
 }
 
-void		scene_text(t_mlx *m)
+static void		scene_text_scene_add(t_mlx *m, int c)
 {
-	if (!m->flst)
-		return ;
-	if (m->scene == RT && m->menu.draw == 1
+
+	mlx_string_put(m->mlx, m->win
+	, m->scene_img[1][ID_IMG_MENU_ADD_SCENE_BOX].pos[0] + 15
+	, m->scene_img[1][ID_IMG_MENU_ADD_SCENE_BOX].pos[1] + 8
+	, c, TXT_SCENE_ADD_NAME);
+}
+
+void			scene_text(t_mlx *m)
+{
+	if (m->flst && m->scene == RT && m->menu.draw == 1
 	&& (m->menu.id >= LOAD_FILE || m->menu.id <= LOAD_SPOT))
 		scene_text_menu_load(m, m->flst, -1, 0);
+	if (m->scene == RT && m->menu.draw == 1 && m->menu.id >= LOAD_SCENE_ADD)
+		scene_text_scene_add(m, MENU_TEXT_COLOR);
 }
