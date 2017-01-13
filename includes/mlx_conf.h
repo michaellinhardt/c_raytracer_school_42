@@ -77,6 +77,11 @@
 # define ID_IMG_BTN_CAMERA_OFF 37
 
 
+# define ID_IMG_BTN_EDIT_ADD_OFF 38
+# define ID_IMG_BTN_EDIT_MOD_OFF 39
+# define ID_IMG_BTN_EDIT_DEL_OFF 40
+
+
 # define MENU_LOAD_X_MAX 4
 # define MENU_LOAD_Y_MAX 3
 # define MENU_LOAD_START_X W_X * 0.10

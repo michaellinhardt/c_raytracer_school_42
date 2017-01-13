@@ -169,4 +169,27 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	img->set_alpha = -1;
 	set_type_action(img, MENU, 0, NULL);
 
+	img = &m->scene_img[1][ID_IMG_BTN_EDIT_ADD_OFF];
+	img->pos[0] = 183;
+	img->pos[1] = 952;
+	img->fade_min = 80;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
+
+	img = &m->scene_img[1][ID_IMG_BTN_EDIT_MOD_OFF];
+	img->pos[0] = m->scene_img[1][ID_IMG_BTN_EDIT_ADD_OFF].pos[0]
+	+ (img->width * 1) + (BOT_BTN_X_DECALLAGE * 1);
+	img->pos[1] = m->scene_img[1][ID_IMG_BTN_EDIT_ADD_OFF].pos[1];
+	img->fade_min = 80;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
+
+	img = &m->scene_img[1][ID_IMG_BTN_EDIT_DEL_OFF];
+	img->pos[0] = m->scene_img[1][ID_IMG_BTN_EDIT_ADD_OFF].pos[0]
+	+ (img->width * 2) + (BOT_BTN_X_DECALLAGE * 2);
+	img->pos[1] = m->scene_img[1][ID_IMG_BTN_EDIT_ADD_OFF].pos[1];
+	img->fade_min = 80;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
+
 }
