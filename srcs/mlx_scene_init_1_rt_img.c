@@ -1,10 +1,37 @@
 # include "raytra_gen.h"
 # include "raystruct.h"
 
+static void			scene_init_1_rt_input_area(t_mlx *m, t_get *g, int i)
+{
+	while (++i < GET_APP_MAX)
+	{
+		if (!(g = &m->get[i])->menu)
+			continue ;
+		g->top[0] = g->pos[0];
+		g->top[1] = g->pos[1];
+		g->width = INPUT_SIZE_CHAR_X * g->size_max + INPUT_PADDING;
+		g->heigh = INPUT_SIZE_CHAR_Y + INPUT_PADDING;
+		g->bot[0] = g->pos[0] + g->width;
+		g->bot[1] = g->pos[1] + g->heigh;
+	}
+}
+
+static void			scene_init_1_rt_input(t_mlx *m, t_get *g)
+{
+	g = &m->get[ID_INPUT_ADD_SCENE_NAME];
+	g->menu = LOAD_SCENE_ADD;
+	g->mode = MODE_STRING_FILE;
+	g->pos[0] = 510;
+	g->pos[1] = 395;
+	g->size_min = 3;
+	g->size_max = 20;
+}
+
 void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 {
-	(void)m;
-	(void)img;
+
+	scene_init_1_rt_input(m, (t_get *)NULL);
+	scene_init_1_rt_input_area(m, (t_get *)NULL, -1);
 
 	img = &m->scene_img[1][ID_IMG_MENU_CADRE];
 	img->fade_min = 110;
@@ -241,4 +268,9 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	set_type_action(img, MENU, 1, &menu_scene_add_btn_cancel);
 	set_over_click(m, img
 		, ID_IMG_BTN_SCENE_ADD_CANCEL_OVER, ID_IMG_BTN_SCENE_ADD_CANCEL_CLICK);
+
+
+
+
+
 }

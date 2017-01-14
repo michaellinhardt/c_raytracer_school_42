@@ -115,6 +115,7 @@ typedef struct		s_menu
 	char			draw;
 	enum e_menu		id;
 	enum e_menu		next;
+	char			*new_scene;
 	struct s_scene	*scene;
 	struct s_scene	*spot;
 	struct s_scene	*obj;

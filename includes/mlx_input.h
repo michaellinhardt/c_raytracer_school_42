@@ -9,14 +9,23 @@
 # define INPUT_SIZE_CHAR_Y 30
 # define INPUT_SIZE_CHAR_X 15
 
-# define INPUT_SIZE_BORDER 3
+# define INPUT_BORDER_SIZE 3
+
+# define INPUT_BORDER_FADE_SPEED 5
+
+# define INPUT_CURSOR_FAME_TOTAL 100
+# define INPUT_CURSOR_DISPLAY_AT 50
+
+# define INPUT_PADDING 10
 
 # define GET_APP_MAX 30
+# define GET_SIZE_MAX 50
 
 enum	e_get_inputmode {
-	DOUBLE,
-	INT,
-	NAME
+	MODE_DOUBLE,
+	MODE_INT,
+	MODE_STRING,
+	MODE_STRING_FILE
 };
 
 enum	e_get_status {
@@ -68,18 +77,25 @@ typedef struct					s_get
 	enum e_get_status			status;
 	enum e_get_action			action;
 	enum e_get_inputmode		mode;
+	void						(*send)(void *gen, void *mlx);
 	int							pos[2];
 	int							top[2];
 	int							bot[2];
+	int							width;
+	int							heigh;
+	int							fade_focus;
+	int							frame_cursor;
 	int							size_min;
 	int							size_max;
 	int							val_min;
 	int							val_max;
 	void						*target;
-	void						*data;
-	void						*tmp;
+	char						data[GET_SIZE_MAX];
+	char						tmp[GET_SIZE_MAX];
 	int							i;
 	int							j;
 }								t_get;
+
+# define ID_INPUT_ADD_SCENE_NAME 0
 
 #endif
