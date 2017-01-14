@@ -1,7 +1,7 @@
 #ifndef MLX_INPUT_H
 # define MLX_INPUT_H
 
-# define INPUT_COLOR_ENABLED 0xFF000000
+# define INPUT_COLOR_ENABLED 0x00000000
 # define INPUT_COLOR_DISABLED 0xFF000000
 
 # define INPUT_COLOR_BORDER 0xFFFF0000
@@ -78,11 +78,7 @@ typedef struct					s_get
 	enum e_get_action			action;
 	enum e_get_inputmode		mode;
 	void						(*send)(void *gen, void *mlx);
-	int							pos[2];
-	int							top[2];
-	int							bot[2];
-	int							width;
-	int							heigh;
+	struct s_img				box;
 	int							fade_focus;
 	int							frame_cursor;
 	int							size_min;

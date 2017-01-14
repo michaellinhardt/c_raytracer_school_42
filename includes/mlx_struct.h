@@ -30,8 +30,6 @@ enum	e_status {
 	OBJECT
 };
 
-# include "mlx_input.h"
-
 /*
 ** structure lié au image qui sont des objet,
 ** pouvant etre désactivé, ou une simple image, un bouton ou l'état d'un bouton
@@ -106,6 +104,8 @@ typedef struct		s_input
 	t_input_key		key;
 	t_input_mouse	mouse;
 }					t_input;
+
+# include "mlx_input.h"
 
 /*
 ** pilote quel menu est dessiner a lecran

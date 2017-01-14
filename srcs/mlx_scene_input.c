@@ -23,7 +23,7 @@ void			scene_input(t_gen *d, t_mlx *m, int i)
 	lay = layer(m, 5, 1);
 	while (++i < GET_APP_MAX)
 	{
-		if (!m->get[i].menu)
+		if (m->get[i].menu != m->menu.id || m->get[i].menu == NONE)
 			continue ;
 		set_fade(&m->get[i]);
 		if (m->get[i].status == GET_FOCUS)

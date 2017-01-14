@@ -7,12 +7,12 @@ static void			scene_init_1_rt_input_area(t_mlx *m, t_get *g, int i)
 	{
 		if (!(g = &m->get[i])->menu)
 			continue ;
-		g->top[0] = g->pos[0];
-		g->top[1] = g->pos[1];
-		g->width = INPUT_SIZE_CHAR_X * g->size_max + INPUT_PADDING;
-		g->heigh = INPUT_SIZE_CHAR_Y + INPUT_PADDING;
-		g->bot[0] = g->pos[0] + g->width;
-		g->bot[1] = g->pos[1] + g->heigh;
+		g->box.mouse.top[0] = g->box.pos[0];
+		g->box.mouse.top[1] = g->box.pos[1];
+		g->box.width = INPUT_SIZE_CHAR_X * g->size_max + INPUT_PADDING;
+		g->box.heigh = INPUT_SIZE_CHAR_Y + INPUT_PADDING;
+		g->box.mouse.bot[0] = g->box.pos[0] + g->box.width;
+		g->box.mouse.bot[1] = g->box.pos[1] + g->box.heigh;
 	}
 }
 
@@ -21,8 +21,8 @@ static void			scene_init_1_rt_input(t_mlx *m, t_get *g)
 	g = &m->get[ID_INPUT_ADD_SCENE_NAME];
 	g->menu = LOAD_SCENE_ADD;
 	g->mode = MODE_STRING_FILE;
-	g->pos[0] = 510;
-	g->pos[1] = 395;
+	g->box.pos[0] = 510;
+	g->box.pos[1] = 395;
 	g->size_min = 3;
 	g->size_max = 20;
 }
