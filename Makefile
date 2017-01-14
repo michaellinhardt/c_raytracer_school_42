@@ -97,6 +97,7 @@ SRC = $(addprefix $(SRCSPATH), $(SRCS))
 WFLAGS = -Wall -Werror -Wextra -march=native -O3
 
 LFLAGS = -L libft/ -lft -lm -lmlx -framework OpenGL -framework AppKit
+MIKAFLAGS = -L libft/ -lft -L minilibx/ -lmlx -framework OpenGL -framework AppKit
 
 CC = gcc -g
 
@@ -110,6 +111,12 @@ all : $(NAME)
 $(NAME) : $(OBJ)
 #	make -C libft
 	$(CC) -o $(NAME) $(OBJ) $(WFLAGS) $(LFLAGS) -I $(INCLUDES)
+
+mika: $(OBJ)
+	$(CC) -o $(NAME) $(OBJ) $(WFLAGS) $(MIKAFLAGS) -I $(INCLUDES)
+
+lib:
+	make -C libft re
 
 clean :
 	rm -rf $(OBJ)
