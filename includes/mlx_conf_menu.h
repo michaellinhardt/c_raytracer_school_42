@@ -1,0 +1,22 @@
+#ifndef MLX_CONF_MENU_H
+# define MLX_CONF_MENU_H
+
+# define MENU_LOAD_X_MAX 4
+# define MENU_LOAD_Y_MAX 3
+# define MENU_LOAD_START_X W_X * 0.10
+# define MENU_LOAD_START_Y W_Y * 0.08
+# define MENU_LOAD_END_X W_X * 0.90
+# define MENU_LOAD_END_Y W_Y * 0.90
+
+# define MENU_LOAD_SIZE_X MENU_LOAD_END_X - MENU_LOAD_START_X
+# define MENU_LOAD_SIZE_Y MENU_LOAD_END_Y - MENU_LOAD_START_Y
+# define MENU_LOAD_TEXT_MARGIN_X 5
+# define MENU_LOAD_TEXT_MARGIN_Y 5
+# define MENU_LOAD_PREVIEW_NAME_SIZE_MAX 18
+# define MENU_LOAD_PREVIEW_PATH "./resources/menu_load_preview/"
+# define MENU_LOAD_WAIT_BEFORE_LOAD 40
+
+# define MENU_LOAD_MARGIN_X 20
+# define MENU_LOAD_MARGIN_Y 20
+
+#endif
