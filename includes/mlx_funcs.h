@@ -76,4 +76,10 @@ void		menu_btn_right(void *gen, void *mlx);
 void		menu_save_btn_open(void *gen, void *mlx);
 void		menu_camera_btn_open(void *gen, void *mlx);
 
+void		scene_input(t_gen *d, t_mlx *m, int i);
+void		scene_input_action(t_gen *d, t_mlx *m, t_get *g);
+void		scene_input_buff(t_gen *d, t_mlx *m, t_get *g);
+void		scene_input_draw_box(t_gen *d, t_mlx *m, t_get *g);
+void		scene_input_draw_cursor(t_gen *d, t_mlx *m, t_get *g);
+
 #endif

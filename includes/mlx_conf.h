@@ -34,6 +34,4 @@
 
 # define TXT_SCENE_ADD_NAME "Nom de la nouvelle scene:"
 
-# include "mlx_input.h"
-
 #endif

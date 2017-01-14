@@ -30,6 +30,8 @@ enum	e_status {
 	OBJECT
 };
 
+# include "mlx_input.h"
+
 /*
 ** structure lié au image qui sont des objet,
 ** pouvant etre désactivé, ou une simple image, un bouton ou l'état d'un bouton
@@ -154,6 +156,7 @@ typedef struct		s_mlx
 	enum e_scene	scene;
 	char			img_isload[SCENE_MAX];
 	t_img			scene_img[SCENE_MAX][SCENE_IMG_MAX];
+	t_get			get[GET_APP_MAX];
 	int				winx;
 	int				winy;
 }					t_mlx;

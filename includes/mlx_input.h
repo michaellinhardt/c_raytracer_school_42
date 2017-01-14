@@ -4,8 +4,14 @@
 # define INPUT_COLOR_ENABLED 0xFF000000
 # define INPUT_COLOR_DISABLED 0xFF000000
 
+# define INPUT_COLOR_BORDER 0xFFFF0000
+
 # define INPUT_SIZE_CHAR_Y 30
 # define INPUT_SIZE_CHAR_X 15
+
+# define INPUT_SIZE_BORDER 3
+
+# define GET_APP_MAX 30
 
 enum	e_get_inputmode {
 	DOUBLE,
@@ -14,9 +20,9 @@ enum	e_get_inputmode {
 };
 
 enum	e_get_status {
-	GET_STATUS,
-	ENABLED,
-	LOCKED
+	GET_ENABLED,
+	GET_DISABLED,
+	GET_FOCUS
 };
 
 enum	e_get_action {
@@ -58,9 +64,10 @@ enum	e_get_action {
 */
 typedef struct					s_get
 {
-	enum e_get_status			g_sta;
-	enum e_get_action			g_act;
-	enum e_get_inputmode		g_inp;
+	enum e_menu					menu;
+	enum e_get_status			status;
+	enum e_get_action			action;
+	enum e_get_inputmode		mode;
 	int							pos[2];
 	int							top[2];
 	int							bot[2];
