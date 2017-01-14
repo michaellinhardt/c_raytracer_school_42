@@ -33,6 +33,9 @@ int		loop_hook(t_gen *d)
 		m->menu.next = NONE;
 	}
 	scene_btn(d, m, (t_img *)NULL);
+	// scene_input_buff(d, m, &m->get, -1);
+	// scene_input_get(d, m, &m->get, -1);
+	// scene_input_draw(d, m, &m->get, -1);
 	scene_build(d, m, layer(m, 1, 0), (t_img *)NULL);
 	scene(d, m);
 	return (0);

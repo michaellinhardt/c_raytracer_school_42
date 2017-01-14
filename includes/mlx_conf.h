@@ -1,8 +1,8 @@
 #ifndef MLX_CONF_H
 # define MLX_CONF_H
 
-# include "mlx_conf_img.h"
 # include "mlx_conf_menu.h"
+# include "mlx_conf_img.h"
 
 # define WIN_TITLE "Awsome RT bitchhhh"
 
@@ -33,5 +33,7 @@
 # define MENU_TEXT_COLOR 0xFFFFFF
 
 # define TXT_SCENE_ADD_NAME "Nom de la nouvelle scene:"
+
+# include "mlx_input.h"
 
 #endif
