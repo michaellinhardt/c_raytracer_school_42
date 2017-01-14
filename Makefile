@@ -112,8 +112,12 @@ $(NAME) : $(OBJ)
 #	make -C libft
 	$(CC) -o $(NAME) $(OBJ) $(WFLAGS) $(LFLAGS) -I $(INCLUDES)
 
+
+rmika: fclean mika
+
 mika: $(OBJ)
 	$(CC) -o $(NAME) $(OBJ) $(WFLAGS) $(MIKAFLAGS) -I $(INCLUDES)
+	@./RT
 
 lib:
 	make -C libft re

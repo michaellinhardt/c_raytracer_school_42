@@ -1,6 +1,17 @@
 #ifndef MLX_CONF_MENU_H
 # define MLX_CONF_MENU_H
 
+/*
+** le fade est calculé sur MENU_MODALE_FADE et pas sur la couleur
+*/
+# define MENU_MODALE_COLOR_BLUE 0XFF000070
+# define MENU_MODALE_COLOR 0XFF000000
+# define MENU_MODALE_FADE 75
+
+# define MENU_FADE_CADRE_INTERFACE 140
+
+# define MENU_FADE_ADD_SCENE 50
+
 # define MENU_LOAD_X_MAX 4
 # define MENU_LOAD_Y_MAX 3
 # define MENU_LOAD_START_X W_X * 0.10

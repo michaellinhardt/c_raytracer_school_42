@@ -212,7 +212,7 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	img->pos[0] = (m->winx / 2) - (img->width / 2);
 	img->pos[1] = (m->winy / 2) - (img->heigh / 2);
 	img->menu = LOAD_SCENE_ADD;
-	img->fade_min = 100;
+	img->fade_min = MENU_FADE_ADD_SCENE;
 	img->set_alpha = -1;
 	set_type_action(img, MENU, 0, NULL);
 

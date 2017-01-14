@@ -58,7 +58,10 @@ void			scene_init_1_rt(t_gen *d, t_mlx *m, t_img *img)
 	img = layer(m, 4, 2);
 	img->i = -4;
 	while ((img->i += 4) < (img->sl * m->winy))
-			img->str[img->i + 3] = (unsigned char)50;
+	{
+		img->ptr[img->i / 4] = MENU_MODALE_COLOR;
+		img->str[img->i + 3] = (unsigned char)MENU_MODALE_FADE;
+	}
 	scene_init_1_rt_img(m, img);
 	scene_init_1_rt_menu(m);
 	m->menu.draw = 1;

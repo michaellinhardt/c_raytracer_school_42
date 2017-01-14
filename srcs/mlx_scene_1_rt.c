@@ -25,7 +25,7 @@ static void		draw_rt(t_gen *d, t_mlx *m)
 		anim_init(&m->scene_img[1][ID_IMG_LOADING], FADE_IN);
 	else if (m->loading == MENU_LOAD_WAIT_BEFORE_LOAD)
 	{
-		m->scene_img[1][ID_IMG_MENU_CADRE].fade_min = 190;
+		m->scene_img[1][ID_IMG_MENU_CADRE].fade_min = MENU_FADE_CADRE_INTERFACE;
 		raytracing(d);
 		ft_bzero(&m->input, sizeof(t_input));
 		d->sc->data = ft_strnew(len);
