@@ -7,4 +7,6 @@ void			mouse_release(t_gen *d, int btn, int x, int y)
 		return ;
 	else if (mouse_release_img(d, btn, x, y))
 		return ;
+	else if (mouse_release_get(d, btn, x, y))
+		return ;
 }
