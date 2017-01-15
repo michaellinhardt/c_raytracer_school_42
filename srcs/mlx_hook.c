@@ -59,6 +59,7 @@ int		mousep_hook(int btn, int x, int y, t_gen *d)
 
 int		mouser_hook(int btn, int x, int y, t_gen *d)
 {
+	ft_printf("coord: %d,%d\n", x, y);
 	if (d->sc && !d->sc->data)
 		return (0);
 	(btn == 1) ? d->mlx.input.mouse.left = 0 : 0;
