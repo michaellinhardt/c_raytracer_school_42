@@ -11,7 +11,7 @@ static void		prepare_img(t_get *g, t_img *img)
 		color = INPUT_COLOR_ENABLED;
 	img->i = -1;
 	while (++img->i < img->width * img->heigh)
-		img->ptr[img->i] = color;
+		img->ptr[img->i] = color;-
 }
 
 void	scene_input_draw_box(t_gen *d, t_mlx *m, t_get *g, t_img *lay)
