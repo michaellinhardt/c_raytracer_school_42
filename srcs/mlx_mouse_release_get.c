@@ -1,13 +1,21 @@
 #include "raytra_gen.h"
 #include "raystruct.h"
 
-static void		set_focus(t_get *get, int target, int i)
+static void		set_focus(t_mlx *m, t_get *get, int target, int i)
 {
-	while (++i < GET_APP_MAX)
+	m->get_focus = NULL;
+	while (++i < GET_APP_MAX && (get = &m->get[i]))
 		if (i != target && get->status == GET_FOCUS)
 			get->status = GET_ENABLED;
 		else if (i == target && get->status == GET_ENABLED)
+		{
+			m->get_focus = get;
 			get->status = GET_FOCUS;
+		}
+		else if (i == target && get->status == GET_ENABLED)
+		{
+			// on clic dans un input deja focus
+		}
 }
 
 int				mouse_release_get(t_gen *d, int btn, int x, int y)
@@ -28,11 +36,11 @@ int				mouse_release_get(t_gen *d, int btn, int x, int y)
 		&& get->menu > NONE && get->menu == d->mlx.menu.id)
 		{
 			if (btn == 1)
-				set_focus((t_get *)NULL, i, -1);
+				set_focus(&d->mlx, (t_get *)NULL, i, -1);
 			return (1);
 		}
 	}
 	if (is_one_focus > 0)
-		set_focus((t_get *)NULL, -1, -1);
+		set_focus(&d->mlx, (t_get *)NULL, -1, -1);
 	return (0);
 }

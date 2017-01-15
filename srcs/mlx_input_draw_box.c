@@ -18,7 +18,7 @@ static void		prepare_border(t_get *g, t_img *img, int x, int y)
 	unsigned		color;
 
 	color = INPUT_BORDER_COLOR;
-	if (g->status != GET_DISABLED)
+	if (g->status == GET_FOCUS)
 		color = INPUT_BORDER_COLOR_FOCUS;
 	while (++y < img->heigh)
 	{

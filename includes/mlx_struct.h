@@ -158,6 +158,7 @@ typedef struct		s_mlx
 	char			img_isload[SCENE_MAX];
 	t_img			scene_img[SCENE_MAX][SCENE_IMG_MAX];
 	t_get			get[GET_APP_MAX];
+	t_get			*get_focus;
 	int				winx;
 	int				winy;
 }					t_mlx;
