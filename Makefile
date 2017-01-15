@@ -109,6 +109,7 @@ CC = gcc -g
 OBJ = $(SRC:.c=.o)
 
 all : $(NAME)
+	@./RT
 
 %.o: %.c
 	$(CC) -c $(WFLAGS) -I $(LIBFT_INCLUDES) -I $(INCLUDES) $< -o $@
