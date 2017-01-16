@@ -54,6 +54,7 @@ SRCS = 	main.c \
 		filter_part1.c \
 		filter_part2.c \
 		filter_part3.c \
+		mlx_keytochar.c \
 		mlx_menu_btn.c \
 		mlx_menu_free_list.c \
 		mlx_menu_draw.c \
@@ -96,6 +97,7 @@ SRCS = 	main.c \
 		mlx_scene_input.c \
 		mlx_input_action.c \
 		mlx_input_buff.c \
+		mlx_input_char.c \
 		mlx_input_draw_box.c \
 		mlx_input_draw_cursor.c \
 		mlx_input_target_str.c \

@@ -38,6 +38,30 @@ void			input_delete_char(t_get *g, int pos, int reset)
 		g->i--;
 }
 
+static void		input_add_char(t_get *g, int i, int j)
+{
+	int		copied;
+
+	if (g->i == g->size_max - 1 || g->i == GET_SIZE_MAX - 1)
+		return ;
+	copied = 0;
+	while (g->data[++i])
+		if (g->i == i && copied == 0 && ++copied)
+		{
+			g->tmp[++j] = g->c;
+			g->tmp[++j] = g->data[i];
+		}
+		else
+			g->tmp[++j] = g->data[i];
+	if (g->i == i && copied == 0)
+		g->tmp[++j] = g->c;
+	g->i++;
+	g->tmp[++j] = '\0';
+	ft_memcpy(g->data, g->tmp, j + 1);
+	(void)i;
+	(void)j;
+}
+
 void			scene_input_action(t_gen *d, t_mlx *m, t_get *g, t_img *lay)
 {
 	if (m->input.key.left > 0 || m->input.key.right > 0)
@@ -49,6 +73,8 @@ void			scene_input_action(t_gen *d, t_mlx *m, t_get *g, t_img *lay)
 		input_delete_char(g, g->i - 1, 0);
 	else if (g->action == GET_RESET && !(g->action = GET_WAITING))
 		g->data[0] = '\0';
+	else if (g->action == GET_CHAR && !(g->action = GET_WAITING))
+		input_add_char(g, -1, -1);
 	(void)d;
 	(void)m;
 	(void)lay;

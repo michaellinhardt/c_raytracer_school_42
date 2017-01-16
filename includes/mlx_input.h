@@ -20,7 +20,7 @@
 # define INPUT_CURSOR_COLOR 0x00000000
 # define INPUT_CURSOR_FAME_TOTAL 30
 # define INPUT_CURSOR_DISPLAY_UNDER 10
-# define INPUT_CURSOR_MOVE_TEMPO 2
+# define INPUT_CURSOR_MOVE_TEMPO 3
 # define INPUT_CURSOR_DEL_TEMPO 5
 
 # define INPUT_PADDING 10
@@ -97,6 +97,7 @@ typedef struct					s_get
 	struct s_get_target			target;
 	char						data[GET_SIZE_MAX];
 	char						tmp[GET_SIZE_MAX];
+	char						c;
 	int							i;
 	int							j;
 }								t_get;

@@ -3,6 +3,7 @@
 
 void		mlx_start(t_gen *d, t_mlx *m);
 
+char		mlx_keytochar(int key);
 int			mouseo_hook(int x, int y, t_gen *d);
 int			keyr_hook(int key, t_gen *d);
 int			keyp_hook(int key, t_gen *d);
@@ -39,6 +40,7 @@ void		scene_text_menu(t_gen *d, t_mlx *m);
 void		scene_text_input(t_mlx *m, t_get *get, int i);
 void		cursor_move_left_right(t_mlx *m, t_get *g, int reset);
 void		input_delete_char(t_get *g, int pos, int reset);
+void		input_catch_char(t_gen *d, t_mlx *m, t_get *g, int key);
 
 t_img		*layer(t_mlx *m, int id, int reset);
 void		layer_add(t_mlx *m, t_img *l, t_img *i);
