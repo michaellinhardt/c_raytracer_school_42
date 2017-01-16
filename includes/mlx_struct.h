@@ -96,6 +96,8 @@ typedef struct		s_input_key
 	char			up;
 	char			down;
 	char			shift;
+	char			suppr;
+	char			backspace;
 }					t_input_key;
 
 typedef struct		s_input

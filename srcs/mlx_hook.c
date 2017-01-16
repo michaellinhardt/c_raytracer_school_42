@@ -31,8 +31,14 @@ int		keyr_hook(int key, t_gen *d)
 		(key == 124) ? d->mlx.input.key.right = 0 : 0;
 		(key == 125) ? d->mlx.input.key.down = 0 : 0;
 		(key == 126) ? d->mlx.input.key.up = 0 : 0;
-		if (key == 123 || key == 124)
+		(key == 51) ? d->mlx.input.key.backspace = 0 : 0;
+		(key == 117) ? d->mlx.input.key.suppr = 0 : 0;
+		if (d->mlx.getfocus && (key == 123 || key == 124))
 			cursor_move_left_right(&d->mlx, d->mlx.getfocus, 666);
+		else if (d->mlx.getfocus && key == 51)
+			input_delete_char(d->mlx.getfocus, d->mlx.getfocus->i - 1, 666);
+		else if (d->mlx.getfocus && key == 117)
+			input_delete_char(d->mlx.getfocus, d->mlx.getfocus->i, 666);
 	}
 	return (0);
 }
@@ -45,6 +51,8 @@ int		keyp_hook(int key, t_gen *d)
 	(key == 124) ? d->mlx.input.key.right = 1 : 0;
 	(key == 125) ? d->mlx.input.key.down = 1 : 0;
 	(key == 126) ? d->mlx.input.key.up = 1 : 0;
+	(key == 51) ? d->mlx.input.key.backspace = 1 : 0;
+	(key == 117) ? d->mlx.input.key.suppr = 1 : 0;
 	return (0);
 }
 
