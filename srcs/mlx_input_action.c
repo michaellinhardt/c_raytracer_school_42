@@ -10,14 +10,10 @@ int				cursor_move_left_right(t_mlx *m, t_get *g, int ret)
 	if (ret == 666 || ++move_speed)
 		return (1);
 	if (m->input.key.left > 0 && g->i > 0 && ++ret)
-	{
 		g->i--;
-	}
 	else if (m->input.key.right > 0 && g->i < (int)ft_strlen(g->data)
 	&& g->i < g->size_max && ++ret)
-	{
 		g->i++;
-	}
 	return (ret);
 }
 
