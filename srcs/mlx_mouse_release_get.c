@@ -34,7 +34,9 @@ static void		set_pos(t_get *get, int x, int max)
 	int		start;
 	int		mid;
 	int		end;
+	int		old;
 
+	old = get->i;
 	get->i = (x - INPUT_PADDING - get->box.pos[0]) / INPUT_SIZE_CHAR_X;
 	start = get->i * INPUT_SIZE_CHAR_X;
 	mid = start + (INPUT_SIZE_CHAR_X / 2);
@@ -43,6 +45,8 @@ static void		set_pos(t_get *get, int x, int max)
 		get->i++;
 	if (get->i > max)
 		get->i = max;
+	if (old != get->i)
+		scene_input_draw_cursor(NULL, NULL, NULL);		
 }
 
 int				mouse_release_get(t_gen *d, int btn, int x, int y)
