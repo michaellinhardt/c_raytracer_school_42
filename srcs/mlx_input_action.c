@@ -75,8 +75,8 @@ void			scene_input_action(t_gen *d, t_mlx *m, t_get *g, t_img *lay)
 		g->data[0] = '\0';
 	else if (g->action == GET_CHAR && !(g->action = GET_WAITING))
 		input_add_char(g, -1, -1);
+	else if (g->action == GET_VALID && !(g->action = GET_WAITING))
+		input_valid(m, g);
 	(void)d;
-	(void)m;
 	(void)lay;
-	(void)g;
 }

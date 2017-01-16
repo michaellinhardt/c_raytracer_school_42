@@ -13,12 +13,15 @@ static void		prepare_data(t_get *g)
 	ft_strdel(&tmp);
 }
 
-static void		set_focus(t_mlx *m, t_get *get, int tar, int i)
+void			input_set_focus(t_mlx *m, t_get *get, int tar, int i)
 {
 	m->getfocus = NULL;
 	while (++i < GET_APP_MAX && (get = &m->get[i]))
 		if (i != tar && get->status == GET_FOCUS)
+		{
+			get->action = GET_WAITING;
 			get->status = GET_ENABLED;
+		}
 		else if (i == tar && get->status == GET_ENABLED && (m->getfocus = get))
 		{
 			get->status = GET_FOCUS;
@@ -66,13 +69,13 @@ int				mouse_release_get(t_gen *d, int btn, int x, int y)
 			if (btn == 1)
 			{
 				if (get->status != GET_FOCUS)
-					set_focus(&d->mlx, (t_get *)NULL, i, -1);
+					input_set_focus(&d->mlx, (t_get *)NULL, i, -1);
 				set_pos(get, x, (int)ft_strlen(get->data));
 			}
 			return (1);
 		}
 	}
 	if (is_one_focus > 0)
-		set_focus(&d->mlx, (t_get *)NULL, -1, -1);
+		input_set_focus(&d->mlx, (t_get *)NULL, -1, -1);
 	return (0);
 }

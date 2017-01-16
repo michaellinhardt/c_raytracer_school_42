@@ -96,7 +96,7 @@ SRCS = 	main.c \
 		mlx_scene_text_input.c \
 		mlx_scene_input.c \
 		mlx_input_action.c \
-		mlx_input_buff.c \
+		mlx_input_valid.c \
 		mlx_input_char.c \
 		mlx_input_draw_box.c \
 		mlx_input_draw_cursor.c \

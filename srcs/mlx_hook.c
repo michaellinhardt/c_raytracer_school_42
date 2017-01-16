@@ -12,7 +12,7 @@ int		mouseo_hook(int x, int y, t_gen *d)
 
 int		keyr_hook(int key, t_gen *d)
 {
-	// ft_printf("\ttab[%d] = ''\n", key);
+	// ft_printf("\ttab[%d] = '';\n", key);
 	if (key == 53)
 		exit (0);
 	else if (d->mlx.scene > INTRO && (!d->sc || (d->sc && d->sc->data)))
