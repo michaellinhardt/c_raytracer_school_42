@@ -159,6 +159,7 @@ typedef struct		s_mlx
 	t_img			scene_img[SCENE_MAX][SCENE_IMG_MAX];
 	t_get			get[GET_APP_MAX];
 	t_get			*getfocus;
+	t_img			getcursor;
 	int				winx;
 	int				winy;
 }					t_mlx;

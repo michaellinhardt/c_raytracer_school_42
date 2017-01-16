@@ -35,6 +35,16 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	scene_init_1_rt_input(m, (t_get *)NULL);
 	scene_init_1_rt_input_area(m, (t_get *)NULL, -1);
 
+	img = &m->getcursor;
+	img->width = 2;
+	img->heigh = INPUT_SIZE_CHAR_Y - INPUT_PADDING;
+	img->img = mlx_new_img(m, img, img->width, img->heigh);
+	img->i = -1;
+	while (++img->i < img->width * img->heigh)
+		img->ptr[img->i] = INPUT_CURSOR_COLOR;
+	img->fade_min = 1;
+	img->fade_max = 255;
+
 	img = &m->scene_img[1][ID_IMG_MENU_CADRE];
 	img->fade_min = 110;
 	img->set_alpha = 0xFF000000;

@@ -88,6 +88,6 @@ char		*input_target_to_str(t_get *g);
 void		scene_input_action(t_gen *d, t_mlx *m, t_get *g, t_img *lay);
 void		scene_input_buff(t_gen *d, t_mlx *m, t_get *g, t_img *lay);
 void		scene_input_draw_box(t_gen *d, t_mlx *m, t_get *g, t_img *lay);
-void		scene_input_draw_cursor(t_gen *d, t_mlx *m, t_get *g, t_img *lay);
+void		scene_input_draw_cursor(t_mlx *m, t_get *g, t_img *lay);
 
 #endif

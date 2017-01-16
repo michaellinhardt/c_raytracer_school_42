@@ -18,7 +18,8 @@ void			scene_input(t_gen *d, t_mlx *m, int i)
 			scene_input_buff(d, m, &m->get[i], lay);
 		}
 		scene_input_draw_box(d, m, &m->get[i], lay);
-		scene_input_draw_cursor(d, m, &m->get[i], lay);
+		if (m->get[i].status == GET_FOCUS)
+			scene_input_draw_cursor(m, &m->get[i], lay);
 	}
 	(void)d;
 }
