@@ -21,12 +21,12 @@ static void			scene_init_1_rt_input(t_mlx *m, t_get *g)
 	g = &m->get[ID_INPUT_ADD_SCENE_NAME];
 	g->menu = LOAD_SCENE_ADD;
 	g->mode = MODE_STRING_FILE;
-	m->menu.new_scene = ft_strdup("nouvelle_scene");
+	m->menu.new_scene = ft_strdup("0 MIL-nouvelle_scene");
 	g->target.ptr_str = m->menu.new_scene;
 	g->box.pos[0] = 541;
 	g->box.pos[1] = 483;
 	g->size_min = 3;
-	g->size_max = 39;
+	g->size_max = 59;
 }
 
 void			scene_init_1_rt_img(t_mlx *m, t_img *img)

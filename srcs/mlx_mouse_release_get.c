@@ -29,14 +29,20 @@ static void		set_focus(t_mlx *m, t_get *get, int tar, int i)
 		}
 }
 
-static void		set_pos(t_get *g, int x, int y)
+static void		set_pos(t_get *get, int x, int max)
 {
-	int		x_decal;
+	int		start;
+	int		mid;
+	int		end;
 
-	x_decal = x - INPUT_PADDING - g->box.pos[0];
-	ft_printf("pos x: %d\n", x_decal);
-	(void)g;
-	(void)y;
+	get->i = (x - INPUT_PADDING - get->box.pos[0]) / INPUT_SIZE_CHAR_X;
+	start = get->i * INPUT_SIZE_CHAR_X;
+	mid = start + (INPUT_SIZE_CHAR_X / 2);
+	end = start + INPUT_SIZE_CHAR_X;
+	if ((x - INPUT_PADDING - get->box.pos[0]) > mid)
+		get->i++;
+	if (get->i > max)
+		get->i = max;
 }
 
 int				mouse_release_get(t_gen *d, int btn, int x, int y)
@@ -58,8 +64,10 @@ int				mouse_release_get(t_gen *d, int btn, int x, int y)
 		{
 			if (btn == 1)
 			{
-				set_focus(&d->mlx, (t_get *)NULL, i, -1);
-				set_pos(get, x, y);
+				if (get->status != GET_FOCUS)
+					set_focus(&d->mlx, (t_get *)NULL, i, -1);
+				set_pos(get, x, (int)ft_strlen(get->data));
+				ft_printf("pos x: %d\n", get->i);
 			}
 			return (1);
 		}
