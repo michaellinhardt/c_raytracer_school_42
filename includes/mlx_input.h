@@ -91,8 +91,6 @@ typedef struct					s_get
 	enum e_get_inputmode		mode;
 	void						(*send)(void *gen, void *mlx);
 	struct s_img				box;
-	int							fade_focus;
-	int							frame_cursor;
 	int							size_min;
 	int							size_max;
 	int							val_min;

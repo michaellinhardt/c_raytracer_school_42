@@ -67,7 +67,6 @@ int				mouse_release_get(t_gen *d, int btn, int x, int y)
 				if (get->status != GET_FOCUS)
 					set_focus(&d->mlx, (t_get *)NULL, i, -1);
 				set_pos(get, x, (int)ft_strlen(get->data));
-				ft_printf("pos x: %d\n", get->i);
 			}
 			return (1);
 		}

@@ -1,19 +1,6 @@
 #include "raytra_gen.h"
 #include "raystruct.h"
 
-static void		set_fade(t_get *g)
-{
-	if (g->status == GET_FOCUS)
-		g->fade_focus = (g->fade_focus
-		+ INPUT_BORDER_FADE_SPEED) > 255 ? 255 : (g->fade_focus
-		+ INPUT_BORDER_FADE_SPEED);
-	else
-		g->fade_focus = (g->fade_focus
-		- INPUT_BORDER_FADE_SPEED) < 0 ? 0 : (g->fade_focus
-		- INPUT_BORDER_FADE_SPEED);
-
-}
-
 void			scene_input(t_gen *d, t_mlx *m, int i)
 {
 	t_img	*lay;
@@ -25,7 +12,6 @@ void			scene_input(t_gen *d, t_mlx *m, int i)
 	{
 		if (m->get[i].menu != m->menu.id || m->get[i].menu == NONE)
 			continue ;
-		set_fade(&m->get[i]);
 		if (m->get[i].status == GET_FOCUS)
 		{
 			scene_input_action(d, m, &m->get[i], lay);
