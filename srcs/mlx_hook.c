@@ -76,6 +76,9 @@ int		mouser_hook(int btn, int x, int y, t_gen *d)
 	(btn == 2) ? d->mlx.input.mouse.right = 0 : 0;
 	d->mlx.input.mouse.release_x = x;
 	d->mlx.input.mouse.release_y = y;
+	if (d->mlx.getfocus && btn == 2 && (d->mlx.getfocus->action = GET_RESET)
+	&& !(d->mlx.getfocus->i = 0))
+		return (0);
 	mouse_release(d, btn, x, y);
 	return (0);
 }

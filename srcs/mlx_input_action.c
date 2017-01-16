@@ -47,7 +47,8 @@ void			scene_input_action(t_gen *d, t_mlx *m, t_get *g, t_img *lay)
 		input_delete_char(g, g->i, 0);
 	else if (m->input.key.backspace > 0 && g->i > 0)
 		input_delete_char(g, g->i - 1, 0);
-
+	else if (g->action == GET_RESET && !(g->action = GET_WAITING))
+		g->data[0] = '\0';
 	(void)d;
 	(void)m;
 	(void)lay;

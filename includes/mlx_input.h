@@ -46,7 +46,6 @@ enum	e_get_status {
 enum	e_get_action {
 	GET_WAITING,
 	GET_VALID,
-	GET_CANCEL,
 	GET_RESET,
 	GET_CHAR
 };
