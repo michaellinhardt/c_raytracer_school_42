@@ -14,7 +14,7 @@ static void		menu_draw_actif_sub(t_mlx *m, t_img *img)
 
 void			menu_draw_actif(t_mlx *m, t_img *img)
 {
-	if (m->menu.draw == -1 || m->loading != 0)
+	if (m->menu.draw == -1 || m->menu.loading != 0)
 		return ;
 	else if (m->menu.id == LOAD_FILE)
 		img = &m->scene_img[1][ID_IMG_BTN_LOAD];

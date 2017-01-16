@@ -8,17 +8,23 @@
 # define INPUT_SIZE_CHAR_X 15
 
 # define INPUT_BORDER_COLOR 0x00000000
-# define INPUT_BORDER_COLOR_FOCUS 0x000000FF
-# define INPUT_BORDER_SIZE 3
+# define INPUT_BORDER_COLOR_FOCUS 0x00FF0000
+# define INPUT_BORDER_SIZE 2
 # define INPUT_BORDER_FADE_SPEED 5
+
+# define INPUT_TEXT_COLOR 0x000000
+# define INPUT_TEXT_COLOR_FOCUS 0xFF0000
+# define INPUT_TEXT_COLOR_DISABLED 0x10FF10
 
 # define INPUT_CURSOR_FAME_TOTAL 100
 # define INPUT_CURSOR_DISPLAY_AT 50
 
 # define INPUT_PADDING 10
 
+# define INPUT_MODE_DOUBLE_PRECISION 6
+
 # define GET_APP_MAX 30
-# define GET_SIZE_MAX 50
+# define GET_SIZE_MAX 255
 
 enum	e_get_inputmode {
 	MODE_DOUBLE,
@@ -70,6 +76,13 @@ enum	e_get_action {
 ** C'est la loop mlx à chaque nouveau tous qui manipule le contenue
 **
 */
+typedef struct					s_get_target
+{
+	double						*ptr_double;
+	int							*ptr_int;
+	char						*ptr_str;
+}								t_get_target;
+
 typedef struct					s_get
 {
 	enum e_menu					menu;
@@ -84,7 +97,7 @@ typedef struct					s_get
 	int							size_max;
 	int							val_min;
 	int							val_max;
-	void						*target;
+	struct s_get_target			target;
 	char						data[GET_SIZE_MAX];
 	char						tmp[GET_SIZE_MAX];
 	int							i;

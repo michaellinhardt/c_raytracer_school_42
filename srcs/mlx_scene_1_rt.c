@@ -21,9 +21,9 @@ static void		draw_rt(t_gen *d, t_mlx *m)
 	static int		len = (W_X * W_Y * 4);
 	if (!d->sc || (d->sc && d->sc->data))
 		return ;
-	if (++m->loading == 1)
+	if (++m->menu.loading == 1)
 		anim_init(&m->scene_img[1][ID_IMG_LOADING], FADE_IN);
-	else if (m->loading == MENU_LOAD_WAIT_BEFORE_LOAD)
+	else if (m->menu.loading == MENU_LOAD_WAIT_BEFORE_LOAD)
 	{
 		m->scene_img[1][ID_IMG_MENU_CADRE].fade_min = MENU_FADE_CADRE_INTERFACE;
 		raytracing(d);
@@ -32,7 +32,7 @@ static void		draw_rt(t_gen *d, t_mlx *m)
 		ft_memcpy(d->sc->data, d->data, len);
 		ft_memcpy(layer(m, 0, 0)->str, d->sc->data, len);
 		m->menu.scene = d->sc;
-		m->loading = 0;
+		m->menu.loading = 0;
 	}
 	layer_add(m, layer(m, 2, 0), &m->scene_img[1][ID_IMG_LOADING]);
 }
@@ -62,6 +62,6 @@ void			scene_1_rt(t_gen *d, t_mlx *m)
 	perma_fade(m, layer(m, 1, 0));
 	perma_fade(m, layer(m, 2, 0));
 	perma_fade(m, layer(m, 3, 0));
-	scene_text(m);
+	scene_text(d, m);
 	draw_rt(d, m);
 }

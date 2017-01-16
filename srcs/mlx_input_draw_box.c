@@ -26,15 +26,15 @@ static void		prepare_border(t_get *g, t_img *img, int x, int y)
 		if (y < INPUT_BORDER_SIZE)
 			while (++x < img->width)
 				img->ptr[y * img->width + x] = color;
-		else if (y >= INPUT_BORDER_SIZE && y <= img->heigh - INPUT_BORDER_SIZE)
+		else if (y >= INPUT_BORDER_SIZE && y < img->heigh - INPUT_BORDER_SIZE)
 		{
 			while (++x < INPUT_BORDER_SIZE)
 				img->ptr[y * img->width + x] = color;
 			x = img->width;
-			while (--x > img->width - INPUT_BORDER_SIZE)
+			while (--x >= img->width - INPUT_BORDER_SIZE)
 				img->ptr[y * img->width + x] = color;
 		}
-		else if (y > img->heigh - INPUT_BORDER_SIZE)
+		else if (y >= img->heigh - INPUT_BORDER_SIZE)
 			while (++x < img->width)
 				img->ptr[y * img->width + x] = color;
 	}

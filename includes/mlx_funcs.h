@@ -32,8 +32,11 @@ void		anim_init(t_img *img, enum e_anim anim);
 void		scene_btn(t_gen *d, t_mlx *m, t_img *img);
 void		scene_build(t_gen *d, t_mlx *m, t_img *lay, t_img *img);
 void		menu_draw_actif(t_mlx *m, t_img *img);
-void		scene_text(t_mlx *m);
 void		scene(t_gen *d, t_mlx *m);
+
+void		scene_text(t_gen *d, t_mlx *m);
+void		scene_text_menu(t_gen *d, t_mlx *m);
+void		scene_text_input(t_mlx *m, t_get *get, int i);
 
 t_img		*layer(t_mlx *m, int id, int reset);
 void		layer_add(t_mlx *m, t_img *l, t_img *i);
@@ -81,6 +84,7 @@ void		menu_save_btn_open(void *gen, void *mlx);
 void		menu_camera_btn_open(void *gen, void *mlx);
 
 void		scene_input(t_gen *d, t_mlx *m, int i);
+char		*input_target_to_str(t_get *g);
 void		scene_input_action(t_gen *d, t_mlx *m, t_get *g, t_img *lay);
 void		scene_input_buff(t_gen *d, t_mlx *m, t_get *g, t_img *lay);
 void		scene_input_draw_box(t_gen *d, t_mlx *m, t_get *g, t_img *lay);

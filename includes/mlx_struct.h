@@ -119,6 +119,7 @@ typedef struct		s_menu
 	struct s_scene	*scene;
 	struct s_scene	*spot;
 	struct s_scene	*obj;
+	int				loading;
 }					t_menu;
 
 /*
@@ -150,7 +151,6 @@ typedef struct		s_mlx
 	t_menu			menu;
 	t_flst			*flst;
 	int				total_file;
-	int				loading;
 	t_input			input;
 	char			loop;
 	char			loopstop;
@@ -158,7 +158,7 @@ typedef struct		s_mlx
 	char			img_isload[SCENE_MAX];
 	t_img			scene_img[SCENE_MAX][SCENE_IMG_MAX];
 	t_get			get[GET_APP_MAX];
-	t_get			*get_focus;
+	t_get			*getfocus;
 	int				winx;
 	int				winy;
 }					t_mlx;
