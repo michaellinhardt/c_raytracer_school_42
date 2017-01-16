@@ -37,6 +37,7 @@ void		scene(t_gen *d, t_mlx *m);
 void		scene_text(t_gen *d, t_mlx *m);
 void		scene_text_menu(t_gen *d, t_mlx *m);
 void		scene_text_input(t_mlx *m, t_get *get, int i);
+int			cursor_move_left_right(t_mlx *m, t_get *g, int ret);
 
 t_img		*layer(t_mlx *m, int id, int reset);
 void		layer_add(t_mlx *m, t_img *l, t_img *i);

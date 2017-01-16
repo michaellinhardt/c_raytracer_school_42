@@ -31,6 +31,8 @@ int		keyr_hook(int key, t_gen *d)
 		(key == 124) ? d->mlx.input.key.right = 0 : 0;
 		(key == 125) ? d->mlx.input.key.down = 0 : 0;
 		(key == 126) ? d->mlx.input.key.up = 0 : 0;
+		if (key == 123 || key == 124)
+			cursor_move_left_right(&d->mlx, d->mlx.getfocus, 666);
 	}
 	return (0);
 }
