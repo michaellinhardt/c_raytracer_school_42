@@ -39,11 +39,18 @@ static void		scene_text_scene_add(t_mlx *m, int c)
 
 static void		scene_text_scene_mod(t_mlx *m, int c)
 {
-
 	mlx_string_put(m->mlx, m->win
 	, m->scene_img[1][IMENU_EDIT_SCENE_BOX].pos[0] + 15
 	, m->scene_img[1][IMENU_EDIT_SCENE_BOX].pos[1] + 8
 	, c, TXT_SCENE_MOD_NAME);
+	mlx_string_put(m->mlx, m->win
+	, m->get[ID_INPUT_SCENE_AMBIANCE1].box.pos[0] + 6
+	, m->get[ID_INPUT_SCENE_AMBIANCE1].box.pos[1] - 23
+	, c, TXT_SCENE_MOD_AMB1);
+	mlx_string_put(m->mlx, m->win
+	, m->get[ID_INPUT_SCENE_AMBIANCE2].box.pos[0] + 6
+	, m->get[ID_INPUT_SCENE_AMBIANCE2].box.pos[1] - 23
+	, c, TXT_SCENE_MOD_AMB2);
 }
 
 void			scene_text_menu(t_gen *d, t_mlx *m)

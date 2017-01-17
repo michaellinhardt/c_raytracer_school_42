@@ -54,8 +54,8 @@ enum	e_get_action {
 
 typedef struct					s_get_target
 {
-	double						**ptr_double;
-	int							**ptr_int;
+	double						*ptr_double;
+	int							*ptr_int;
 	char						**ptr_str;
 }								t_get_target;
 
@@ -81,5 +81,7 @@ typedef struct					s_get
 
 # define ID_INPUT_ADD_SCENE_NAME 0
 # define ID_INPUT_MOD_SCENE_NAME 1
+# define ID_INPUT_SCENE_AMBIANCE1 2
+# define ID_INPUT_SCENE_AMBIANCE2 3
 
 #endif
