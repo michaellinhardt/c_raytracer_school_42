@@ -14,7 +14,7 @@ void			scene_text_notif(t_mlx *m, t_notif *lst)
 	while (lst)
 	{
 		mlx_string_put(m->mlx, m->win, lst->bloc.pos[0] + NOTIF_PADDING
-		, lst->bloc.pos[1], 0xFFFFFFFF, lst->msg);
+		, lst->bloc.pos[1], lst->color, lst->msg);
 		lst = lst->next;
 	}
 }
