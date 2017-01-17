@@ -19,6 +19,7 @@ static void		perma_fade(t_mlx *m, t_img *i)
 static void		draw_rt(t_gen *d, t_mlx *m)
 {
 	static int		len = (W_X * W_Y * 4);
+
 	if (!d->sc || (d->sc && d->sc->data))
 		return ;
 	if (++m->menu.loading == 1)
@@ -62,6 +63,7 @@ void			scene_1_rt(t_gen *d, t_mlx *m)
 	perma_fade(m, layer(m, 1, 0));
 	perma_fade(m, layer(m, 2, 0));
 	perma_fade(m, layer(m, 3, 0));
+	perma_fade(m, layer(m, 5, 0));
 	scene_text(d, m);
 	draw_rt(d, m);
 }

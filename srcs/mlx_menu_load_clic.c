@@ -10,7 +10,7 @@ static void		purge_scene(t_gen *d, t_scene *sc, char *path, char nb)
 	while (sc)
 	{
 		next = sc->next;
-		if (sc->nb <= nb && !ft_strcmp(sc->path_save, path))
+		if (sc->path_save && sc->nb <= nb && !ft_strcmp(sc->path_save, path))
 		{
 			if (!prev && ((sc->next = d->sc_off) || 1))
 			{
@@ -23,7 +23,7 @@ static void		purge_scene(t_gen *d, t_scene *sc, char *path, char nb)
 			sc->next = d->sc_off;
 			d->sc_off = sc;
 		}
-		else if (sc->nb > nb)
+		else if (sc->path_save && sc->nb > nb)
 			sc->path_save = ft_strdup(path);
 		prev = sc;
 		sc = next;
