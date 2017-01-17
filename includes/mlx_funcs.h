@@ -11,6 +11,7 @@ int			mousep_hook(int btn, int x, int y, t_gen *d);
 int			mouser_hook(int btn, int x, int y, t_gen *d);
 
 void		notif(t_mlx *m, enum e_notif type, char *msg);
+void		notif2(t_mlx *m, enum e_notif type, char *str1, char *str2);
 void		notif_draw(t_mlx *m, t_notif *lst, t_notif *next);
 void		scene_text_notif(t_mlx *m, t_notif *lst);
 

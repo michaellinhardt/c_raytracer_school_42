@@ -30,6 +30,8 @@
 # define GET_APP_MAX 30
 # define GET_SIZE_MAX 255
 
+# define NOTIF_INPUT_SAVE "save: "
+
 enum	e_get_inputmode {
 	MODE_DOUBLE,
 	MODE_INT,
