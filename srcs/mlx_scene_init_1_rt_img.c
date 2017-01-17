@@ -283,8 +283,7 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	img->set_alpha = -1;
 	set_area(img);
 	set_type_action(img, MENU, 1, &menu_edit_switch_btn_open);
-	set_over_click(m, img, IB_E_SWITCH_OVER
-								, IB_E_SWITCH_CLICK);
+	set_over_click(m, img, IB_E_SWITCH_OVER, IB_E_SWITCH_CLICK);
 
 	img = &m->scene_img[1][IB_E_DEL_OFF];
 	img->pos[0] = m->scene_img[1][IB_E_MOD_OFF].pos[0]
@@ -293,6 +292,15 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	img->fade_min = 80;
 	img->set_alpha = -1;
 	set_type_action(img, MENU, 0, NULL);
+
+	img = &m->scene_img[1][IB_E_DEL];
+	img->pos[0] = m->scene_img[1][IB_E_DEL_OFF].pos[0];
+	img->pos[1] = m->scene_img[1][IB_E_DEL_OFF].pos[1];
+	img->fade_min = 40;
+	img->set_alpha = -1;
+	set_area(img);
+	set_type_action(img, MENU, 1, &menu_edit_del_btn_open);
+	set_over_click(m, img, IB_E_DEL_OVER, IB_E_DEL_CLICK);
 
 	img = &m->scene_img[1][IB_SELECTED];
 	img->fade_min = 100;

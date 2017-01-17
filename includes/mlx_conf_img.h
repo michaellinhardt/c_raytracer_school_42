@@ -76,6 +76,10 @@
 
 # define IMENU_EDIT_SCENE_BOX 56
 
-# define ID_MAX_AUTO_INIT 56
+# define IB_E_DEL 57
+# define IB_E_DEL_OVER 58
+# define IB_E_DEL_CLICK 59
+
+# define ID_MAX_AUTO_INIT 59
 
 #endif
