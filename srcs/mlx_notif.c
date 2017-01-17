@@ -11,17 +11,23 @@ static void		notif_free(t_mlx *m, t_notif *destroy)
 
 void			scene_text_notif(t_mlx *m, t_notif *lst)
 {
+	char		*strid;
+
 	while (lst)
 	{
-		mlx_string_put(m->mlx, m->win, lst->bloc.pos[0] + NOTIF_PADDING
+		strid = ft_itoa(lst->id);
+		mlx_string_put(m->mlx, m->win, lst->bloc.pos[0] + lst->bloc.width - 1
+		, lst->bloc.pos[1] + 1, lst->color, strid);
+		mlx_string_put(m->mlx, m->win, lst->bloc.pos[0] + NOTIF_PADDING + 5
 		, lst->bloc.pos[1], lst->color, lst->msg);
 		lst = lst->next;
+		ft_strdel(&strid);
 	}
 }
 
 static void		notif_draw_pos(t_mlx *m, t_notif *lst, int pos)
 {
-	lst->bloc.pos[0] = NOTIF_POS_RIGHT_X - lst->bloc.width;
+	lst->bloc.pos[0] = NOTIF_POS_RIGHT_X - lst->bloc.width - NOTIF_ID_SIZE_X;
 	lst->bloc.pos[1] = NOTIF_POS_RIGHT_Y - (lst->bloc.heigh * pos);
 	(void)m;
 }
@@ -60,10 +66,10 @@ void			notif(t_mlx *m, enum e_notif type, char *msg)
 	if (!(n = (t_notif *)ft_memalloc((sizeof(t_notif)))))
 		error(2, "ft_memalloc()");
 	n->id = ++id;
-	n->msg = ft_strdup(msg);
+	n->msg = ft_strjoin(msg, " .");
 	n->type = type;
 	n->bloc.fade = 0;
-	n->bloc.width = ((int)ft_strlen(msg) * NOTIF_SIZE_CHAR_X)
+	n->bloc.width = ((int)ft_strlen(n->msg) * NOTIF_SIZE_CHAR_X)
 	+ (NOTIF_PADDING * 2);
 	n->bloc.heigh = NOTIF_SIZE_CHAR_Y + (NOTIF_PADDING * 2);
 	n->next = m->notif;
