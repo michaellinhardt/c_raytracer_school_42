@@ -13,7 +13,11 @@ void			scene_input(t_gen *d, t_mlx *m, int i)
 		if (m->get[i].menu != m->menu.id || m->get[i].menu == NONE)
 			continue ;
 		if (m->get[i].status == GET_FOCUS)
+		{
+			if (m->get[i].i > (int)ft_strlen(m->get[i].data))
+				m->get[i].i = (int)ft_strlen(m->get[i].data);
 			scene_input_action(d, m, &m->get[i], lay);
+		}
 		scene_input_draw_box(d, m, &m->get[i], lay);
 	}
 	if (m->getfocus)

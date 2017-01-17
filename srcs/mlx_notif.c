@@ -34,8 +34,7 @@ void			notif_draw(t_mlx *m, t_notif *lst, t_notif *next)
 	int			i;
 	t_notif		*prev;
 
-	prev = NULL;
-	if (!m->notif)
+	if (!(prev = NULL) && !m->notif)
 		return ;
 	i = -1;
 	while (lst)
@@ -47,9 +46,11 @@ void			notif_draw(t_mlx *m, t_notif *lst, t_notif *next)
 		else
 		{
 			if (!lst->next)
+			{
 				notif_free(m, lst);
-			if (prev)
-				prev->next = NULL;
+				if (prev)
+					prev->next = NULL;
+			}
 		}
 		prev = lst;
 		lst = next;
@@ -82,13 +83,11 @@ void			notif(t_mlx *m, enum e_notif type, char *msg)
 		ft_strcpy(max, msg);
 	n->msg = ft_strdup(max);
 	n->type = type;
-	n->bloc.fade = 0;
 	n->bloc.width = ((int)ft_strlen(n->msg) * NOTIF_SIZE_CHAR_X)
 	+ (NOTIF_PADDING * 2);
 	n->bloc.heigh = NOTIF_SIZE_CHAR_Y + (NOTIF_PADDING * 2);
 	n->next = m->notif;
-	m->notif = n;
-	if (type == N_NORMAL)
+	if ((m->notif = n) && type == N_NORMAL)
 		n->color = NOTIF_COLOR_NORMAL;
 	else if (type == N_WARNING)
 		n->color = NOTIF_COLOR_WARNING;
