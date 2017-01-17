@@ -19,10 +19,12 @@ int		keyr_hook(int key, t_gen *d)
 	{
 		if (key == 261 && (d->mlx.menu.draw *= -1) && d->mlx.menu.draw == 1)
 		{
+				menu_list_free(&d->mlx, d->mlx.flst, (t_flst *)NULL);
 				layer(&d->mlx, 1, 1);
 				scene_init_1_rt_menu(&d->mlx);
+				if (d->mlx.menu.id == LOAD_SCENE)
+					menu_scene_open_order(d, &d->mlx);
 		}
-
 		(key == 123) ? d->mlx.input.key.left = 0 : 0;
 		(key == 124) ? d->mlx.input.key.right = 0 : 0;
 		(key == 125) ? d->mlx.input.key.down = 0 : 0;

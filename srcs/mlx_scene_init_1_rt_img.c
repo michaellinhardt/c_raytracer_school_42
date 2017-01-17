@@ -286,7 +286,6 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	set_over_click(m, img, IB_E_SWITCH_OVER
 								, IB_E_SWITCH_CLICK);
 
-
 	img = &m->scene_img[1][IB_E_DEL_OFF];
 	img->pos[0] = m->scene_img[1][IB_E_MOD_OFF].pos[0]
 	+ (img->width * 3) + (BOT_BTN_X_DECALLAGE * 3);

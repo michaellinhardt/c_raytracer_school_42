@@ -140,6 +140,7 @@ typedef struct		s_flst
 	int				bot[2];
 	int				id;
 	int				over;
+	int				actif;
 	t_img			preview;
 	struct s_flst	*p;
 	struct s_flst	*n;

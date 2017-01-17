@@ -18,10 +18,11 @@ static void		scene_text_menu_load(t_mlx *m, t_flst *elem, int i, int color)
 		else
 			ft_memcpy(name, elem->path, len);
 		name[len] = '\0';
-		if (elem->over)
+		color = 0xFFFFFF;
+		if (elem->actif == 1)
+			color = 0xFF0000;
+		else if (elem->over)
 			color = 0x00FFFF;
-		else
-			color = 0xFFFFFF;
 		mlx_string_put(m->mlx, m->win, elem->top[0] + MENU_LOAD_TEXT_MARGIN_X,
 		elem->bot[1] + MENU_LOAD_TEXT_MARGIN_Y, color, name);
 		elem = elem->n;

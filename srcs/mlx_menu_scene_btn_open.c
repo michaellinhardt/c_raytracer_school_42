@@ -12,6 +12,8 @@ static void		build_list(t_mlx *m, t_flst *new, t_scene *sc)
 	{
 		if (!(new = (t_flst *)ft_memalloc(sizeof(t_flst))))
 			error(2, "malloc t_flst struct");
+		if (!m->flst)
+			new->actif = 1;
 		if (sc->name)
 			new->path = ft_strdup(sc->name);
 		else
