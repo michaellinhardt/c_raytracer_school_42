@@ -10,6 +10,8 @@ int			keyp_hook(int key, t_gen *d);
 int			mousep_hook(int btn, int x, int y, t_gen *d);
 int			mouser_hook(int btn, int x, int y, t_gen *d);
 
+void		notif(t_mlx *m, char *msg, enum e_notif type, t_notif *n);
+
 void		mouse_release(t_gen *d, int btn, int x, int y);
 int			mouse_release_img(t_gen *d, int btn, int x, int y);
 int			mouse_release_flst(t_gen *d, t_flst *elem, int x, int y);
@@ -41,7 +43,7 @@ void		scene_text_input(t_mlx *m, t_get *get, int i);
 void		cursor_move_left_right(t_mlx *m, t_get *g, int reset);
 void		input_delete_char(t_get *g, int pos, int reset);
 void		input_catch_char(t_gen *d, t_mlx *m, t_get *g, int key);
-void		input_valid(t_mlx *m, t_get *g);
+void		input_valid(t_gen *d, t_mlx *m, t_get *g);
 void		input_set_focus(t_mlx *m, t_get *get, int tar, int i);
 
 t_img		*layer(t_mlx *m, int id, int reset);
@@ -74,7 +76,6 @@ void		menu_load_clic(t_gen *d, t_mlx *m, t_flst *elem);
 void		menu_edit_add_btn_open(void *gen, void *mlx);
 
 void		menu_scene_add_btn_ok(void *gen, void *mlx);
-void		menu_scene_add_btn_cancel(void *gen, void *mlx);
 void		menu_scene_btn_open(void *gen, void *mlx);
 void		menu_scene_clic(t_gen *d, t_mlx *m, t_flst *elem);
 

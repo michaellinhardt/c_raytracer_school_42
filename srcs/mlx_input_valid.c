@@ -8,9 +8,11 @@ static void		input_valid_string(t_mlx *m, t_get *g)
 	input_set_focus(m, (t_get *)NULL, -1, -1);
 }
 
-void			input_valid(t_mlx *m, t_get *g)
+void			input_valid(t_gen *d, t_mlx *m, t_get *g)
 {
 	if (g->mode == MODE_STRING_FILE)
 		input_valid_string(m, g);
+	if (g->send)
+		g->send(d, m);
 	(void)m;
 }

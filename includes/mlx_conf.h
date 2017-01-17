@@ -29,9 +29,11 @@
 
 # define PATH_XPM "./resources/scene_img/"
 # define PATH_SCENE "./scene/"
+# define PATH_NEW_SCENE "./resources/new_scene.rt"
 
 # define MENU_TEXT_COLOR 0xFFFFFF
 
 # define TXT_SCENE_ADD_NAME "Nom de la nouvelle scene:"
+# define TXT_SCENE_ADD_NAME_DEFAUT "nouvelle_scene"
 
 #endif

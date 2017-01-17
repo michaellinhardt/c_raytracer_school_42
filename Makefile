@@ -55,6 +55,7 @@ SRCS = 	main.c \
 		filter_part2.c \
 		filter_part3.c \
 		mlx_keytochar.c \
+		mlx_notif.c \
 		mlx_menu_btn.c \
 		mlx_menu_free_list.c \
 		mlx_menu_draw.c \

@@ -108,6 +108,7 @@ typedef struct		s_input
 }					t_input;
 
 # include "mlx_input.h"
+# include "mlx_notif.h"
 
 /*
 ** pilote quel menu est dessiner a lecran
@@ -162,6 +163,7 @@ typedef struct		s_mlx
 	t_get			get[GET_APP_MAX];
 	t_get			*getfocus;
 	t_img			getcursor;
+	struct s_notif	*notif;
 	int				winx;
 	int				winy;
 }					t_mlx;
