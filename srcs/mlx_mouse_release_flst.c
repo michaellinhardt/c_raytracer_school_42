@@ -22,7 +22,7 @@ int				mouse_release_flst(t_gen *d, t_flst *elem, int x, int y)
 	&& (d->mlx.menu.id >= LOAD_FILE || d->mlx.menu.id <= LOAD_SPOT))
 	{
 		i = MENU_LOAD_X_MAX * MENU_LOAD_Y_MAX;
-		img = &d->mlx.scene_img[d->mlx.scene][ID_IMG_PREVIEW_CLIC];
+		img = &d->mlx.scene_img[d->mlx.scene][IMG_PREVIEW_CLIC];
 		while (elem && --i >= 0)
 		{
 			if (area(NULL, elem, x, y))

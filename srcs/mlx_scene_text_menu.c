@@ -32,8 +32,8 @@ static void		scene_text_scene_add(t_mlx *m, int c)
 {
 
 	mlx_string_put(m->mlx, m->win
-	, m->scene_img[1][ID_IMG_MENU_ADD_SCENE_BOX].pos[0] + 15
-	, m->scene_img[1][ID_IMG_MENU_ADD_SCENE_BOX].pos[1] + 8
+	, m->scene_img[1][IMG_MENU_ADD_SCENE_BOX].pos[0] + 15
+	, m->scene_img[1][IMG_MENU_ADD_SCENE_BOX].pos[1] + 8
 	, c, TXT_SCENE_ADD_NAME);
 }
 

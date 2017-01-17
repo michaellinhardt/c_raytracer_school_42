@@ -23,10 +23,10 @@ static void		draw_rt(t_gen *d, t_mlx *m)
 	if (!d->sc || (d->sc && d->sc->data))
 		return ;
 	if (++m->menu.loading == 1)
-		anim_init(&m->scene_img[1][ID_IMG_LOADING], FADE_IN);
+		anim_init(&m->scene_img[1][IMG_LOADING], FADE_IN);
 	else if (m->menu.loading == MENU_LOAD_WAIT_BEFORE_LOAD)
 	{
-		m->scene_img[1][ID_IMG_MENU_CADRE].fade_min = MENU_FADE_CADRE_INTERFACE;
+		m->scene_img[1][IMG_MENU_CADRE].fade_min = MENU_FADE_CADRE_INTERFACE;
 		raytracing(d);
 		notif2(m, N_NORMAL, d->sc->name, ": scene generated!");
 		ft_bzero(&m->input, sizeof(t_input));
@@ -36,7 +36,7 @@ static void		draw_rt(t_gen *d, t_mlx *m)
 		m->menu.scene = d->sc;
 		m->menu.loading = 0;
 	}
-	layer_add(m, layer(m, 2, 0), &m->scene_img[1][ID_IMG_LOADING]);
+	layer_add(m, layer(m, 2, 0), &m->scene_img[1][IMG_LOADING]);
 }
 
 /*

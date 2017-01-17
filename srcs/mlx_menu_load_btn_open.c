@@ -42,6 +42,7 @@ void			menu_load_btn_open(void *gen, void *mlx)
 	t_mlx	*m;
 	t_flst	*lst;
 	int		total;
+	char	*itoaa;
 
 	m = mlx;
 	menu_list_free(m, m->flst, (t_flst *)NULL);
@@ -51,6 +52,9 @@ void			menu_load_btn_open(void *gen, void *mlx)
 	total = 0;
 	while (++total && lst && (lst->id = total))
 		lst = lst->n;
+	itoaa = ft_itoa(total - 1);
+	notif2(m, N_NORMAL, itoaa, " files loaded in the menu");
+	ft_strdel(&itoaa);
 	m->total_file = total;
 	m->menu.id = LOAD_FILE;
 	(void)gen;

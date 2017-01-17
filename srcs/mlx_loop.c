@@ -33,7 +33,7 @@ int		loop_hook(t_gen *d)
 		m->menu.next = NONE;
 	}
 	scene_input(d, m, -1);
-	scene_btn(d, m, (t_img *)NULL);
+	scene_btn(d, m, (t_img *)NULL, &m->menu);
 	scene_build(d, m, layer(m, 1, 0), (t_img *)NULL);
 	notif_draw(m, m->notif, (t_notif *)NULL);
 	scene(d, m);

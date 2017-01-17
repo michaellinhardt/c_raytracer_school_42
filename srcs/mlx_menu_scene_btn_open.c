@@ -28,7 +28,7 @@ static void		build_list(t_mlx *m, t_flst *new, t_scene *sc)
 	}
 }
 
-static void		menu_scene_open_order(t_gen *d, t_mlx *m)
+void			menu_scene_open_order(t_gen *d, t_mlx *m)
 {
 	t_flst	*lst;
 	int		total;
@@ -57,7 +57,7 @@ void			menu_scene_btn_open(void *gen, void *mlx)
 	d = gen;
 	m = mlx;
 	if (!d->sc)
-		ft_printf("scene btn new\n");
+		m->menu.next = LOAD_SCENE_ADD;
 	else
 		menu_scene_open_order(d, m);
 }

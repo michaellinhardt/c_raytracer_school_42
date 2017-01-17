@@ -35,7 +35,7 @@ int			itow(t_mlx *m, void *img, int x, int y);
 void		scene_img_load(t_gen *d, t_mlx *m);
 void		scene_img_init(t_gen *d, t_mlx *m);
 void		anim_init(t_img *img, enum e_anim anim);
-void		scene_btn(t_gen *d, t_mlx *m, t_img *img);
+void		scene_btn(t_gen *d, t_mlx *m, t_img *img, t_menu *e);
 void		scene_build(t_gen *d, t_mlx *m, t_img *lay, t_img *img);
 void		menu_draw_actif(t_mlx *m, t_img *img);
 void		scene(t_gen *d, t_mlx *m);
@@ -76,11 +76,14 @@ void		menu_load_btn_prev(void *gen, void *mlx);
 void		menu_load_btn_open(void *gen, void *mlx);
 void		menu_load_clic(t_gen *d, t_mlx *m, t_flst *elem);
 
+void		menu_edit_mod_btn_open(void *gen, void *mlx);
+void		menu_edit_switch_btn_open(void *gen, void *mlx);
 void		menu_edit_add_btn_open(void *gen, void *mlx);
 
 void		menu_scene_add_btn_ok(void *gen, void *mlx);
 void		menu_scene_btn_open(void *gen, void *mlx);
 void		menu_scene_clic(t_gen *d, t_mlx *m, t_flst *elem);
+void		menu_scene_open_order(t_gen *d, t_mlx *m);
 
 void		menu_object_btn_open(void *gen, void *mlx);
 void		menu_object_clic(t_gen *d, t_mlx *m, t_flst *elem);
