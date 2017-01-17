@@ -42,7 +42,8 @@ static void		input_add_char(t_get *g, int i, int j)
 {
 	int		copied;
 
-	if (g->i == g->size_max - 1 || g->i == GET_SIZE_MAX - 1)
+	if (g->i == g->size_max - 1 || g->i == GET_SIZE_MAX - 1
+	|| (int)ft_strlen(g->data) == g->size_max - 1)
 		return ;
 	copied = 0;
 	while (g->data[++i])

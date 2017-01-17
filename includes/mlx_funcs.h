@@ -10,7 +10,9 @@ int			keyp_hook(int key, t_gen *d);
 int			mousep_hook(int btn, int x, int y, t_gen *d);
 int			mouser_hook(int btn, int x, int y, t_gen *d);
 
-void		notif(t_mlx *m, char *msg, enum e_notif type, t_notif *n);
+void		notif(t_mlx *m, enum e_notif type, char *msg);
+void		notif_draw(t_mlx *m, t_notif *lst, t_notif *next);
+void		scene_text_notif(t_mlx *m, t_notif *lst);
 
 void		mouse_release(t_gen *d, int btn, int x, int y);
 int			mouse_release_img(t_gen *d, int btn, int x, int y);

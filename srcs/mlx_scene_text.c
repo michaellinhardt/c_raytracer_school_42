@@ -6,5 +6,6 @@ void			scene_text(t_gen *d, t_mlx *m)
 	{
 		scene_text_menu(d, m);
 		scene_text_input(m, (t_get *)NULL, -1);
+		scene_text_notif(m, m->notif);
 	}
 }
