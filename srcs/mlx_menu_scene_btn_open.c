@@ -32,6 +32,7 @@ static void		menu_scene_open_order(t_gen *d, t_mlx *m)
 {
 	t_flst	*lst;
 	int		total;
+	char	*itoaa;
 
 	menu_list_free(m, m->flst, (t_flst *)NULL);
 	m->flst = NULL;
@@ -40,6 +41,9 @@ static void		menu_scene_open_order(t_gen *d, t_mlx *m)
 	total = 0;
 	while (++total && lst && (lst->id = total))
 		lst = lst->n;
+	itoaa = ft_itoa(total - 1);
+	notif2(m, N_NORMAL, itoaa, " scene loaded in the menu");
+	ft_strdel(&itoaa);
 	m->total_file = total;
 	m->menu.id = LOAD_SCENE;
 }

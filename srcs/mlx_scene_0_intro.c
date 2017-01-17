@@ -20,5 +20,4 @@ void			scene_0_skip(void *gen, void *mlx)
 		m->scene_img[0][0].anim.tempo = 7;
 	}
 	(void)gen;
-	(void)mlx;
 }

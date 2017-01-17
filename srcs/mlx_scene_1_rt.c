@@ -28,6 +28,7 @@ static void		draw_rt(t_gen *d, t_mlx *m)
 	{
 		m->scene_img[1][ID_IMG_MENU_CADRE].fade_min = MENU_FADE_CADRE_INTERFACE;
 		raytracing(d);
+		notif2(m, N_NORMAL, d->sc->name, ": scene generated!");
 		ft_bzero(&m->input, sizeof(t_input));
 		d->sc->data = ft_strnew(len);
 		ft_memcpy(d->sc->data, d->data, len);
