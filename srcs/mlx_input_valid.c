@@ -3,8 +3,8 @@
 
 static void		input_valid_string(t_mlx *m, t_get *g)
 {
-	ft_strdel(&g->target.ptr_str);
-	g->target.ptr_str = ft_strdup(g->data);
+	ft_strdel(&(*g->target.ptr_str));
+	*g->target.ptr_str = ft_strdup(g->data);
 	input_set_focus(m, (t_get *)NULL, -1, -1);
 }
 

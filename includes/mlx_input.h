@@ -52,9 +52,9 @@ enum	e_get_action {
 
 typedef struct					s_get_target
 {
-	double						*ptr_double;
-	int							*ptr_int;
-	char						*ptr_str;
+	double						**ptr_double;
+	int							**ptr_int;
+	char						**ptr_str;
 }								t_get_target;
 
 typedef struct					s_get

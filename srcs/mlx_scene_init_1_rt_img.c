@@ -22,7 +22,7 @@ static void			scene_init_1_rt_input(t_mlx *m, t_get *g)
 	g->menu = LOAD_SCENE_ADD;
 	g->mode = MODE_STRING_FILE;
 	m->menu.new_scene = ft_strdup(TXT_SCENE_ADD_NAME_DEFAUT);
-	g->target.ptr_str = m->menu.new_scene;
+	g->target.ptr_str = &m->menu.new_scene;
 	g->box.pos[0] = 541;
 	g->box.pos[1] = 483;
 	g->size_min = 3;
