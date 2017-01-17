@@ -25,13 +25,15 @@ static void		input_catch_char_double(t_mlx *m, t_get *g, char c)
 	char			*msg;
 	static char		str[2] = " \0";
 
-	if (c == '.')
-		c = ',';
-	if (ft_isdigit(c) || c == ',')
+	if (c == ',')
+		c = '.';
+	if (ft_isdigit(c) || (c == '.' && !ft_strchr(g->data, '.')))
 	{
 		g->action = GET_CHAR;
 		g->c = c;
 	}
+	else if (c == '.' && ft_strchr(g->data, '.'))
+		notif(m, N_WARNING, "there is already a . in the input");
 	else
 	{
 		str[0] = c;
