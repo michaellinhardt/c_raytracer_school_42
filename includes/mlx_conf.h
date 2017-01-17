@@ -36,4 +36,8 @@
 # define TXT_SCENE_ADD_NAME "Nom de la nouvelle scene:"
 # define TXT_SCENE_ADD_NAME_DEFAUT "nouvelle_scene"
 
+# define TXT_SCENE_MOD_NAME "Nom de la scene:"
+# define TXT_SCENE_MOD_AMB1 "Ambiance 1:"
+# define TXT_SCENE_MOD_AMB2 "Ambiance 2:"
+
 #endif

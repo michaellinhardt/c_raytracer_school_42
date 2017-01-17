@@ -1,9 +1,9 @@
 #ifndef MLX_CONF_IMG_H
 # define MLX_CONF_IMG_H
 
-# define IMG_MENU_CADRE 0
-# define IMG_MENU_CADRE_LIGHTNING 1
-# define IMG_MENU_CADRE_LOGO 2
+# define IMENU_CADRE 0
+# define IMENU_CADRE_LIGHTNING 1
+# define IMENU_CADRE_LOGO 2
 
 # define IB_LOAD 3
 # define IB_LOAD_OVER 4
@@ -59,7 +59,7 @@
 # define IB_E_ADD_OVER 43
 # define IB_E_ADD_CLICK 44
 
-# define IMG_MENU_ADD_SCENE_BOX 45
+# define IMENU_ADD_SCENE_BOX 45
 
 # define IB_SCENE_ADD_OK 46
 # define IB_SCENE_ADD_OK_OVER 47
@@ -74,6 +74,8 @@
 # define IB_E_SWITCH_OVER 54
 # define IB_E_SWITCH_CLICK 55
 
-# define ID_MAX_AUTO_INIT 51
+# define IMENU_EDIT_SCENE_BOX 56
+
+# define ID_MAX_AUTO_INIT 56
 
 #endif

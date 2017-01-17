@@ -27,13 +27,19 @@ static void			scene_init_1_rt_input(t_mlx *m, t_get *g)
 	g->box.pos[1] = 483;
 	g->size_min = 3;
 	g->size_max = 59;
+
+	g = &m->get[ID_INPUT_MOD_SCENE_NAME];
+	g->menu = LOAD_SCENE_EDIT;
+	g->mode = MODE_STRING_FILE;
+	g->target.ptr_str = NULL;
+	g->box.pos[0] = m->scene_img[1][IMENU_EDIT_SCENE_BOX].pos[0] + 15;
+	g->box.pos[1] = m->scene_img[1][IMENU_EDIT_SCENE_BOX].pos[1] + 30;
+	g->size_min = 3;
+	g->size_max = 59;
 }
 
 void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 {
-
-	scene_init_1_rt_input(m, (t_get *)NULL);
-	scene_init_1_rt_input_area(m, (t_get *)NULL, -1);
 
 	img = &m->getcursor;
 	img->width = 2;
@@ -45,19 +51,19 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	img->fade_min = 1;
 	img->fade_max = 255;
 
-	img = &m->scene_img[1][IMG_MENU_CADRE];
+	img = &m->scene_img[1][IMENU_CADRE];
 	img->fade_min = 110;
 	img->set_alpha = 0xFF000000;
 	set_type_action(img, MENU, 0, NULL);
 
-	img = &m->scene_img[1][IMG_MENU_CADRE_LIGHTNING];
+	img = &m->scene_img[1][IMENU_CADRE_LIGHTNING];
 	img->pos[0] = (m->winx / 2) - (img->width / 2);
 	img->pos[1] = 4;
 	img->fade_min = 80;
 	img->set_alpha = -1;
 	set_type_action(img, MENU, 0, NULL);
 
-	img = &m->scene_img[1][IMG_MENU_CADRE_LOGO];
+	img = &m->scene_img[1][IMENU_CADRE_LOGO];
 	img->pos[0] = (m->winx / 2) - (img->width / 2);
 	img->pos[1] = 22;
 	img->fade_min = 100;
@@ -278,7 +284,7 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	img->set_alpha = -1;
 	set_type_action(img, DISABLED, 0, NULL);
 
-	img = &m->scene_img[1][IMG_MENU_ADD_SCENE_BOX];
+	img = &m->scene_img[1][IMENU_ADD_SCENE_BOX];
 	img->pos[0] = (m->winx / 2) - (img->width / 2);
 	img->pos[1] = (m->winy / 2) - (img->heigh / 2);
 	img->menu = LOAD_SCENE_ADD;
@@ -286,11 +292,19 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	img->set_alpha = -1;
 	set_type_action(img, MENU, 0, NULL);
 
+	img = &m->scene_img[1][IMENU_EDIT_SCENE_BOX];
+	img->pos[0] = (m->winx / 2) - (img->width / 2);
+	img->pos[1] = (m->winy / 2) - (img->heigh / 2);
+	img->menu = LOAD_SCENE_EDIT;
+	img->fade_min = MENU_FADE_ADD_SCENE;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
+
 	img = &m->scene_img[1][IB_SCENE_ADD_OK];
-	img->pos[0] = m->scene_img[1][IMG_MENU_ADD_SCENE_BOX].pos[0]
-	+ m->scene_img[1][IMG_MENU_ADD_SCENE_BOX].width - img->width - 5;
-	img->pos[1] = m->scene_img[1][IMG_MENU_ADD_SCENE_BOX].pos[1]
-	+ m->scene_img[1][IMG_MENU_ADD_SCENE_BOX].heigh - img->heigh - 5;
+	img->pos[0] = m->scene_img[1][IMENU_ADD_SCENE_BOX].pos[0]
+	+ m->scene_img[1][IMENU_ADD_SCENE_BOX].width - img->width - 5;
+	img->pos[1] = m->scene_img[1][IMENU_ADD_SCENE_BOX].pos[1]
+	+ m->scene_img[1][IMENU_ADD_SCENE_BOX].heigh - img->heigh - 5;
 	img->menu = LOAD_SCENE_ADD;
 	img->fade_min = 40;
 	img->set_alpha = -1;
@@ -299,4 +313,8 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 	set_over_click(m, img
 		, IB_SCENE_ADD_OK_OVER, IB_SCENE_ADD_OK_CLICK);
 
+
+
+	scene_init_1_rt_input(m, (t_get *)NULL);
+	scene_init_1_rt_input_area(m, (t_get *)NULL, -1);
 }

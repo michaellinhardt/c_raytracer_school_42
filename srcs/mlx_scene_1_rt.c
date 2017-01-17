@@ -26,7 +26,7 @@ static void		draw_rt(t_gen *d, t_mlx *m)
 		anim_init(&m->scene_img[1][IMG_LOADING], FADE_IN);
 	else if (m->menu.loading == MENU_LOAD_WAIT_BEFORE_LOAD)
 	{
-		m->scene_img[1][IMG_MENU_CADRE].fade_min = MENU_FADE_CADRE_INTERFACE;
+		m->scene_img[1][IMENU_CADRE].fade_min = MENU_FADE_CADRE_INTERFACE;
 		raytracing(d);
 		notif2(m, N_NORMAL, d->sc->name, ": scene generated!");
 		ft_bzero(&m->input, sizeof(t_input));

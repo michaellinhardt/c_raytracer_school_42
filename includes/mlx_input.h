@@ -80,5 +80,6 @@ typedef struct					s_get
 }								t_get;
 
 # define ID_INPUT_ADD_SCENE_NAME 0
+# define ID_INPUT_MOD_SCENE_NAME 1
 
 #endif

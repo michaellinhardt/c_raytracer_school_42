@@ -6,6 +6,8 @@ static void		menu_draw_actif_sub(t_mlx *m, t_img *img)
 		img = &m->scene_img[1][IB_E_ADD];
 	else if (m->menu.id == LOAD_SCENE)
 		img = &m->scene_img[1][IB_E_SWITCH];
+	else if (m->menu.id == LOAD_SCENE_EDIT)
+		img = &m->scene_img[1][IB_E_MOD];
 	else
 		return ;
 	m->scene_img[1][IB_SELECTED].pos[0] = img->pos[0] - 3;
