@@ -7,6 +7,5 @@ void			menu_edit_del_btn_open(void *gen, void *mlx)
 
 	m = mlx;
 	d = gen;
-	ft_printf("DEL btn clic\n");
-	// m->menu.next = LOAD_SCENE_DEL;
+	m->menu.next = LOAD_SCENE_DEL;
 }
