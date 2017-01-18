@@ -38,6 +38,15 @@ static void		scene_text_scene_add(t_mlx *m, int c)
 	, c, TXT_SCENE_ADD_NAME);
 }
 
+static void		scene_text_scene_del(t_mlx *m, int c)
+{
+
+	mlx_string_put(m->mlx, m->win
+	, m->scene_img[1][IMENU_EDIT_SCENE_BOX_DEL].pos[0] + 20
+	, m->scene_img[1][IMENU_EDIT_SCENE_BOX_DEL].pos[1] + 38
+	, c, TXT_SCENE_DEL_VALID);
+}
+
 static void		scene_text_scene_mod(t_mlx *m, int c)
 {
 	mlx_string_put(m->mlx, m->win
@@ -62,5 +71,7 @@ void			scene_text_menu(t_gen *d, t_mlx *m)
 		scene_text_scene_add(m, MENU_TEXT_COLOR);
 	else if (m->menu.id == LOAD_SCENE_EDIT)
 		scene_text_scene_mod(m, MENU_TEXT_COLOR);
+	else if (m->menu.id == LOAD_SCENE_DEL)
+		scene_text_scene_del(m, MENU_TEXT_COLOR);
 	(void)d;
 }

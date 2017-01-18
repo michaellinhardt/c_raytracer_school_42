@@ -80,6 +80,16 @@
 # define IB_E_DEL_OVER 58
 # define IB_E_DEL_CLICK 59
 
-# define ID_MAX_AUTO_INIT 59
+# define IMENU_EDIT_SCENE_BOX_DEL 60
+
+# define IB_SCENE_DEL_OK 61
+# define IB_SCENE_DEL_OK_OVER 62
+# define IB_SCENE_DEL_OK_CLICK 63
+
+# define IB_SCENE_DEL_CANCEL 64
+# define IB_SCENE_DEL_CANCEL_OVER 65
+# define IB_SCENE_DEL_CANCEL_CLICK 66
+
+# define ID_MAX_AUTO_INIT 67
 
 #endif

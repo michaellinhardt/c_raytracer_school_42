@@ -40,4 +40,6 @@
 # define TXT_SCENE_MOD_AMB1 "Ambiance 1:"
 # define TXT_SCENE_MOD_AMB2 "Ambiance 2:"
 
+# define TXT_SCENE_DEL_VALID "Do you really want to delete this scene ?"
+
 #endif

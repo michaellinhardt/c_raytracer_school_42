@@ -79,7 +79,10 @@ void		menu_load_clic(t_gen *d, t_mlx *m, t_flst *elem);
 void		menu_edit_mod_btn_open(void *gen, void *mlx);
 void		menu_edit_switch_btn_open(void *gen, void *mlx);
 void		menu_edit_add_btn_open(void *gen, void *mlx);
+
 void		menu_edit_del_btn_open(void *gen, void *mlx);
+void		menu_scene_del_btn_ok(void *gen, void *mlx);
+void		menu_scene_del_btn_cancel(void *gen, void *mlx);
 
 void		menu_scene_add_btn_ok(void *gen, void *mlx);
 void		menu_scene_btn_open(void *gen, void *mlx);
