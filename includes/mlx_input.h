@@ -34,6 +34,7 @@
 
 enum	e_get_inputmode {
 	MODE_DOUBLE,
+	MODE_DOUBLE_BUT_INT,
 	MODE_INT,
 	MODE_STRING,
 	MODE_STRING_FILE
@@ -65,7 +66,9 @@ typedef struct					s_get
 	enum e_get_status			status;
 	enum e_get_action			action;
 	enum e_get_inputmode		mode;
-	void						(*send)(void *gen, void *mlx);
+	void						(*draw)(void *gen, void *mlx, void *get);
+	void						(*init)(void *gen, void *mlx, void *get);
+	void						(*send)(void *gen, void *mlx, void *get);
 	struct s_img				box;
 	int							size_min;
 	int							size_max;

@@ -86,7 +86,9 @@ void			input_catch_char(t_gen *d, t_mlx *m, t_get *g, int key)
 		}
 		if (g->mode == MODE_DOUBLE)
 			input_catch_char_double(m, g, c);
-		if (g->mode == MODE_INT)
+		else if (g->mode == MODE_DOUBLE_BUT_INT)
+			input_catch_char_int(m, g, c);
+		else if (g->mode == MODE_INT)
 			input_catch_char_int(m, g, c);
 		else if (g->mode == MODE_STRING)
 			input_catch_char_string_file(m, g, c);

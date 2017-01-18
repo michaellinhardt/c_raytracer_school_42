@@ -47,7 +47,7 @@ void		cursor_move_left_right(t_mlx *m, t_get *g, int reset);
 void		input_delete_char(t_get *g, int pos, int reset);
 void		input_catch_char(t_gen *d, t_mlx *m, t_get *g, int key);
 void		input_valid(t_gen *d, t_mlx *m, t_get *g);
-void		input_set_focus(t_mlx *m, t_get *get, int tar, int i);
+void		input_set_focus(t_gen *d, t_mlx *m, t_get *get, int tar);
 
 t_img		*layer(t_mlx *m, int id, int reset);
 void		layer_add(t_mlx *m, t_img *l, t_img *i);
@@ -55,7 +55,7 @@ void		layer_set_alpha(t_img *img);
 
 void		scene_init_0_intro(t_mlx *m, t_img *img);
 void		scene_init_1_rt(t_gen *d, t_mlx *m, t_img *img);
-void		scene_init_1_rt_img(t_mlx *m, t_img *img);
+void		scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img);
 void		scene_init_1_rt_menu(t_mlx *m);
 
 void		set_type_action(t_img *img, enum e_status status, int btn

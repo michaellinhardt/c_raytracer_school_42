@@ -16,7 +16,7 @@ static void			scene_init_1_rt_input_area(t_mlx *m, t_get *g, int i)
 	}
 }
 
-static void			scene_init_1_rt_input(t_mlx *m, t_get *g)
+static void			scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g)
 {
 	g = &m->get[ID_INPUT_ADD_SCENE_NAME];
 	g->menu = LOAD_SCENE_ADD;
@@ -38,7 +38,7 @@ static void			scene_init_1_rt_input(t_mlx *m, t_get *g)
 
 	g = &m->get[ID_INPUT_SCENE_AMBIANCE1];
 	g->menu = LOAD_SCENE_EDIT;
-	g->mode = MODE_DOUBLE;
+	g->mode = MODE_DOUBLE_BUT_INT;
 	g->box.pos[0] = m->get[ID_INPUT_MOD_SCENE_NAME].box.pos[0];
 	g->box.pos[1] = m->get[ID_INPUT_MOD_SCENE_NAME].box.pos[1]
 	+ INPUT_SIZE_CHAR_Y * 2 + 15;
@@ -52,9 +52,11 @@ static void			scene_init_1_rt_input(t_mlx *m, t_get *g)
 	g->box.pos[1] = m->get[ID_INPUT_SCENE_AMBIANCE1].box.pos[1];
 	g->size_min = 3;
 	g->size_max = 25;
+
+	(void)d;
 }
 
-void			scene_init_1_rt_img(t_mlx *m, t_img *img)
+void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 {
 
 	img = &m->getcursor;
@@ -338,6 +340,6 @@ void			scene_init_1_rt_img(t_mlx *m, t_img *img)
 
 
 
-	scene_init_1_rt_input(m, (t_get *)NULL);
+	scene_init_1_rt_input(d, m, (t_get *)NULL);
 	scene_init_1_rt_input_area(m, (t_get *)NULL, -1);
 }

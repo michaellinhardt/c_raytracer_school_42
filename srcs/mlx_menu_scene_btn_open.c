@@ -61,5 +61,6 @@ void			menu_scene_btn_open(void *gen, void *mlx)
 	if (!d->sc)
 		m->menu.next = LOAD_SCENE_ADD;
 	else
-		menu_scene_open_order(d, m);
+		menu_edit_mod_btn_open(gen, mlx);
+		// menu_scene_open_order(d, m);
 }

@@ -62,7 +62,7 @@ void			scene_init_1_rt(t_gen *d, t_mlx *m, t_img *img)
 		img->ptr[img->i / 4] = MENU_MODALE_COLOR;
 		img->str[img->i + 3] = (unsigned char)MENU_MODALE_FADE;
 	}
-	scene_init_1_rt_img(m, img);
+	scene_init_1_rt_img(d, m, img);
 	scene_init_1_rt_menu(m);
 	m->menu.draw = 1;
 	menu_load_btn_open((void *)d, (void *)m);

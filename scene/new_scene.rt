@@ -1,0 +1,29 @@
+scene {
+	name { new_scene }
+	camera {pos{890; 525; 0}, dir{0; 1; 2}}
+	spot {
+		name {spot}
+			type {point}
+			camera {pos{890; 525; 0}, dir{1 ; 1; 5}}
+			color { 0xffffff}
+	}
+	ambiance { 0x452d6e; 52 }
+	objects {
+		simple_obj {
+			name { Fond cyan }
+			camera {pos{870 ; 540 ; 50}, dir{0 ; 0 ; -1 }}
+			type { plan }
+			size { 1. ; 0.0 ; 0 }
+			effect { 0 ; 0 ; 0 ; 0; 0; 0}
+			color { 0x0077ff }
+		}
+		simple_obj {
+			name { Sphere rouge }
+			camera {pos{890 ; 525 ; 35}, dir{0 ; 0 ; -1 }}
+			type { sphere }
+			size { 3 ; 0.0 ; 0 }
+			effect { 0 ; 0 ; 0 ; 0 ; 0 ; 0}
+			color { 0xff0000 }
+		}
+	}
+}
