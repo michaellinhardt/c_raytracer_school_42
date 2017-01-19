@@ -36,8 +36,8 @@ static void		scene_btn_sub(t_gen *d, t_mlx *m, t_menu *e)
 
 void			scene_btn(t_gen *d, t_mlx *m, t_img *img, t_menu *e)
 {
-	s(m, (!e->scene || !e->obj ? 1 : 0), IB_OBJECT_OFF, IB_OBJECT);
-	s(m, (!e->scene || !e->spot ? 1 : 0), IB_SPOT_OFF, IB_SPOT);
+	s(m, (!e->scene ? 1 : 0), IB_OBJECT_OFF, IB_OBJECT);
+	s(m, (!e->scene ? 1 : 0), IB_SPOT_OFF, IB_SPOT);
 	s(m, (!e->scene ? 1 : 0), IB_CAMERA_OFF, IB_CAMERA);
 	scene_btn_sub(d, m, e);
 	(void)d;
