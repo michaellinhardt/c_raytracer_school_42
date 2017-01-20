@@ -17,6 +17,9 @@ void			menu_edit_mod_btn_open(void *gen, void *mlx)
 	else if (m->menu.id >= LOAD_OBJECT && m->menu.id < LOAD_SPOT)
 	{
 		m->get[ID_INPUT_OBJECT_NAME].target.ptr_str = &m->menu.obj->name;
+		m->get[ID_INPUT_OBJECT_POS1].target.ptr_double = &m->menu.obj->pos[0];
+		m->get[ID_INPUT_OBJECT_POS2].target.ptr_double = &m->menu.obj->pos[1];
+		m->get[ID_INPUT_OBJECT_POS3].target.ptr_double = &m->menu.obj->pos[2];
 		m->menu.next = LOAD_OBJECT_EDIT;
 	}
 }

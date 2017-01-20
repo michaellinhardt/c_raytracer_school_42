@@ -43,5 +43,11 @@
 # define TXT_SCENE_DEL_VALID "Do you really want to delete this scene ?"
 
 # define TXT_OBJECT_MOD_NAME "Object name:"
+# define TXT_OBJECT_MOD_POS1 "Positon x:"
+# define TXT_OBJECT_MOD_POS2 "Positon y:"
+# define TXT_OBJECT_MOD_POS3 "Positon z:"
+# define TXT_OBJECT_MOD_POS4 "Direction x:"
+# define TXT_OBJECT_MOD_POS5 "Direction y:"
+# define TXT_OBJECT_MOD_POS6 "Direction z:"
 
 #endif

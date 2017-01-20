@@ -93,6 +93,13 @@ typedef struct					s_get
 # define ID_INPUT_MOD_SCENE_NAME 1
 # define ID_INPUT_SCENE_AMBIANCE1 2
 # define ID_INPUT_SCENE_AMBIANCE2 3
+
 # define ID_INPUT_OBJECT_NAME 4
+# define ID_INPUT_OBJECT_POS1 5
+# define ID_INPUT_OBJECT_POS2 6
+# define ID_INPUT_OBJECT_POS3 7
+# define ID_INPUT_OBJECT_POS4 8
+# define ID_INPUT_OBJECT_POS5 9
+# define ID_INPUT_OBJECT_POS6 10
 
 #endif

@@ -66,6 +66,62 @@ static void			scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g)
 	g->size_min = 3;
 	g->size_max = 59;
 
+	g = &m->get[ID_INPUT_OBJECT_POS1];
+	g->menu = LOAD_OBJECT_EDIT;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->get[ID_INPUT_OBJECT_NAME].box.pos[0];
+	g->box.pos[1] = m->get[ID_INPUT_OBJECT_NAME].box.pos[1] + 6
+	+ m->get[ID_INPUT_OBJECT_NAME].box.heigh * 2 + INPUT_SIZE_CHAR_Y * 2;
+	g->name = ft_strdup(TXT_OBJECT_MOD_POS1);
+	g->size_min = 3;
+	g->size_max = 17;
+
+	g = &m->get[ID_INPUT_OBJECT_POS2];
+	g->menu = LOAD_OBJECT_EDIT;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->get[ID_INPUT_OBJECT_POS1].box.pos[0] + 330;
+	g->box.pos[1] = m->get[ID_INPUT_OBJECT_POS1].box.pos[1];
+	g->name = ft_strdup(TXT_OBJECT_MOD_POS2);
+	g->size_min = 1;
+	g->size_max = 17;
+
+	g = &m->get[ID_INPUT_OBJECT_POS3];
+	g->menu = LOAD_OBJECT_EDIT;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->get[ID_INPUT_OBJECT_POS2].box.pos[0] + 330;
+	g->box.pos[1] = m->get[ID_INPUT_OBJECT_POS2].box.pos[1];
+	g->name = ft_strdup(TXT_OBJECT_MOD_POS3);
+	g->size_min = 1;
+	g->size_max = 17;
+
+	g = &m->get[ID_INPUT_OBJECT_POS4];
+	g->menu = LOAD_OBJECT_EDIT;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->get[ID_INPUT_OBJECT_NAME].box.pos[0];
+	g->box.pos[1] = m->get[ID_INPUT_OBJECT_NAME].box.pos[1] + 6
+	+ m->get[ID_INPUT_OBJECT_NAME].box.heigh * 2 + INPUT_SIZE_CHAR_Y * 2;
+	g->name = ft_strdup(TXT_OBJECT_MOD_POS1);
+	g->size_min = 3;
+	g->size_max = 17;
+
+	g = &m->get[ID_INPUT_OBJECT_POS5];
+	g->menu = LOAD_OBJECT_EDIT;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->get[ID_INPUT_OBJECT_POS1].box.pos[0] + 330;
+	g->box.pos[1] = m->get[ID_INPUT_OBJECT_POS1].box.pos[1];
+	g->name = ft_strdup(TXT_OBJECT_MOD_POS2);
+	g->size_min = 1;
+	g->size_max = 17;
+
+	g = &m->get[ID_INPUT_OBJECT_POS6];
+	g->menu = LOAD_OBJECT_EDIT;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->get[ID_INPUT_OBJECT_POS2].box.pos[0] + 330;
+	g->box.pos[1] = m->get[ID_INPUT_OBJECT_POS2].box.pos[1];
+	g->name = ft_strdup(TXT_OBJECT_MOD_POS3);
+	g->size_min = 1;
+	g->size_max = 17;w
+
 	(void)d;
 }
 
