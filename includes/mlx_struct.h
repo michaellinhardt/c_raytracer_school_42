@@ -9,7 +9,9 @@ enum	e_menu {
 	LOAD_SCENE_EDIT,
 	LOAD_SCENE_ADD,
 	LOAD_OBJECT,
+	LOAD_OBJECT_EDIT,
 	LOAD_SPOT,
+	LOAD_SPOT_EDIT,
 	LOAD_CAMERA
 };
 
@@ -122,8 +124,8 @@ typedef struct		s_menu
 	enum e_menu		next;
 	char			*new_scene;
 	struct s_scene	*scene;
-	struct s_scene	*spot;
-	struct s_scene	*obj;
+	struct s_spot	*spot;
+	struct s_obj	*obj;
 	int				loading;
 }					t_menu;
 

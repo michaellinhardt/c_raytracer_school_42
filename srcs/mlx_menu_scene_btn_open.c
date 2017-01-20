@@ -61,5 +61,8 @@ void			menu_scene_btn_open(void *gen, void *mlx)
 	if (!d->sc)
 		m->menu.next = LOAD_SCENE_ADD;
 	else
+	{
+		m->menu.id = LOAD_SCENE;
 		menu_edit_mod_btn_open(gen, mlx);
+	}
 }

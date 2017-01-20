@@ -26,6 +26,10 @@ int		keyr_hook(int key, t_gen *d)
 					menu_scene_open_order(d, &d->mlx);
 				else if (d->mlx.menu.id == LOAD_FILE)
 					menu_load_btn_open(d, &d->mlx);
+				else if (d->mlx.menu.id == LOAD_OBJECT)
+					menu_object_btn_open(d, &d->mlx);
+				else if (d->mlx.menu.id == LOAD_SPOT)
+					menu_spot_btn_open(d, &d->mlx);
 		}
 		(key == 123) ? d->mlx.input.key.left = 0 : 0;
 		(key == 124) ? d->mlx.input.key.right = 0 : 0;

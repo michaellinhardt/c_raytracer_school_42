@@ -30,6 +30,31 @@ static void		input_valid_int(t_gen *d, t_mlx *m, t_get *g)
 	input_set_focus(d, m, (t_get *)NULL, -1);
 }
 
+static int		hexa_to_dec(char c)
+{
+	if (ft_isdigit(c))
+		return (c - '0');
+	else if (ft_isalpha(c))
+	{
+		if (c >= 'a' && c <= 'f')
+			return (10 + c - 'a');
+		if (c >= 'A' && c <= 'F')
+			return (10 + c - 'A');
+	}
+	return (0);
+}
+
+static void		input_valid_hexa_to_double(t_gen *d, t_mlx *m, t_get *g, int i)
+{
+	*g->target.ptr_double = 0;
+	while (--i > -1)
+		*g->target.ptr_double = *g->target.ptr_double
+						+ hexa_to_dec(g->data[i]) * (pow(16, 5 - i));
+	ft_printf("%X\n", (int)*g->target.ptr_double);
+	notif2(m, N_NORMAL, NOTIF_INPUT_SAVE, g->data);
+	input_set_focus(d, m, (t_get *)NULL, -1);
+}
+
 void			input_valid(t_gen *d, t_mlx *m, t_get *g)
 {
 	if (g->mode == MODE_STRING_FILE)
@@ -42,6 +67,8 @@ void			input_valid(t_gen *d, t_mlx *m, t_get *g)
 		input_valid_double_but_int(d, m, g);
 	else if (g->mode == MODE_INT)
 		input_valid_int(d, m, g);
+	else if (g->mode == MODE_HEXA_TO_DOUBLE)
+		input_valid_hexa_to_double(d, m, g, 6);
 	if (g->send)
 		g->send(d, m, g);
 	(void)m;

@@ -19,7 +19,7 @@ int				mouse_release_flst(t_gen *d, t_flst *elem, int x, int y)
 	t_img	*img;
 
 	if (d->mlx.scene == RT && d->mlx.flst && d->mlx.menu.draw == 1
-	&& (d->mlx.menu.id >= LOAD_FILE || d->mlx.menu.id <= LOAD_SPOT))
+	&& (d->mlx.menu.id >= LOAD_FILE || d->mlx.menu.id <= LOAD_CAMERA))
 	{
 		i = MENU_LOAD_X_MAX * MENU_LOAD_Y_MAX;
 		img = &d->mlx.scene_img[d->mlx.scene][IMG_PREVIEW_CLIC];
@@ -29,8 +29,10 @@ int				mouse_release_flst(t_gen *d, t_flst *elem, int x, int y)
 			{
 				img->pos[0] = elem->top[0];
 				img->pos[1] = elem->top[1];
-				layer_add(&d->mlx, layer(&d->mlx, 3, (d->mlx.menu.draw *= -1)), img);
+				layer_add(&d->mlx, layer(&d->mlx, 3, 0), img);
 				call_clic(d, &d->mlx, elem, d->mlx.menu.id);
+				if (d->mlx.menu.id == LOAD_FILE)
+					d->mlx.menu.draw = -1;
 				return (1);
 			}
 			elem = elem->n;

@@ -64,6 +64,26 @@ static void		input_catch_char_int(t_mlx *m, t_get *g, char c)
 	(void)m;
 }
 
+static void		input_catch_char_hexa(t_mlx *m, t_get *g, char c)
+{
+	char			*msg;
+	static char		str[2] = " \0";
+
+	if (ft_isdigit(c) || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f'))
+	{
+		g->action = GET_CHAR;
+		g->c = c;
+	}
+	else
+	{
+		str[0] = c;
+		msg = ft_strjoin(str, " is invalid char for this input");
+		notif(m, N_WARNING, msg);
+		ft_strdel(&msg);
+	}
+	(void)m;
+}
+
 void			input_catch_char(t_gen *d, t_mlx *m, t_get *g, int key)
 {
 	char		c;
@@ -90,6 +110,8 @@ void			input_catch_char(t_gen *d, t_mlx *m, t_get *g, int key)
 			input_catch_char_int(m, g, c);
 		else if (g->mode == MODE_INT)
 			input_catch_char_int(m, g, c);
+		else if (g->mode == MODE_HEXA || g->mode == MODE_HEXA_TO_DOUBLE)
+			input_catch_char_hexa(m, g, c);
 		else if (g->mode == MODE_STRING)
 			input_catch_char_string_file(m, g, c);
 		else if (g->mode == MODE_STRING_FILE)

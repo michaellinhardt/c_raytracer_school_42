@@ -24,11 +24,11 @@ void			menu_draw_actif(t_mlx *m, t_img *img)
 		return ;
 	else if (m->menu.id == LOAD_FILE)
 		img = &m->scene_img[1][IB_LOAD];
-	else if (m->menu.id >= LOAD_SCENE)
+	else if (m->menu.id >= LOAD_SCENE && m->menu.id < LOAD_OBJECT)
 		img = &m->scene_img[1][IB_SCENE];
-	else if (m->menu.id == LOAD_OBJECT)
+	else if (m->menu.id >= LOAD_OBJECT && m->menu.id < LOAD_SPOT)
 		img = &m->scene_img[1][IB_OBJECT];
-	else if (m->menu.id == LOAD_SPOT)
+	else if (m->menu.id >= LOAD_SPOT && m->menu.id < LOAD_CAMERA)
 		img = &m->scene_img[1][IB_SPOT];
 	else if (m->menu.id == LOAD_CAMERA)
 		img = &m->scene_img[1][IB_CAMERA];
