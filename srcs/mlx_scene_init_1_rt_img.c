@@ -330,6 +330,14 @@ void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 	set_over_click(m, img
 		, IB_SCENE_ADD_OK_OVER, IB_SCENE_ADD_OK_CLICK);
 
+	img = &m->scene_img[1][IMENU_EDIT_OBJECT_BOX];
+	img->pos[0] = (m->winx / 2) - (img->width / 2);
+	img->pos[1] = (m->winy / 2) - (img->heigh / 2);
+	img->menu = LOAD_OBJECT_EDIT;
+	img->fade_min = MENU_FADE_ADD_SCENE;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
+
 	img = &m->scene_img[1][IMENU_EDIT_SCENE_BOX];
 	img->pos[0] = (m->winx / 2) - (img->width / 2);
 	img->pos[1] = (m->winy / 2) - (img->heigh / 2);

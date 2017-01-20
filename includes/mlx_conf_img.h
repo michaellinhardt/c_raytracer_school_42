@@ -90,6 +90,8 @@
 # define IB_SCENE_DEL_CANCEL_OVER 65
 # define IB_SCENE_DEL_CANCEL_CLICK 66
 
+# define IMENU_EDIT_OBJECT_BOX 67
+
 # define ID_MAX_AUTO_INIT 67
 
 #endif

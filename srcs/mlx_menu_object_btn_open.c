@@ -44,7 +44,6 @@ static void		menu_object_open_order(t_gen *d, t_mlx *m)
 	m->menu.id = LOAD_OBJECT;
 }
 
-
 void			menu_object_btn_open(void *gen, void *mlx)
 {
 	t_gen	*d;
