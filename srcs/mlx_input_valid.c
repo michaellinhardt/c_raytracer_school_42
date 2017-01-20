@@ -55,9 +55,25 @@ static void		input_valid_hexa_to_double(t_gen *d, t_mlx *m, t_get *g, int i)
 	input_set_focus(d, m, (t_get *)NULL, -1);
 }
 
+static int		input_size_min(t_mlx *m, t_get *g)
+{
+	char		*sizemin;
+
+	if ((int)ft_strlen(g->data) < g->size_min)
+	{
+		sizemin = ft_itoa(g->size_min);
+		notif2(m, N_NORMAL, NOTIF_INPUT_SIZE_MIN, sizemin);
+		ft_strdel(&sizemin);
+		return (1);
+	}
+	return (0);
+}
+
 void			input_valid(t_gen *d, t_mlx *m, t_get *g)
 {
-	if (g->mode == MODE_STRING_FILE)
+	if (input_size_min(m, g))
+		return ;
+	else if (g->mode == MODE_STRING_FILE)
 		input_valid_string(d, m, g);
 	else if (g->mode == MODE_STRING)
 		input_valid_string(d, m, g);
@@ -71,5 +87,4 @@ void			input_valid(t_gen *d, t_mlx *m, t_get *g)
 		input_valid_hexa_to_double(d, m, g, 6);
 	if (g->send)
 		g->send(d, m, g);
-	(void)m;
 }

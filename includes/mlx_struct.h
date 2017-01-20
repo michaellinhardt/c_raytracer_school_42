@@ -1,6 +1,10 @@
 #ifndef MLX_STRUCT_H
 # define MLX_STRUCT_H
 
+/*
+** Ne pas changer l'ordre de cet enum sinon MALEDICTION
+** (et Oren te tig si tu touche..)
+*/
 enum	e_menu {
 	NONE,
 	LOAD_FILE,

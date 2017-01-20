@@ -22,6 +22,7 @@ static void			scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g)
 	g->menu = LOAD_SCENE_ADD;
 	g->mode = MODE_STRING_FILE;
 	m->menu.new_scene = ft_strdup(TXT_SCENE_ADD_NAME_DEFAUT);
+	g->name = ft_strdup(TXT_SCENE_ADD_NAME);
 	g->target.ptr_str = &m->menu.new_scene;
 	g->box.pos[0] = 541;
 	g->box.pos[1] = 483;
@@ -33,6 +34,7 @@ static void			scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g)
 	g->mode = MODE_STRING_FILE;
 	g->box.pos[0] = m->scene_img[1][IMENU_EDIT_SCENE_BOX].pos[0] + 15;
 	g->box.pos[1] = m->scene_img[1][IMENU_EDIT_SCENE_BOX].pos[1] + 40;
+	g->name = ft_strdup(TXT_SCENE_MOD_NAME);
 	g->size_min = 3;
 	g->size_max = 59;
 
@@ -42,6 +44,7 @@ static void			scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g)
 	g->box.pos[0] = m->get[ID_INPUT_MOD_SCENE_NAME].box.pos[0];
 	g->box.pos[1] = m->get[ID_INPUT_MOD_SCENE_NAME].box.pos[1]
 	+ INPUT_SIZE_CHAR_Y * 2 + 15;
+	g->name = ft_strdup(TXT_SCENE_MOD_AMB1);
 	g->size_min = 5;
 	g->size_max = 7;
 
@@ -50,8 +53,18 @@ static void			scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g)
 	g->mode = MODE_DOUBLE;
 	g->box.pos[0] = m->get[ID_INPUT_SCENE_AMBIANCE1].box.pos[0] + 347;
 	g->box.pos[1] = m->get[ID_INPUT_SCENE_AMBIANCE1].box.pos[1];
+	g->name = ft_strdup(TXT_SCENE_MOD_AMB2);
 	g->size_min = 3;
 	g->size_max = 25;
+
+	g = &m->get[ID_INPUT_OBJECT_NAME];
+	g->menu = LOAD_OBJECT_EDIT;
+	g->mode = MODE_STRING_FILE;
+	g->box.pos[0] = m->scene_img[1][IMENU_EDIT_OBJECT_BOX].pos[0] + 15;
+	g->box.pos[1] = m->scene_img[1][IMENU_EDIT_OBJECT_BOX].pos[1] + 40;
+	g->name = ft_strdup(TXT_OBJECT_MOD_NAME);
+	g->size_min = 3;
+	g->size_max = 59;
 
 	(void)d;
 }

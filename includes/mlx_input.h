@@ -12,6 +12,9 @@
 # define INPUT_BORDER_SIZE 2
 # define INPUT_BORDER_FADE_SPEED 5
 
+# define INPUT_NAME_COLOR 0xFFFFFF
+# define INPUT_NAME_POS_X 7
+# define INPUT_NAME_POS_Y -23
 
 # define INPUT_TEXT_COLOR 0x000000
 # define INPUT_TEXT_COLOR_FOCUS 0xFF0000
@@ -31,6 +34,7 @@
 # define GET_SIZE_MAX 255
 
 # define NOTIF_INPUT_SAVE "save: "
+# define NOTIF_INPUT_SIZE_MIN "minimum size for this input is: "
 
 enum	e_get_inputmode {
 	MODE_DOUBLE,
@@ -64,6 +68,7 @@ typedef struct					s_get_target
 
 typedef struct					s_get
 {
+	char						*name;
 	enum e_menu					menu;
 	enum e_get_status			status;
 	enum e_get_action			action;
@@ -88,5 +93,6 @@ typedef struct					s_get
 # define ID_INPUT_MOD_SCENE_NAME 1
 # define ID_INPUT_SCENE_AMBIANCE1 2
 # define ID_INPUT_SCENE_AMBIANCE2 3
+# define ID_INPUT_OBJECT_NAME 4
 
 #endif

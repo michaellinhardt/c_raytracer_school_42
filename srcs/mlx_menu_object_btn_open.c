@@ -28,7 +28,7 @@ static void		build_list(t_mlx *m, t_flst *new, t_obj *obj)
 	}
 }
 
-static void		menu_object_open_order(t_gen *d, t_mlx *m)
+void		menu_object_open_order(t_gen *d, t_mlx *m)
 {
 	t_flst	*lst;
 	int		total;
@@ -53,6 +53,11 @@ void			menu_object_btn_open(void *gen, void *mlx)
 	m = mlx;
 	if (!d->sc)
 		ft_printf("pas de scene..\n");
-	else
+	else if (!m->menu.obj)
 		menu_object_open_order(d, m);
+	else if (m->menu.obj)
+	{
+		m->menu.id = LOAD_OBJECT;
+		menu_edit_mod_btn_open(gen, mlx);
+	}
 }

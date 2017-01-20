@@ -14,4 +14,9 @@ void			menu_edit_mod_btn_open(void *gen, void *mlx)
 		m->get[ID_INPUT_SCENE_AMBIANCE2].target.ptr_double = &d->sc->amb[1];
 		m->menu.next = LOAD_SCENE_EDIT;
 	}
+	else if (m->menu.id >= LOAD_OBJECT && m->menu.id < LOAD_SPOT)
+	{
+		m->get[ID_INPUT_OBJECT_NAME].target.ptr_str = &m->menu.obj->name;
+		m->menu.next = LOAD_OBJECT_EDIT;
+	}
 }

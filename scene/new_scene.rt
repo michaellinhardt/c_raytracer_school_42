@@ -17,13 +17,5 @@ scene {
 			effect { 0 ; 0 ; 0 ; 0; 0; 0}
 			color { 0x0077ff }
 		}
-		simple_obj {
-			name { Sphere rouge }
-			camera {pos{890 ; 525 ; 35}, dir{0 ; 0 ; -1 }}
-			type { sphere }
-			size { 3 ; 0.0 ; 0 }
-			effect { 0 ; 0 ; 0 ; 0 ; 0 ; 0}
-			color { 0xff0000 }
-		}
 	}
 }

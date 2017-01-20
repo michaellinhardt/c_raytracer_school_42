@@ -29,15 +29,6 @@ static void		scene_text_menu_load(t_mlx *m, t_flst *elem, int i, int color)
 	}
 }
 
-static void		scene_text_scene_add(t_mlx *m, int c)
-{
-
-	mlx_string_put(m->mlx, m->win
-	, m->scene_img[1][IMENU_ADD_SCENE_BOX].pos[0] + 15
-	, m->scene_img[1][IMENU_ADD_SCENE_BOX].pos[1] + 8
-	, c, TXT_SCENE_ADD_NAME);
-}
-
 static void		scene_text_scene_del(t_mlx *m, int c)
 {
 
@@ -47,31 +38,25 @@ static void		scene_text_scene_del(t_mlx *m, int c)
 	, c, TXT_SCENE_DEL_VALID);
 }
 
-static void		scene_text_scene_mod(t_mlx *m, int c)
+static void		input_text_display(t_mlx *m, t_get *g, int i, unsigned color)
 {
-	mlx_string_put(m->mlx, m->win
-	, m->scene_img[1][IMENU_EDIT_SCENE_BOX].pos[0] + 15
-	, m->scene_img[1][IMENU_EDIT_SCENE_BOX].pos[1] + 8
-	, c, TXT_SCENE_MOD_NAME);
-	mlx_string_put(m->mlx, m->win
-	, m->get[ID_INPUT_SCENE_AMBIANCE1].box.pos[0] + 6
-	, m->get[ID_INPUT_SCENE_AMBIANCE1].box.pos[1] - 23
-	, c, TXT_SCENE_MOD_AMB1);
-	mlx_string_put(m->mlx, m->win
-	, m->get[ID_INPUT_SCENE_AMBIANCE2].box.pos[0] + 6
-	, m->get[ID_INPUT_SCENE_AMBIANCE2].box.pos[1] - 23
-	, c, TXT_SCENE_MOD_AMB2);
+	while (++i < GET_APP_MAX && (g = &m->get[i]))
+		if (g->name && g->menu > NONE && g->menu == m->menu.id
+		&& m->menu.draw == 1)
+		{
+			mlx_string_put(m->mlx, m->win
+			, g->box.pos[0] + INPUT_NAME_POS_X
+			, g->box.pos[1] + INPUT_NAME_POS_Y
+			, color, g->name);
+		}
 }
 
 void			scene_text_menu(t_gen *d, t_mlx *m)
 {
 	if (m->flst && (m->menu.id >= LOAD_FILE || m->menu.id <= LOAD_SPOT))
 		scene_text_menu_load(m, m->flst, -1, 0);
-	else if (m->menu.id == LOAD_SCENE_ADD)
-		scene_text_scene_add(m, MENU_TEXT_COLOR);
-	else if (m->menu.id == LOAD_SCENE_EDIT)
-		scene_text_scene_mod(m, MENU_TEXT_COLOR);
 	else if (m->menu.id == LOAD_SCENE_DEL)
 		scene_text_scene_del(m, MENU_TEXT_COLOR);
+	input_text_display(m, (t_get *)NULL, -1, INPUT_NAME_COLOR);
 	(void)d;
 }
