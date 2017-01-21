@@ -1,11 +1,49 @@
 #include "raystruct.h"
+#include <stdio.h>
+
+char 	*file_to_char(char *path_file_to_load)
+{
+	static char buf[100000];
+	int fd;
+	int rd;
+
+	fd = open(path_file_to_load, O_RDONLY);
+	if (fd == -1)
+		error(4, "L'ouverture du fichier de miniature a echoue\n");
+	rd = read(fd, buf, 100000);
+	if (rd == -1)
+		error(4, "La copie du fichier de miniature a echoue\n");
+	close(fd);
+	return (buf);
+}
+
+void	char_to_file(char *min_data, char *file_path)
+{
+	int fd;
+
+	fd = open(file_path, O_RDWR|O_CREAT|O_TRUNC, S_IRWXU);
+	if (fd == -1)
+		error(4, "La creation du fichier de miniature a echoue\n");
+	write(fd, min_data, 100000);
+	close(fd);
+	// printf("La scene a ete ecrite\n");
+}
 
 void	pixel_to_char(t_gen *s, int color, int x, int y)
 {
 	int		*ptr;
+	int		*minptr;
 
+	minptr = (int *)s->downscaled;
 	ptr = (int *)s->data;
 	ptr[W_X * y + x] = color;
+	x = x / 8.4;
+	y = y / 8.4;
+	minptr[200 * y + x] = color;
+
+
+	// printf("minptr  =  [%d]\n", minptr[200 * y + x]);
+	// printf("downscaled  =  [%d]\n", ((int *)s->downscaled)[200 * y + x]);
 }
 
 void	*mlx_new_img(t_mlx *m, t_img *img, int width, int heigh)

@@ -1,0 +1,37 @@
+scene {
+	name { Vincent }
+	camera {pos{20; 20; 00}, dir{0; 0; 1}}
+	spot {
+		name {spot n1}
+			type {point}
+			camera {pos{20; 22; 0}, dir{1 ; 1; 5}}
+			color { 0xffffff }
+	}
+	ambiance { 0xffffff; 15 }
+	objects {
+		simple_obj {
+			name { Plan fond }
+			camera {pos{20; 20; 20}, dir{0 ; 0 ; -1}}
+			type { plan }
+			size { 1 ; 25 ; 0 }
+			effect { 0 ; 0 ; 0 ; 0; 1 ; 0}
+			color { 0x005500 }
+		}
+		simple_obj {
+			name { Plan bas }
+			camera {pos{20; 18.5; 20}, dir{0 ; 1 ; 0}}
+			type { plan }
+			size { 1 ; 25 ; 0 }
+			effect { 0 ; 100; 0 ; 0; 1 ; 0}
+			color { 0xffffff }
+		}
+		simple_obj {
+			name { Sphere }
+			camera {pos{20; 20; 10}, dir{0 ; 0 ; -1}}
+			type { sphere }
+			size { 3 ; 25 ; 0 }
+			effect { 0 ; 00 ; 0 ; 0; 1 ; 1}
+			color { 0xffffff }
+		}
+}
+}

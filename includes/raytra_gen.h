@@ -117,9 +117,11 @@ typedef struct		s_scene
 
 typedef struct		s_gen
 {
+	int 			miniature;
 	t_scene			*sc;
 	t_scene			*sc_off;
 	char			*data;
+	char			*downscaled;
 	t_mlx			mlx;
 	int				rep; //
 	char			nb;

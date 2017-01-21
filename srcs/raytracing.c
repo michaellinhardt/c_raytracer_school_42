@@ -109,11 +109,14 @@ void			raytracing(t_gen *s)
 		(!(t.z = ft_memalloc(sizeof(t_thread) * MT))) ? error(2, "Malloc") : 1;
 		init_threads(t.z, &t, s);
 		c = 1;
-		if (!(s->data = (char *)ft_memalloc(W_X * 4 * W_Y)))
+		if (!(s->data = (char *)ft_memalloc(W_X * 4 * W_Y)) || !(s->downscaled = (char *)ft_memalloc(100000)))
 			return ;
 	}
 	else
+	{
 		ft_bzero(s->data, W_X * 4 * W_Y);
+		ft_bzero(s->downscaled, 100000);
+	}
 	lanch_raytracing(p, t);
 	/*
 	** put image to windows ... or not

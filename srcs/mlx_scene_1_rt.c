@@ -18,7 +18,8 @@ static void		perma_fade(t_mlx *m, t_img *i)
 
 static void		draw_rt(t_gen *d, t_mlx *m)
 {
-	static int		len = (W_X * W_Y * 4);
+	int	len;
+	len = d->miniature ? 200 * 150 * 4 : (W_X * W_Y * 4);
 	if (!d->sc || (d->sc && d->sc->data))
 		return ;
 	if (++m->menu.loading == 1)
@@ -27,6 +28,9 @@ static void		draw_rt(t_gen *d, t_mlx *m)
 	{
 		m->scene_img[1][ID_IMG_MENU_CADRE].fade_min = MENU_FADE_CADRE_INTERFACE;
 		raytracing(d);
+		// if (!d->sc->path_save)
+		char_to_file(d->downscaled, ft_strjoin(d->sc->name, ".minrt"));
+		file_to_char("tasoeur.rt");
 		ft_bzero(&m->input, sizeof(t_input));
 		d->sc->data = ft_strnew(len);
 		ft_memcpy(d->sc->data, d->data, len);

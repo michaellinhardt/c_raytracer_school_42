@@ -22,8 +22,13 @@ void			sqrtc(double *color)
 static void		init_getnearesthit(t_ray *r,
 	t_gen *raytracer, double x1, double y1)
 {
-	r->dir = vector_normalize(new_vector(x1 - W_X / 2.0,
-		W_Y / 2.0 - y1, (W_Y / 2.0) / tan(70 * 0.5)));
+	int width;
+	int height;
+
+	width = raytracer->miniature ? 200 : W_X;
+	height = raytracer->miniature ? 200 : W_Y;
+	r->dir = vector_normalize(new_vector(x1 - width / 2.0,
+		height / 2.0 - y1, (height / 2.0) / tan(70 * 0.5)));
 	if (raytracer->view_angle[0])
 		r->dir = matricerot_x(r->dir, raytracer->view_angle[0]);
 	if (raytracer->view_angle[1])

@@ -19,6 +19,9 @@
 # define PI 3.14159265359
 # define TEXWIDTH 64
 # define TEXHEIGHT 64
+// # define WIDTH (miniature ? 200 : W_X)
+// # define HEIGTH (miniature ? 125 : W_Y)
+
 
 # define KEY_ONE 83
 # define KEY_TWO 84
@@ -74,6 +77,7 @@ typedef struct		s_ray
 
 typedef struct		s_general
 {
+	int 			miniature;
 	// char			c;
 	// double			bpp;
 	// int				bit_per_pixel;
@@ -395,7 +399,8 @@ int					texture_ice(double u, double v, char *str, void *mlx);
 /*
 **									palette_couleur
 */
-
+char 				*file_to_char(char *path_file_to_load);
+void				char_to_file(char *min_data, char *file_path);
 unsigned char		change_col(unsigned char *col, double *nbr);
 void				abstract(unsigned char *t, int rowstride, int index);
 void				brightness(unsigned char *t, int rowstride, int index);
