@@ -43,7 +43,7 @@ t_obj *tmp)
 		c->vec_obj_light = vectormultby_scalar(vector_normalize(
 			new_vector(c->spot->pos[3], c->spot->pos[4], c->spot->pos[5])), -1);
 	c->dot_light_norm = vector_dot(c->vec_obj_light, r->norm);
-	c->i_l[c->i] = (ft_shadow(sc->obj, c, sc) == 0) ? c->i_l[c->i] : 0;
+	c->i_l[c->i] = (ft_shadow(sc->obj, c, sc) == 0) ? (c->i_l[c->i] * (1 - tmp->eff[0] / 100)) : 0;
 	if (vector_dot(r->norm, vectormultby_scalar(c->vec_obj_light, -1)) > 0 &&
 	tmp->type == PLAN)
 		return (0);
