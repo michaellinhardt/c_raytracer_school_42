@@ -16,6 +16,24 @@ static void			scene_init_1_rt_input_area(t_mlx *m, t_get *g, int i)
 	}
 }
 
+static void			scene_img_copy(t_mlx *m, t_img *src, t_img *dst)
+{
+	dst->width = src->width;
+	dst->heigh = src->heigh;
+	dst->fade_min = src->fade_min;
+	dst->fade_max = src->fade_max;
+	dst->set_alpha = src->set_alpha;
+	dst->menu = src->menu;
+	dst->pos[0] = src->pos[0];
+	dst->pos[1] = src->pos[1];
+	set_type_action(dst, src->status, src->mouse.btn, src->mouse.action);
+	if (!dst->img)
+		dst->img = mlx_new_img(m, dst, src->width, src->heigh);
+	dst->i = -1;
+	while (++dst->i < dst->width * dst->heigh)
+		dst->ptr[dst->i] = src->ptr[dst->i];
+}
+
 static void			scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g)
 {
 	g = &m->get[ID_INPUT_ADD_SCENE_NAME];
@@ -220,7 +238,6 @@ static void			scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g)
 
 void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 {
-
 	img = &m->getcursor;
 	img->width = 2;
 	img->heigh = INPUT_SIZE_CHAR_Y - INPUT_PADDING;
@@ -542,6 +559,85 @@ void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 	set_over_click(m, img
 		, IB_SCENE_DEL_CANCEL_OVER, IB_SCENE_DEL_CANCEL_CLICK);
 
+	img = &m->scene_img[1][IB_OBJECT_MOD_TYPE_OFF];
+	img->menu = LOAD_OBJECT_EDIT;
+	img->fade_min = 80;
+	img->set_alpha = -1;
+	img->pos[0] = m->scene_img[1][IMENU_EDIT_OBJECT_BOX].pos[0] + 360;
+	img->pos[1] = m->scene_img[1][IMENU_EDIT_OBJECT_BOX].pos[1]
+	+ m->scene_img[1][IMENU_EDIT_OBJECT_BOX].heigh - 80 - img->heigh * 2;
+
+	set_type_action(img, DISABLED, 8, NULL);
+
+	img = &m->scene_img[1][IB_OBJECT_MOD_TYPE];
+	img->menu = LOAD_OBJECT_EDIT;
+	img->fade_min = 80;
+	img->set_alpha = -1;
+	set_type_action(img, DISABLED, 8, NULL);
+
+	img = &m->scene_img[1][IB_OBJECT_MOD_TYPE_OVER];
+	img->menu = LOAD_OBJECT_EDIT;
+	img->fade_min = 80;
+	img->set_alpha = -1;
+	set_type_action(img, DISABLED, 8, NULL);
+
+	img = &m->scene_img[1][IB_OBJECT_MOD_TYPE_SELECT];
+	img->menu = LOAD_OBJECT_EDIT;
+	img->fade_min = 80;
+	img->set_alpha = -1;
+	set_type_action(img, DISABLED, 8, NULL);
+
+
+	int		i;
+	i = 0;
+	while (++i < 10)
+	{
+		img = &m->scene_img[1][IB_OBJECT_MOD_TYPE_SELECT + i];
+		scene_img_copy(m, &m->scene_img[1][IB_OBJECT_MOD_TYPE_OFF], img);
+		img->pos[0] += (i % 3 - 1) * 320;
+		if (i > 3 && i < 7)
+			img->pos[1] += (img->heigh + 10);
+		else if (i > 6)
+			img->pos[1] += (img->heigh + 10) * 2;
+		set_area(img);
+		set_type_action(img, MENU, 8, NULL);
+	}
+
+	i = 0;
+	while (++i < 10)
+	{
+		img = &m->scene_img[1][IB_OBJECT_MOD_TYPE_OFF9 + i];
+		scene_img_copy(m, &m->scene_img[1][IB_OBJECT_MOD_TYPE_OVER], img);
+		img->pos[0] = m->scene_img[1][IB_OBJECT_MOD_TYPE_OFF9 + i - 9].pos[0];
+		img->pos[1] = m->scene_img[1][IB_OBJECT_MOD_TYPE_OFF9 + i - 9].pos[1];
+		set_area(img);
+		set_type_action(img, DISABLED, 8, NULL);
+	}
+
+	i = 0;
+	while (++i < 10)
+	{
+		img = &m->scene_img[1][IB_OBJECT_MOD_TYPE_OVER9 + i];
+		scene_img_copy(m, &m->scene_img[1][IB_OBJECT_MOD_TYPE_SELECT], img);
+		img->pos[0] = m->scene_img[1][IB_OBJECT_MOD_TYPE_OVER9 + i - 9].pos[0];
+		img->pos[1] = m->scene_img[1][IB_OBJECT_MOD_TYPE_OVER9 + i - 9].pos[1];
+		set_area(img);
+		set_type_action(img, DISABLED, 8, NULL);
+	}
+
+	i = 0;
+	while (++i < 10)
+	{
+		img = &m->scene_img[1][IB_OBJECT_MOD_TYPE_SELECT9 + i];
+		scene_img_copy(m, &m->scene_img[1][IB_OBJECT_MOD_TYPE], img);
+		img->pos[0] = m->scene_img[1][IB_OBJECT_MOD_TYPE_SELECT9 + i - 9].pos[0];
+		img->pos[1] = m->scene_img[1][IB_OBJECT_MOD_TYPE_SELECT9 + i - 9].pos[1];
+		set_area(img);
+		set_type_action(img, MENU, 1, NULL);
+		set_over_click(m, img
+		, (IB_OBJECT_MOD_TYPE_SELECT9 + i) - 18
+		, (IB_OBJECT_MOD_TYPE_SELECT9 + i) - 9);
+	}
 
 
 	scene_init_1_rt_input(d, m, (t_get *)NULL);

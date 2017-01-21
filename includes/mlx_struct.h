@@ -130,6 +130,7 @@ typedef struct		s_menu
 	struct s_scene	*scene;
 	struct s_spot	*spot;
 	struct s_obj	*obj;
+	t_img			obj_type[6];
 	int				loading;
 }					t_menu;
 
