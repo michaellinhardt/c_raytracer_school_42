@@ -1,5 +1,19 @@
 #include "raystruct.h"
 
+char		*hexa_format(char *char_hexa)
+{
+	char *convert;
+
+	convert = NULL;
+	if (ft_strlen(char_hexa) == 4)
+	{
+		convert = ft_strjoin("00", char_hexa);
+		ft_strdel(&char_hexa);
+		return (convert);
+	}
+	return (char_hexa);
+}
+
 char		*input_target_to_str(t_get *g)
 {
 	if (g->mode == MODE_DOUBLE)
@@ -10,9 +24,9 @@ char		*input_target_to_str(t_get *g)
 	else if (g->mode == MODE_INT)
 		return (ft_itoa(*g->target.ptr_int));
 	else if (g->mode == MODE_HEXA)
-		return (ft_itoa_base(*g->target.ptr_int, 16, 1));
+		return (hexa_format(ft_itoa_base(*g->target.ptr_int, 16, 1)));
 	else if (g->mode == MODE_HEXA_TO_DOUBLE)
-		return (ft_itoa_base(*g->target.ptr_double, 16, 1));
+		return (hexa_format(ft_itoa_base(*g->target.ptr_double, 16, 1)));
 	else if (g->mode >= MODE_STRING && g->mode <= MODE_STRING_FILE)
 		return (ft_strdup(*g->target.ptr_str));
 	else

@@ -43,11 +43,25 @@
 # define TXT_SCENE_DEL_VALID "Do you really want to delete this scene ?"
 
 # define TXT_OBJECT_MOD_NAME "Object name:"
+
 # define TXT_OBJECT_MOD_POS1 "Positon x:"
 # define TXT_OBJECT_MOD_POS2 "Positon y:"
 # define TXT_OBJECT_MOD_POS3 "Positon z:"
 # define TXT_OBJECT_MOD_POS4 "Direction x:"
 # define TXT_OBJECT_MOD_POS5 "Direction y:"
 # define TXT_OBJECT_MOD_POS6 "Direction z:"
+
+# define TXT_OBJECT_MOD_SIZE1 "Size 1:"
+# define TXT_OBJECT_MOD_SIZE2 "Size 2:"
+# define TXT_OBJECT_MOD_SIZE3 "Size 3:"
+
+# define TXT_OBJECT_MOD_EFF1 "Effect 1:"
+# define TXT_OBJECT_MOD_EFF2 "Effect 2:"
+# define TXT_OBJECT_MOD_EFF3 "Effect 3:"
+# define TXT_OBJECT_MOD_EFF4 "Effect 4:"
+# define TXT_OBJECT_MOD_EFF5 "Effect 5:"
+# define TXT_OBJECT_MOD_EFF6 "Effect 6:"
+
+# define TXT_OBJECT_MOD_COLOR "Color:"
 
 #endif
