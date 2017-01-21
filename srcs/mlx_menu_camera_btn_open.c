@@ -8,7 +8,7 @@ void			menu_camera_btn_open(void *gen, void *mlx)
 	d = gen;
 	m = mlx;
 	ft_printf("camera btn open\n");
-	ft_strdel(&d->sc->data);
+	redraw(d, m, 1);
 	(void)m;
 	(void)gen;
 	(void)mlx;
