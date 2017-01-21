@@ -2,13 +2,13 @@
 
 static void		menu_draw_actif_sub(t_mlx *m, t_img *img)
 {
-	if (m->menu.id == LOAD_SCENE_ADD)
+	if (m->menu.id == LOAD_SCENE_ADD || m->menu.id == LOAD_OBJECT_ADD)
 		img = &m->scene_img[1][IB_E_ADD];
-	else if (m->menu.id == LOAD_SCENE)
+	else if (m->menu.id == LOAD_SCENE || m->menu.id == LOAD_OBJECT)
 		img = &m->scene_img[1][IB_E_SWITCH];
-	else if (m->menu.id == LOAD_SCENE_EDIT)
+	else if (m->menu.id == LOAD_SCENE_EDIT || m->menu.id == LOAD_OBJECT_EDIT)
 		img = &m->scene_img[1][IB_E_MOD];
-	else if (m->menu.id == LOAD_SCENE_DEL)
+	else if (m->menu.id == LOAD_SCENE_DEL || m->menu.id == LOAD_OBJECT_DEL)
 		img = &m->scene_img[1][IB_E_DEL];
 	else
 		return ;
