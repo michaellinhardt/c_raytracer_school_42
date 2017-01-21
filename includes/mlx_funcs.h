@@ -93,6 +93,7 @@ void		menu_scene_open_order(t_gen *d, t_mlx *m);
 void		menu_object_btn_open(void *gen, void *mlx);
 void		menu_object_clic(t_gen *d, t_mlx *m, t_flst *elem);
 void		menu_object_open_order(t_gen *d, t_mlx *m);
+void		menu_object_mod_btn_type(void *gen, void *mlx);
 
 void		menu_spot_btn_open(void *gen, void *mlx);
 void		menu_spot_clic(t_gen *d, t_mlx *m, t_flst *elem);

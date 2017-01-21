@@ -633,7 +633,7 @@ void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 		img->pos[0] = m->scene_img[1][IB_OBJECT_MOD_TYPE_SELECT9 + i - 9].pos[0];
 		img->pos[1] = m->scene_img[1][IB_OBJECT_MOD_TYPE_SELECT9 + i - 9].pos[1];
 		set_area(img);
-		set_type_action(img, MENU, 1, NULL);
+		set_type_action(img, MENU, 1, &menu_object_mod_btn_type);
 		set_over_click(m, img
 		, (IB_OBJECT_MOD_TYPE_SELECT9 + i) - 18
 		, (IB_OBJECT_MOD_TYPE_SELECT9 + i) - 9);
