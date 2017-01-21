@@ -87,6 +87,7 @@ void		menu_scene_del_btn_cancel(void *gen, void *mlx);
 void		menu_scene_add_btn_ok(void *gen, void *mlx);
 void		menu_scene_btn_open(void *gen, void *mlx);
 void		menu_scene_clic(t_gen *d, t_mlx *m, t_flst *elem);
+void		menu_reset_obj_plan(t_mlx *m);
 void		menu_scene_open_order(t_gen *d, t_mlx *m);
 
 void		menu_object_btn_open(void *gen, void *mlx);

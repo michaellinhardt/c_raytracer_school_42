@@ -64,4 +64,15 @@
 
 # define TXT_OBJECT_MOD_COLOR "Color:"
 
+# define TXT_OBJECT_MOD_TYPE "Actual type:"
+# define TXT_OBJECT_TYPE_SPHERE "Sphere"
+# define TXT_OBJECT_TYPE_RECTANGLE "Rectangle"
+# define TXT_OBJECT_TYPE_PLAN "Plan"
+# define TXT_OBJECT_TYPE_CONE "Cone"
+# define TXT_OBJECT_TYPE_CYLINDRE "Cylindre"
+# define TXT_OBJECT_TYPE_COMPLEXE "Complexe"
+# define TXT_OBJECT_TYPE_BOLOID "Boloid"
+# define TXT_OBJECT_TYPE_TRIANGLE "Triangle"
+# define TXT_OBJECT_TYPE_ELLIPSE "Ellipse"
+
 #endif
