@@ -31,5 +31,6 @@ void			menu_scene_clic(t_gen *d, t_mlx *m, t_flst *elem)
 		}
 	}
 	menu_reset_obj_plan(m);
-	m->menu.scene = sc;
+	m->menu.scene = d->sc;
+	menu_edit_mod_btn_open((void *)d, (void *)m);
 }
