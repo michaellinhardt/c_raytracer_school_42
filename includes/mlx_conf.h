@@ -36,6 +36,9 @@
 # define TXT_SCENE_ADD_NAME "New scene name:"
 # define TXT_SCENE_ADD_NAME_DEFAUT "new_scene"
 
+# define TXT_OBJECT_ADD_NAME "New object name:"
+# define TXT_OBJECT_ADD_NAME_DEFAUT "new_object"
+
 # define TXT_SCENE_MOD_NAME "Scene name:"
 # define TXT_SCENE_MOD_AMB1 "Ambiance 1:"
 # define TXT_SCENE_MOD_AMB2 "Ambiance 2:"

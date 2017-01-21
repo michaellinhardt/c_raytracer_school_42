@@ -32,6 +32,7 @@ static void			scene_img_copy(t_mlx *m, t_img *src, t_img *dst)
 	dst->i = -1;
 	while (++dst->i < dst->width * dst->heigh)
 		dst->ptr[dst->i] = src->ptr[dst->i];
+	set_area(dst);
 }
 
 static void			scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g)
@@ -232,6 +233,17 @@ static void			scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g)
 	g->name = ft_strdup(TXT_OBJECT_MOD_EFF6);
 	g->size_min = 1;
 	g->size_max = 17;
+
+	g = &m->get[ID_INPUT_ADD_OBJECT_NAME];
+	g->menu = LOAD_OBJECT_ADD;
+	g->mode = MODE_STRING_FILE;
+	m->menu.new_object = ft_strdup(TXT_OBJECT_ADD_NAME_DEFAUT);
+	g->name = ft_strdup(TXT_OBJECT_ADD_NAME);
+	g->target.ptr_str = &m->menu.new_object;
+	g->box.pos[0] = 541;
+	g->box.pos[1] = 483;
+	g->size_min = 3;
+	g->size_max = 59;
 
 	(void)d;
 }
@@ -587,7 +599,6 @@ void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 	img->set_alpha = -1;
 	set_type_action(img, DISABLED, 8, NULL);
 
-
 	int		i;
 	i = 0;
 	while (++i < 10)
@@ -638,6 +649,25 @@ void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 		, (IB_OBJECT_MOD_TYPE_SELECT9 + i) - 18
 		, (IB_OBJECT_MOD_TYPE_SELECT9 + i) - 9);
 	}
+
+	img = &m->scene_img[1][IMENU_ADD_OBJECT_BOX];
+	scene_img_copy(m, &m->scene_img[1][IMENU_ADD_SCENE_BOX], img);
+	img->menu = LOAD_OBJECT_ADD;
+	img = &m->scene_img[1][IB_OBJECT_ADD_OK];
+	scene_img_copy(m, &m->scene_img[1][IB_SCENE_ADD_OK], img);
+	img->menu = LOAD_OBJECT_ADD;
+	img = &m->scene_img[1][IB_OBJECT_ADD_OK_OVER];
+	scene_img_copy(m, &m->scene_img[1][IB_SCENE_ADD_OK_OVER], img);
+	img->menu = LOAD_OBJECT_ADD;
+	img = &m->scene_img[1][IB_OBJECT_ADD_OK_CLICK];
+	scene_img_copy(m, &m->scene_img[1][IB_SCENE_ADD_OK_CLICK], img);
+	img->menu = LOAD_OBJECT_ADD;
+
+
+	img = &m->scene_img[1][IB_OBJECT_ADD_OK];
+	set_type_action(img, MENU, 1, &menu_object_add_btn_ok);
+	set_over_click(m, img
+		, IB_OBJECT_ADD_OK_OVER, IB_OBJECT_ADD_OK_CLICK);
 
 
 	scene_init_1_rt_input(d, m, (t_get *)NULL);

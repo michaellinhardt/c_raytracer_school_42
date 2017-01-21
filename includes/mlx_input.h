@@ -115,4 +115,6 @@ typedef struct					s_get
 
 # define ID_INPUT_OBJECT_COLOR 20
 
+# define ID_INPUT_ADD_OBJECT_NAME 21
+
 #endif

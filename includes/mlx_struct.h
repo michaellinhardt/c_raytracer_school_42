@@ -129,6 +129,7 @@ typedef struct		s_menu
 	enum e_menu		id;
 	enum e_menu		next;
 	char			*new_scene;
+	char			*new_object;
 	struct s_scene	*scene;
 	struct s_spot	*spot;
 	struct s_obj	*obj;
