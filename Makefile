@@ -69,6 +69,7 @@ SRCS = 	main.c \
 		mlx_menu_object_clic.c \
 		mlx_menu_object_mod_btn_type.c \
 		mlx_menu_object_add_btn.c \
+		mlx_menu_object_del_btn.c \
 		mlx_menu_scene_del_btn.c \
 		mlx_menu_scene_add_btn.c \
 		mlx_menu_scene_btn_open.c \
