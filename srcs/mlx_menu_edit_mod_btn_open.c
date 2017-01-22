@@ -35,4 +35,16 @@ void			menu_edit_mod_btn_open(void *gen, void *mlx)
 		m->get[ID_INPUT_OBJECT_COLOR].target.ptr_int = &m->menu.obj->c_o;
 		m->menu.next = LOAD_OBJECT_EDIT;
 	}
+	else if (m->menu.id >= LOAD_SPOT && m->menu.id < LOAD_CAMERA)
+	{
+		m->get[ID_INPUT_SPOT_NAME].target.ptr_str = &m->menu.spot->name;
+		m->get[ID_INPUT_SPOT_COLOR].target.ptr_int = &m->menu.spot->c_s;
+		m->get[ID_INPUT_SPOT_POS1].target.ptr_double = &m->menu.spot->pos[0];
+		m->get[ID_INPUT_SPOT_POS2].target.ptr_double = &m->menu.spot->pos[1];
+		m->get[ID_INPUT_SPOT_POS3].target.ptr_double = &m->menu.spot->pos[2];
+		m->get[ID_INPUT_SPOT_POS4].target.ptr_double = &m->menu.spot->pos[3];
+		m->get[ID_INPUT_SPOT_POS5].target.ptr_double = &m->menu.spot->pos[4];
+		m->get[ID_INPUT_SPOT_POS6].target.ptr_double = &m->menu.spot->pos[5];
+		m->menu.next = LOAD_SPOT_EDIT;
+	}
 }

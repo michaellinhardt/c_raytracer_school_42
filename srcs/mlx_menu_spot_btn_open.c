@@ -28,7 +28,7 @@ static void		build_list(t_mlx *m, t_flst *new, t_spot *spot)
 	}
 }
 
-static void		menu_spot_open_order(t_gen *d, t_mlx *m)
+void			menu_spot_open_order(t_gen *d, t_mlx *m)
 {
 	t_flst	*lst;
 	int		total;
@@ -52,10 +52,11 @@ void			menu_spot_btn_open(void *gen, void *mlx)
 
 	d = gen;
 	m = mlx;
-	if (!d->sc)
-		ft_printf("pas de scene..\n");
-	else if (d->sc && !d->sc->spot)
-		ft_printf("spot btn new\n");
-	else
+	if (!m->menu.spot)
 		menu_spot_open_order(d, m);
+	else
+	{
+		m->menu.id = LOAD_SPOT;
+		menu_edit_mod_btn_open(gen, mlx);
+	}
 }

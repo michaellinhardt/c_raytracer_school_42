@@ -100,6 +100,8 @@ void		menu_object_del_btn_cancel(void *gen, void *mlx);
 
 void		menu_spot_btn_open(void *gen, void *mlx);
 void		menu_spot_clic(t_gen *d, t_mlx *m, t_flst *elem);
+void		menu_spot_open_order(t_gen *d, t_mlx *m);
+void		menu_spot_mod_btn_type(void *gen, void *mlx);
 
 void		menu_btn_left(void *gen, void *mlx);
 void		menu_btn_right(void *gen, void *mlx);

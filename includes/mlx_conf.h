@@ -45,8 +45,10 @@
 
 # define TXT_SCENE_DEL_VALID "Do you really want to delete this scene ?"
 # define TXT_OBJECT_DEL_VALID "Do you really want to delete this object ?"
+# define TXT_SPOT_DEL_VALID "Do you really want to delete this spot ?"
 
 # define TXT_OBJECT_MOD_NAME "Object name:"
+# define TXT_SPOT_MOD_NAME "Spot name:"
 
 # define TXT_OBJECT_MOD_POS1 "Positon x:"
 # define TXT_OBJECT_MOD_POS2 "Positon y:"
@@ -54,6 +56,13 @@
 # define TXT_OBJECT_MOD_POS4 "Direction x:"
 # define TXT_OBJECT_MOD_POS5 "Direction y:"
 # define TXT_OBJECT_MOD_POS6 "Direction z:"
+
+# define TXT_SPOT_MOD_POS1 "Positon x:"
+# define TXT_SPOT_MOD_POS2 "Positon y:"
+# define TXT_SPOT_MOD_POS3 "Positon z:"
+# define TXT_SPOT_MOD_POS4 "Direction x:"
+# define TXT_SPOT_MOD_POS5 "Direction y:"
+# define TXT_SPOT_MOD_POS6 "Direction z:"
 
 # define TXT_OBJECT_MOD_SIZE1 "Size 1:"
 # define TXT_OBJECT_MOD_SIZE2 "Size 2:"
@@ -67,6 +76,7 @@
 # define TXT_OBJECT_MOD_EFF6 "Effect 6:"
 
 # define TXT_OBJECT_MOD_COLOR "Color:"
+# define TXT_SPOT_MOD_COLOR "Color:"
 
 # define TXT_OBJECT_MOD_TYPE "Actual type:"
 # define TXT_OBJECT_TYPE_SPHERE "Sphere"
@@ -78,5 +88,9 @@
 # define TXT_OBJECT_TYPE_BOLOID "Boloid"
 # define TXT_OBJECT_TYPE_TRIANGLE "Triangle"
 # define TXT_OBJECT_TYPE_ELLIPSE "Ellipse"
+
+# define TXT_SPOT_MOD_TYPE "Actual type:"
+# define TXT_SPOT_TYPE_DIIR "Directionnal"
+# define TXT_SPOT_TYPE_POINT "Point..ctuel?"
 
 #endif

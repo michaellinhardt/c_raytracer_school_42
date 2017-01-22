@@ -11,6 +11,8 @@ void			menu_edit_switch_btn_open(void *gen, void *mlx)
 		menu_scene_open_order(d, m);
 	else if (m->menu.id >= LOAD_OBJECT && m->menu.id < LOAD_SPOT)
 		menu_object_open_order(d, m);
+	else if (m->menu.id >= LOAD_SPOT && m->menu.id < LOAD_CAMERA)
+		menu_spot_open_order(d, m);
 	(void)d;
 	(void)m;
 	(void)gen;

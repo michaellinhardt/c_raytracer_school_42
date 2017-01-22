@@ -37,6 +37,13 @@ static void		scene_btn_sub(t_gen *d, t_mlx *m, t_menu *e)
 		s(m, (!d->sc ? 1 : 0), IB_E_SWITCH_OFF, IB_E_SWITCH);
 		s(m, (!((d->sc)->obj)->next || !m->menu.obj ? 1 : 0), IB_E_DEL_OFF, IB_E_DEL);
 	}
+	else if (e->id >= LOAD_SPOT && e->id < LOAD_CAMERA)
+	{
+		s(m, (!m->menu.spot ? 1 : 0), IB_E_MOD_OFF, IB_E_MOD);
+		s(m, 0, IB_E_ADD_OFF, IB_E_ADD);
+		s(m, (!d->sc ? 1 : 0), IB_E_SWITCH_OFF, IB_E_SWITCH);
+		s(m, (!((d->sc)->spot)->next || !m->menu.spot ? 1 : 0), IB_E_DEL_OFF, IB_E_DEL);
+	}
 	(void)d;
 	(void)m;
 }

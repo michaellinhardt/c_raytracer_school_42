@@ -17,6 +17,8 @@ enum	e_menu {
 	LOAD_OBJECT_DEL,
 	LOAD_OBJECT_EDIT,
 	LOAD_SPOT,
+	LOAD_SPOT_DEL,
+	LOAD_SPOT_ADD,
 	LOAD_SPOT_EDIT,
 	LOAD_CAMERA
 };
@@ -134,6 +136,7 @@ typedef struct		s_menu
 	struct s_spot	*spot;
 	struct s_obj	*obj;
 	int				obj_type;
+	int				spot_type;
 	int				loading;
 }					t_menu;
 

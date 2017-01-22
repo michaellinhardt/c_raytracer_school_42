@@ -51,9 +51,7 @@ void			menu_object_btn_open(void *gen, void *mlx)
 
 	d = gen;
 	m = mlx;
-	if (!d->sc)
-		ft_printf("pas de scene..\n");
-	else if (!m->menu.obj)
+	if (!m->menu.obj)
 		menu_object_open_order(d, m);
 	else if (m->menu.obj)
 	{

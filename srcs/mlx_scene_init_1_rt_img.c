@@ -245,6 +245,80 @@ static void			scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g)
 	g->size_min = 3;
 	g->size_max = 59;
 
+	g = &m->get[ID_INPUT_SPOT_NAME];
+	g->menu = LOAD_SPOT_EDIT;
+	g->mode = MODE_STRING_FILE;
+	g->box.pos[0] = m->scene_img[1][IMENU_EDIT_SPOT_BOX].pos[0] + 15;
+	g->box.pos[1] = m->scene_img[1][IMENU_EDIT_SPOT_BOX].pos[1] + 40;
+	g->name = ft_strdup(TXT_SPOT_MOD_NAME);
+	g->size_min = 3;
+	g->size_max = 59;
+
+	g = &m->get[ID_INPUT_SPOT_COLOR];
+	g->menu = LOAD_SPOT_EDIT;
+	g->mode = MODE_HEXA;
+	g->box.pos[0] = m->get[ID_INPUT_SPOT_NAME].box.pos[0] + 710;
+	g->box.pos[1] = m->get[ID_INPUT_SPOT_NAME].box.pos[1];
+	g->name = ft_strdup(TXT_SPOT_MOD_COLOR);
+	g->size_min = 6;
+	g->size_max = 7;
+
+	g = &m->get[ID_INPUT_SPOT_POS1];
+	g->menu = LOAD_SPOT_EDIT;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->get[ID_INPUT_SPOT_NAME].box.pos[0];
+	g->box.pos[1] = m->get[ID_INPUT_SPOT_NAME].box.pos[1] + 10
+	+ m->get[ID_INPUT_SPOT_NAME].box.heigh * 2 + INPUT_SIZE_CHAR_Y * 2;
+	g->name = ft_strdup(TXT_SPOT_MOD_POS1);
+	g->size_min = 3;
+	g->size_max = 17;
+
+	g = &m->get[ID_INPUT_SPOT_POS2];
+	g->menu = LOAD_SPOT_EDIT;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->get[ID_INPUT_SPOT_POS1].box.pos[0] + 330;
+	g->box.pos[1] = m->get[ID_INPUT_SPOT_POS1].box.pos[1];
+	g->name = ft_strdup(TXT_SPOT_MOD_POS2);
+	g->size_min = 1;
+	g->size_max = 17;
+
+	g = &m->get[ID_INPUT_SPOT_POS3];
+	g->menu = LOAD_SPOT_EDIT;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->get[ID_INPUT_SPOT_POS2].box.pos[0] + 330;
+	g->box.pos[1] = m->get[ID_INPUT_SPOT_POS2].box.pos[1];
+	g->name = ft_strdup(TXT_SPOT_MOD_POS3);
+	g->size_min = 1;
+	g->size_max = 17;
+
+	g = &m->get[ID_INPUT_SPOT_POS4];
+	g->menu = LOAD_SPOT_EDIT;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->get[ID_INPUT_SPOT_POS1].box.pos[0];
+	g->box.pos[1] = m->get[ID_INPUT_SPOT_POS1].box.pos[1] + 10
+	+ m->get[ID_INPUT_SPOT_POS1].box.heigh * 2 + INPUT_SIZE_CHAR_Y * 2;
+	g->name = ft_strdup(TXT_SPOT_MOD_POS4);
+	g->size_min = 3;
+	g->size_max = 17;
+
+	g = &m->get[ID_INPUT_SPOT_POS5];
+	g->menu = LOAD_SPOT_EDIT;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->get[ID_INPUT_SPOT_POS2].box.pos[0];
+	g->box.pos[1] = m->get[ID_INPUT_SPOT_POS4].box.pos[1];
+	g->name = ft_strdup(TXT_SPOT_MOD_POS5);
+	g->size_min = 1;
+	g->size_max = 17;
+
+	g = &m->get[ID_INPUT_SPOT_POS6];
+	g->menu = LOAD_SPOT_EDIT;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->get[ID_INPUT_SPOT_POS3].box.pos[0];
+	g->box.pos[1] = m->get[ID_INPUT_SPOT_POS4].box.pos[1];
+	g->name = ft_strdup(TXT_SPOT_MOD_POS6);
+	g->size_min = 1;
+	g->size_max = 17;
+
 	(void)d;
 }
 
@@ -695,6 +769,67 @@ void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 	set_type_action(img, MENU, 1, &menu_object_del_btn_cancel);
 	set_over_click(m, img
 		, IB_OBJECT_DEL_CANCEL_OVER, IB_OBJECT_DEL_CANCEL_CLICK);
+
+	img = &m->scene_img[1][IMENU_EDIT_SPOT_BOX];
+	img->pos[0] = (m->winx / 2) - (img->width / 2);
+	img->pos[1] = (m->winy / 2) - (img->heigh / 2);
+	img->menu = LOAD_SPOT_EDIT;
+	img->fade_min = MENU_FADE_ADD_SCENE;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
+
+	i = 0;
+	while (++i < 3)
+	{
+		img = &m->scene_img[1][IMENU_EDIT_SPOT_BOX + i];
+		scene_img_copy(m, &m->scene_img[1][IB_OBJECT_MOD_TYPE_OFF], img);
+		img->menu = LOAD_SPOT_EDIT;
+		img->pos[0] = 50 + m->scene_img[1][IMENU_EDIT_SPOT_BOX].pos[0]
+		+ (i * 200);
+		img->pos[1] = m->scene_img[1][IMENU_EDIT_SPOT_BOX].pos[1]
+		+ m->scene_img[1][IMENU_EDIT_SPOT_BOX].heigh - 100;
+		set_area(img);
+		set_type_action(img, MENU, 8, NULL);
+	}
+
+	i = 0;
+	while (++i < 3)
+	{
+		img = &m->scene_img[1][IB_SPOT_MOD_TYPE_OFF2 + i];
+		scene_img_copy(m, &m->scene_img[1][IB_OBJECT_MOD_TYPE_OVER], img);
+		img->menu = LOAD_SPOT_EDIT;
+		img->pos[0] = m->scene_img[1][IB_SPOT_MOD_TYPE_OFF2 + i - 2].pos[0];
+		img->pos[1] = m->scene_img[1][IB_SPOT_MOD_TYPE_OFF2 + i - 2].pos[1];
+		set_area(img);
+		set_type_action(img, DISABLED, 8, NULL);
+	}
+
+	i = 0;
+	while (++i < 3)
+	{
+		img = &m->scene_img[1][IB_SPOT_MOD_TYPE_OVER2 + i];
+		scene_img_copy(m, &m->scene_img[1][IB_OBJECT_MOD_TYPE_SELECT], img);
+		img->menu = LOAD_SPOT_EDIT;
+		img->pos[0] = m->scene_img[1][IB_SPOT_MOD_TYPE_OVER2 + i - 2].pos[0];
+		img->pos[1] = m->scene_img[1][IB_SPOT_MOD_TYPE_OVER2 + i - 2].pos[1];
+		set_area(img);
+		set_type_action(img, DISABLED, 8, NULL);
+	}
+
+	i = 0;
+	while (++i < 3)
+	{
+		img = &m->scene_img[1][IB_SPOT_MOD_TYPE_SELECT2 + i];
+		scene_img_copy(m, &m->scene_img[1][IB_OBJECT_MOD_TYPE], img);
+		img->menu = LOAD_SPOT_EDIT;
+		img->pos[0] = m->scene_img[1][IB_SPOT_MOD_TYPE_SELECT2 + i - 2].pos[0];
+		img->pos[1] = m->scene_img[1][IB_SPOT_MOD_TYPE_SELECT2 + i - 2].pos[1];
+		set_area(img);
+		set_type_action(img, MENU, 1, &menu_spot_mod_btn_type);
+		set_over_click(m, img
+		, (IB_SPOT_MOD_TYPE_SELECT2 + i) - 4
+		, (IB_SPOT_MOD_TYPE_SELECT2 + i) - 2);
+	}
 
 	scene_init_1_rt_input(d, m, (t_get *)NULL);
 	scene_init_1_rt_input_area(m, (t_get *)NULL, -1);

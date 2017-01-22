@@ -117,4 +117,13 @@ typedef struct					s_get
 
 # define ID_INPUT_ADD_OBJECT_NAME 21
 
+# define ID_INPUT_SPOT_NAME 22
+# define ID_INPUT_SPOT_COLOR 23
+# define ID_INPUT_SPOT_POS1 24
+# define ID_INPUT_SPOT_POS2 25
+# define ID_INPUT_SPOT_POS3 26
+# define ID_INPUT_SPOT_POS4 27
+# define ID_INPUT_SPOT_POS5 28
+# define ID_INPUT_SPOT_POS6 29
+
 #endif

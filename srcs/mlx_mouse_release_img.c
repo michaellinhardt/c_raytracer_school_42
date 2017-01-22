@@ -5,22 +5,30 @@ static void		set_obj_type(t_mlx *m, int i)
 {
 	if (i == IB_OBJECT_MOD_TYPE1)
 	m->menu.obj_type = SPHERE;
-	if (i == IB_OBJECT_MOD_TYPE2)
+	else if (i == IB_OBJECT_MOD_TYPE2)
 	m->menu.obj_type = RECTANGLE;
-	if (i == IB_OBJECT_MOD_TYPE3)
+	else if (i == IB_OBJECT_MOD_TYPE3)
 	m->menu.obj_type = PLAN;
-	if (i == IB_OBJECT_MOD_TYPE4)
+	else if (i == IB_OBJECT_MOD_TYPE4)
 	m->menu.obj_type = CONE;
-	if (i == IB_OBJECT_MOD_TYPE5)
+	else if (i == IB_OBJECT_MOD_TYPE5)
 	m->menu.obj_type = CYLINDRE;
-	if (i == IB_OBJECT_MOD_TYPE6)
+	else if (i == IB_OBJECT_MOD_TYPE6)
 	m->menu.obj_type = COMPLEXE;
-	if (i == IB_OBJECT_MOD_TYPE7)
+	else if (i == IB_OBJECT_MOD_TYPE7)
 	m->menu.obj_type = BOLOID;
-	if (i == IB_OBJECT_MOD_TYPE8)
+	else if (i == IB_OBJECT_MOD_TYPE8)
 	m->menu.obj_type = TRIANGLE;
-	if (i == IB_OBJECT_MOD_TYPE9)
+	else if (i == IB_OBJECT_MOD_TYPE9)
 	m->menu.obj_type = ELLIPSE;
+}
+
+static void		set_spot_type(t_mlx *m, int i)
+{
+	if (i == IB_SPOT_MOD_TYPE1)
+	m->menu.spot_type = DIIR;
+	else if (i == IB_SPOT_MOD_TYPE2)
+	m->menu.spot_type = POINT;
 }
 
 int				mouse_release_img(t_gen *d, int btn, int x, int y)
@@ -40,6 +48,8 @@ int				mouse_release_img(t_gen *d, int btn, int x, int y)
 					, &d->mlx.scene_img[d->mlx.scene][img->mouse.click_id]);
 			if (i >= IB_OBJECT_MOD_TYPE1 && i <= IB_OBJECT_MOD_TYPE9)
 				set_obj_type(&d->mlx, i);
+			if (i >= IB_SPOT_MOD_TYPE1 && i <= IB_SPOT_MOD_TYPE2)
+				set_spot_type(&d->mlx, i);
 			if (img->mouse.action)
 				img->mouse.action((void *)d, (void *)&d->mlx);
 			return (1);
