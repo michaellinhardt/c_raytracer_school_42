@@ -96,6 +96,7 @@ void		menu_object_open_order(t_gen *d, t_mlx *m);
 void		menu_object_mod_btn_type(void *gen, void *mlx);
 void		menu_object_add_btn_ok(void *gen, void *mlx);
 void		menu_object_del_btn_ok(void *gen, void *mlx);
+void		menu_object_del_btn_cancel(void *gen, void *mlx);
 
 void		menu_spot_btn_open(void *gen, void *mlx);
 void		menu_spot_clic(t_gen *d, t_mlx *m, t_flst *elem);

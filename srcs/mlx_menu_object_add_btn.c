@@ -23,6 +23,7 @@ void			menu_object_add_btn_ok(void *gen, void *mlx)
 		m->menu.new_object = ft_strdup(TXT_OBJECT_ADD_NAME_DEFAUT);
 		obj->next = d->sc->obj;
 		d->sc->obj = obj;
-		menu_object_open_order(d, m);
+		m->menu.obj = obj;
+		menu_edit_mod_btn_open(d, m);
 	}
 }
