@@ -9,7 +9,8 @@ void			menu_edit_add_btn_open(void *gen, void *mlx)
 		m->menu.next = LOAD_SCENE_ADD;
 	else if (m->menu.id >= LOAD_OBJECT && m->menu.id < LOAD_SPOT)
 		m->menu.next = LOAD_OBJECT_ADD;
-	(void)m;
+	else if (m->menu.id >= LOAD_SPOT && m->menu.id < LOAD_CAMERA)
+		m->menu.next = LOAD_SPOT_ADD;
 	(void)gen;
 	(void)mlx;
 }

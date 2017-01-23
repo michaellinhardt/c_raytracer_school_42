@@ -319,6 +319,17 @@ static void			scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g)
 	g->size_min = 1;
 	g->size_max = 17;
 
+	g = &m->get[ID_INPUT_ADD_SPOT_NAME];
+	g->menu = LOAD_SPOT_ADD;
+	g->mode = MODE_STRING_FILE;
+	m->menu.new_spot = ft_strdup(TXT_SPOT_ADD_NAME_DEFAUT);
+	g->name = ft_strdup(TXT_SPOT_ADD_NAME);
+	g->target.ptr_str = &m->menu.new_spot;
+	g->box.pos[0] = 541;
+	g->box.pos[1] = 483;
+	g->size_min = 3;
+	g->size_max = 59;
+
 	(void)d;
 }
 
@@ -830,6 +841,10 @@ void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 		, (IB_SPOT_MOD_TYPE_SELECT2 + i) - 4
 		, (IB_SPOT_MOD_TYPE_SELECT2 + i) - 2);
 	}
+
+	img = &m->scene_img[1][IMENU_ADD_SPOT_BOX];
+	scene_img_copy(m, &m->scene_img[1][IMENU_ADD_SCENE_BOX], img);
+	img->menu = LOAD_SPOT_ADD;
 
 	scene_init_1_rt_input(d, m, (t_get *)NULL);
 	scene_init_1_rt_input_area(m, (t_get *)NULL, -1);

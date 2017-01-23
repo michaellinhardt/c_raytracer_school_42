@@ -132,6 +132,7 @@ typedef struct		s_menu
 	enum e_menu		next;
 	char			*new_scene;
 	char			*new_object;
+	char			*new_spot;
 	struct s_scene	*scene;
 	struct s_spot	*spot;
 	struct s_obj	*obj;

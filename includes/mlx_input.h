@@ -126,4 +126,6 @@ typedef struct					s_get
 # define ID_INPUT_SPOT_POS5 28
 # define ID_INPUT_SPOT_POS6 29
 
+# define ID_INPUT_ADD_SPOT_NAME 21
+
 #endif

@@ -167,6 +167,8 @@
 # define IB_SPOT_MOD_TYPE1 126
 # define IB_SPOT_MOD_TYPE2 127
 
+# define IMENU_ADD_SPOT_BOX 128
+
 # define ID_MAX_AUTO_INIT 145
 
 #endif
