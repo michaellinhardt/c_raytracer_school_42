@@ -169,6 +169,10 @@
 
 # define IMENU_ADD_SPOT_BOX 128
 
+# define IB_SPOT_ADD_OK 129
+# define IB_SPOT_ADD_OK_OVER 130
+# define IB_SPOT_ADD_OK_CLICK 131
+
 # define ID_MAX_AUTO_INIT 145
 
 #endif

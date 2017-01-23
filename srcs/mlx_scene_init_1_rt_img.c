@@ -845,6 +845,20 @@ void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 	img = &m->scene_img[1][IMENU_ADD_SPOT_BOX];
 	scene_img_copy(m, &m->scene_img[1][IMENU_ADD_SCENE_BOX], img);
 	img->menu = LOAD_SPOT_ADD;
+	img = &m->scene_img[1][IB_SPOT_ADD_OK];
+	scene_img_copy(m, &m->scene_img[1][IB_SCENE_ADD_OK], img);
+	img->menu = LOAD_SPOT_ADD;
+	img = &m->scene_img[1][IB_SPOT_ADD_OK_OVER];
+	scene_img_copy(m, &m->scene_img[1][IB_SCENE_ADD_OK_OVER], img);
+	img->menu = LOAD_SPOT_ADD;
+	img = &m->scene_img[1][IB_SPOT_ADD_OK_CLICK];
+	scene_img_copy(m, &m->scene_img[1][IB_SCENE_ADD_OK_CLICK], img);
+	img->menu = LOAD_SPOT_ADD;
+
+	img = &m->scene_img[1][IB_SPOT_ADD_OK];
+	set_type_action(img, MENU, 1, &menu_spot_add_btn_ok);
+	set_over_click(m, img
+		, IB_SPOT_ADD_OK_OVER, IB_SPOT_ADD_OK_CLICK);
 
 	scene_init_1_rt_input(d, m, (t_get *)NULL);
 	scene_init_1_rt_input_area(m, (t_get *)NULL, -1);
