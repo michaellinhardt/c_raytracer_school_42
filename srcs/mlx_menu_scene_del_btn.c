@@ -16,6 +16,8 @@ void			menu_scene_del_btn_ok(void *gen, void *mlx)
 		d->sc = d->sc->next;
 		sc->next = d->sc_off;
 		d->sc_off = sc;
+		m->menu.scene = NULL;
+		menu_reset_obj_plan(m);
 		menu_scene_del_btn_cancel(gen, mlx);
 	}
 }

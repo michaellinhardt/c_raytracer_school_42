@@ -30,7 +30,7 @@
 
 # define INPUT_MODE_DOUBLE_PRECISION 6
 
-# define GET_APP_MAX 30
+# define GET_APP_MAX 50
 # define GET_SIZE_MAX 255
 
 # define NOTIF_INPUT_SAVE "save: "
@@ -126,6 +126,6 @@ typedef struct					s_get
 # define ID_INPUT_SPOT_POS5 28
 # define ID_INPUT_SPOT_POS6 29
 
-# define ID_INPUT_ADD_SPOT_NAME 21
+# define ID_INPUT_ADD_SPOT_NAME 30
 
 #endif
