@@ -48,6 +48,7 @@ void		input_delete_char(t_get *g, int pos, int reset);
 void		input_catch_char(t_gen *d, t_mlx *m, t_get *g, int key);
 void		input_valid(t_gen *d, t_mlx *m, t_get *g);
 void		input_set_focus(t_gen *d, t_mlx *m, t_get *get, int tar);
+void		input_catch_char_end(t_mlx *m, t_get *g, char c);
 
 t_img		*layer(t_mlx *m, int id, int reset);
 void		layer_add(t_mlx *m, t_img *l, t_img *i);
@@ -118,5 +119,11 @@ void		scene_input_draw_box(t_gen *d, t_mlx *m, t_get *g, t_img *lay);
 void		scene_input_draw_cursor(t_mlx *m, t_get *g, t_img *lay);
 
 void		redraw(t_gen *d, t_mlx *m, int loading);
+
+void		input_valid_string(t_gen *d, t_mlx *m, t_get *g);
+void		input_valid_double(t_gen *d, t_mlx *m, t_get *g);
+void		input_valid_double_but_int(t_gen *d, t_mlx *m, t_get *g);
+void		input_valid_int(t_gen *d, t_mlx *m, t_get *g);
+
 
 #endif
