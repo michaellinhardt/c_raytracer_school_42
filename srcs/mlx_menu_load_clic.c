@@ -42,6 +42,6 @@ void		menu_load_clic(t_gen *d, t_mlx *m, t_flst *elem)
 	purge_scene(d, d->sc, path, nb);
 	ft_strdel(&path);
 	ft_strdel(&d->sc->data);
-	menu_reset_obj_plan(m);
+	menu_reset_obj_spot(m);
 	(void)m;
 }

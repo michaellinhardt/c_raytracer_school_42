@@ -1,7 +1,7 @@
 #include "raytra_gen.h"
 #include "raystruct.h"
 
-void			menu_reset_obj_plan(t_mlx *m)
+void			menu_reset_obj_spot(t_mlx *m)
 {
 	m->menu.obj = NULL;
 	m->menu.spot = NULL;
@@ -30,7 +30,7 @@ void			menu_scene_clic(t_gen *d, t_mlx *m, t_flst *elem)
 				ft_memcpy(layer(m, 0, 0)->str, d->sc->data, W_X * W_Y * 4);
 		}
 	}
-	menu_reset_obj_plan(m);
+	menu_reset_obj_spot(m);
 	m->menu.scene = d->sc;
 	menu_edit_mod_btn_open((void *)d, (void *)m);
 }

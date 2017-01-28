@@ -22,7 +22,7 @@ void			menu_object_del_btn_ok(void *gen, void *mlx)
 		obj->next = d->obj_off;
 		d->obj_off = obj;
 	}
-	menu_reset_obj_plan(m);
+	menu_reset_obj_spot(m);
 	menu_edit_switch_btn_open(d, m);
 }
 

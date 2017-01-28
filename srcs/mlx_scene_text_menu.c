@@ -45,6 +45,14 @@ static void		scene_text_object_del(t_mlx *m, int c)
 	, c, TXT_OBJECT_DEL_VALID);
 }
 
+static void		scene_text_spot_del(t_mlx *m, int c)
+{
+	mlx_string_put(m->mlx, m->win
+	, m->scene_img[1][IMENU_EDIT_OBJECT_BOX_DEL].pos[0] + 20
+	, m->scene_img[1][IMENU_EDIT_OBJECT_BOX_DEL].pos[1] + 38
+	, c, TXT_SPOT_DEL_VALID);
+}
+
 static void		scene_text_object_mod2(t_mlx *m, int c, int i, t_img *img)
 {
 	char		str[9][255];
@@ -146,6 +154,8 @@ void			scene_text_menu(t_gen *d, t_mlx *m)
 		scene_text_scene_del(m, MENU_TEXT_COLOR);
 	else if (m->menu.id == LOAD_OBJECT_DEL)
 		scene_text_object_del(m, MENU_TEXT_COLOR);
+	else if (m->menu.id == LOAD_SPOT_DEL)
+		scene_text_spot_del(m, MENU_TEXT_COLOR);
 	else if (m->menu.id == LOAD_OBJECT_EDIT)
 		scene_text_object_mod(m, MENU_TEXT_COLOR, reset);
 	else if (m->menu.id == LOAD_SPOT_EDIT)

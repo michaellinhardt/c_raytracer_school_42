@@ -11,4 +11,6 @@ void			menu_edit_del_btn_open(void *gen, void *mlx)
 		m->menu.next = LOAD_SCENE_DEL;
 	else if (m->menu.id >= LOAD_OBJECT && m->menu.id < LOAD_SPOT)
 		m->menu.next = LOAD_OBJECT_DEL;
+	else if (m->menu.id >= LOAD_SPOT && m->menu.id < LOAD_CAMERA)
+		m->menu.next = LOAD_SPOT_DEL;
 }

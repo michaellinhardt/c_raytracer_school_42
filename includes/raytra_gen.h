@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2017/01/22 16:42:18 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/01/28 11:40:46 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ typedef struct		s_gen
 	t_scene			*sc;
 	t_scene			*sc_off;
 	t_obj			*obj_off;
+	t_spot			*spot_off;
 	char			*data;
 	t_mlx			mlx;
 	int				rep; //
