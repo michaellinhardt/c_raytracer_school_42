@@ -1,11 +1,5 @@
 #include "raystruct.h"
 
-static void		load_preview(t_mlx *m, t_flst *elem)
-{
-	(void)m;
-	(void)elem;
-}
-
 static void		build_list(t_mlx *m, t_flst *new, t_obj *obj)
 {
 	while (obj)
@@ -16,19 +10,19 @@ static void		build_list(t_mlx *m, t_flst *new, t_obj *obj)
 			new->path = ft_strdup("Unknow..");
 		else
 			new->path = ft_strdup(obj->name);
-		if (!m->flst && (m->flst = new) && (!(new->p = (t_flst *)NULL)))
-				new->n = (t_flst *)NULL;
+		if (!m->flst && (m->flst = new)
+			&& (!(new->p = (t_flst *)NULL)))
+			new->n = (t_flst *)NULL;
 		else if ((m->flst->p = new)
 		&& (new->n = m->flst)
 		&& (!(new->p = NULL)))
 			m->flst = new;
 		m->flst->obj = obj;
-		load_preview(m, m->flst);
 		obj = obj->next;
 	}
 }
 
-void		menu_object_open_order(t_gen *d, t_mlx *m)
+void			menu_object_open_order(t_gen *d, t_mlx *m)
 {
 	t_flst	*lst;
 	int		total;
