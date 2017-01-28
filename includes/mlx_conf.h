@@ -20,7 +20,7 @@
 ** LAYER_MAX est le nombre de layer t_img necessaire pour le projet
 */
 # define SCENE_MAX 3
-# define SCENE_IMG_MAX 200
+# define SCENE_IMG_MAX 201
 # define LAYER_MAX 6
 
 # define MENU_MAX 5

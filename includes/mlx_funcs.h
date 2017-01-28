@@ -117,6 +117,9 @@ void		scene_input_action(t_gen *d, t_mlx *m, t_get *g, t_img *lay);
 void		scene_input_draw_box(t_gen *d, t_mlx *m, t_get *g, t_img *lay);
 void		scene_input_draw_cursor(t_mlx *m, t_get *g, t_img *lay);
 
+void		menu_gen_data_btn(void *gen, void *mlx);
+void		menu_gen_bmp_btn(void *gen, void *mlx);
+
 void		redraw(t_gen *d, t_mlx *m, int loading);
 
 #endif

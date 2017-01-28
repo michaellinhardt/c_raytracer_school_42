@@ -16,6 +16,8 @@ static void		s(t_mlx *m, int boolean, int trueval, int falseval)
 
 static void		scene_btn_sub(t_gen *d, t_mlx *m, t_menu *e)
 {
+	s(m, (!d->sc ? 1 : 0), IB_GEN_DATA_OFF, IB_GEN_DATA);
+	s(m, (!d->sc || !d->sc->data ? 1 : 0), IB_GEN_BMP_OFF, IB_GEN_BMP);
 	if (m->menu.id == LOAD_FILE)
 	{
 		s(m, 1, IB_E_MOD_OFF, IB_E_MOD);

@@ -6,7 +6,7 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2017/01/07 01:58:06 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/01/28 21:58:09 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,7 +264,7 @@ typedef struct		s_refra
 **									write_img.c
 */
 
-void				print_bmp(char *str, t_id t, t_gen *s);
+void				print_bmp(char *str, t_gen *s);
 
 /*
 **	key and mouse functions			key_functions.c

@@ -185,11 +185,16 @@
 
 # define IMENU_EDIT_CAMERA_BOX 139
 
-# define IB_GEN_DATA_OFF 150
-# define IB_GEN_DATA 151
-# define IB_GEN_DATA_OVER 152
-# define IB_GEN_DATA_CLICK 153
+# define IB_GEN_DATA_OFF 140
+# define IB_GEN_DATA 141
+# define IB_GEN_DATA_OVER 142
+# define IB_GEN_DATA_CLICK 143
 
-# define ID_MAX_AUTO_INIT 145
+# define IB_GEN_BMP_OFF 144
+# define IB_GEN_BMP 145
+# define IB_GEN_BMP_OVER 146
+# define IB_GEN_BMP_CLICK 147
+
+# define ID_MAX_AUTO_INIT 200
 
 #endif
