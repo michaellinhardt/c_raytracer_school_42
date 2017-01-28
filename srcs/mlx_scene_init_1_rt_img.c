@@ -1,5 +1,5 @@
-# include "raytra_gen.h"
-# include "raystruct.h"
+#include "raytra_gen.h"
+#include "raystruct.h"
 
 static void			scene_init_1_rt_input_area(t_mlx *m, t_get *g, int i)
 {

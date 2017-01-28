@@ -32,9 +32,8 @@ void			input_set_focus(t_gen *d, t_mlx *m, t_get *get, int tar)
 			if (get->init)
 				get->init((void *)d, (void *)m, (void *)get);
 		}
-		else if (i == tar && get->status == GET_FOCUS && (m->getfocus = get))
-		{
-		}
+		else if (i == tar && get->status == GET_FOCUS)
+			m->getfocus = get;
 }
 
 static void		set_pos(t_get *get, int x, int max)
@@ -58,29 +57,27 @@ int				mouse_release_get(t_gen *d, int btn, int x, int y)
 {
 	t_get		*get;
 	t_img		*img;
-	int			i;
-	int			is_one_focus;
+	int			i[2];
 
-	i = -1;
-	is_one_focus = 0;
-	while (++i < GET_APP_MAX)
+	i[0] = -1;
+	i[1] = 0;
+	while (++i[0] < GET_APP_MAX)
 	{
-		if ((get = &d->mlx.get[i])->status == GET_FOCUS)
-			is_one_focus++;
-		if (area((img = &d->mlx.get[i].box), NULL, x, y)
+		((get = &d->mlx.get[i[0]])->status == GET_FOCUS) ? i[1]++ : 1;
+		if (area((img = &d->mlx.get[i[0]].box), NULL, x, y)
 		&& (btn == 1 || btn == 2) && d->mlx.menu.draw == 1
 		&& get->menu > NONE && get->menu == d->mlx.menu.id)
 		{
 			if (btn == 1)
 			{
 				if (get->status != GET_FOCUS)
-					input_set_focus(d, &d->mlx, (t_get *)NULL, i);
+					input_set_focus(d, &d->mlx, (t_get *)NULL, i[0]);
 				set_pos(get, x, (int)ft_strlen(get->data));
 			}
 			return (1);
 		}
 	}
-	if (is_one_focus > 0)
+	if (i[1] > 0)
 		input_set_focus(d, &d->mlx, (t_get *)NULL, -1);
 	return (0);
 }

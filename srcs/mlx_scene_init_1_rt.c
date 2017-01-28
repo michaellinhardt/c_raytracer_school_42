@@ -1,5 +1,5 @@
-# include "raytra_gen.h"
-# include "raystruct.h"
+#include "raytra_gen.h"
+#include "raystruct.h"
 
 void			set_type_action(t_img *img, enum e_status status, int btn
 			, void (*action)(void *gen, void *mlx))

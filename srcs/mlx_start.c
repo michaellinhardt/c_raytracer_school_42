@@ -1,5 +1,5 @@
-# include "raystruct.h"
-# include "raytra_gen.h"
+#include "raystruct.h"
+#include "raytra_gen.h"
 
 int				red_cross(void)
 {
