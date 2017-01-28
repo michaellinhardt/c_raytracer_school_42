@@ -29,6 +29,14 @@ static void		scene_text_menu_load(t_mlx *m, t_flst *elem, int i, int color)
 	}
 }
 
+static void		scene_text_camera(t_mlx *m, int c)
+{
+	mlx_string_put(m->mlx, m->win
+	, m->scene_img[1][IMENU_EDIT_CAMERA_BOX].pos[0] + 20
+	, m->scene_img[1][IMENU_EDIT_CAMERA_BOX].pos[1] + 25
+	, c, TXT_CAMERA_MOD_TITLE);
+}
+
 static void		scene_text_scene_del(t_mlx *m, int c)
 {
 	mlx_string_put(m->mlx, m->win
@@ -160,6 +168,8 @@ void			scene_text_menu(t_gen *d, t_mlx *m)
 		scene_text_object_mod(m, MENU_TEXT_COLOR, reset);
 	else if (m->menu.id == LOAD_SPOT_EDIT)
 		scene_text_spot_mod(m, MENU_TEXT_COLOR, reset);
+	else if (m->menu.id == LOAD_CAMERA)
+		scene_text_camera(m, MENU_TEXT_COLOR);
 	input_text_display(m, (t_get *)NULL, -1, INPUT_NAME_COLOR);
 	(void)d;
 }

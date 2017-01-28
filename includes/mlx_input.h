@@ -128,4 +128,11 @@ typedef struct					s_get
 
 # define ID_INPUT_ADD_SPOT_NAME 30
 
+# define ID_INPUT_CAM1 31
+# define ID_INPUT_CAM2 32
+# define ID_INPUT_CAM3 33
+# define ID_INPUT_CAM4 34
+# define ID_INPUT_CAM5 35
+# define ID_INPUT_CAM6 36
+
 #endif

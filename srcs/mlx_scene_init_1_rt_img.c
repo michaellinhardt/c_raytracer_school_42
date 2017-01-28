@@ -330,6 +330,63 @@ static void			scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g)
 	g->size_min = 3;
 	g->size_max = 59;
 
+	g = &m->get[ID_INPUT_CAM1];
+	g->menu = LOAD_CAMERA;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->scene_img[1][IMENU_EDIT_CAMERA_BOX].pos[0] + 18;
+	g->box.pos[1] = m->scene_img[1][IMENU_EDIT_CAMERA_BOX].pos[1] + 90;
+	g->name = ft_strdup(TXT_CAMERA_MOD_CAM1);
+	g->size_min = 3;
+	g->size_max = 17;
+
+	g = &m->get[ID_INPUT_CAM2];
+	g->menu = LOAD_CAMERA;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->get[ID_INPUT_CAM1].box.pos[0] + 330;
+	g->box.pos[1] = m->get[ID_INPUT_CAM1].box.pos[1];
+	g->name = ft_strdup(TXT_CAMERA_MOD_CAM2);
+	g->size_min = 1;
+	g->size_max = 17;
+
+	g = &m->get[ID_INPUT_CAM3];
+	g->menu = LOAD_CAMERA;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->get[ID_INPUT_CAM2].box.pos[0] + 330;
+	g->box.pos[1] = m->get[ID_INPUT_CAM2].box.pos[1];
+	g->name = ft_strdup(TXT_CAMERA_MOD_CAM3);
+	g->size_min = 1;
+	g->size_max = 17;
+
+	g = &m->get[ID_INPUT_CAM4];
+	g->menu = LOAD_CAMERA;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->get[ID_INPUT_CAM1].box.pos[0];
+	g->box.pos[1] = m->get[ID_INPUT_CAM1].box.pos[1] + 10
+	+ m->get[ID_INPUT_CAM1].box.heigh * 2 + INPUT_SIZE_CHAR_Y * 2;
+	g->name = ft_strdup(TXT_CAMERA_MOD_CAM4);
+	g->size_min = 3;
+	g->size_max = 17;
+
+	g = &m->get[ID_INPUT_CAM5];
+	g->menu = LOAD_CAMERA;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->get[ID_INPUT_CAM2].box.pos[0];
+	g->box.pos[1] = m->get[ID_INPUT_CAM4].box.pos[1];
+	g->name = ft_strdup(TXT_CAMERA_MOD_CAM5);
+	g->size_min = 1;
+	g->size_max = 17;
+
+	g = &m->get[ID_INPUT_CAM6];
+	g->menu = LOAD_CAMERA;
+	g->mode = MODE_DOUBLE;
+	g->box.pos[0] = m->get[ID_INPUT_CAM3].box.pos[0];
+	g->box.pos[1] = m->get[ID_INPUT_CAM4].box.pos[1];
+	g->name = ft_strdup(TXT_CAMERA_MOD_CAM6);
+	g->size_min = 1;
+	g->size_max = 17;
+
+
+
 	(void)d;
 }
 
@@ -885,6 +942,14 @@ void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 	set_type_action(img, MENU, 1, &menu_spot_add_btn_ok);
 	set_over_click(m, img
 		, IB_SPOT_ADD_OK_OVER, IB_SPOT_ADD_OK_CLICK);
+
+	img = &m->scene_img[1][IMENU_EDIT_CAMERA_BOX];
+	img->pos[0] = (m->winx / 2) - (img->width / 2);
+	img->pos[1] = (m->winy / 2) - (img->heigh / 2);
+	img->menu = LOAD_CAMERA;
+	img->fade_min = MENU_FADE_ADD_SCENE;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
 
 	scene_init_1_rt_input(d, m, (t_get *)NULL);
 	scene_init_1_rt_input_area(m, (t_get *)NULL, -1);

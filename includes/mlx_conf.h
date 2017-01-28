@@ -96,4 +96,12 @@
 # define TXT_SPOT_TYPE_DIIR "Directionnal"
 # define TXT_SPOT_TYPE_POINT "Point..ctuel?"
 
+# define TXT_CAMERA_MOD_TITLE "Edit camera position and direction:"
+# define TXT_CAMERA_MOD_CAM1 "Position x:"
+# define TXT_CAMERA_MOD_CAM2 "Position y:"
+# define TXT_CAMERA_MOD_CAM3 "Position z:"
+# define TXT_CAMERA_MOD_CAM4 "Direction x:"
+# define TXT_CAMERA_MOD_CAM5 "Direction y:"
+# define TXT_CAMERA_MOD_CAM6 "Direction z:"
+
 #endif
