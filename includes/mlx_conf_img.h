@@ -8,9 +8,10 @@
 # define IB_LOAD 3
 # define IB_LOAD_OVER 4
 # define IB_LOAD_CLICK 5
-# define IB_SAVE 6
-# define IB_SAVE_OVER 7
-# define IB_SAVE_CLICK 8
+
+# define IB__SAVE 6
+# define IB__SAVE_OVER 7
+# define IB__SAVE_CLICK 8
 
 # define BOT_BTN_X_DECALLAGE 1
 
@@ -194,6 +195,11 @@
 # define IB_GEN_BMP 145
 # define IB_GEN_BMP_OVER 146
 # define IB_GEN_BMP_CLICK 147
+
+# define IB_SAVE_OFF 148
+# define IB_SAVE 149
+# define IB_SAVE_OVER 150
+# define IB_SAVE_CLICK 151
 
 # define ID_MAX_AUTO_INIT 200
 

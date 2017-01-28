@@ -430,9 +430,16 @@ void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 	set_type_action(img, MENU, 1, &menu_load_btn_open);
 	set_over_click(m, img, IB_LOAD_OVER, IB_LOAD_CLICK);
 
-	img = &m->scene_img[1][IB_SAVE];
+	img = &m->scene_img[1][IB_SAVE_OFF];
 	img->pos[0] = 1095;
 	img->pos[1] = m->scene_img[1][IB_LOAD].pos[1];
+	img->fade_min = 80;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
+
+	img = &m->scene_img[1][IB_SAVE];
+	img->pos[0] = m->scene_img[1][IB_SAVE_OFF].pos[0];
+	img->pos[1] = m->scene_img[1][IB_SAVE_OFF].pos[1];
 	img->fade_min = 40;
 	img->set_alpha = -1;
 	set_area(img);
