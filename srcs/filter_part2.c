@@ -12,7 +12,7 @@
 
 #include "raystruct.h"
 
-void	sepia(unsigned char *t, int rowstride, int index)
+void	sepia(char *data, int index)
 {
 	unsigned char	col[3];
 	double			nbr[3][4];
@@ -29,18 +29,18 @@ void	sepia(unsigned char *t, int rowstride, int index)
 	nbr[2][1] = 0.534;
 	nbr[2][2] = 0.131;
 	nbr[2][3] = 0;
-	while ((index += 3) < W_Y * rowstride)
+	while ((index += 4) < W_Y * W_X * 4)
 	{
-		col[0] = t[index + 0];
-		col[1] = t[index + 1];
-		col[2] = t[index + 2];
-		t[index + 0] = change_col(col, nbr[0]);
-		t[index + 1] = change_col(col, nbr[1]);
-		t[index + 2] = change_col(col, nbr[2]);
+		col[0] = data[index + 2];
+		col[1] = data[index + 1];
+		col[2] = data[index + 0];
+		data[index + 2] = change_col(col, nbr[0]);
+		data[index + 1] = change_col(col, nbr[1]);
+		data[index + 0] = change_col(col, nbr[2]);
 	}
 }
 
-void	technicolor(unsigned char *t, int rowstride, int index)
+void	technicolor(char *data, int index)
 {
 	unsigned char	col[3];
 	double			nbr[3][4];
@@ -57,18 +57,18 @@ void	technicolor(unsigned char *t, int rowstride, int index)
 	nbr[2][1] = -0.75;
 	nbr[2][2] = 1.848;
 	nbr[2][3] = 30.951;
-	while ((index += 3) < W_Y * rowstride)
+	while ((index += 4) < W_Y * W_X * 4)
 	{
-		col[0] = t[index + 0];
-		col[1] = t[index + 1];
-		col[2] = t[index + 2];
-		t[index + 0] = change_col(col, nbr[0]);
-		t[index + 1] = change_col(col, nbr[1]);
-		t[index + 2] = change_col(col, nbr[2]);
+		col[0] = data[index + 2];
+		col[1] = data[index + 1];
+		col[2] = data[index + 0];
+		data[index + 2] = change_col(col, nbr[0]);
+		data[index + 1] = change_col(col, nbr[1]);
+		data[index + 0] = change_col(col, nbr[2]);
 	}
 }
 
-void	polaroid(unsigned char *t, int rowstride, int index)
+void	polaroid(char *data, int index)
 {
 	unsigned char	col[3];
 	double			nbr[3][4];
@@ -85,18 +85,18 @@ void	polaroid(unsigned char *t, int rowstride, int index)
 	nbr[2][1] = -0.016;
 	nbr[2][2] = 1.483;
 	nbr[2][3] = 0;
-	while ((index += 3) < W_Y * rowstride)
+	while ((index += 4) < W_Y * W_X * 4)
 	{
-		col[0] = t[index + 0];
-		col[1] = t[index + 1];
-		col[2] = t[index + 2];
-		t[index + 0] = change_col(col, nbr[0]);
-		t[index + 1] = change_col(col, nbr[1]);
-		t[index + 2] = change_col(col, nbr[2]);
+		col[0] = data[index + 2];
+		col[1] = data[index + 1];
+		col[2] = data[index + 0];
+		data[index + 2] = change_col(col, nbr[0]);
+		data[index + 1] = change_col(col, nbr[1]);
+		data[index + 0] = change_col(col, nbr[2]);
 	}
 }
 
-void	bgr(unsigned char *t, int rowstride, int index)
+void	bgr(char *data, int index)
 {
 	unsigned char	col[3];
 	double			nbr[3][4];
@@ -113,18 +113,18 @@ void	bgr(unsigned char *t, int rowstride, int index)
 	nbr[2][1] = 0;
 	nbr[2][2] = 0;
 	nbr[2][3] = 0;
-	while ((index += 3) < W_Y * rowstride)
+	while ((index += 4) < W_Y * W_X * 4)
 	{
-		col[0] = t[index + 0];
-		col[1] = t[index + 1];
-		col[2] = t[index + 2];
-		t[index + 0] = change_col(col, nbr[0]);
-		t[index + 1] = change_col(col, nbr[1]);
-		t[index + 2] = change_col(col, nbr[2]);
+		col[0] = data[index + 2];
+		col[1] = data[index + 1];
+		col[2] = data[index + 0];
+		data[index + 2] = change_col(col, nbr[0]);
+		data[index + 1] = change_col(col, nbr[1]);
+		data[index + 0] = change_col(col, nbr[2]);
 	}
 }
 
-void	kodachrome(unsigned char *t, int rowstride, int index)
+void	kodachrome(char *data, int index)
 {
 	unsigned char	col[3];
 	double			nbr[3][4];
@@ -141,13 +141,13 @@ void	kodachrome(unsigned char *t, int rowstride, int index)
 	nbr[2][1] = -0.56;
 	nbr[2][2] = 1.601;
 	nbr[2][3] = 35.63;
-	while ((index += 3) < W_Y * rowstride)
+	while ((index += 4) < W_Y * W_X * 4)
 	{
-		col[0] = t[index + 0];
-		col[1] = t[index + 1];
-		col[2] = t[index + 2];
-		t[index + 0] = change_col(col, nbr[0]);
-		t[index + 1] = change_col(col, nbr[1]);
-		t[index + 2] = change_col(col, nbr[2]);
+		col[0] = data[index + 2];
+		col[1] = data[index + 1];
+		col[2] = data[index + 0];
+		data[index + 2] = change_col(col, nbr[0]);
+		data[index + 1] = change_col(col, nbr[1]);
+		data[index + 0] = change_col(col, nbr[2]);
 	}
 }

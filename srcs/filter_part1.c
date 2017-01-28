@@ -25,41 +25,12 @@ unsigned char	change_col(unsigned char *col, double *nbr)
 	}
 	return (0);
 }
-//mettre index a -3; rowstride = gdk_pixbuf_get_rowstride(pixbuf);
-
-void	abstract(unsigned char *t, int rowstride, int index)
-{
-	unsigned char	col[3];
-	double			nbr[3][4];
-
-	nbr[0][0] = 1;
-	nbr[0][1] = 0;
-	nbr[0][2] = 0;
-	nbr[0][3] = 0;
-	nbr[1][0] = 0;
-	nbr[1][1] = 1;
-	nbr[1][2] = 0;
-	nbr[1][3] = 0;
-	nbr[2][0] = 0;
-	nbr[2][1] = 0;
-	nbr[2][2] = 1;
-	nbr[2][3] = 0;
-	while ((index += 3) < W_Y * rowstride)
-	{
-		col[0] = t[index + 0];
-		col[1] = t[index + 1];
-		col[2] = t[index + 2];
-		t[index + 0] = change_col(col, nbr[0]);
-		t[index + 1] = change_col(col, nbr[1]);
-		t[index + 2] = change_col(col, nbr[2]);
-	}
-}
+//mettre index a -4;
 
 void	antialiasing(unsigned char *t, int rowstride, int index)
 {
 	unsigned char	col[3];
 	double			nbr[3][4];
-
 
 	nbr[0][0] = 1;
 	nbr[0][1] = 0;
@@ -84,7 +55,7 @@ void	antialiasing(unsigned char *t, int rowstride, int index)
 	}
 }
 
-void	brightness(unsigned char *t, int rowstride, int index)
+void	brightness(char *data, int index)
 {
 	unsigned char	col[3];
 	double			nbr[3][4];
@@ -101,18 +72,18 @@ void	brightness(unsigned char *t, int rowstride, int index)
 	nbr[2][1] = 0;
 	nbr[2][2] = 1.5;
 	nbr[2][3] = 0;
-	while ((index += 3) < W_Y * rowstride)
+	while ((index += 4) < W_Y * W_X * 4)
 	{
-		col[0] = t[index + 0];
-		col[1] = t[index + 1];
-		col[2] = t[index + 2];
-		t[index + 0] = change_col(col, nbr[0]);
-		t[index + 1] = change_col(col, nbr[1]);
-		t[index + 2] = change_col(col, nbr[2]);
+		col[0] = data[index + 2];
+		col[1] = data[index + 1];
+		col[2] = data[index + 0];
+		data[index + 2] = change_col(col, nbr[0]);
+		data[index + 1] = change_col(col, nbr[1]);
+		data[index + 0] = change_col(col, nbr[2]);
 	}
 }
 
-void	darkness(unsigned char *t, int rowstride, int index)
+void	darkness(char *data, int index)
 {
 	unsigned char	col[3];
 	double			nbr[3][4];
@@ -129,18 +100,18 @@ void	darkness(unsigned char *t, int rowstride, int index)
 	nbr[2][1] = 0;
 	nbr[2][2] = 0.5;
 	nbr[2][3] = 0;
-	while ((index += 3) < W_Y * rowstride)
+	while ((index += 4) < W_Y * W_X * 4)
 	{
-		col[0] = t[index + 0];
-		col[1] = t[index + 1];
-		col[2] = t[index + 2];
-		t[index + 0] = change_col(col, nbr[0]);
-		t[index + 1] = change_col(col, nbr[1]);
-		t[index + 2] = change_col(col, nbr[2]);
+		col[0] = data[index + 2];
+		col[1] = data[index + 1];
+		col[2] = data[index + 0];
+		data[index + 2] = change_col(col, nbr[0]);
+		data[index + 1] = change_col(col, nbr[1]);
+		data[index + 0] = change_col(col, nbr[2]);
 	}
 }
 
-void	negative(unsigned char *t, int rowstride, int index)
+void	negative(char *data, int index)
 {
 	unsigned char	col[3];
 	double			nbr[3][4];
@@ -157,13 +128,13 @@ void	negative(unsigned char *t, int rowstride, int index)
 	nbr[2][1] = 1;
 	nbr[2][2] = 0;
 	nbr[2][3] = 0;
-	while ((index += 3) < W_Y * rowstride)
+	while ((index += 4) < W_Y * W_X * 4)
 	{
-		col[0] = t[index + 0];
-		col[1] = t[index + 1];
-		col[2] = t[index + 2];
-		t[index + 0] = change_col(col, nbr[0]);
-		t[index + 1] = change_col(col, nbr[1]);
-		t[index + 2] = change_col(col, nbr[2]);
+		col[0] = data[index + 2];
+		col[1] = data[index + 1];
+		col[2] = data[index + 0];
+		data[index + 2] = change_col(col, nbr[0]);
+		data[index + 1] = change_col(col, nbr[1]);
+		data[index + 0] = change_col(col, nbr[2]);
 	}
 }
