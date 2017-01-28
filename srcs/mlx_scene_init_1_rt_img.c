@@ -429,7 +429,6 @@ void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 	set_type_action(img, MENU, 0, NULL);
 
 	img = &m->scene_img[1][IB_ARROW_LEFT];
-	img->menu = LOAD_FILE;
 	img->pos[0] = m->scene_img[1][IB_ARROW_LEFT_OFF].pos[0];
 	img->pos[1] = m->scene_img[1][IB_ARROW_LEFT_OFF].pos[1];
 	img->fade_min = 80;
@@ -447,7 +446,6 @@ void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 	set_type_action(img, MENU, 0, NULL);
 
 	img = &m->scene_img[1][IB_ARROW_RIGHT];
-	img->menu = LOAD_FILE;
 	img->pos[0] = m->scene_img[1][IB_ARROW_RIGHT_OFF].pos[0];
 	img->pos[1] = m->scene_img[1][IB_ARROW_RIGHT_OFF].pos[1];
 	img->fade_min = 80;

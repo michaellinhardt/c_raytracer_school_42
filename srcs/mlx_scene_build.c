@@ -57,7 +57,7 @@ void			scene_build(t_gen *d, t_mlx *m, t_img *lay, t_img *img)
 	if (m->menu.draw == 1)
 		layer(m, 1, 1);
 	if (m->scene == RT && m->menu.draw == 1
-	&& m->menu.id >= LOAD_FILE && m->menu.id <= LOAD_SPOT)
+	&& m->menu.id >= LOAD_FILE && m->menu.id < LOAD_CAMERA)
 	{
 		menu_draw(m, m->flst, -1, -1);
 		menu_special_draw(d, m);
