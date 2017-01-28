@@ -1,11 +1,5 @@
 #include "raystruct.h"
 
-static void		load_preview(t_mlx *m, t_flst *elem)
-{
-	(void)m;
-	(void)elem;
-}
-
 static void		build_list(t_mlx *m, t_flst *new, t_scene *sc)
 {
 	while (sc)
@@ -18,14 +12,14 @@ static void		build_list(t_mlx *m, t_flst *new, t_scene *sc)
 			new->path = ft_strdup(sc->name);
 		else
 			new->path = ft_strdup("Unknow..");
-		if (!m->flst && (m->flst = new) && (!(new->p = (t_flst *)NULL)))
-				new->n = (t_flst *)NULL;
+		if (!m->flst && (m->flst = new)
+			&& (!(new->p = (t_flst *)NULL)))
+			new->n = (t_flst *)NULL;
 		else if ((m->flst->p = new)
 		&& (new->n = m->flst)
 		&& (!(new->p = NULL)))
 			m->flst = new;
 		m->flst->scene = sc;
-		load_preview(m, m->flst);
 		sc = sc->next;
 	}
 }
@@ -49,7 +43,6 @@ void			menu_scene_open_order(t_gen *d, t_mlx *m)
 	m->total_file = total;
 	m->menu.id = LOAD_SCENE;
 }
-
 
 void			menu_scene_btn_open(void *gen, void *mlx)
 {

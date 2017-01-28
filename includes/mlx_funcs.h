@@ -48,6 +48,7 @@ void		input_delete_char(t_get *g, int pos, int reset);
 void		input_catch_char(t_gen *d, t_mlx *m, t_get *g, int key);
 void		input_valid(t_gen *d, t_mlx *m, t_get *g);
 void		input_set_focus(t_gen *d, t_mlx *m, t_get *get, int tar);
+void		input_catch_char_end(t_mlx *m, t_get *g, char c);
 
 t_img		*layer(t_mlx *m, int id, int reset);
 void		layer_add(t_mlx *m, t_img *l, t_img *i);
@@ -121,5 +122,19 @@ void		menu_gen_data_btn(void *gen, void *mlx);
 void		menu_gen_bmp_btn(void *gen, void *mlx);
 
 void		redraw(t_gen *d, t_mlx *m, int loading);
+
+void		input_valid_string(t_gen *d, t_mlx *m, t_get *g);
+void		input_valid_double(t_gen *d, t_mlx *m, t_get *g);
+void		input_valid_double_but_int(t_gen *d, t_mlx *m, t_get *g);
+void		input_valid_int(t_gen *d, t_mlx *m, t_get *g);
+void		scene_text_menu_load(t_mlx *m, t_flst *elem, int i, int color);
+void		scene_text_camera(t_mlx *m, int c);
+void		scene_text_scene_del(t_mlx *m, int c);
+void		scene_text_object_del(t_mlx *m, int c);
+void		scene_text_spot_del(t_mlx *m, int c);
+void		scene_text_object_mod2(t_mlx *m, int c, int i, t_img *img);
+void		scene_text_spot_mod2(t_mlx *m, int c, int i, t_img *img);
+void		scene_text_spot_mod(t_mlx *m, int c, char msg[512]);
+
 
 #endif

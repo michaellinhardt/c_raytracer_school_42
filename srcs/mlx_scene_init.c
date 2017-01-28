@@ -1,4 +1,4 @@
-# include "raystruct.h"
+#include "raystruct.h"
 
 void			anim_init(t_img *img, enum e_anim anim)
 {

@@ -106,11 +106,15 @@ SRCS = 	main.c \
 		mlx_scene_1_rt.c \
 		mlx_scene_text.c \
 		mlx_scene_text_menu.c \
+		mlx_scene_text_menu_next.c \
+		mlx_scene_text_menu_bis.c \
 		mlx_scene_text_input.c \
 		mlx_scene_input.c \
 		mlx_input_action.c \
 		mlx_input_valid.c \
+		mlx_input_valid_next.c \
 		mlx_input_char.c \
+		mlx_input_char_next.c \
 		mlx_input_draw_box.c \
 		mlx_input_draw_cursor.c \
 		mlx_input_target_str.c \

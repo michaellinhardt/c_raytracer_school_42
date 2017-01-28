@@ -1,4 +1,4 @@
-# include "raystruct.h"
+#include "raystruct.h"
 
 void			scene_init_0_intro(t_mlx *m, t_img *img)
 {
