@@ -91,7 +91,6 @@ double			getnearesthit(t_ray *r, t_gen *raytracer, double x, double y)
 		d[2] = co[0] * ref[2] + co[1] * re[2] + co[2] * d[2];
 		c[1] = colorfromrgb(d);
 		pixel_to_char(raytracer, c[1], x, y);
-		// mlx_put_pixel_to_image; char* = raytracer->data , color = c[1]
 	}
 	return (co[3]);
 }

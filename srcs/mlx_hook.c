@@ -1,38 +1,33 @@
 #include "raytra_gen.h"
 #include "raystruct.h"
 
-int		mouseo_hook(int x, int y, t_gen *d)
+static void		keyr_hook_mid(int key, t_gen *d)
 {
-	if (d->sc && !d->sc->data)
-		return (0);
-	d->mlx.input.mouse.over_x = x;
-	d->mlx.input.mouse.over_y = y;
-	return (0);
+	if (key == 261 && (d->mlx.menu.draw *= -1) && d->mlx.menu.draw == 1)
+	{
+		menu_list_free(&d->mlx, d->mlx.flst, (t_flst *)NULL);
+		layer(&d->mlx, 1, 1);
+		scene_init_1_rt_menu(&d->mlx);
+		if (d->mlx.menu.id == LOAD_SCENE)
+			menu_scene_open_order(d, &d->mlx);
+		else if (d->mlx.menu.id == LOAD_FILE)
+			menu_load_btn_open(d, &d->mlx);
+		else if (d->mlx.menu.id == LOAD_OBJECT)
+			menu_object_btn_open(d, &d->mlx);
+		else if (d->mlx.menu.id == LOAD_SPOT)
+			menu_spot_btn_open(d, &d->mlx);
+	}
+	else if (key == 261 && d->mlx.menu.draw == -1)
+		input_set_focus(d, &d->mlx, (t_get *)NULL, -1);
 }
 
-int		keyr_hook(int key, t_gen *d)
+int				keyr_hook(int key, t_gen *d)
 {
-	// ft_printf("\tkey %d\n", key);
 	if (key == 53)
-		exit (0);
+		exit(0);
 	else if (d->mlx.scene > INTRO && (!d->sc || (d->sc && d->sc->data)))
 	{
-		if (key == 261 && (d->mlx.menu.draw *= -1) && d->mlx.menu.draw == 1)
-		{
-				menu_list_free(&d->mlx, d->mlx.flst, (t_flst *)NULL);
-				layer(&d->mlx, 1, 1);
-				scene_init_1_rt_menu(&d->mlx);
-				if (d->mlx.menu.id == LOAD_SCENE)
-					menu_scene_open_order(d, &d->mlx);
-				else if (d->mlx.menu.id == LOAD_FILE)
-					menu_load_btn_open(d, &d->mlx);
-				else if (d->mlx.menu.id == LOAD_OBJECT)
-					menu_object_btn_open(d, &d->mlx);
-				else if (d->mlx.menu.id == LOAD_SPOT)
-					menu_spot_btn_open(d, &d->mlx);
-		}
-		else if (key == 261 && d->mlx.menu.draw == -1)
-			input_set_focus(d, &d->mlx, (t_get *)NULL, -1);
+		keyr_hook_mid(key, d);
 		(key == 123) ? d->mlx.input.key.left = 0 : 0;
 		(key == 124) ? d->mlx.input.key.right = 0 : 0;
 		(key == 125) ? d->mlx.input.key.down = 0 : 0;
@@ -45,7 +40,7 @@ int		keyr_hook(int key, t_gen *d)
 	return (0);
 }
 
-int		keyp_hook(int key, t_gen *d)
+int				keyp_hook(int key, t_gen *d)
 {
 	(key == 123) ? d->mlx.input.key.left = 1 : 0;
 	(key == 124) ? d->mlx.input.key.right = 1 : 0;
@@ -56,7 +51,7 @@ int		keyp_hook(int key, t_gen *d)
 	return (0);
 }
 
-int		mousep_hook(int btn, int x, int y, t_gen *d)
+int				mousep_hook(int btn, int x, int y, t_gen *d)
 {
 	if (d->sc && !d->sc->data)
 		return (0);
@@ -67,7 +62,7 @@ int		mousep_hook(int btn, int x, int y, t_gen *d)
 	(void)y;
 }
 
-int		mouser_hook(int btn, int x, int y, t_gen *d)
+int				mouser_hook(int btn, int x, int y, t_gen *d)
 {
 	if (d->sc && !d->sc->data)
 		return (0);

@@ -65,27 +65,6 @@ void			*display(void *z)
 	return (NULL);
 }
 
-/* to del
-
-static void		merge_chuncks(void *dest, void const *src)
-{
-	size_t			size;
-	size_t			i;
-
-	i = -1;
-	size = W_X * W_Y * 3;
-	while (++i < size)
-	{
-		if ((*(unsigned char *)(src)) > 0)
-			(*(unsigned char *)(dest)) = (*(unsigned char *)src);
-		dest++;
-		src++;
-	}
-	dest -= size;
-}
-
-*/
-
 static void		lanch_raytracing(pthread_t *p, t_id t)
 {
 	int	j;
@@ -103,19 +82,18 @@ void			raytracing(t_gen *s)
 	static t_id		t;
 	static char		c = 0;
 	pthread_t		p[MT];
+	int				toto;
 
+	toto = W_Y * W_X * 4;
 	if (!c)
 	{
 		(!(t.z = ft_memalloc(sizeof(t_thread) * MT))) ? error(2, "Malloc") : 1;
 		init_threads(t.z, &t, s);
 		c = 1;
-		if (!(s->data = (char *)ft_memalloc(W_X * 4 * W_Y)))
+		if (!(s->data = (char *)ft_memalloc(toto)))
 			return ;
 	}
 	else
-		ft_bzero(s->data, W_X * 4 * W_Y);
+		ft_bzero(s->data, toto);
 	lanch_raytracing(p, t);
-	/*
-	** put image to windows ... or not
-	*/ 
 }

@@ -30,7 +30,7 @@ static void		purge_scene(t_gen *d, t_scene *sc, char *path, char nb)
 	}
 }
 
-void		menu_load_clic(t_gen *d, t_mlx *m, t_flst *elem)
+void			menu_load_clic(t_gen *d, t_mlx *m, t_flst *elem)
 {
 	char	*path;
 	char	nb;

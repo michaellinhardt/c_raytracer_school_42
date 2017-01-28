@@ -40,7 +40,7 @@ static void		prepare_border(t_get *g, t_img *img, int x, int y)
 	}
 }
 
-void	scene_input_draw_box(t_gen *d, t_mlx *m, t_get *g, t_img *lay)
+void			scene_input_draw_box(t_gen *d, t_mlx *m, t_get *g, t_img *lay)
 {
 	if (!g->box.img)
 	{

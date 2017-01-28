@@ -1,6 +1,15 @@
 #include "raytra_gen.h"
 #include "raystruct.h"
 
+int				mouseo_hook(int x, int y, t_gen *d)
+{
+	if (d->sc && !d->sc->data)
+		return (0);
+	d->mlx.input.mouse.over_x = x;
+	d->mlx.input.mouse.over_y = y;
+	return (0);
+}
+
 static void		set_obj_type(t_mlx *m, int i)
 {
 	if (i == IB_OBJECT_MOD_TYPE1)
