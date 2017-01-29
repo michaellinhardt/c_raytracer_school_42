@@ -139,6 +139,7 @@ typedef struct		s_menu
 	struct s_obj	*obj;
 	int				obj_type;
 	int				filter_id;
+	int				filter[14];
 	int				spot_type;
 	int				loading;
 }					t_menu;

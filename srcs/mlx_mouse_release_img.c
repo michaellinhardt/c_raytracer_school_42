@@ -43,9 +43,9 @@ static void		set_spot_type(t_mlx *m, int i)
 static void		set_filter_id(t_mlx *m, int i)
 {
 	if (i < IB_FILTER1_ON)
-		m->menu.filter_id = i - IB_FILTER_CLICK;
+		m->menu.filter_id = i - IB_FILTER_CLICK - 1;
 	else
-		m->menu.filter_id = i - IB_FILTER14_OFF;
+		m->menu.filter_id = i - IB_FILTER14_OFF - 1;
 }
 
 int				mouse_release_img(t_gen *d, int btn, int x, int y)
