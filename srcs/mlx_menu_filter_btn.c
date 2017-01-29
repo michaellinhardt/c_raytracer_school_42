@@ -24,10 +24,12 @@ void			menu_filter_checkbox_btn(void *gen, void *mlx)
 void			menu_filter_btn_ok(void *gen, void *mlx)
 {
 	t_mlx	*m;
+	t_gen	*d;
 
 	m = mlx;
-	notif(m, N_NORMAL, "filter click ok");
+	d = gen;
 	(void)m;
+	(void)d;
 	(void)gen;
 }
 
