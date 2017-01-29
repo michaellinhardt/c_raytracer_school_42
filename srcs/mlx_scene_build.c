@@ -24,7 +24,7 @@ static void		menu_draw_actif_sub(t_mlx *m, t_img *img)
 
 void			menu_draw_actif(t_mlx *m, t_img *img)
 {
-	if (m->menu.draw == -1 || m->menu.loading != 0 || m->menu.id == LOAD_FILTER)
+	if (m->menu.draw == -1 || m->menu.loading != 0)
 		return ;
 	else if (m->menu.id == LOAD_FILE)
 		img = &m->scene_img[1][IB_LOAD];
@@ -36,6 +36,8 @@ void			menu_draw_actif(t_mlx *m, t_img *img)
 		img = &m->scene_img[1][IB_SPOT];
 	else if (m->menu.id == LOAD_CAMERA)
 		img = &m->scene_img[1][IB_CAMERA];
+	else if (m->menu.id == LOAD_FILTER)
+		img = &m->scene_img[1][IB_FILTER];
 	m->scene_img[1][IB_SELECTED].pos[0] = img->pos[0] - 3;
 	m->scene_img[1][IB_SELECTED].pos[1] = img->pos[1] - 3;
 	img = &m->scene_img[1][IB_SELECTED];

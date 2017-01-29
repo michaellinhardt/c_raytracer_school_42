@@ -205,6 +205,11 @@
 # define IB_CHECKBOX_NO 153
 # define IB_CHECKBOX_YES 154
 
+# define IB_FILTER_OFF 155
+# define IB_FILTER 156
+# define IB_FILTER_OVER 157
+# define IB_FILTER_CLICK 158
+
 # define ID_MAX_AUTO_INIT 200
 
 #endif

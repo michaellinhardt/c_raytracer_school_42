@@ -136,6 +136,8 @@ void		scene_text_object_mod2(t_mlx *m, int c, int i, t_img *img);
 void		scene_text_spot_mod2(t_mlx *m, int c, int i, t_img *img);
 void		scene_text_spot_mod(t_mlx *m, int c, char msg[512]);
 
-void		menu_filter_checkbox_btn(void *gen, void *mlx);
+void		menu_filter_btn_open(void *gen, void *mlx);
+void		menu_filter_checkbox_btn_on(void *gen, void *mlx);
+void		menu_filter_checkbox_btn_off(void *gen, void *mlx);
 
 #endif

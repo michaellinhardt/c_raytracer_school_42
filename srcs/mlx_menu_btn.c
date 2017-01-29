@@ -69,6 +69,7 @@ void			scene_btn(t_gen *d, t_mlx *m, t_img *img, t_menu *e)
 	s(m, (!d->sc ? 1 : 0), IB_SAVE_OFF, IB_SAVE);
 	s(m, (!d->sc ? 1 : 0), IB_GEN_DATA_OFF, IB_GEN_DATA);
 	s(m, (!d->sc || !d->sc->data ? 1 : 0), IB_GEN_BMP_OFF, IB_GEN_BMP);
+	s(m, (!d->sc || !d->sc->data ? 1 : 0), IB_FILTER_OFF, IB_FILTER);
 	scene_btn_sub(d, m, e);
 	(void)img;
 }

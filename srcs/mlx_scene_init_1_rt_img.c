@@ -888,7 +888,7 @@ void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 	img->fade_min = MENU_FADE_ADD_SCENE;
 	img->set_alpha = -1;
 	set_area(img);
-	set_type_action(img, MENU, 1, &menu_filter_checkbox_btn);
+	set_type_action(img, DISABLED, 1, &menu_filter_checkbox_btn_on);
 
 
 	img = &m->scene_img[1][IB_CHECKBOX_YES];
@@ -898,7 +898,22 @@ void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 	img->fade_min = MENU_FADE_ADD_SCENE;
 	img->set_alpha = -1;
 	set_area(img);
-	set_type_action(img, MENU, 1, &menu_filter_checkbox_btn);
+	set_type_action(img, DISABLED, 1, &menu_filter_checkbox_btn_off);
+
+	img = &m->scene_img[1][IB_FILTER_OFF];
+	img->pos[0] = 30;
+	img->pos[1] = W_Y - (img->width * 2) - 25;
+	img->fade_min = 80;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
+	img = &m->scene_img[1][IB_FILTER];
+	img->pos[0] = m->scene_img[1][IB_FILTER_OFF].pos[0];
+	img->pos[1] = m->scene_img[1][IB_FILTER_OFF].pos[1];
+	img->fade_min = 40;
+	img->set_alpha = -1;
+	set_area(img);
+	set_type_action(img, MENU, 1, &menu_filter_btn_open);
+	set_over_click(m, img, IB_FILTER_OVER, IB_FILTER_CLICK);
 
 
 

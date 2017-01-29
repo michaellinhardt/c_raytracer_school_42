@@ -14,7 +14,6 @@ void			menu_camera_btn_open(void *gen, void *mlx)
 	m->get[ID_INPUT_CAM5].target.ptr_double = &d->sc->cam[4];
 	m->get[ID_INPUT_CAM6].target.ptr_double = &d->sc->cam[5];
 	m->menu.next = LOAD_CAMERA;
-	m->menu.next = LOAD_FILTER;
 	(void)m;
 	(void)gen;
 	(void)mlx;
