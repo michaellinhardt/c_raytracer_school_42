@@ -31,3 +31,25 @@ void			menu_filter_checkbox_btn_off(void *gen, void *mlx)
 	(void)gen;
 	(void)mlx;
 }
+
+void			menu_filter_btn_ok(void *gen, void *mlx)
+{
+	t_mlx	*m;
+
+	m = mlx;
+	notif(m, N_NORMAL, "filter click ok");
+	(void)m;
+	(void)gen;
+	(void)mlx;
+}
+
+void			menu_filter_btn_cancel(void *gen, void *mlx)
+{
+	t_mlx	*m;
+
+	m = mlx;
+	notif(m, N_NORMAL, "filter click cancel");
+	(void)m;
+	(void)gen;
+	(void)mlx;
+}

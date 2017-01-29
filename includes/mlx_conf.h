@@ -104,4 +104,20 @@
 # define TXT_CAMERA_MOD_CAM5 "Direction y:"
 # define TXT_CAMERA_MOD_CAM6 "Direction z:"
 
+# define TXT_FILTER_1 "Filter 1"
+# define TXT_FILTER_2 "Filter 2"
+# define TXT_FILTER_3 "Filter 3"
+# define TXT_FILTER_4 "Filter 4"
+# define TXT_FILTER_5 "Filter 5"
+# define TXT_FILTER_6 "Filter 6"
+# define TXT_FILTER_7 "Filter 7"
+# define TXT_FILTER_8 "Filter 8"
+# define TXT_FILTER_9 "Filter 9"
+# define TXT_FILTER_10 "Filter 10"
+# define TXT_FILTER_11 "Filter 11"
+# define TXT_FILTER_12 "Filter 12"
+# define TXT_FILTER_13 "Filter 13"
+# define TXT_FILTER_14 "Filter 14"
+
+
 #endif
