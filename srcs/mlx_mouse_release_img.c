@@ -40,6 +40,14 @@ static void		set_spot_type(t_mlx *m, int i)
 		m->menu.spot_type = POINT;
 }
 
+static void		set_filter_id(t_mlx *m, int i)
+{
+	if (i < IB_FILTER1_ON)
+		m->menu.filter_id = i - IB_FILTER_CLICK;
+	else
+		m->menu.filter_id = i - IB_FILTER14_OFF;
+}
+
 int				mouse_release_img(t_gen *d, int btn, int x, int y)
 {
 	t_img		*img;
@@ -57,8 +65,10 @@ int				mouse_release_img(t_gen *d, int btn, int x, int y)
 					, &d->mlx.scene_img[d->mlx.scene][img->mouse.click_id]);
 			if (i >= IB_OBJECT_MOD_TYPE1 && i <= IB_OBJECT_MOD_TYPE9)
 				set_obj_type(&d->mlx, i);
-			if (i >= IB_SPOT_MOD_TYPE1 && i <= IB_SPOT_MOD_TYPE2)
+			else if (i >= IB_SPOT_MOD_TYPE1 && i <= IB_SPOT_MOD_TYPE2)
 				set_spot_type(&d->mlx, i);
+			else if (i >= IB_FILTER1_OFF && i <= IB_FILTER14_ON)
+				set_filter_id(&d->mlx, i);
 			if (img->mouse.action)
 				img->mouse.action((void *)d, (void *)&d->mlx);
 			return (1);

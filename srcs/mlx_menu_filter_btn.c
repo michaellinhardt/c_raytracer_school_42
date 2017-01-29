@@ -16,6 +16,7 @@ void			menu_filter_checkbox_btn_on(void *gen, void *mlx)
 
 	m = mlx;
 	notif(m, N_NORMAL, "checkbox click on");
+	ft_printf("%d\n", m->menu.filter_id);
 	(void)m;
 	(void)gen;
 	(void)mlx;
@@ -27,6 +28,7 @@ void			menu_filter_checkbox_btn_off(void *gen, void *mlx)
 
 	m = mlx;
 	notif(m, N_NORMAL, "checkbox click off");
+	ft_printf("%d\n", m->menu.filter_id);
 	(void)m;
 	(void)gen;
 	(void)mlx;
