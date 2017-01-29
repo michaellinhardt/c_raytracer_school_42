@@ -24,7 +24,7 @@ static void		menu_draw_actif_sub(t_mlx *m, t_img *img)
 
 void			menu_draw_actif(t_mlx *m, t_img *img)
 {
-	if (m->menu.draw == -1 || m->menu.loading != 0)
+	if (m->menu.draw == -1 || m->menu.loading != 0 || m->menu.id == LOAD_FILTER)
 		return ;
 	else if (m->menu.id == LOAD_FILE)
 		img = &m->scene_img[1][IB_LOAD];
@@ -43,12 +43,6 @@ void			menu_draw_actif(t_mlx *m, t_img *img)
 	menu_draw_actif_sub(m, (t_img *)NULL);
 }
 
-static void		menu_special_draw(t_gen *d, t_mlx *m)
-{
-	(void)d;
-	(void)m;
-}
-
 void			scene_build(t_gen *d, t_mlx *m, t_img *lay, t_img *img)
 {
 	int		i;
@@ -58,10 +52,7 @@ void			scene_build(t_gen *d, t_mlx *m, t_img *lay, t_img *img)
 		layer(m, 1, 1);
 	if (m->scene == RT && m->menu.draw == 1
 	&& m->menu.id >= LOAD_FILE && m->menu.id < LOAD_CAMERA)
-	{
 		menu_draw(m, m->flst, -1, -1);
-		menu_special_draw(d, m);
-	}
 	while (m->scene_img[m->scene][++i].img)
 	{
 		if (((img = &m->scene_img[m->scene][i])->status > MENU)
@@ -70,4 +61,5 @@ void			scene_build(t_gen *d, t_mlx *m, t_img *lay, t_img *img)
 			layer_add(m, lay, img);
 	}
 	menu_draw_actif(m, (t_img *)NULL);
+	(void)d;
 }

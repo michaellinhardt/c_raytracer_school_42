@@ -19,7 +19,7 @@ int				mouse_release_flst(t_gen *d, t_flst *elem, int x, int y)
 	t_img	*img;
 
 	if (d->mlx.scene == RT && d->mlx.flst && d->mlx.menu.draw == 1
-	&& (d->mlx.menu.id >= LOAD_FILE || d->mlx.menu.id <= LOAD_CAMERA))
+	&& d->mlx.menu.id > NONE)
 	{
 		i = MENU_LOAD_X_MAX * MENU_LOAD_Y_MAX;
 		img = &d->mlx.scene_img[d->mlx.scene][IMG_PREVIEW_CLIC];

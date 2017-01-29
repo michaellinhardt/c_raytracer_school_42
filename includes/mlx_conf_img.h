@@ -201,6 +201,10 @@
 # define IB_SAVE_OVER 150
 # define IB_SAVE_CLICK 151
 
+# define IMENU_FILTER_BOX 152
+# define IB_CHECKBOX_NO 153
+# define IB_CHECKBOX_YES 154
+
 # define ID_MAX_AUTO_INIT 200
 
 #endif

@@ -870,6 +870,38 @@ void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 	img->fade_min = MENU_FADE_ADD_SCENE;
 	img->set_alpha = -1;
 	set_type_action(img, MENU, 0, NULL);
+
+
+	img = &m->scene_img[1][IMENU_FILTER_BOX];
+	img->pos[0] = (m->winx / 2) - (img->width / 2);
+	img->pos[1] = (m->winy / 2) - (img->heigh / 2);
+	img->menu = LOAD_FILTER;
+	img->fade_min = MENU_FADE_ADD_SCENE;
+	img->set_alpha = -1;
+	set_type_action(img, MENU, 0, NULL);
+
+
+	img = &m->scene_img[1][IB_CHECKBOX_NO];
+	img->pos[0] = m->scene_img[1][IMENU_FILTER_BOX].pos[0] + 10;
+	img->pos[1] = m->scene_img[1][IMENU_FILTER_BOX].pos[1] + 10;
+	img->menu = LOAD_FILTER;
+	img->fade_min = MENU_FADE_ADD_SCENE;
+	img->set_alpha = -1;
+	set_area(img);
+	set_type_action(img, MENU, 1, &menu_filter_checkbox_btn);
+
+
+	img = &m->scene_img[1][IB_CHECKBOX_YES];
+	img->pos[0] = m->scene_img[1][IB_CHECKBOX_NO].pos[0];
+	img->pos[1] = m->scene_img[1][IB_CHECKBOX_NO].pos[1];
+	img->menu = LOAD_FILTER;
+	img->fade_min = MENU_FADE_ADD_SCENE;
+	img->set_alpha = -1;
+	set_area(img);
+	set_type_action(img, MENU, 1, &menu_filter_checkbox_btn);
+
+
+
 	scene_init_1_rt_input(d, m, (t_get *)NULL);
 	scene_init_1_rt_input_area(m, (t_get *)NULL, -1);
 }

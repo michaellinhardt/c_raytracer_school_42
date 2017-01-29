@@ -20,7 +20,8 @@ enum	e_menu {
 	LOAD_SPOT_DEL,
 	LOAD_SPOT_ADD,
 	LOAD_SPOT_EDIT,
-	LOAD_CAMERA
+	LOAD_CAMERA,
+	LOAD_FILTER
 };
 
 enum	e_scene {
@@ -137,6 +138,7 @@ typedef struct		s_menu
 	struct s_spot	*spot;
 	struct s_obj	*obj;
 	int				obj_type;
+	int				filter_id;
 	int				spot_type;
 	int				loading;
 }					t_menu;
