@@ -26,7 +26,7 @@ static int	ft_shadow_spot_dir(t_obj *s, t_color *c, t_scene *sc)
 		if (!s->eff[3])
 		{
 			dist = lenray(sc, &r);
-			coef = coef * (r.obj->eff[0] / 100);
+			coef = coef * (1 - r.obj->eff[0] / 100);
 		}
 		s = s->next;
 	}
