@@ -56,7 +56,7 @@ double			ft_shadow(t_obj *s, t_color *c, t_scene *sc)
 			if (!s->eff[3])
 			{
 				dist[1] = lenray(sc, &r);
-				if (dist[1] > EPS && dist[1] < dist[0] - EPS)
+				if (dist[1] > EPS * 20 && dist[1] < dist[0] - EPS * 20)
 					coef += (1  - r.obj->eff[0] / 100);
 			}
 			coef2 += 1;
