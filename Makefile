@@ -145,28 +145,20 @@ CC = gcc -g
 OBJ = $(SRC:.c=.o)
 
 all : $(NAME)
-	@./RT
 
 %.o: %.c
 	$(CC) -c $(WFLAGS) -I $(LIBFT_INCLUDES) -I $(INCLUDES) $< -o $@
 
 $(NAME) : $(OBJ)
-#	make -C libft
+	make -C libft
 	$(CC) -o $(NAME) $(OBJ) $(WFLAGS) $(LFLAGS) -I $(INCLUDES)
-
-
-rmika: fclean mika
-
-mika: $(OBJ)
-	$(CC) -o $(NAME) $(OBJ) $(WFLAGS) $(MIKAFLAGS) -I $(INCLUDES)
-	@./RT
 
 lib:
 	make -C libft re
 
 clean :
 	rm -rf $(OBJ)
-#	make -C libft clean
+	make -C libft clean
 
 img :
 	@mkdir image
@@ -177,9 +169,16 @@ clean_si :
 
 fclean : clean
 	rm -f $(NAME)
-#	make -C libft fclean
+	make -C libft fclean
 
 re : fclean all
+
+rt : cleanrt all
+	@./$(NAME)
+
+cleanrt : 
+	rm -f $(NAME)
+	rm -rf $(OBJ)
 
 lre :
 	make -C libft/ re
