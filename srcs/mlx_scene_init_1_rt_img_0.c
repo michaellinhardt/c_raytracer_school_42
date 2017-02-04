@@ -6,7 +6,7 @@
 /*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 13:50:15 by mlinhard          #+#    #+#             */
-/*   Updated: 2017/02/04 16:17:26 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/04 16:24:14 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -366,7 +366,10 @@ void			scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g)
 
 void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 {
-	scene_init_1_rt_img_1(d, m, img);
+	scene_init_1_rt_img_1(m, img);
+	scene_init_1_rt_img_2(m, img);
+	scene_init_1_rt_img_3(m, img);
+	scene_init_1_rt_img_4(m, img);
 
 	scene_init_1_rt_input(d, m, (t_get *)NULL);
 	scene_init_1_rt_input_area(m, (t_get *)NULL, -1);

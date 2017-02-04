@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_scene_init_1_rt_img_4.c                        :+:      :+:    :+:   */
+/*   mlx_scene_init_1_rt_img_7.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 13:50:15 by mlinhard          #+#    #+#             */
-/*   Updated: 2017/02/04 16:27:30 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/04 16:30:09 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void		part4(t_mlx *m, t_img *img)
 	(void)img;
 }
 
-void			scene_init_1_rt_img_4(t_mlx *m, t_img *img)
+void			scene_init_1_rt_img_7(t_mlx *m, t_img *img)
 {
 	part1(m, img);
 	part2(m, img);

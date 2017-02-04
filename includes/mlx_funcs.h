@@ -64,10 +64,16 @@ void		scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g);
 void		scene_init_1_rt_input_area(t_mlx *m, t_get *g, int i);
 
 void		scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img);
-void		scene_init_1_rt_img_1(t_gen *d, t_mlx *m, t_img *img);
-void		scene_init_1_rt_img_2(t_gen *d, t_mlx *m, t_img *img);
-void		scene_init_1_rt_img_3(t_gen *d, t_mlx *m, t_img *img);
-
+void		scene_init_1_rt_img_1(t_mlx *m, t_img *img);
+void		scene_init_1_rt_img_2(t_mlx *m, t_img *img);
+void		scene_init_1_rt_img_3(t_mlx *m, t_img *img);
+void		scene_init_1_rt_img_4(t_mlx *m, t_img *img);
+void		scene_init_1_rt_img_5(t_mlx *m, t_img *img);
+void		scene_init_1_rt_img_6(t_mlx *m, t_img *img);
+void		scene_init_1_rt_img_7(t_mlx *m, t_img *img);
+void		scene_init_1_rt_img_8(t_mlx *m, t_img *img);
+void		scene_init_1_rt_img_9(t_mlx *m, t_img *img);
+void		scene_init_1_rt_img_10(t_mlx *m, t_img *img);
 
 void		set_type_action(t_img *img, enum e_status status, int btn
 			, void (*action)(void *gen, void *mlx));
