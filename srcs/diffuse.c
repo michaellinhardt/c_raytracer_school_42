@@ -45,13 +45,13 @@ t_obj *tmp)
 			new_vector(c->spot->pos[3], c->spot->pos[4], c->spot->pos[5])), -1);
 	c->dot_light_norm = vector_dot(c->vec_obj_light, r->norm);
 	shad = ft_shadow(sc->obj, c, sc);
-	c->i_l[c->i] *= (1 - shad);
+	c->i_l[c->i] *= (shad);
 	if (vector_dot(r->norm, vectormultby_scalar(c->vec_obj_light, -1)) > 0 &&
 	tmp->type == PLAN)
 		return (0);
 	diffuse_shadow_specular_end(c, r, &speculaire, &obj_dotn);
 	return (c->i_l[c->i] == 0 ? 0 : c->i_l[c->i] * (c->rgb[c->i] *
-	c->dot_light_norm * (1 - shad) + 1 * pow(speculaire, 66)));
+	c->dot_light_norm + 1 * pow(speculaire, 66)));
 }
 
 static void		diffuse_end(t_ray *r, t_obj *tmp, t_color *c, t_scene *sc)
