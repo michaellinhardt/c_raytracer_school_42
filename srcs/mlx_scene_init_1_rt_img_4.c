@@ -6,7 +6,7 @@
 /*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 13:50:15 by mlinhard          #+#    #+#             */
-/*   Updated: 2017/02/04 16:41:02 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/04 17:27:35 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static void		part4(t_mlx *m, t_img *img)
 	scene_img_copy(m, &m->scene_img[1][IB_SCENE_DEL_CANCEL], img);
 	img->menu = LOAD_OBJECT_DEL;
 	set_type_action(img, MENU, 1, &menu_object_del_btn_cancel);
-	set_over_click(m, img, IB_OBJECT_DEL_CANCEL_OVER, IB_OBJECT_DEL_CANCEL_CLICK);
+	set_over_click(m, img, IB_OBJECT_DEL_CANCEL_OVER
+		, IB_OBJECT_DEL_CANCEL_CLICK);
 	img = &m->scene_img[1][IMENU_EDIT_SPOT_BOX_DEL];
 	scene_img_copy(m, &m->scene_img[1][IMENU_EDIT_SCENE_BOX_DEL], img);
 	img->menu = LOAD_SPOT_DEL;
@@ -78,14 +79,14 @@ static void		part2(t_mlx *m, t_img *img, int i)
 	i = 0;
 	while (++i < 10)
 	{
-		img = &m->scene_img[1][IB_OBJECT_MOD_TYPE_SELECT9 + i];
+		img = &m->scene_img[1][IB_OBJEC_MOD_TYP_SELCT9 + i];
 		scene_img_copy(m, &m->scene_img[1][IB_OBJECT_MOD_TYPE], img);
-		img->pos[0] = m->scene_img[1][IB_OBJECT_MOD_TYPE_SELECT9 + i - 9].pos[0];
-		img->pos[1] = m->scene_img[1][IB_OBJECT_MOD_TYPE_SELECT9 + i - 9].pos[1];
+		img->pos[0] = m->scene_img[1][IB_OBJEC_MOD_TYP_SELCT9 + i - 9].pos[0];
+		img->pos[1] = m->scene_img[1][IB_OBJEC_MOD_TYP_SELCT9 + i - 9].pos[1];
 		set_area(img);
 		set_type_action(img, MENU, 1, &menu_object_mod_btn_type);
-		set_over_click(m, img, (IB_OBJECT_MOD_TYPE_SELECT9 + i) - 18
-		, (IB_OBJECT_MOD_TYPE_SELECT9 + i) - 9);
+		set_over_click(m, img, (IB_OBJEC_MOD_TYP_SELCT9 + i) - 18
+		, (IB_OBJEC_MOD_TYP_SELCT9 + i) - 9);
 	}
 	img = &m->scene_img[1][IMENU_ADD_OBJECT_BOX];
 	scene_img_copy(m, &m->scene_img[1][IMENU_ADD_SCENE_BOX], img);

@@ -6,7 +6,7 @@
 /*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 13:50:15 by mlinhard          #+#    #+#             */
-/*   Updated: 2017/02/04 16:59:22 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/04 17:25:13 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void				scene_img_copy(t_mlx *m, t_img *src, t_img *dst)
 	set_area(dst);
 }
 
-void			scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g)
+void				scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g)
 {
 	scene_init_1_rt_get_1(m, g);
 	scene_init_1_rt_get_2(m, g);
 	(void)d;
 }
 
-void			scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
+void				scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img)
 {
 	scene_init_1_rt_img_1(m, img);
 	scene_init_1_rt_img_2(m, img);
