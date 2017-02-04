@@ -6,7 +6,7 @@
 /*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 13:50:15 by mlinhard          #+#    #+#             */
-/*   Updated: 2017/02/04 16:57:47 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/04 17:01:39 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,8 @@ void			scene_init_1_rt_get_3(t_mlx *m, t_get *g)
 	g->name = ft_strdup(TXT_SPOT_MOD_POS4);
 	g->size_min = 3;
 	g->size_max = 17;
-	part1(m, img);
-	part2(m, img);
-	part3(m, img);
-	part4(m, img);
+	part1(m, g);
+	part2(m, g);
+	part3(m, g);
+	part4(m, g);
 }
