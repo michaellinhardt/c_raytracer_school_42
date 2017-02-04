@@ -6,20 +6,14 @@
 /*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 13:50:15 by mlinhard          #+#    #+#             */
-/*   Updated: 2017/02/04 16:27:30 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/04 16:34:31 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raytra_gen.h"
 #include "raystruct.h"
 
-static void		part1(t_mlx *m, t_img *img)
-{
-	(void)m;
-	(void)img;
-}
-
-static void		part2(t_mlx *m, t_img *img)
+static void		part4(t_mlx *m, t_img *img)
 {
 	(void)m;
 	(void)img;
@@ -31,7 +25,13 @@ static void		part3(t_mlx *m, t_img *img)
 	(void)img;
 }
 
-static void		part4(t_mlx *m, t_img *img)
+static void		part2(t_mlx *m, t_img *img)
+{
+	(void)m;
+	(void)img;
+}
+
+static void		part1(t_mlx *m, t_img *img)
 {
 	(void)m;
 	(void)img;
