@@ -71,6 +71,10 @@ void		scene_init_1_rt_img_4(t_mlx *m, t_img *img);
 void		scene_init_1_rt_img_5(t_mlx *m, t_img *img);
 void		scene_init_1_rt_img_6(t_mlx *m, t_img *img);
 
+void		scene_init_1_rt_get_1(d, m, g);
+void		scene_init_1_rt_get_2(d, m, g);
+
+
 void		set_type_action(t_img *img, enum e_status status, int btn
 			, void (*action)(void *gen, void *mlx));
 void		set_area(t_img *img);
