@@ -103,7 +103,7 @@ static void		part1(t_mlx *m, t_img *img)
 {
 	img = &m->scene_img[1][IB_E_DEL_OFF];
 	img->pos[0] = m->scene_img[1][IB_GEN_DATA_OFF].pos[0]
-	+ (img->width * 5) + (BOT_BTN_X_DECALLAGE * 5);
+	+ (5 * img->width) + (5 * BOT_BTN_X_DECALLAGE);
 	img->pos[1] = m->scene_img[1][IB_GEN_DATA_OFF].pos[1];
 	img->fade_min = 80;
 	img->set_alpha = -1;

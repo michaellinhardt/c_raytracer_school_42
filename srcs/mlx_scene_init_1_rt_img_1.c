@@ -43,7 +43,7 @@ static void		part3(t_mlx *m, t_img *img)
 {
 	img = &m->scene_img[1][IB_SPOT];
 	img->pos[0] = m->scene_img[1][IB_SCENE].pos[0]
-	+ (img->width * 2) + (BOT_BTN_X_DECALLAGE * 2);
+	+ (2 * img->width) + (2 * BOT_BTN_X_DECALLAGE);
 	img->pos[1] = m->scene_img[1][IB_SCENE].pos[1];
 	img->fade_min = 40;
 	img->set_alpha = -1;
@@ -52,7 +52,7 @@ static void		part3(t_mlx *m, t_img *img)
 	set_over_click(m, img, IB_SPOT_OVER, IB_SPOT_CLICK);
 	img = &m->scene_img[1][IB_CAMERA];
 	img->pos[0] = m->scene_img[1][IB_SCENE].pos[0]
-	+ (img->width * 3) + (BOT_BTN_X_DECALLAGE * 3);
+	+ (3 * img->width) + (3 * BOT_BTN_X_DECALLAGE);
 	img->pos[1] = m->scene_img[1][IB_SCENE].pos[1];
 	img->fade_min = 40;
 	img->set_alpha = -1;
@@ -87,7 +87,7 @@ static void		part2(t_mlx *m, t_img *img)
 	set_over_click(m, img, IB_SCENE_OVER, IB_SCENE_CLICK);
 	img = &m->scene_img[1][IB_OBJECT];
 	img->pos[0] = m->scene_img[1][IB_SCENE].pos[0]
-	+ (img->width * 1) + (BOT_BTN_X_DECALLAGE * 1);
+	+ (img->width) + (BOT_BTN_X_DECALLAGE);
 	img->pos[1] = m->scene_img[1][IB_SCENE].pos[1];
 	img->fade_min = 40;
 	img->set_alpha = -1;
