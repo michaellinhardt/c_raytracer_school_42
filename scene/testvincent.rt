@@ -1,0 +1,29 @@
+scene {
+	name { test vincent        	 }
+	camera {pos{0; 0; 0 }, dir{0; 1; 2}}
+	spot {
+		name {co1cuou}
+			type {point}
+			camera {pos{0; 20; 0}, dir{0;0;0}}
+			color { 0xffffff}
+	}
+	ambiance { 0xffffff; 25 }
+	objects {
+		simple_obj {
+			name { PLAN BAS }
+			camera {pos{5 ; -10 ; 0}, dir{0 ; 1 ; 0 }}
+			type { plan }
+			size { 1. ; 0.0 ; 0 }
+			effect { 0 ; 0 ; 0 ; 0 ; 1 ; 0}
+			color { 0x0080ff }
+		}
+		simple_obj {
+			name { Cylindre }
+			camera {pos{0 ; -10; 0}, dir{0 ; 1 ; 0 }}
+			type { cylindre }
+			size { 2.5 ; 1000 ; 0 }
+			effect { 0 ; 0 ; 0 ; 0 ; 1 ; 0.2}
+			color { 0x66ff99 }
+		}
+	}
+}

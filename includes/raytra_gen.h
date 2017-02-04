@@ -18,8 +18,6 @@
 # include "mlx_struct.h"
 # include "get_next_line.h"
 # include <mlx.h>
-// # include <gtk/gtk.h>
-// # include <glib.h>
 # include <math.h>
 # include <dirent.h>
 
@@ -124,9 +122,9 @@ typedef struct		s_gen
 	t_spot			*spot_off;
 	char			*data;
 	t_mlx			mlx;
-	int				rep; //
+	int				rep;
 	char			nb;
-	double			view_angle[3]; // check with vincent
+	double			view_angle[3];
 }					t_gen;
 
 void				error(int i, char *str);

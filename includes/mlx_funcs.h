@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raytra_gen.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
+/*   Updated: 2017/02/04 09:37:01 by mlinhard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MLX_FUNCS_H
 # define MLX_FUNCS_H
 
@@ -73,7 +85,6 @@ void		scene_init_1_rt_img_6(t_mlx *m, t_img *img);
 
 void		scene_init_1_rt_get_1(t_mlx *m, t_get *g);
 void		scene_init_1_rt_get_2(t_mlx *m, t_get *g);
-
 
 void		set_type_action(t_img *img, enum e_status status, int btn
 			, void (*action)(void *gen, void *mlx));

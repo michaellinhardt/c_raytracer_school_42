@@ -1,7 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raytra_gen.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
+/*   Updated: 2017/02/04 09:37:01 by mlinhard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MLX_STRUCT_H
 # define MLX_STRUCT_H
 
-#define EDIT_BOOL 0x1
+# define EDIT_BOOL 0x1
+
+# include "mlx_input.h"
+# include "mlx_notif.h"
+
 /*
 ** Ne pas changer l'ordre de cet enum sinon MALEDICTION
 ** (et Oren te tig si tu touche..)
@@ -121,9 +137,6 @@ typedef struct		s_input
 	t_input_mouse	mouse;
 }					t_input;
 
-# include "mlx_input.h"
-# include "mlx_notif.h"
-
 /*
 ** pilote quel menu est dessiner a lecran
 */
@@ -189,6 +202,5 @@ typedef struct		s_mlx
 	int				winx;
 	int				winy;
 }					t_mlx;
-
 
 #endif
