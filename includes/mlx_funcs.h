@@ -70,10 +70,6 @@ void		scene_init_1_rt_img_3(t_mlx *m, t_img *img);
 void		scene_init_1_rt_img_4(t_mlx *m, t_img *img);
 void		scene_init_1_rt_img_5(t_mlx *m, t_img *img);
 void		scene_init_1_rt_img_6(t_mlx *m, t_img *img);
-void		scene_init_1_rt_img_7(t_mlx *m, t_img *img);
-void		scene_init_1_rt_img_8(t_mlx *m, t_img *img);
-void		scene_init_1_rt_img_9(t_mlx *m, t_img *img);
-void		scene_init_1_rt_img_10(t_mlx *m, t_img *img);
 
 void		set_type_action(t_img *img, enum e_status status, int btn
 			, void (*action)(void *gen, void *mlx));

@@ -126,6 +126,8 @@ SRCS = 	main.c \
 		mlx_scene_init_1_rt_img_2.c \
 		mlx_scene_init_1_rt_img_3.c \
 		mlx_scene_init_1_rt_img_4.c \
+		mlx_scene_init_1_rt_img_5.c \
+		mlx_scene_init_1_rt_img_6.c \
 		mlx_start.c
 
 
