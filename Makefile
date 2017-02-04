@@ -140,7 +140,7 @@ WFLAGS = -Wall -Werror -Wextra -march=native -O3
 LFLAGS = -L libft/ -lft -lm -lmlx -framework OpenGL -framework AppKit
 MIKAFLAGS = -L libft/ -lft -L minilibx/ -lmlx -framework OpenGL -framework AppKit
 
-CC = gcc -g
+CC = gcc
 
 OBJ = $(SRC:.c=.o)
 
