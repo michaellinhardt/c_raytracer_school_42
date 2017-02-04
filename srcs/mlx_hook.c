@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_hook.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/04 13:48:12 by mlinhard          #+#    #+#             */
+/*   Updated: 2017/02/04 13:48:12 by mlinhard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "raytra_gen.h"
 #include "raystruct.h"
 
@@ -27,6 +39,7 @@ int				keyr_hook(int key, t_gen *d)
 		exit(0);
 	else if (d->mlx.scene > INTRO && (!d->sc || (d->sc && d->sc->data)))
 	{
+		(key == 15) ? (menu_reset_cam(d)) : 0;
 		keyr_hook_mid(key, d);
 		(key == 123) ? d->mlx.input.key.left = 0 : 0;
 		(key == 124) ? d->mlx.input.key.right = 0 : 0;
@@ -34,6 +47,13 @@ int				keyr_hook(int key, t_gen *d)
 		(key == 126) ? d->mlx.input.key.up = 0 : 0;
 		(key == 51) ? d->mlx.input.key.backspace = 0 : 0;
 		(key == 117) ? d->mlx.input.key.suppr = 0 : 0;
+		if (key == 49)
+		{
+			if ((d->mlx.menu.edit_mode ^= EDIT_BOOL) & EDIT_BOOL)
+				notif(&d->mlx, N_NORMAL, "Edit mode: direction");
+			else
+				notif(&d->mlx, N_NORMAL, "Edit mode: position");
+		}
 		if (d->mlx.getfocus)
 			input_catch_char(d, &d->mlx, d->mlx.getfocus, key);
 	}
@@ -48,6 +68,7 @@ int				keyp_hook(int key, t_gen *d)
 	(key == 126) ? d->mlx.input.key.up = 1 : 0;
 	(key == 51) ? d->mlx.input.key.backspace = 1 : 0;
 	(key == 117) ? d->mlx.input.key.suppr = 1 : 0;
+	keyp_hook_keyboard(key, d, new_vector(0, 0, 0));
 	return (0);
 }
 

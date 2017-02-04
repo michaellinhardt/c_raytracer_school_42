@@ -7,6 +7,7 @@ char		mlx_keytochar(int key);
 int			mouseo_hook(int x, int y, t_gen *d);
 int			keyr_hook(int key, t_gen *d);
 int			keyp_hook(int key, t_gen *d);
+int			keyp_hook_keyboard(int key, t_gen *d, t_vector vec);
 int			mousep_hook(int btn, int x, int y, t_gen *d);
 int			mouser_hook(int btn, int x, int y, t_gen *d);
 
@@ -88,7 +89,7 @@ void		menu_scene_del_btn_cancel(void *gen, void *mlx);
 void		menu_scene_add_btn_ok(void *gen, void *mlx);
 void		menu_scene_btn_open(void *gen, void *mlx);
 void		menu_scene_clic(t_gen *d, t_mlx *m, t_flst *elem);
-void		menu_reset_obj_spot(t_mlx *m);
+void		menu_reset_obj_spot(t_gen *d, t_mlx *m);
 void		menu_scene_open_order(t_gen *d, t_mlx *m);
 
 void		menu_object_btn_open(void *gen, void *mlx);
@@ -122,6 +123,7 @@ void		menu_gen_data_btn(void *gen, void *mlx);
 void		menu_gen_bmp_btn(void *gen, void *mlx);
 
 void		redraw(t_gen *d, t_mlx *m, int loading);
+int			menu_reset_cam(t_gen *d);
 
 void		input_valid_string(t_gen *d, t_mlx *m, t_get *g);
 void		input_valid_double(t_gen *d, t_mlx *m, t_get *g);

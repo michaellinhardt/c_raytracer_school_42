@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_menu_load_clic.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/04 13:49:19 by mlinhard          #+#    #+#             */
+/*   Updated: 2017/02/04 13:49:19 by mlinhard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "raytra_gen.h"
 #include "raystruct.h"
 
@@ -42,6 +54,6 @@ void			menu_load_clic(t_gen *d, t_mlx *m, t_flst *elem)
 	purge_scene(d, d->sc, path, nb);
 	ft_strdel(&path);
 	ft_strdel(&d->sc->data);
-	menu_reset_obj_spot(m);
+	menu_reset_obj_spot(d, m);
 	(void)m;
 }

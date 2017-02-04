@@ -6,7 +6,7 @@
 /*   By: bbrunell <bbrunell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 22:04:03 by bbrunell          #+#    #+#             */
-/*   Updated: 2017/01/03 15:01:30 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/04 13:44:12 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			ft_shadow(t_obj *s, t_color *c, t_scene *sc)
 			if (!s->eff[3])
 			{
 				dist[1] = lenray(sc, &r);
-				if (dist[1] > EPS && dist[1] < dist[0] - EPS)
+				if (dist[1] > EPS * 20 && dist[1] < dist[0] - EPS * 20)
 					return (1);
 			}
 			s = s->next;

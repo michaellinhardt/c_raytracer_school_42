@@ -33,6 +33,9 @@
 
 # define MENU_TEXT_COLOR 0xFFFFFF
 
+# define OBJ_DIR_MOD 5
+# define OBJ_POS_MOD 1
+
 # define TXT_SCENE_ADD_NAME "New scene name:"
 # define TXT_SCENE_ADD_NAME_DEFAUT "new_scene"
 
@@ -118,6 +121,5 @@
 # define TXT_FILTER_12 "Filter 12"
 # define TXT_FILTER_13 "Filter 13"
 # define TXT_FILTER_14 "Filter 14"
-
 
 #endif

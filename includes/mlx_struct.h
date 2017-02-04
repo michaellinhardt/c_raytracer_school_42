@@ -1,6 +1,7 @@
 #ifndef MLX_STRUCT_H
 # define MLX_STRUCT_H
 
+#define EDIT_BOOL 0x1
 /*
 ** Ne pas changer l'ordre de cet enum sinon MALEDICTION
 ** (et Oren te tig si tu touche..)
@@ -137,6 +138,7 @@ typedef struct		s_menu
 	struct s_scene	*scene;
 	struct s_spot	*spot;
 	struct s_obj	*obj;
+	char			edit_mode;
 	int				obj_type;
 	int				filter_id;
 	int				filter[14];

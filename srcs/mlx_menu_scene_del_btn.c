@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_menu_scene_del_btn.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/04 13:49:39 by mlinhard          #+#    #+#             */
+/*   Updated: 2017/02/04 13:49:39 by mlinhard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "raystruct.h"
 
 void			menu_scene_del_btn_ok(void *gen, void *mlx)
@@ -17,7 +29,7 @@ void			menu_scene_del_btn_ok(void *gen, void *mlx)
 		sc->next = d->sc_off;
 		d->sc_off = sc;
 		m->menu.scene = NULL;
-		menu_reset_obj_spot(m);
+		menu_reset_obj_spot(d, m);
 		menu_scene_del_btn_cancel(gen, mlx);
 	}
 }

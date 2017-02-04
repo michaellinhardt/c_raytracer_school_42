@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_scene_init_1_rt.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/04 13:50:18 by mlinhard          #+#    #+#             */
+/*   Updated: 2017/02/04 13:50:18 by mlinhard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "raytra_gen.h"
 #include "raystruct.h"
 
@@ -65,5 +77,6 @@ void			scene_init_1_rt(t_gen *d, t_mlx *m, t_img *img)
 	scene_init_1_rt_img(d, m, img);
 	scene_init_1_rt_menu(m);
 	m->menu.draw = 1;
+	m->menu.edit_mode ^= EDIT_BOOL;
 	menu_load_btn_open((void *)d, (void *)m);
 }

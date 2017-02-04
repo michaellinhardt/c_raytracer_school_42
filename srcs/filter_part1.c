@@ -3,31 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   filter_part1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrunell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbrunell <bbrunell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/06 17:12:59 by bbrunell          #+#    #+#             */
-/*   Updated: 2016/09/06 17:13:02 by bbrunell         ###   ########.fr       */
+/*   Updated: 2017/02/04 13:54:19 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raystruct.h"
 
-unsigned char	change_col(unsigned char *col, double *nbr)
-{
-	unsigned char index;
-
-	if (col[0] * nbr[0] + col[1] * nbr[1] + col[2] * nbr[2] + nbr[3] > 0)
-	{
-		index = ((col[0] * nbr[0] + col[1] * nbr[1] + col[2] * nbr[2] +
-		nbr[3] > 0xff)) ? (unsigned char)0xff : (unsigned char)((col[0] * nbr[0]
-		+ col[1] * nbr[1] + col[2] * nbr[2] + nbr[3]));
-		return (index);
-	}
-	return (0);
-}
-//mettre index a -3; rowstride = gdk_pixbuf_get_rowstride(pixbuf);
-
-void	abstract(unsigned char *t, int rowstride, int index)
+void			abstract(unsigned char *t, int rowstride, int index)
 {
 	unsigned char	col[3];
 	double			nbr[3][4];
@@ -55,11 +40,10 @@ void	abstract(unsigned char *t, int rowstride, int index)
 	}
 }
 
-void	antialiasing(unsigned char *t, int rowstride, int index)
+void			antialiasing(unsigned char *t, int rowstride, int index)
 {
 	unsigned char	col[3];
 	double			nbr[3][4];
-
 
 	nbr[0][0] = 1;
 	nbr[0][1] = 0;
@@ -84,7 +68,7 @@ void	antialiasing(unsigned char *t, int rowstride, int index)
 	}
 }
 
-void	brightness(unsigned char *t, int rowstride, int index)
+void			brightness(unsigned char *t, int rowstride, int index)
 {
 	unsigned char	col[3];
 	double			nbr[3][4];
@@ -112,7 +96,7 @@ void	brightness(unsigned char *t, int rowstride, int index)
 	}
 }
 
-void	darkness(unsigned char *t, int rowstride, int index)
+void			darkness(unsigned char *t, int rowstride, int index)
 {
 	unsigned char	col[3];
 	double			nbr[3][4];
@@ -140,7 +124,7 @@ void	darkness(unsigned char *t, int rowstride, int index)
 	}
 }
 
-void	negative(unsigned char *t, int rowstride, int index)
+void			negative(unsigned char *t, int rowstride, int index)
 {
 	unsigned char	col[3];
 	double			nbr[3][4];

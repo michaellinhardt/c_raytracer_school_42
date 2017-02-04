@@ -54,6 +54,7 @@ SRCS = 	main.c \
 		filter_part1.c \
 		filter_part2.c \
 		filter_part3.c \
+		filter_part4.c \
 		mlx_keytochar.c \
 		mlx_notif.c \
 		mlx_menu_btn.c \
@@ -88,6 +89,7 @@ SRCS = 	main.c \
 		mlx_menu_filter_btn.c \
 		mlx_redraw.c \
 		mlx_hook.c \
+		mlx_hook_keyboard.c \
 		mlx_loop.c \
 		mlx_img.c \
 		mlx_layer.c \
