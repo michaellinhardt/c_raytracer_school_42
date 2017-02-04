@@ -57,8 +57,17 @@ void		layer_set_alpha(t_img *img);
 
 void		scene_init_0_intro(t_mlx *m, t_img *img);
 void		scene_init_1_rt(t_gen *d, t_mlx *m, t_img *img);
-void		scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img);
 void		scene_init_1_rt_menu(t_mlx *m);
+
+void		scene_img_copy(t_mlx *m, t_img *src, t_img *dst);
+void		scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g);
+void		scene_init_1_rt_input_area(t_mlx *m, t_get *g, int i);
+
+void		scene_init_1_rt_img(t_gen *d, t_mlx *m, t_img *img);
+void		scene_init_1_rt_img_1(t_gen *d, t_mlx *m, t_img *img);
+void		scene_init_1_rt_img_2(t_gen *d, t_mlx *m, t_img *img);
+void		scene_init_1_rt_img_3(t_gen *d, t_mlx *m, t_img *img);
+
 
 void		set_type_action(t_img *img, enum e_status status, int btn
 			, void (*action)(void *gen, void *mlx));

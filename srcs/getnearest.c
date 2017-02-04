@@ -58,7 +58,7 @@ static void		getnearesthit_mid(t_ray *r,
 		{
 			i[0] = c[0];
 			i[1] = 0;
-			d[0] = c[3];
+			d[0] = co[3];
 			d[1] = r->obj->eff[1];
 			c[2] = reflexion(raytracer->sc, r, i, d);
 		}

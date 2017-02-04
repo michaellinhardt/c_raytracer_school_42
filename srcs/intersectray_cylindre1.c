@@ -15,7 +15,7 @@
 int		init_and_solve2nd_degree(t_ray *r, t_obj *s, t_cylindre *cyl,
 t_inter *i)
 {
-	cyl->pos = new_vector(s->pos[0], s->pos[1], s->pos[2]);
+	cyl->pos = new_vector((int)s->pos[0], (int)s->pos[1], (int)s->pos[2]);
 	cyl->dir = vector_normalize(new_vector(s->pos[3], s->pos[4], s->pos[5]));
 	cyl->dot = vector_dot(r->dir, cyl->dir);
 	cyl->objetpos_raypos = vector_sub(r->start, cyl->pos);

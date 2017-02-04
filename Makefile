@@ -103,7 +103,6 @@ SRCS = 	main.c \
 		mlx_scene_init.c \
 		mlx_scene_init_0_intro.c \
 		mlx_scene_init_1_rt.c \
-		mlx_scene_init_1_rt_img.c \
 		mlx_scene_build.c \
 		mlx_scene_0_intro.c \
 		mlx_scene_1_rt.c \
@@ -122,6 +121,11 @@ SRCS = 	main.c \
 		mlx_input_draw_cursor.c \
 		mlx_input_target_str.c \
 		mlx_check_area.c \
+		mlx_scene_init_1_rt_img_0.c \
+		mlx_scene_init_1_rt_img_1.c \
+		mlx_scene_init_1_rt_img_2.c \
+		mlx_scene_init_1_rt_img_3.c \
+		mlx_scene_init_1_rt_img_4.c \
 		mlx_start.c
 
 

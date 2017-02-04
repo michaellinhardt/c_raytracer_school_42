@@ -6,7 +6,7 @@
 /*   By: bbrunell <bbrunell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 22:04:03 by bbrunell          #+#    #+#             */
-/*   Updated: 2017/02/04 13:44:12 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/04 16:16:28 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	ft_shadow_spot_dir(t_obj *s, t_color *c, t_scene *sc)
 	return (0);
 }
 
-int			ft_shadow(t_obj *s, t_color *c, t_scene *sc)
+double			ft_shadow(t_obj *s, t_color *c, t_scene *sc)
 {
 	t_ray	r;
 	double	dist[2];
@@ -48,7 +48,7 @@ int			ft_shadow(t_obj *s, t_color *c, t_scene *sc)
 			{
 				dist[1] = lenray(sc, &r);
 				if (dist[1] > EPS * 20 && dist[1] < dist[0] - EPS * 20)
-					return (1);
+					return (1 * (1 - s->eff[0] / 100));
 			}
 			s = s->next;
 		}
