@@ -6,19 +6,19 @@
 /*   By: bbrunell <bbrunell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 22:04:03 by bbrunell          #+#    #+#             */
-/*   Updated: 2017/02/04 16:16:28 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/04 17:24:00 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raystruct.h"
 
-static int	ft_shadow_spot_dir(t_obj *s, t_color *c, t_scene *sc)
+static int		ft_shadow_spot_dir(t_obj *s, t_color *c, t_scene *sc)
 {
 	t_ray	r;
 	double	dist;
 	double	coef;
 	double	coef2;
-	
+
 	r.start = c->hitpoint;
 	r.dir = c->vec_obj_light;
 	coef = 0;
@@ -29,7 +29,7 @@ static int	ft_shadow_spot_dir(t_obj *s, t_color *c, t_scene *sc)
 		{
 			dist = lenray(sc, &r);
 			if (dist > EPS)
-				coef += (1  - r.obj->eff[0] / 100);
+				coef += (1 - r.obj->eff[0] / 100);
 		}
 		coef2 += 1;
 		s = s->next;
@@ -57,7 +57,7 @@ double			ft_shadow(t_obj *s, t_color *c, t_scene *sc)
 			{
 				dist[1] = lenray(sc, &r);
 				if (dist[1] > EPS * 20 && dist[1] < dist[0] - EPS * 20)
-					coef += (1  - r.obj->eff[0] / 100);
+					coef += (1 - r.obj->eff[0] / 100);
 			}
 			coef2 += 1;
 			s = s->next;
@@ -67,4 +67,3 @@ double			ft_shadow(t_obj *s, t_color *c, t_scene *sc)
 		return (ft_shadow_spot_dir(s, c, sc));
 	return ((coef > 0) ? (coef2 - coef) / coef2 : 1);
 }
-
