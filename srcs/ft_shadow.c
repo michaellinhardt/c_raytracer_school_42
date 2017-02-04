@@ -16,9 +16,7 @@ static int	ft_shadow_spot_dir(t_obj *s, t_color *c, t_scene *sc)
 {
 	t_ray	r;
 	double	dist;
-	double	coef;
 
-	coef = 1;
 	r.start = c->hitpoint;
 	r.dir = c->vec_obj_light;
 	while (s)
@@ -26,21 +24,19 @@ static int	ft_shadow_spot_dir(t_obj *s, t_color *c, t_scene *sc)
 		if (!s->eff[3])
 		{
 			dist = lenray(sc, &r);
-			coef = coef * (1 - r.obj->eff[0] / 100);
+			if (dist > EPS)
+				return (1);
 		}
 		s = s->next;
 	}
-	coef = (coef > 1) ? 1 : coef;
-	return ((coef > 0) ? coef : 0);
+	return (0);
 }
 
 double			ft_shadow(t_obj *s, t_color *c, t_scene *sc)
 {
 	t_ray	r;
 	double	dist[2];
-	double	coef;
 
-	coef = 1;
 	if (c->spot->type & POINT)
 	{
 		r.start = new_vector(c->spot_pos.x, c->spot_pos.y, c->spot_pos.z);
@@ -51,14 +47,13 @@ double			ft_shadow(t_obj *s, t_color *c, t_scene *sc)
 			if (!s->eff[3])
 			{
 				dist[1] = lenray(sc, &r);
-				if (dist[1] > EPS && dist[1] < dist[0] - EPS)
-					coef = coef * (1 - r.obj->eff[0] / 100);
+				if (dist[1] > EPS * 20 && dist[1] < dist[0] - EPS * 20)
+					return (1 * (1 - s->eff[0] / 100));
 			}
 			s = s->next;
 		}
 	}
 	if (c->spot->type & DIIR)
 		return (ft_shadow_spot_dir(s, c, sc));
-	coef = (coef > 1) ? 1 : coef;
-	return ((coef < 0) ? 0 : coef);
+	return (0);
 }
