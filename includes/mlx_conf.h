@@ -1,5 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raytra_gen.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
+/*   Updated: 2017/02/04 09:37:01 by mlinhard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MLX_CONF_H
 # define MLX_CONF_H
+
+# include "mlx_conf_menu.h"
+# include "mlx_conf_img.h"
 
 # define WIN_TITLE "Awsome RT bitchhhh"
 
@@ -17,7 +32,7 @@
 ** LAYER_MAX est le nombre de layer t_img necessaire pour le projet
 */
 # define SCENE_MAX 3
-# define SCENE_IMG_MAX 50
+# define SCENE_IMG_MAX 201
 # define LAYER_MAX 6
 
 # define MENU_MAX 5
@@ -26,68 +41,97 @@
 
 # define PATH_XPM "./resources/scene_img/"
 # define PATH_SCENE "./scene/"
+# define PATH_NEW_SCENE "./resources/new_scene.rt"
 
-# define ID_IMG_MENU_CADRE 0
-# define ID_IMG_MENU_CADRE_LIGHTNING 1
-# define ID_IMG_MENU_CADRE_LOGO 2
+# define MENU_TEXT_COLOR 0xFFFFFF
 
-# define ID_IMG_BTN_LOAD 3
-# define ID_IMG_BTN_LOAD_OVER 4
-# define ID_IMG_BTN_LOAD_CLICK 5
-# define ID_IMG_BTN_SAVE 6
-# define ID_IMG_BTN_SAVE_OVER 7
-# define ID_IMG_BTN_SAVE_CLICK 8
+# define OBJ_DIR_MOD 5
+# define OBJ_POS_MOD 1
 
-# define BOT_BTN_X_DECALLAGE 1
+# define TXT_SCENE_ADD_NAME "New scene name:"
+# define TXT_SCENE_ADD_NAME_DEFAUT "new_scene"
 
-# define ID_IMG_BTN_SCENE 9
-# define ID_IMG_BTN_SCENE_OVER 10
-# define ID_IMG_BTN_SCENE_CLICK 11
-# define ID_IMG_BTN_OBJECT 12
-# define ID_IMG_BTN_OBJECT_OVER 13
-# define ID_IMG_BTN_OBJECT_CLICK 14
-# define ID_IMG_BTN_SPOT 15
-# define ID_IMG_BTN_SPOT_OVER 16
-# define ID_IMG_BTN_SPOT_CLICK 17
-# define ID_IMG_BTN_CAMERA 18
-# define ID_IMG_BTN_CAMERA_OVER 19
-# define ID_IMG_BTN_CAMERA_CLICK 20
+# define TXT_OBJECT_ADD_NAME "New object name:"
+# define TXT_OBJECT_ADD_NAME_DEFAUT "new_object"
 
-# define ID_IMG_BTN_ARROW_RIGHT_OFF 21
-# define ID_IMG_BTN_ARROW_RIGHT 22
-# define ID_IMG_BTN_ARROW_RIGHT_OVER 23
-# define ID_IMG_BTN_ARROW_RIGHT_CLICK 24
+# define TXT_SPOT_ADD_NAME "New spot name:"
+# define TXT_SPOT_ADD_NAME_DEFAUT "new_spot"
 
-# define ID_IMG_BTN_ARROW_LEFT_OFF 25
-# define ID_IMG_BTN_ARROW_LEFT 26
-# define ID_IMG_BTN_ARROW_LEFT_OVER 27
-# define ID_IMG_BTN_ARROW_LEFT_CLICK 28
+# define TXT_SCENE_MOD_NAME "Scene name:"
+# define TXT_SCENE_MOD_AMB1 "Ambiance 1:"
+# define TXT_SCENE_MOD_AMB2 "Ambiance 2:"
 
-# define ID_MAX_AUTO_INIT 28
+# define TXT_SCENE_DEL_VALID "Do you really want to delete this scene ?"
+# define TXT_OBJECT_DEL_VALID "Do you really want to delete this object ?"
+# define TXT_SPOT_DEL_VALID "Do you really want to delete this spot ?"
 
-# define ID_IMG_PREVIEW_NO_IMG 29
-# define ID_IMG_PREVIEW 30
-# define ID_IMG_PREVIEW_OVER 31
-# define ID_IMG_PREVIEW_CLIC 32
+# define TXT_OBJECT_MOD_NAME "Object name:"
+# define TXT_SPOT_MOD_NAME "Spot name:"
 
-# define ID_IMG_LOADING 33
+# define TXT_OBJECT_MOD_POS1 "Positon x:"
+# define TXT_OBJECT_MOD_POS2 "Positon y:"
+# define TXT_OBJECT_MOD_POS3 "Positon z:"
+# define TXT_OBJECT_MOD_POS4 "Direction x:"
+# define TXT_OBJECT_MOD_POS5 "Direction y:"
+# define TXT_OBJECT_MOD_POS6 "Direction z:"
 
-# define MENU_LOAD_X_MAX 4
-# define MENU_LOAD_Y_MAX 3
-# define MENU_LOAD_START_X W_X * 0.10
-# define MENU_LOAD_START_Y W_Y * 0.08
-# define MENU_LOAD_END_X W_X * 0.90
-# define MENU_LOAD_END_Y W_Y * 0.90
+# define TXT_SPOT_MOD_POS1 "Position x:"
+# define TXT_SPOT_MOD_POS2 "Position y:"
+# define TXT_SPOT_MOD_POS3 "Position z:"
+# define TXT_SPOT_MOD_POS4 "Direction x:"
+# define TXT_SPOT_MOD_POS5 "Direction y:"
+# define TXT_SPOT_MOD_POS6 "Direction z:"
 
-# define MENU_LOAD_SIZE_X MENU_LOAD_END_X - MENU_LOAD_START_X
-# define MENU_LOAD_SIZE_Y MENU_LOAD_END_Y - MENU_LOAD_START_Y
-# define MENU_LOAD_TEXT_MARGIN_X 5
-# define MENU_LOAD_TEXT_MARGIN_Y 5
-# define MENU_LOAD_PREVIEW_NAME_SIZE_MAX 18
-# define MENU_LOAD_PREVIEW_PATH "./resources/menu_load_preview/"
-# define MENU_LOAD_WAIT_BEFORE_LOAD 40
+# define TXT_OBJECT_MOD_SIZE1 "Size 1:"
+# define TXT_OBJECT_MOD_SIZE2 "Size 2:"
+# define TXT_OBJECT_MOD_SIZE3 "Size 3:"
 
-# define MENU_LOAD_MARGIN_X 20
-# define MENU_LOAD_MARGIN_Y 20
+# define TXT_OBJECT_MOD_EFF1 "Transparence:"
+# define TXT_OBJECT_MOD_EFF2 "Reflection:"
+# define TXT_OBJECT_MOD_EFF3 "Refraction:"
+# define TXT_OBJECT_MOD_EFF4 "Negatif:"
+# define TXT_OBJECT_MOD_EFF5 "Perlin:"
+# define TXT_OBJECT_MOD_EFF6 "Bump mapping:"
+
+# define TXT_OBJECT_MOD_COLOR "Color:"
+# define TXT_SPOT_MOD_COLOR "Color:"
+
+# define TXT_OBJECT_MOD_TYPE "Actual type:"
+# define TXT_OBJECT_TYPE_SPHERE "Sphere"
+# define TXT_OBJECT_TYPE_RECTANGLE "Rectangle"
+# define TXT_OBJECT_TYPE_PLAN "Plan"
+# define TXT_OBJECT_TYPE_CONE "Cone"
+# define TXT_OBJECT_TYPE_CYLINDRE "Cylindre"
+# define TXT_OBJECT_TYPE_COMPLEXE "Complexe"
+# define TXT_OBJECT_TYPE_BOLOID "Boloid"
+# define TXT_OBJECT_TYPE_TRIANGLE "Triangle"
+# define TXT_OBJECT_TYPE_ELLIPSE "Ellipse"
+
+# define TXT_SPOT_MOD_TYPE "Actual type:"
+# define TXT_SPOT_TYPE_DIIR "Directionnal"
+# define TXT_SPOT_TYPE_POINT "Point..ctuel?"
+
+# define TXT_CAMERA_MOD_TITLE "Edit camera position and direction:"
+# define TXT_CAMERA_MOD_CAM1 "Position x:"
+# define TXT_CAMERA_MOD_CAM2 "Position y:"
+# define TXT_CAMERA_MOD_CAM3 "Position z:"
+# define TXT_CAMERA_MOD_CAM4 "Direction x:"
+# define TXT_CAMERA_MOD_CAM5 "Direction y:"
+# define TXT_CAMERA_MOD_CAM6 "Direction z:"
+
+# define TXT_FILTER_1 "Filter 1"
+# define TXT_FILTER_2 "Filter 2"
+# define TXT_FILTER_3 "Filter 3"
+# define TXT_FILTER_4 "Filter 4"
+# define TXT_FILTER_5 "Filter 5"
+# define TXT_FILTER_6 "Filter 6"
+# define TXT_FILTER_7 "Filter 7"
+# define TXT_FILTER_8 "Filter 8"
+# define TXT_FILTER_9 "Filter 9"
+# define TXT_FILTER_10 "Filter 10"
+# define TXT_FILTER_11 "Filter 11"
+# define TXT_FILTER_12 "Filter 12"
+# define TXT_FILTER_13 "Filter 13"
+# define TXT_FILTER_14 "Filter 14"
 
 #endif

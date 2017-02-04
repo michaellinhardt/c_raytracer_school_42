@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_scene_img_load.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/04 13:50:11 by mlinhard          #+#    #+#             */
+/*   Updated: 2017/02/04 13:50:12 by mlinhard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "raystruct.h"
 
 int			scene_img_file(t_mlx *m, DIR *dir, struct dirent *f, char *path)
@@ -41,11 +53,11 @@ void		scene_img_folder(t_mlx *m, DIR *dir, struct dirent *f)
 	closedir(dir);
 }
 
-void		scene_img_load(t_mlx *m)
+void		scene_img_load(t_gen *d, t_mlx *m)
 {
 	if (m->img_isload[m->scene] == 1)
 		return ;
 	scene_img_folder(m, (DIR *)NULL, (struct dirent *)NULL);
-	scene_img_init(m);
+	scene_img_init(d, m);
 	m->img_isload[m->scene] = 1;
 }

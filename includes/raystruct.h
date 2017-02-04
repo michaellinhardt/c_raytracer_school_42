@@ -6,7 +6,7 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2017/01/07 01:58:06 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/01/29 18:23:44 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@
 # include <pthread.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-// # include <gui.h>
 
 # include "raytra_gen.h"
 # include "mlx_funcs.h"
@@ -74,16 +73,7 @@ typedef struct		s_ray
 
 typedef struct		s_general
 {
-	// char			c;
-	// double			bpp;
-	// int				bit_per_pixel;
 	int				s_line;
-	// int				endian;
-	// char			*data;
-	// void			*img;
-	// void			*win;
-	// void			*mlx;
-	// int				color;
 	THE				*z;
 }					t_id;
 
@@ -264,7 +254,7 @@ typedef struct		s_refra
 **									write_img.c
 */
 
-void				print_bmp(char *str, t_id t, t_gen *s);
+void				print_bmp(char *str, t_gen *s);
 
 /*
 **	key and mouse functions			key_functions.c
@@ -359,7 +349,8 @@ double				intersectray_complex(t_ray *r, t_obj *s, int *col);
 double				intersectray_boloid(t_ray *r, t_obj *s, t_inter *i);
 double				intersectray_triangle(t_ray *r, t_obj *s, t_inter *i);
 double				intersectray_ellipse(t_ray *r, t_obj *s, t_inter *i);
-double				touch_cone_or_plan(t_ray *r, t_obj *s, t_inter *i, t_cone *c);
+double				touch_cone_or_plan(t_ray *r, t_obj *s, t_inter *i
+	, t_cone *c);
 double				inter1_or_plan(t_ray *r, t_obj *s, t_inter *i, t_cone *c);
 double				inter2_or_plan(t_ray *r, t_obj *s, t_inter *i, t_cone *c);
 
@@ -414,7 +405,8 @@ void				antialiasing(unsigned char *t, int rowstride, int index);
 
 int					texture(t_obj *tmp, t_vector hitpoint);
 double				noise(t_ray *r, t_vector hitpoint, double bump_mapping);
-double				getnearesthit(t_ray *r, t_gen *raytracer, double x1, double y1);
+double				getnearesthit(t_ray *r, t_gen *raytracer, double x1
+	, double y1);
 double				ft_shadow(t_obj *s, t_color *c, t_scene *sc);
 
 #endif

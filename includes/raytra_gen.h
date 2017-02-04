@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2017/01/07 08:36:28 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/04 09:37:01 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # include "mlx_struct.h"
 # include "get_next_line.h"
 # include <mlx.h>
-// # include <gtk/gtk.h>
-// # include <glib.h>
 # include <math.h>
 # include <dirent.h>
 
@@ -106,6 +104,8 @@ typedef struct		s_scene
 {
 	char			*name;
 	char			*path_save;
+	char			*data;
+	char			*data_original;
 	char			nb;
 	double			cam[6];
 	double			amb[2];
@@ -118,11 +118,13 @@ typedef struct		s_gen
 {
 	t_scene			*sc;
 	t_scene			*sc_off;
+	t_obj			*obj_off;
+	t_spot			*spot_off;
 	char			*data;
 	t_mlx			mlx;
-	int				rep; //
+	int				rep;
 	char			nb;
-	double			view_angle[3]; // check with vincent
+	double			view_angle[3];
 }					t_gen;
 
 void				error(int i, char *str);

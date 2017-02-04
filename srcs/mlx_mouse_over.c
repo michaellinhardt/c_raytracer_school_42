@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_mouse_over.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/04 13:49:55 by mlinhard          #+#    #+#             */
+/*   Updated: 2017/02/04 13:49:55 by mlinhard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "raytra_gen.h"
 #include "raystruct.h"
 
@@ -20,4 +32,5 @@ void	mouse_over(t_mlx *m, int x, int y)
 				, &m->scene_img[m->scene][img->mouse.over_id]);
 		}
 	}
+	menu_draw_actif(m, (t_img *)NULL);
 }

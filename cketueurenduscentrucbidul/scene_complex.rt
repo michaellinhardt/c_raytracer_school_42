@@ -1,0 +1,54 @@
+scene {								
+	name { NAME_SCENE        	 }
+	camera {pos{890; 525; -50}, dir{0; 1; 2}}				
+	spot {	
+	name {cocuou}
+	type { point }						
+		camera {pos{890; 525; -50}, dir{1 ; 0; 1}}
+		color { 0xFFFFFF }					
+	}
+	ambiance { 0x452d6e; 52 }					
+	objects {
+		simple_obj {
+			name { vert }
+			camera {pos{1060 ; 550 ; 0}, dir{-10 ; 0 ; 0 }}
+			type { plan }				
+			size { 1. ; 0.0 ; 0 }			
+			effect { 0 ; 0 ; 0 ; 0;0;0}			
+			color { 0x00FF00 }				
+		}
+		simple_obj {
+			name { rouge }
+			camera {pos{0 ; 550 ; 0}, dir{10 ; 0 ; 0 }}
+			type { plan }				
+			size { 1. ; 0.0 ; 0 }			
+			effect { 0 ; 0 ; 0 ; 0;0;0}			
+			color { 0xFF0000 }				
+		}
+		complex_obj {
+			name { complex }
+			camera {pos{ 890; 530; 20}, dir{1 ;1 ; 0}}
+			simple_obj {
+				camera {pos{ 890; 535; 22}, dir{1 ;1 ; 0}}				
+				type { sphere }				
+				size { 7 ; 5.0 ; 0 }			
+				effect { 0 ; 0 ; 0 ; 0;1;0}			
+				color { 0xFF0000 }				
+			}
+			simple_obj {
+				camera {pos{ 895; 530; 18}, dir{1 ;1 ; 0}}				
+				type { sphere }				
+				size { 7 ; 5.0 ; 0 }			
+				effect { 0 ; 0 ; 0 ; 1;0;0}			
+				color { 0x00ff00 }				
+			}
+			simple_obj {
+				camera {pos{ 890; 525; 22}, dir{1 ;1 ; 0}}				
+				type { sphere }				
+				size { 7 ; 5.0 ; 0 }			
+				effect { 0 ; 100 ; 0 ; 0;1;1}			
+				color { 0x0000FF }				
+			}
+		}
+}
+}

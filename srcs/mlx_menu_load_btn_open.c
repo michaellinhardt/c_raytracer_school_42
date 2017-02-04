@@ -1,22 +1,16 @@
-#include "raystruct.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_menu_load_btn_open.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/04 13:49:16 by mlinhard          #+#    #+#             */
+/*   Updated: 2017/02/04 13:49:17 by mlinhard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static void		free_list(t_mlx *m, t_flst *flst, t_flst *destroy)
-{
-	if (!flst)
-		return ;
-	while (flst)
-	{
-		destroy = flst;
-		flst = flst->n;
-		ft_strdel(&destroy->path);
-		ft_strdel(&destroy->path_preview);
-		if (destroy->preview.img)
-			mlx_destroy_image(m->mlx, destroy->preview.img);
-		destroy->n = NULL;
-		destroy->p = NULL;
-		ft_memdel((void **)&destroy);
-	}
-}
+#include "raystruct.h"
 
 static void		load_preview(t_mlx *m, t_flst *elem)
 {
@@ -43,8 +37,9 @@ static void		build_list(t_mlx *m, t_flst *new, DIR *dir, struct dirent *f)
 		if (!(new = (t_flst *)ft_memalloc(sizeof(t_flst))))
 			error(2, "malloc t_flst struct");
 		new->path = ft_strdup(f->d_name);
-		if (!m->flst && (m->flst = new) && (!(new->p = (t_flst *)NULL)))
-				new->n = (t_flst *)NULL;
+		if (!m->flst && (m->flst = new)
+			&& (!(new->p = (t_flst *)NULL)))
+			new->n = (t_flst *)NULL;
 		else if ((m->flst->p = new)
 		&& (new->n = m->flst)
 		&& (!(new->p = NULL)))
@@ -55,20 +50,26 @@ static void		build_list(t_mlx *m, t_flst *new, DIR *dir, struct dirent *f)
 	closedir(dir);
 }
 
-void			menu_load_btn_open(void *ptr)
+void			menu_load_btn_open(void *gen, void *mlx)
 {
 	t_mlx	*m;
 	t_flst	*lst;
 	int		total;
+	char	*itoaa;
 
-	m = ptr;
-	free_list(m, m->flst, (t_flst *)NULL);
+	m = mlx;
+	menu_list_free(m, m->flst, (t_flst *)NULL);
 	m->flst = NULL;
 	build_list(m, m->flst, NULL, NULL);
 	lst = m->flst;
 	total = 0;
 	while (++total && lst && (lst->id = total))
 		lst = lst->n;
+	itoaa = ft_itoa(total - 1);
+	notif2(m, N_NORMAL, itoaa, " files loaded in the menu");
+	ft_strdel(&itoaa);
 	m->total_file = total;
 	m->menu.id = LOAD_FILE;
+	(void)gen;
+	(void)mlx;
 }

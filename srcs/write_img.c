@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/22 07:58:30 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/11 02:53:15 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2017/01/28 22:00:29 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,24 @@ static void	write_header(int fd)
 	write(fd, infoheader, 40);
 }
 
-static void	fill_img(int fd, char *str, t_id t)
+static void	fill_img(int fd, char *str)
 {
 	int		i;
-	char	s[t.s_line * W_Y + 1];
-	char	tmp[t.s_line + 1];
+	char	s[(W_X * 4 * W_Y) + 1];
+	char	tmp[(W_X * 4) + 1];
+	int		s_line;
 
-	ft_memcpy(s, str, t.s_line * W_Y);
+	s_line = W_X * 4;
+	ft_memcpy(s, str, s_line * W_Y);
 	i = 0;
 	while (i < W_Y / 2)
 	{
-		ft_memcpy(tmp, s + i * t.s_line, t.s_line);
-		ft_memcpy(s + i * t.s_line, s + (W_Y - i - 1) * t.s_line, t.s_line);
-		ft_memcpy(s + (W_Y - i - 1) * t.s_line, tmp, t.s_line);
+		ft_memcpy(tmp, s + i * s_line, s_line);
+		ft_memcpy(s + i * s_line, s + (W_Y - i - 1) * s_line, s_line);
+		ft_memcpy(s + (W_Y - i - 1) * s_line, tmp, s_line);
 		++i;
 	}
-	write(fd, s, t.s_line * W_Y);
+	write(fd, s, s_line * W_Y);
 }
 
 static char	*name_file(t_gen *s, int *nb)
@@ -80,7 +82,7 @@ static char	*name_file(t_gen *s, int *nb)
 	return (tmp);
 }
 
-void		print_bmp(char *str, t_id t, t_gen *s)
+void		print_bmp(char *str, t_gen *s)
 {
 	int			fd;
 	static int	nb[20] = {0};
@@ -93,7 +95,7 @@ void		print_bmp(char *str, t_id t, t_gen *s)
 	fd = open(name, O_CREAT | O_RDWR | O_TRUNC, 0755);
 	ft_strdel(&name);
 	write_header(fd);
-	fill_img(fd, str, t);
+	fill_img(fd, str);
 	close(fd);
 	c = 1;
 }

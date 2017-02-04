@@ -1,8 +1,20 @@
-# include "raytra_gen.h"
-# include "raystruct.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_scene_init_1_rt.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/04 13:50:18 by mlinhard          #+#    #+#             */
+/*   Updated: 2017/02/04 13:50:18 by mlinhard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "raytra_gen.h"
+#include "raystruct.h"
 
 void			set_type_action(t_img *img, enum e_status status, int btn
-			, void (*action)(void *ptr))
+			, void (*action)(void *gen, void *mlx))
 {
 	img->status = status;
 	img->mouse.btn = btn;
@@ -49,7 +61,7 @@ void			scene_init_1_rt_menu(t_mlx *m)
 			anim_init(&m->scene_img[1][i], FADE_IN);
 }
 
-void			scene_init_1_rt(t_mlx *m, t_img *img)
+void			scene_init_1_rt(t_gen *d, t_mlx *m, t_img *img)
 {
 	layer(m, 0, 2);
 	layer(m, 1, 1);
@@ -58,9 +70,13 @@ void			scene_init_1_rt(t_mlx *m, t_img *img)
 	img = layer(m, 4, 2);
 	img->i = -4;
 	while ((img->i += 4) < (img->sl * m->winy))
-			img->str[img->i + 3] = (unsigned char)50;
-	scene_init_1_rt_img(m, img);
+	{
+		img->ptr[img->i / 4] = MENU_MODALE_COLOR;
+		img->str[img->i + 3] = (unsigned char)MENU_MODALE_FADE;
+	}
+	scene_init_1_rt_img(d, m, img);
 	scene_init_1_rt_menu(m);
 	m->menu.draw = 1;
-	menu_load_btn_open((void *)m);
+	m->menu.edit_mode ^= EDIT_BOOL;
+	menu_load_btn_open((void *)d, (void *)m);
 }

@@ -1,0 +1,93 @@
+scene {
+	name { complexe }
+	camera {pos{50; 50; 0 }, dir{0; 1; 2}}
+	spot {
+		name {co1cuou}
+			type {point}
+			camera {pos{50; 50; 20}, dir{0;0;0}}
+			color { 0xffffff}
+	}
+	ambiance { 0xffffff; 0 }
+	objects {
+		simple_obj {
+			name { PLAN HAUT }
+			camera {pos{50 ; 55 ; 20}, dir{0 ; 1 ; 0 }}
+			type { plan }
+			size { 1. ; 0.0 ; 0 }
+			effect { 90 ; 0 ; 1.15 ; 0 ; 1; 0.5}
+			color { 0x9B111E }
+		}
+		simple_obj {
+			name { Cylindre}
+			camera {pos{40 ; 65 ; 24.5}, dir{ 1; 0 ; 0 }}
+			type { cylindre }
+			size { 1.5 ; 200 ; 0 }
+			effect { 0 ; 0 ; 1 ; 0 ; 1 ; 0}
+			color { 0x00ff99 }
+		}
+		simple_obj {
+			name { Cylindre}
+			camera {pos{40 ; 65 ; 29.5}, dir{ 1; 0 ; 0 }}
+			type { cylindre }
+			size { 1.5 ; 200 ; 0 }
+			effect { 0 ; 0 ; 1 ; 0 ; 1 ; 0}
+			color { 0x0099ff }
+		}
+		simple_obj {
+			name { Cylindre}
+			camera {pos{40 ; 65 ; 35}, dir{ 1; 0 ; 0 }}
+			type { cylindre }
+			size { 1 ; 200 ; 0 }
+			effect { 0 ; 0 ; 1 ; 0 ; 1 ; 0}
+			color { 0xffffff }
+		}
+		simple_obj {
+			name { Cylindre}
+			camera {pos{40 ; 65 ; 40}, dir{ 1; 0 ; 0 }}
+			type { cylindre }
+			size { 1 ; 200 ; 0 }
+			effect { 0 ; 0 ; 1 ; 0 ; 1 ; 0}
+			color { 0xffff00 }
+		}
+		simple_obj {
+			name { Cylindre}
+			camera {pos{40 ; 65 ; 45}, dir{ 1; 0 ; 0 }}
+			type { cylindre }
+			size { 1 ; 200 ; 0 }
+			effect { 0 ; 0 ; 1 ; 0 ; 1 ; 0}
+			color { 0xff0000 }
+		}
+		simple_obj {
+			name { Cylindre}
+			camera {pos{40 ; 65 ; 50}, dir{ 1; 0 ; 0 }}
+			type { cylindre }
+			size { 1 ; 200 ; 0 }
+			effect { 0 ; 0 ; 1 ; 0 ; 1 ; 0}
+			color { 0x990000 }
+		}
+		simple_obj {
+			name { Cphere}
+			camera {pos{40 ; 50 ; 30}, dir{ 1; 0 ; 0 }}
+			type { sphere }
+			size { 4 ; 200 ; 0 }
+			effect { 0 ; 100 ; 1 ; 0 ; 1 ; 0}
+			color { 0x990000 }
+		}
+		simple_obj {
+			name { Cphere}
+			camera {pos{60 ; 50 ; 30}, dir{ 1; 0 ; 0 }}
+			type { sphere }
+			size { 4 ; 200 ; 0 }
+			effect { 0 ; 100 ; 1 ; 0 ; 0 ; 0}
+			color { 0x990000 }
+		}
+		simple_obj {
+			name { PLAN}
+			camera {pos{60 ; 47 ; 50}, dir{ 0; 1 ; 0 }}
+			type { plan }
+			size { 4 ; 200 ; 0 }
+			effect { 0 ; 40 ; 1 ; 0 ; 1 ; 0.3}
+			color { 0xddaaff }
+		}
+	}
+}

@@ -1,10 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_menu_save_btn_open.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/04 13:49:30 by mlinhard          #+#    #+#             */
+/*   Updated: 2017/02/04 13:49:30 by mlinhard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "raystruct.h"
 
-void			menu_save_btn_open(void *ptr)
+void			menu_save_btn_open(void *gen, void *mlx)
 {
-	t_mlx	*m;
+	t_gen	*d;
 
-	m = ptr;
-	ft_printf("save btn open\n");
-	(void)m;
+	d = gen;
+	if (d->sc)
+		print_scene(d->sc);
+	(void)mlx;
 }
