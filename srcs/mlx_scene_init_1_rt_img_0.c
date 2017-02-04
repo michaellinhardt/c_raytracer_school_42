@@ -6,7 +6,7 @@
 /*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 13:50:15 by mlinhard          #+#    #+#             */
-/*   Updated: 2017/02/04 17:25:13 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/04 18:38:18 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void				scene_init_1_rt_input(t_gen *d, t_mlx *m, t_get *g)
 {
 	scene_init_1_rt_get_1(m, g);
 	scene_init_1_rt_get_2(m, g);
+	scene_init_1_rt_get_3(m, g);
 	(void)d;
 }
 
