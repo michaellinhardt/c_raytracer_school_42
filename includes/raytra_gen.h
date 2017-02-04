@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2017/01/28 11:40:46 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/04 09:37:01 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ typedef struct		s_scene
 	char			*name;
 	char			*path_save;
 	char			*data;
+	char			*data_original;
 	char			nb;
 	double			cam[6];
 	double			amb[2];
