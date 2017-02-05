@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2017/02/04 18:43:08 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/05 15:20:49 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,5 +170,6 @@ void		menu_filter_btn_open(void *gen, void *mlx);
 void		menu_filter_checkbox_btn(void *gen, void *mlx);
 void		menu_filter_btn_ok(void *gen, void *mlx);
 void		menu_filter_btn_cancel(void *gen, void *mlx);
+void		menu_filter_call(t_gen *d, int i);
 
 #endif

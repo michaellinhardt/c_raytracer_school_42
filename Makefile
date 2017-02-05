@@ -86,6 +86,7 @@ SRCS = 	main.c \
 		mlx_menu_camera_btn_open.c \
 		mlx_menu_gen_btn.c \
 		mlx_menu_filter_btn.c \
+		mlx_menu_filter_call.c \
 		mlx_redraw.c \
 		mlx_hook.c \
 		mlx_hook_keyboard.c \
