@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raytra_gen.h                                       :+:      :+:    :+:   */
+/*   mlx_conf.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2017/02/04 09:37:01 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/05 14:57:37 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,19 +119,34 @@
 # define TXT_CAMERA_MOD_CAM5 "Direction y:"
 # define TXT_CAMERA_MOD_CAM6 "Direction z:"
 
-# define TXT_FILTER_1 "Filter 1"
-# define TXT_FILTER_2 "Filter 2"
-# define TXT_FILTER_3 "Filter 3"
-# define TXT_FILTER_4 "Filter 4"
-# define TXT_FILTER_5 "Filter 5"
-# define TXT_FILTER_6 "Filter 6"
-# define TXT_FILTER_7 "Filter 7"
-# define TXT_FILTER_8 "Filter 8"
-# define TXT_FILTER_9 "Filter 9"
-# define TXT_FILTER_10 "Filter 10"
-# define TXT_FILTER_11 "Filter 11"
-# define TXT_FILTER_12 "Filter 12"
-# define TXT_FILTER_13 "Filter 13"
-# define TXT_FILTER_14 "Filter 14"
+# define TXT_FILTER_1 "Antialiasing"
+# define TXT_FILTER_2 "Brightness"
+# define TXT_FILTER_3 "Darkness"
+# define TXT_FILTER_4 "Negative"
+# define TXT_FILTER_5 "Sepia"
+# define TXT_FILTER_6 "Technicolor"
+# define TXT_FILTER_7 "Polaroid"
+# define TXT_FILTER_8 "Bgr"
+# define TXT_FILTER_9 "Kodachrome"
+# define TXT_FILTER_10 "Browni"
+# define TXT_FILTER_11 "Vintage"
+# define TXT_FILTER_12 "Black and white"
+# define TXT_FILTER_13 "LSD"
+# define TXT_FILTER_14 "Abstract"
+
+# define FUNC_FILTER_1 &antialiasing
+# define FUNC_FILTER_2 &brightness
+# define FUNC_FILTER_3 &darkness
+# define FUNC_FILTER_4 &negative
+# define FUNC_FILTER_5 &sepia
+# define FUNC_FILTER_6 &technicolor
+# define FUNC_FILTER_7 &polaroid
+# define FUNC_FILTER_8 &bgr
+# define FUNC_FILTER_9 &kodachrome
+# define FUNC_FILTER_10 &browni
+# define FUNC_FILTER_11 &vintage
+# define FUNC_FILTER_12 &black_and_white
+# define FUNC_FILTER_13 &lsd
+# define FUNC_FILTER_14 &abstract
 
 #endif

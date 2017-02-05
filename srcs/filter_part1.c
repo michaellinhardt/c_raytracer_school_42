@@ -6,7 +6,7 @@
 /*   By: bbrunell <bbrunell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/06 17:12:59 by bbrunell          #+#    #+#             */
-/*   Updated: 2017/02/05 14:31:45 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/05 14:51:04 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ unsigned char	change_col(unsigned char *col, double *nbr)
 	return (0);
 }
 
-void			antialiasing(unsigned char *t, int index)
+void			antialiasing(char *d, int index)
 {
 	unsigned char	col[3];
 	double			nbr[3][4];
@@ -45,12 +45,12 @@ void			antialiasing(unsigned char *t, int index)
 	nbr[2][3] = 0;
 	while ((index += 3) < W_Y * W_X * 4 - W_X * 4)
 	{
-		col[0] = (t[index + 0] + t[index + 3] + t[index + W_X * 4]) / 3;
-		col[1] = (t[index + 1] + t[index + 4] + t[index + W_X * 4]) / 3;
-		col[2] = (t[index + 2] + t[index + 5] + t[index + W_X * 4]) / 3;
-		t[index + 0] = change_col(col, nbr[0]);
-		t[index + 1] = change_col(col, nbr[1]);
-		t[index + 2] = change_col(col, nbr[2]);
+		col[0] = (d[index + 0] + d[index + 3] + d[index + W_X * 4]) / 3;
+		col[1] = (d[index + 1] + d[index + 4] + d[index + W_X * 4]) / 3;
+		col[2] = (d[index + 2] + d[index + 5] + d[index + W_X * 4]) / 3;
+		d[index + 0] = change_col(col, nbr[0]);
+		d[index + 1] = change_col(col, nbr[1]);
+		d[index + 2] = change_col(col, nbr[2]);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2017/02/05 14:35:38 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/05 14:51:09 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -401,7 +401,7 @@ void				browni(char *data, int index);
 void				vintage(char *data, int index);
 void				black_and_white(char *data, int index);
 void				lsd(char *data, int index);
-void				antialiasing(unsigned char *t, int index);
+void				antialiasing(char *d, int index);
 
 int					texture(t_obj *tmp, t_vector hitpoint);
 double				noise(t_ray *r, t_vector hitpoint, double bump_mapping);
