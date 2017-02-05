@@ -6,7 +6,7 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2017/01/29 18:23:44 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/05 14:35:38 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -388,20 +388,20 @@ int					texture_ice(double u, double v, char *str, void *mlx);
 */
 
 unsigned char		change_col(unsigned char *col, double *nbr);
-void				abstract(unsigned char *t, int rowstride, int index);
-void				brightness(unsigned char *t, int rowstride, int index);
-void				darkness(unsigned char *t, int rowstride, int index);
-void				negative(unsigned char *t, int rowstride, int index);
-void				sepia(unsigned char *t, int rowstride, int index);
-void				technicolor(unsigned char *t, int rowstride, int index);
-void				polaroid(unsigned char *t, int rowstride, int index);
-void				bgr(unsigned char *t, int rowstride, int index);
-void				kodachrome(unsigned char *t, int rowstride, int index);
-void				browni(unsigned char *t, int rowstride, int index);
-void				vintage(unsigned char *t, int rowstride, int index);
-void				black_and_white(unsigned char *t, int rowstride, int index);
-void				lsd(unsigned char *t, int rowstride, int index);
-void				antialiasing(unsigned char *t, int rowstride, int index);
+void				abstract(char *data, int index);
+void				brightness(char *data, int index);
+void				darkness(char *data, int index);
+void				negative(char *data, int index);
+void				sepia(char *data, int index);
+void				technicolor(char *data, int index);
+void				polaroid(char *data, int index);
+void				bgr(char *data, int index);
+void				kodachrome(char *data, int index);
+void				browni(char *data, int index);
+void				vintage(char *data, int index);
+void				black_and_white(char *data, int index);
+void				lsd(char *data, int index);
+void				antialiasing(unsigned char *t, int index);
 
 int					texture(t_obj *tmp, t_vector hitpoint);
 double				noise(t_ray *r, t_vector hitpoint, double bump_mapping);
