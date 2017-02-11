@@ -6,7 +6,7 @@
 /*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 13:49:32 by mlinhard          #+#    #+#             */
-/*   Updated: 2017/02/04 13:49:33 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/11 21:14:56 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void			menu_scene_add_btn_ok(void *gen, void *mlx)
 		ft_strdel(&d->sc->name);
 		d->sc->name = ft_strdup(m->menu.new_scene);
 		d->sc->path_save = NULL;
+		menu_reset_obj_spot(gen, mlx);
 		m->menu.draw = -1;
 	}
 }
