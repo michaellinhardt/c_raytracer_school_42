@@ -6,7 +6,7 @@
 /*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 13:49:37 by mlinhard          #+#    #+#             */
-/*   Updated: 2017/02/04 13:49:37 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/11 21:01:54 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 int				menu_reset_cam(t_gen *d)
 {
+	if (d->mlx.menu.draw == 1)
+		return (0);
 	d->view_angle[0] = 0;
 	d->view_angle[1] = 0;
 	d->view_angle[2] = 0;
