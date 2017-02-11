@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 16:52:24 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/12/18 18:31:40 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2017/02/12 00:00:38 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,12 @@ double			lenray(t_scene *sc, t_ray *r)
 	nearest[0] = -1;
 	nearest[1] = INT_MAX;
 	norm.x = 0;
+	// a enlever !!
 	lenray_neg(sc->obj, r, nearest, &norm);
 	nearest[2] = -1;
+	// sort lobjet le plus proche
 	tmp = lenray_final(sc->obj, r, nearest, &norm);
+	// si lobjet le plus proche est superieur a la distance minimum on le save
 	if (nearest[2] > EPS)
 	{
 		r->norm = norm;

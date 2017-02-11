@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2016/12/30 22:43:45 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2017/02/11 22:07:28 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,19 @@ void			*display(void *z)
 	t_obj		*tmp;
 	t_id		*t;
 	t_thread	*mt;
-	t_ray		r;
+	t_ray		r; // <- structure deffinissant un rayon et une normal et le ptr de lobjet
 	int			i[2];
 
 	mt = (t_thread*)z;
-	r.start = new_vector(mt->s->sc->cam[0],
+	r.start = new_vector(mt->s->sc->cam[0], // stoque xyz de la cam dans start
 		mt->s->sc->cam[1], mt->s->sc->cam[2]);
-	r.dir = new_vector(mt->s->sc->cam[3], mt->s->sc->cam[4], mt->s->sc->cam[5]);
+	r.dir = new_vector(mt->s->sc->cam[3], mt->s->sc->cam[4], mt->s->sc->cam[5]); // direction de la cam
 	tmp = mt->s->sc->obj;
 	t = mt->t;
 	i[1] = mt->lim[1] - 1;
 	while (++i[1] < mt->lim[3])
 	{
+		// loop de chaque pixel de chaque thread
 		i[0] = mt->lim[0] - 1;
 		while (++i[0] < mt->lim[2])
 			getnearesthit(&r, mt->s, i[0], i[1]);
@@ -68,6 +69,8 @@ void			*display(void *z)
 static void		lanch_raytracing(pthread_t *p, t_id t)
 {
 	int	j;
+
+	// lance les thread sur la fonction display et join les thread
 
 	j = -1;
 	while (++j < MT)
@@ -83,6 +86,8 @@ void			raytracing(t_gen *s)
 	static char		c = 0;
 	pthread_t		p[MT];
 	int				toto;
+
+	// si c == 0 -> initie les thread et la map, sinon bzero la map
 
 	toto = W_Y * W_X * 4;
 	if (!c)

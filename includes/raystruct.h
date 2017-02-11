@@ -6,7 +6,7 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2017/02/05 14:51:09 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/11 22:47:48 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@
 typedef struct		s_color
 {
 	t_spot			*spot;
-	t_vector		hitpoint;
-	t_vector		mirror_vec_light;
-	t_vector		vec_obj_eye;
-	t_vector		vec_obj_light;
+	t_vector		hitpoint;				// point touché
+	t_vector		mirror_vec_light;		// vecteur de lumiere speculaire
+	t_vector		vec_obj_eye;			// direction de lobjet a la camera
+	t_vector		vec_obj_light;			// direction de lobjet a la lumiere
 	t_vector		spot_pos;
-	double			dot_light_norm;
+	double			dot_light_norm;			// le coef de la direction de la lumiere et de la norm
 	double			intensity[3];
 	double			i_a[3];
 	double			i_l[3];
@@ -62,6 +62,10 @@ typedef struct		s_color
 	int				i;
 }					t_color;
 
+// correspond a un rayon
+// start => position du point
+// direction .. direction ()
+// norm de l'objet
 typedef struct		s_ray
 {
 	t_vector		start;
@@ -79,8 +83,8 @@ typedef struct		s_general
 
 typedef struct		s_thread
 {
-	int				nb;
-	int				lim[4];
+	int				nb; // num du thread
+	int				lim[4]; // x,y top et xy bot de la zone du thread
 	t_id			*t;
 	t_gen			*s;
 }					t_thread;
