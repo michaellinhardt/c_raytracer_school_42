@@ -6,7 +6,7 @@
 /*   By: mlinhard <mlinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 13:49:08 by mlinhard          #+#    #+#             */
-/*   Updated: 2017/02/05 15:37:55 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/11 18:55:09 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void			menu_filter_btn_cancel(void *gen, void *mlx)
 			error(2, "ft_strnew(d->sc->data)");
 		ft_memcpy(d->sc->data, d->sc->data_original, W_X * W_Y * 4);
 	}
+	menu_filter_btn_ok(gen, mlx);
 }
 
 void			menu_filter(t_mlx *m, int i)
