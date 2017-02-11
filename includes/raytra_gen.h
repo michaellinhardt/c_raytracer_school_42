@@ -136,7 +136,7 @@ void				print_cut(t_scene *s, char **to_print, t_cut *cut, char c);
 void				print_col(char **to_print, int col, char *tmp);
 void				print_amb(t_scene *s, char **to_print, int col, char *temp);
 void				print_text(t_scene *s, char **to_print, int col);
-void				print_type(t_scene *s, char **to_print, char type);
+void				print_type(t_scene *s, char **to_print, int type);
 void				print_size_eff(t_scene *s, char **tp, double *size, char c);
 
 #endif

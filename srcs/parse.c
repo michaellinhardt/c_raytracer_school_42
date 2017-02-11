@@ -115,7 +115,7 @@ void			parse_scene(t_gen *s, char *argv)
 	}
 	if (ret < 0)
 		return (error(0, NULL));
-	(!a) ? error(3, "scene") : 1;
+	(a != 1) ? error(3, "scene") : 1;
 	ft_strdel(&line);
 	ft_strdel(&tmp);
 }

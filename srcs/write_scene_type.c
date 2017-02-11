@@ -12,7 +12,7 @@
 
 #include "raytra_gen.h"
 
-void			print_type(t_scene *s, char **to_print, char type)
+void			print_type(t_scene *s, char **to_print, int type)
 {
 	char *tmp;
 
