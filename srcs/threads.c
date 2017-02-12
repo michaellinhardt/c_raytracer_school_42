@@ -6,13 +6,13 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/24 17:20:00 by ocarta-l          #+#    #+#             */
-/*   Updated: 2017/02/12 12:23:32 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 13:55:33 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raystruct.h"
 
-void		init_threads(t_thread *t, t_gen *s)
+void		init_threads(t_thread *thread, t_gen *s)
 {
 	int i;
 	int j;
@@ -23,12 +23,12 @@ void		init_threads(t_thread *t, t_gen *s)
 	k = W_Y / sqrt(MT);
 	while (i < MT)
 	{
-		t[i].nb = i;
-		t[i].lim[0] = i % (int)sqrt(MT) * j;
-		t[i].lim[1] = (int)(i / sqrt(MT)) * k;
-		t[i].lim[2] = i % (int)sqrt(MT) * j + j;
-		t[i].lim[3] = (int)(i / sqrt(MT)) * k + k;
-		t[i].s = s;
+		thread[i].nb = i;
+		thread[i].lim[0] = i % (int)sqrt(MT) * j;
+		thread[i].lim[1] = (int)(i / sqrt(MT)) * k;
+		thread[i].lim[2] = i % (int)sqrt(MT) * j + j;
+		thread[i].lim[3] = (int)(i / sqrt(MT)) * k + k;
+		thread[i].s = s;
 		++i;
 	}
 }
