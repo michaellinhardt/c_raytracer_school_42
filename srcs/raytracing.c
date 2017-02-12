@@ -6,7 +6,7 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2017/02/12 12:18:39 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 12:21:39 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,23 +81,23 @@ static void		lanch_raytracing(pthread_t *p, t_thread *t)
 void			raytracing(t_gen *s)
 {
 	static t_thread	*threads;
-	static char		c = 0;
+	static char		is_init = 0;
 	pthread_t		p[MT];
-	int				toto;
+	int				size_data;
 
 	// si c == 0 -> initie les thread et la map, sinon bzero la map
 
-	toto = W_Y * W_X * 4;
-	if (!c)
+	size_data = W_Y * W_X * 4;
+	if (!is_init)
 	{
 		(!(threads = ft_memalloc(
 			sizeof(t_thread) * MT))) ? error(2, "Malloc") : 1;
 		init_threads(threads, s);
-		c = 1;
-		if (!(s->data = (char *)ft_memalloc(toto)))
+		is_init = 1;
+		if (!(s->data = (char *)ft_memalloc(size_data)))
 			return ;
 	}
 	else
-		ft_bzero(s->data, toto);
+		ft_bzero(s->data, size_data);
 	lanch_raytracing(p, threads);
 }
