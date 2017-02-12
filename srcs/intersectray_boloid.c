@@ -16,8 +16,8 @@ static double	inter_boloid(t_ray *r, t_obj *s, t_inter *i, t_boloid *para)
 {
 	if (para->second.dist < 0)
 	{
-		i->inter1 = para->previous_value1;
-		i->inter2 = para->previous_value2;
+		i->hit1 = para->previous_value1;
+		i->hit2 = para->previous_value2;
 		return (0);
 	}
 	para->intersection = get_hitpoint(r->start, r->dir, para->second.dist);
@@ -47,8 +47,8 @@ double			intersectray_boloid(t_ray *r, t_obj *s, t_inter *i)
 	para.second.b - 4 * (para.second.a * para.second.c);
 	if (para.second.discriminant < 0)
 		return (0);
-	para.previous_value1 = i->inter1;
-	para.previous_value2 = i->inter2;
+	para.previous_value1 = i->hit1;
+	para.previous_value2 = i->hit2;
 	para.second.dist = equa_sec(para.second.a,
 	para.second.b, para.second.discriminant, i);
 	return (inter_boloid(r, s, i, &para));

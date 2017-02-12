@@ -30,8 +30,8 @@ t_inter *i)
 	vectormultby_scalar(cyl->dir, cyl->dot2))) - s->size[0] * s->size[0];
 	cyl->second.discriminant = cyl->second.b * cyl->second.b -
 	4 * (cyl->second.a * cyl->second.c);
-	cyl->previous_value1 = i->inter1;
-	cyl->previous_value2 = i->inter2;
+	cyl->previous_value1 = i->hit1;
+	cyl->previous_value2 = i->hit2;
 	cyl->limit_dist = sqrtf(s->size[0] * s->size[0]
 	+ s->size[1] / 2 * s->size[1] / 2);
 	if (cyl->second.discriminant < 0)
@@ -44,8 +44,8 @@ t_inter *i)
 
 double	reset_value(t_ray *r, t_cylindre *cyl, t_inter *i)
 {
-	i->inter1 = cyl->previous_value1;
-	i->inter2 = cyl->previous_value2;
+	i->hit1 = cyl->previous_value1;
+	i->hit2 = cyl->previous_value2;
 	r->norm = vectormultby_scalar(r->norm, 0);
 	return (0);
 }
@@ -61,7 +61,7 @@ t_inter *i)
 	else if (cyl->dist_pos_inter1 >= cyl->limit_dist && cyl->dist_pos_inter2 >=
 	cyl->limit_dist)
 	{
-		if (i->inter2 == i->inter1)
+		if (i->hit2 == i->hit1)
 			return (0);
 		cyl->plan1_dir = vectormultby_scalar(cyl->dir, -1);
 		cyl->plan1_pos = get_hitpoint(cyl->pos, cyl->plan1_dir, s->size[1] / 2);
@@ -81,11 +81,11 @@ double	touch_two_side_cylinder(t_ray *r, t_cylindre *cyl,
 t_inter *i)
 {
 	cyl_norm(r, cyl);
-	if (i->inter1 < 0 && i->inter2 < 0)
+	if (i->hit1 < 0 && i->hit2 < 0)
 		return (reset_value(r, cyl, i));
-	if (i->inter1 > 0 && (i->inter2 <= 0 || i->inter1 < i->inter2))
-		return (i->inter1);
-	return (i->inter2);
+	if (i->hit1 > 0 && (i->hit2 <= 0 || i->hit1 < i->hit2))
+		return (i->hit1);
+	return (i->hit2);
 }
 
 double	intersectray_cylindre(t_ray *r, t_obj *s,
@@ -95,14 +95,14 @@ t_inter *i)
 
 	if (init_and_solve2nd_degree(r, s, &cyl, i) == 0)
 		return (0);
-	cyl.dist_pos_inter1 = vector_dist(get_hitpoint(r->start, r->dir, i->inter1),
+	cyl.dist_pos_inter1 = vector_dist(get_hitpoint(r->start, r->dir, i->hit1),
 	cyl.pos);
-	cyl.dist_pos_inter2 = vector_dist(get_hitpoint(r->start, r->dir, i->inter2),
+	cyl.dist_pos_inter2 = vector_dist(get_hitpoint(r->start, r->dir, i->hit2),
 	cyl.pos);
 	cyl.dist_inter2_plan = vector_dist(get_hitpoint(r->start, r->dir,
-	i->inter2), get_hitpoint(cyl.pos, cyl.dir, s->size[1] / 2));
+	i->hit2), get_hitpoint(cyl.pos, cyl.dir, s->size[1] / 2));
 	cyl.dist_inter1_plan = vector_dist(get_hitpoint(r->start, r->dir,
-	i->inter1), get_hitpoint(cyl.pos, cyl.dir, s->size[1] / 2));
+	i->hit1), get_hitpoint(cyl.pos, cyl.dir, s->size[1] / 2));
 	if (cyl.second.dist < 0)
 		return (reset_value(r, &cyl, i));
 	if (cyl.dist_pos_inter1 < cyl.limit_dist && cyl.dist_pos_inter2

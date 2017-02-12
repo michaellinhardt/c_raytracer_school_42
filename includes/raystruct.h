@@ -6,7 +6,7 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2017/02/12 14:26:30 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 16:16:57 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,8 +161,8 @@ typedef struct		s_triangle
 
 typedef struct		s_inter
 {
-	double inter1;
-	double inter2;
+	double hit1;
+	double hit2;
 }					t_inter;
 typedef struct		s_complex
 {

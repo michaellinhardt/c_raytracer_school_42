@@ -21,17 +21,17 @@ static void	inter_complex_with_eff(t_ray *r, t_obj *p, int *col, t_complex *c)
 	{
 		if (c->tmp->eff[3])
 		{
-			c->i.inter1 = -1;
-			c->i.inter2 = INT_MAX;
+			c->i.hit1 = -1;
+			c->i.hit2 = INT_MAX;
 			c->t = lenray_type(r, c->tmp, &c->i, col);
-			if (c->t > EPS && c->i.inter1 != -1)
-				if (c->nearest[0] == -1 || (c->i.inter1 < c->nearest[0]) ||
-				c->i.inter2 > c->nearest[1])
+			if (c->t > EPS && c->i.hit1 != -1)
+				if (c->nearest[0] == -1 || (c->i.hit1 < c->nearest[0]) ||
+				c->i.hit2 > c->nearest[1])
 				{
-					if (c->nearest[0] == -1 || c->i.inter1 < c->nearest[0])
-						c->nearest[0] = c->i.inter1;
-					if (c->nearest[1] == INT_MAX || c->i.inter2 > c->nearest[1])
-						c->nearest[1] = c->i.inter2;
+					if (c->nearest[0] == -1 || c->i.hit1 < c->nearest[0])
+						c->nearest[0] = c->i.hit1;
+					if (c->nearest[1] == INT_MAX || c->i.hit2 > c->nearest[1])
+						c->nearest[1] = c->i.hit2;
 					c->norm = r->norm;
 				}
 		}
@@ -46,8 +46,8 @@ static int	inter_complex_with_no_eff(t_ray *r, t_complex *c)
 	if (c->t > c->nearest[0] && c->t < c->nearest[1] &&
 	c->nearest[0] > 0)
 	{
-		if (c->i.inter2 <= c->nearest[1] &&
-		c->i.inter1 >= c->nearest[0])
+		if (c->i.hit2 <= c->nearest[1] &&
+		c->i.hit1 >= c->nearest[0])
 		{
 			c->tmp = c->tmp->next;
 			return (1);

@@ -62,7 +62,7 @@ double		intersectray_triangle(t_ray *r, t_obj *p, t_inter *i)
 	if (tr.near > EPS && tr.near < INT_MAX)
 	{
 		r->norm = tr.new_norm;
-		i->inter1 = tr.near;
+		i->hit1 = tr.near;
 		r->norm = vector_normalize(r->norm);
 		return (tr.near);
 	}

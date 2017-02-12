@@ -51,15 +51,15 @@ t_inter *i)
 	{
 		sphere->second.dist = ((-sphere->second.b -
 		sqrtf(sphere->second.discriminant)) / (2 * sphere->second.a));
-		i->inter1 = sphere->second.dist;
-		i->inter2 = ((-sphere->second.b + sqrtf(sphere->second.discriminant))
+		i->hit1 = sphere->second.dist;
+		i->hit2 = ((-sphere->second.b + sqrtf(sphere->second.discriminant))
 		/ (2 * sphere->second.a));
 	}
 	else
 	{
-		i->inter1 = ((-sphere->second.b + sqrtf(sphere->second.discriminant))
+		i->hit1 = ((-sphere->second.b + sqrtf(sphere->second.discriminant))
 		/ (2 * sphere->second.a));
-		i->inter2 = ((-sphere->second.b - sqrtf(sphere->second.discriminant))
+		i->hit2 = ((-sphere->second.b - sqrtf(sphere->second.discriminant))
 		/ (2 * sphere->second.a));
 	}
 	sphere->inter = get_hitpoint(r->start, r->dir, sphere->second.dist);

@@ -24,8 +24,8 @@ double	intersectray_plane(t_ray *r, t_obj *p, t_inter *i)
 	if (t > EPS)
 	{
 		r->norm = n;
-		i->inter1 = t;
-		i->inter2 = i->inter1;
+		i->hit1 = t;
+		i->hit2 = i->hit1;
 		r->norm = vector_normalize(r->norm);
 		if (p->cut)
 			return (cut_object(p, t, r, 0));

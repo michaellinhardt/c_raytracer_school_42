@@ -29,8 +29,8 @@ int		find_cone_equa(t_ray *r, t_obj *s, t_inter *i, t_cone *c)
 	(c->second.a * c->second.c);
 	if (c->second.discriminant < 0)
 		return (0);
-	c->previous_value1 = i->inter1;
-	c->previous_value2 = i->inter2;
+	c->previous_value1 = i->hit1;
+	c->previous_value2 = i->hit2;
 	c->second.dist = equa_sec(c->second.a, c->second.b,
 	c->second.discriminant, i);
 	return (1);
@@ -39,26 +39,26 @@ int		find_cone_equa(t_ray *r, t_obj *s, t_inter *i, t_cone *c)
 int		cut_cone(t_ray *r, t_inter *i, t_cone *c)
 {
 	c->test1 = vector_normalize(vector_sub(get_hitpoint(r->start, r->dir,
-	i->inter1), c->pos));
+	i->hit1), c->pos));
 	c->test2 = vector_normalize(vector_sub(get_hitpoint(r->start, r->dir,
-	i->inter2), c->pos));
-	c->dist_inter1 = vector_dist(get_hitpoint(r->start, r->dir, i->inter1),
+	i->hit2), c->pos));
+	c->dist_inter1 = vector_dist(get_hitpoint(r->start, r->dir, i->hit1),
 	c->pos);
-	c->dist_inter2 = vector_dist(get_hitpoint(r->start, r->dir, i->inter2),
+	c->dist_inter2 = vector_dist(get_hitpoint(r->start, r->dir, i->hit2),
 	c->pos);
-	if ((c->dist_inter1 > c->size_cone && (i->inter2 <= 0 || c->dist_inter2 >
+	if ((c->dist_inter1 > c->size_cone && (i->hit2 <= 0 || c->dist_inter2 >
 	c->size_cone || vector_dot(c->test2, c->dir) > 0)) || (c->dist_inter2 >
-	c->size_cone && (i->inter1 <= 0 || c->dist_inter1 > c->size_cone ||
+	c->size_cone && (i->hit1 <= 0 || c->dist_inter1 > c->size_cone ||
 	vector_dot(c->test1, c->dir) > 0)))
 	{
-		i->inter1 = c->previous_value1;
-		i->inter2 = c->previous_value2;
+		i->hit1 = c->previous_value1;
+		i->hit2 = c->previous_value2;
 		return (0);
 	}
 	if (vector_dot(c->test1, c->dir) > 0 && vector_dot(c->test2, c->dir) > 0)
 	{
-		i->inter1 = c->previous_value1;
-		i->inter2 = c->previous_value2;
+		i->hit1 = c->previous_value1;
+		i->hit2 = c->previous_value2;
 		return (0);
 	}
 	return (1);
@@ -66,26 +66,26 @@ int		cut_cone(t_ray *r, t_inter *i, t_cone *c)
 
 double	touch_cone_or_nothing(t_ray *r, t_inter *i, t_cone *c)
 {
-	if (i->inter1 > 0 && (i->inter2 < 0 || i->inter1 < i->inter2))
+	if (i->hit1 > 0 && (i->hit2 < 0 || i->hit1 < i->hit2))
 	{
-		c->inter_pos = get_hitpoint(r->start, r->dir, i->inter1);
+		c->inter_pos = get_hitpoint(r->start, r->dir, i->hit1);
 		c->lambda = vector_normalize(vector_sub(c->pos, c->inter_pos));
 		r->norm = vector_normalize(vector_sub(vectormultby_scalar(c->dir,
 		vector_dot(c->lambda, c->dir) / vector_dot(c->dir, c->dir)),
 		c->lambda));
-		return (i->inter1);
+		return (i->hit1);
 	}
-	if (i->inter2 > 0 && (i->inter1 < 0 || i->inter2 < i->inter1))
+	if (i->hit2 > 0 && (i->hit1 < 0 || i->hit2 < i->hit1))
 	{
-		c->inter_pos = get_hitpoint(r->start, r->dir, i->inter2);
+		c->inter_pos = get_hitpoint(r->start, r->dir, i->hit2);
 		c->lambda = vector_normalize(vector_sub(c->pos, c->inter_pos));
 		r->norm = vector_normalize(vector_sub(vectormultby_scalar(c->dir,
 		vector_dot(c->lambda, c->dir) / vector_dot(c->dir, c->dir)),
 		c->lambda));
-		return (i->inter2);
+		return (i->hit2);
 	}
-	i->inter1 = c->previous_value1;
-	i->inter2 = c->previous_value2;
+	i->hit1 = c->previous_value1;
+	i->hit2 = c->previous_value2;
 	return (0);
 }
 
@@ -95,10 +95,10 @@ double	intersectray_cone(t_ray *r, t_obj *s, t_inter *i)
 
 	if (!find_cone_equa(r, s, i, &c))
 		return (0);
-	if (i->inter1 < 0 && i->inter2 < 0)
+	if (i->hit1 < 0 && i->hit2 < 0)
 	{
-		i->inter1 = c.previous_value1;
-		i->inter2 = c.previous_value2;
+		i->hit1 = c.previous_value1;
+		i->hit2 = c.previous_value2;
 		return (0);
 	}
 	c.size_cone = s->size[0] / cos(((s->size[1] > 150) ? 150 * (M_PI / 180) / 2

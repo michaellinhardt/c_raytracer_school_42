@@ -85,8 +85,8 @@ double			intersectray_carre(t_ray *r, t_obj *s, t_inter *i)
 	if (c.tzmax < c.tmax)
 		c.tmax = c.tzmax;
 	c.dist = (c.t_min < c.tmax) ? c.t_min : c.tmax;
-	i->inter1 = c.dist;
-	i->inter2 = (c.t_min > c.tmax) ? c.t_min : c.tmax;
+	i->hit1 = c.dist;
+	i->hit2 = (c.t_min > c.tmax) ? c.t_min : c.tmax;
 	c.hitpoint = get_hitpoint(r->start, r->dir, c.dist);
 	c.rec_pos = new_vector(s->pos[0], s->pos[1], s->pos[2]);
 	c.calc = vector_sub(c.hitpoint, c.rec_pos);

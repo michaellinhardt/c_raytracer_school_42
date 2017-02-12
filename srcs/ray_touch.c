@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 16:52:24 by ocarta-l          #+#    #+#             */
-/*   Updated: 2017/02/12 15:52:07 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 16:21:59 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,24 @@ static void		lenray_neg(t_obj *obj, t_ray *rayon
 {
 	int		color;
 	double	t;
-	t_inter i;
+	t_inter inter;
 
 	color = 0;
 	while (obj)
 	{
 		if (obj->eff[3])
 		{
-			i.inter1 = -1;
-			i.inter2 = INT_MAX;
-			t = lenray_type(rayon, obj, &i, &color);
-			if (t > EPS && i.inter1 != -1)
-				if (nearest[0] == -1 || (i.inter1 < nearest[0])
-					|| i.inter2 > nearest[1])
+			inter.hit1 = -1;
+			inter.hit2 = INT_MAX;
+			t = lenray_type(rayon, obj, &inter, &color);
+			if (t > EPS && inter.hit1 != -1)
+				if (nearest[0] == -1 || (inter.hit1 < nearest[0])
+					|| inter.hit2 > nearest[1])
 				{
-					if (nearest[0] == -1 || i.inter1 < nearest[0])
-						nearest[0] = i.inter1;
-					if (nearest[1] == INT_MAX || i.inter2 > nearest[1])
-						nearest[1] = i.inter2;
+					if (nearest[0] == -1 || inter.hit1 < nearest[0])
+						nearest[0] = inter.hit1;
+					if (nearest[1] == INT_MAX || inter.hit2 > nearest[1])
+						nearest[1] = inter.hit2;
 					*norm = rayon->norm;
 				}
 		}
@@ -90,20 +90,20 @@ static char		replace_nearest(t_obj *obj, t_ray *rayon,
 static t_obj	*lenray_final(t_obj *obj, t_ray *rayon,
 	double *n, t_vector *norm)
 {
-	t_inter		i;
+	t_inter		inter;
 	int			color;
 	t_obj		*tmp_obj;
 
 	color = 0;
-	i.inter1 = -1;
+	inter.hit1 = -1;
 	while (obj)
 	{
 		if (!obj->eff[3])
 		{
 			rayon->obj = NULL;
-			n[3] = lenray_type(rayon, obj, &i, &color) - EPS;
-			n[4] = i.inter1;
-			n[5] = i.inter2;
+			n[3] = lenray_type(rayon, obj, &inter, &color) - EPS;
+			n[4] = inter.hit1;
+			n[5] = inter.hit2;
 			if ((n[3] < n[2] && n[3] > EPS) || (n[2] < EPS && n[3] > EPS))
 				if (replace_nearest(obj, rayon, n, norm))
 				{
