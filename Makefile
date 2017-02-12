@@ -165,6 +165,14 @@ clean :
 img :
 	@mkdir image
 
+rmika: fclean mika
+
+mika: $(OBJ)
+	make -C ./libft
+	make -C ./minilibx
+	$(CC) -o $(NAME) $(OBJ) $(WFLAGS) $(MIKAFLAGS) -I $(INCLUDES)
+	@./RT
+
 clean_si :
 	@rm -rf image
 	@rm -rf scene
