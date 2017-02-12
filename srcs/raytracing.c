@@ -6,11 +6,32 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2017/02/12 13:53:55 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 13:58:51 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raystruct.h"
+
+static void		init_threads(t_thread *thread, t_gen *s)
+{
+	int i;
+	int j;
+	int k;
+
+	i = 0;
+	j = W_X / sqrt(MT);
+	k = W_Y / sqrt(MT);
+	while (i < MT)
+	{
+		thread[i].nb = i;
+		thread[i].lim[0] = i % (int)sqrt(MT) * j;
+		thread[i].lim[1] = (int)(i / sqrt(MT)) * k;
+		thread[i].lim[2] = i % (int)sqrt(MT) * j + j;
+		thread[i].lim[3] = (int)(i / sqrt(MT)) * k + k;
+		thread[i].s = s;
+		++i;
+	}
+}
 
 static void		*raytracing_pixel_loop(void *ptr_thread)
 {

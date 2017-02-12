@@ -6,7 +6,7 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2017/02/12 12:45:35 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 13:58:49 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,12 +289,6 @@ double				vector_dist(t_vector v1, t_vector v2);
 t_vector			vector_dir(t_vector v1, t_vector v2);
 t_vector			get_hitpoint(t_vector start, t_vector dir, double dist);
 t_vector			vector_rev(t_vector v);
-
-/*
-**									threads.c
-*/
-
-void				init_threads(t_thread *t, t_gen *s);
 
 /*
 **									write_scene.c

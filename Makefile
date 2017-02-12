@@ -20,7 +20,6 @@ SRCS = 	main.c \
 		vector_functions.c \
 		vector_functions_next.c \
 		vector_functions_bis.c \
-		threads.c \
 		diffuse.c \
 		refraction.c \
 		reflexion.c \
