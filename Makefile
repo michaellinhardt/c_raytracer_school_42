@@ -6,6 +6,7 @@ LIBFT_INCLUDES = libft/includes
 
 SRCS = 	main.c \
 		raytracing.c \
+		raytracing_pixel_loop.c \
 		error.c \
 		parse.c \
 		parse_next.c \
