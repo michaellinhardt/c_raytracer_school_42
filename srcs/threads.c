@@ -6,13 +6,13 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/24 17:20:00 by ocarta-l          #+#    #+#             */
-/*   Updated: 2016/08/10 21:47:05 by ocarta-l         ###   ########.fr       */
+/*   Updated: 2017/02/12 12:17:15 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raystruct.h"
 
-void		init_threads(t_thread *t, t_id *t_g, t_gen *s)
+void		init_threads(t_thread *t, t_gen *s)
 {
 	int i;
 	int j;
@@ -28,7 +28,6 @@ void		init_threads(t_thread *t, t_id *t_g, t_gen *s)
 		t[i].lim[1] = (int)(i / sqrt(MT)) * k;
 		t[i].lim[2] = i % (int)sqrt(MT) * j + j;
 		t[i].lim[3] = (int)(i / sqrt(MT)) * k + k;
-		t[i].t = t_g;
 		t[i].s = s;
 		++i;
 	}

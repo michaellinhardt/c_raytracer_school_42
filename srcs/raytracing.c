@@ -6,7 +6,7 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2017/02/11 22:07:28 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 12:18:39 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ double			noise(t_ray *r, t_vector hitpoint, double bump_mapping)
 void			*display(void *z)
 {
 	t_obj		*tmp;
-	t_id		*t;
 	t_thread	*mt;
 	t_ray		r; // <- structure deffinissant un rayon et une normal et le ptr de lobjet
 	int			i[2];
@@ -54,7 +53,6 @@ void			*display(void *z)
 		mt->s->sc->cam[1], mt->s->sc->cam[2]);
 	r.dir = new_vector(mt->s->sc->cam[3], mt->s->sc->cam[4], mt->s->sc->cam[5]); // direction de la cam
 	tmp = mt->s->sc->obj;
-	t = mt->t;
 	i[1] = mt->lim[1] - 1;
 	while (++i[1] < mt->lim[3])
 	{
@@ -66,7 +64,7 @@ void			*display(void *z)
 	return (NULL);
 }
 
-static void		lanch_raytracing(pthread_t *p, t_id t)
+static void		lanch_raytracing(pthread_t *p, t_thread *t)
 {
 	int	j;
 
@@ -74,7 +72,7 @@ static void		lanch_raytracing(pthread_t *p, t_id t)
 
 	j = -1;
 	while (++j < MT)
-		pthread_create(&p[j], NULL, display, &t.z[j]);
+		pthread_create(&p[j], NULL, display, &t[j]);
 	j = -1;
 	while (++j < MT)
 		pthread_join(p[j], NULL);
@@ -82,7 +80,7 @@ static void		lanch_raytracing(pthread_t *p, t_id t)
 
 void			raytracing(t_gen *s)
 {
-	static t_id		t;
+	static t_thread	*threads;
 	static char		c = 0;
 	pthread_t		p[MT];
 	int				toto;
@@ -92,13 +90,14 @@ void			raytracing(t_gen *s)
 	toto = W_Y * W_X * 4;
 	if (!c)
 	{
-		(!(t.z = ft_memalloc(sizeof(t_thread) * MT))) ? error(2, "Malloc") : 1;
-		init_threads(t.z, &t, s);
+		(!(threads = ft_memalloc(
+			sizeof(t_thread) * MT))) ? error(2, "Malloc") : 1;
+		init_threads(threads, s);
 		c = 1;
 		if (!(s->data = (char *)ft_memalloc(toto)))
 			return ;
 	}
 	else
 		ft_bzero(s->data, toto);
-	lanch_raytracing(p, t);
+	lanch_raytracing(p, threads);
 }

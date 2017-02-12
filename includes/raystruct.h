@@ -6,7 +6,7 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2017/02/11 22:47:48 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 12:19:13 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # define KEY_NIN 92
 
 # define MT 16
-# define THE struct s_thread
 
 # define EPS 0.001
 
@@ -75,17 +74,10 @@ typedef struct		s_ray
 	double			inter[2];
 }					t_ray;
 
-typedef struct		s_general
-{
-	int				s_line;
-	THE				*z;
-}					t_id;
-
 typedef struct		s_thread
 {
 	int				nb; // num du thread
 	int				lim[4]; // x,y top et xy bot de la zone du thread
-	t_id			*t;
 	t_gen			*s;
 }					t_thread;
 
@@ -302,7 +294,7 @@ t_vector			vector_rev(t_vector v);
 **									threads.c
 */
 
-void				init_threads(t_thread *t, t_id *t_g, t_gen *s);
+void				init_threads(t_thread *t, t_gen *s);
 
 /*
 **									write_scene.c
@@ -322,7 +314,6 @@ t_vector			matricerot_z(t_vector v, double angle);
 **									color_functions.c
 */
 
-void				mlx_image_put_pixel(t_id *g, int x, int y, int color);
 void				color_composants(int color, double *ret);
 int					colorfromrgb(double *tab);
 void				color_normalize(double *tab,
