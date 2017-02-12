@@ -6,7 +6,7 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2017/02/12 12:21:39 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 12:24:30 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ static void		lanch_raytracing(pthread_t *p, t_thread *t)
 {
 	int	j;
 
-	// lance les thread sur la fonction display et join les thread
-
 	j = -1;
 	while (++j < MT)
 		pthread_create(&p[j], NULL, display, &t[j]);
@@ -84,8 +82,6 @@ void			raytracing(t_gen *s)
 	static char		is_init = 0;
 	pthread_t		p[MT];
 	int				size_data;
-
-	// si c == 0 -> initie les thread et la map, sinon bzero la map
 
 	size_data = W_Y * W_X * 4;
 	if (!is_init)
