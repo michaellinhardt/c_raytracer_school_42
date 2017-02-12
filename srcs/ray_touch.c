@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 16:52:24 by ocarta-l          #+#    #+#             */
-/*   Updated: 2017/02/12 14:33:37 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 15:52:07 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,21 @@ double			lenray_type(t_ray *rayon, t_obj *obj, t_inter *inter, int *col)
 	return (0);
 }
 
-static void		lenray_neg(t_obj *s, t_ray *r, double *nearest, t_vector *norm)
+static void		lenray_neg(t_obj *obj, t_ray *rayon
+	, double *nearest, t_vector *norm)
 {
 	int		color;
 	double	t;
 	t_inter i;
 
 	color = 0;
-	while (s)
+	while (obj)
 	{
-		if (s->eff[3])
+		if (obj->eff[3])
 		{
 			i.inter1 = -1;
 			i.inter2 = INT_MAX;
-			t = lenray_type(r, s, &i, &color);
+			t = lenray_type(rayon, obj, &i, &color);
 			if (t > EPS && i.inter1 != -1)
 				if (nearest[0] == -1 || (i.inter1 < nearest[0])
 					|| i.inter2 > nearest[1])
@@ -57,14 +58,14 @@ static void		lenray_neg(t_obj *s, t_ray *r, double *nearest, t_vector *norm)
 						nearest[0] = i.inter1;
 					if (nearest[1] == INT_MAX || i.inter2 > nearest[1])
 						nearest[1] = i.inter2;
-					*norm = r->norm;
+					*norm = rayon->norm;
 				}
 		}
-		s = s->next;
+		obj = obj->next;
 	}
 }
 
-static char		replace_nearest(t_obj *s, t_ray *r,
+static char		replace_nearest(t_obj *obj, t_ray *rayon,
 	double *nearest, t_vector *norm)
 {
 	if (nearest[3] > nearest[0] && nearest[3] < nearest[1]
@@ -73,46 +74,46 @@ static char		replace_nearest(t_obj *s, t_ray *r,
 		if (nearest[5] < nearest[1] && nearest[4] > nearest[0])
 			return (0);
 		nearest[2] = nearest[1];
-		if ((!(s->type & COMPLEXE) && (s->type & PLAN))
-			|| (r->obj && (!(r->obj->type & COMPLEXE)
-				&& (r->obj->type & PLAN))))
+		if ((!(obj->type & COMPLEXE) && (obj->type & PLAN))
+			|| (rayon->obj && (!(rayon->obj->type & COMPLEXE)
+				&& (rayon->obj->type & PLAN))))
 			*norm = vector_rev(*norm);
 	}
 	else
 	{
 		nearest[2] = nearest[3];
-		*norm = r->norm;
+		*norm = rayon->norm;
 	}
 	return (1);
 }
 
-static t_obj	*lenray_final(t_obj *s, t_ray *r,
+static t_obj	*lenray_final(t_obj *obj, t_ray *rayon,
 	double *n, t_vector *norm)
 {
 	t_inter		i;
 	int			color;
-	t_obj		*tmp;
+	t_obj		*tmp_obj;
 
 	color = 0;
 	i.inter1 = -1;
-	while (s)
+	while (obj)
 	{
-		if (!s->eff[3])
+		if (!obj->eff[3])
 		{
-			r->obj = NULL;
-			n[3] = lenray_type(r, s, &i, &color) - EPS;
+			rayon->obj = NULL;
+			n[3] = lenray_type(rayon, obj, &i, &color) - EPS;
 			n[4] = i.inter1;
 			n[5] = i.inter2;
 			if ((n[3] < n[2] && n[3] > EPS) || (n[2] < EPS && n[3] > EPS))
-				if (replace_nearest(s, r, n, norm))
+				if (replace_nearest(obj, rayon, n, norm))
 				{
-					tmp = (s->type != COMPLEXE) ? s : r->obj;
-					n[2] = (r->dir.y > 0) ? n[2] - EPS : n[2] + EPS;
+					tmp_obj = (obj->type != COMPLEXE) ? obj : rayon->obj;
+					n[2] = (rayon->dir.y > 0) ? n[2] - EPS : n[2] + EPS;
 				}
 		}
-		s = s->next;
+		obj = obj->next;
 	}
-	return (tmp);
+	return (tmp_obj);
 }
 
 double			lenray(t_scene *sc, t_ray *rayon)
@@ -127,9 +128,7 @@ double			lenray(t_scene *sc, t_ray *rayon)
 	norm.x = 0;
 	lenray_neg(sc->obj, rayon, nearest, &norm);
 	nearest[2] = -1;
-	// sort lobjet le plus proche
 	tmp_obj = lenray_final(sc->obj, rayon, nearest, &norm);
-	// si lobjet le plus proche est superieur a la distance minimum on le save
 	if (nearest[2] > EPS)
 	{
 		rayon->norm = norm;
