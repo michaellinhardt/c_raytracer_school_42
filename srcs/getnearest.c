@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 17:22:00 by ocarta-l          #+#    #+#             */
-/*   Updated: 2017/02/12 14:20:06 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 14:23:12 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ void			sqrtc(double *color)
 }
 
 // applique l'angle de la camera
-static void		init_cam(t_ray *r, t_vector *cam_angle, t_vector vec)
+static void		init_cam(t_ray *rayon, t_vector *cam_angle, t_vector pixel)
 {
-	vec.x = vec.x - W_X / 2.0;
-	vec.y = W_Y / 2.0 - vec.y;
-	vec.z = (W_Y / 2.0) / tan(70 * 0.5);
-	r->dir = vector_normalize(new_vector(vec.x, vec.y, vec.z));
+	pixel.x = pixel.x - W_X / 2.0;
+	pixel.y = W_Y / 2.0 - pixel.y;
+	pixel.z = (W_Y / 2.0) / tan(70 * 0.5);
+	rayon->dir = vector_normalize(new_vector(pixel.x, pixel.y, pixel.z));
 	if (cam_angle->x)
-		r->dir = matricerot_x(r->dir, cam_angle->x);
+		rayon->dir = matricerot_x(rayon->dir, cam_angle->x);
 	if (cam_angle->y)
-		r->dir = matricerot_y(r->dir, cam_angle->y);
+		rayon->dir = matricerot_y(rayon->dir, cam_angle->y);
 	if (cam_angle->z)
-		r->dir = matricerot_z(r->dir, cam_angle->z);
+		rayon->dir = matricerot_z(rayon->dir, cam_angle->z);
 }
 
 static void		getnearesthit_end(t_ray *r,
