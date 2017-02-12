@@ -51,9 +51,9 @@ static void		keyp_hook_keyboard2(int key, t_gen *d, int mult)
 	mult = (key == 12 || key == 0 || key == 1) ? -1 : 1;
 	if (d->mlx.menu.edit_mode & EDIT_BOOL)
 	{
-		d->view_angle[0] += mult * OBJ_DIR_MOD;
-		d->view_angle[1] += mult * OBJ_DIR_MOD;
-		d->view_angle[2] += mult * OBJ_DIR_MOD;
+		d->view_angle.x += mult * OBJ_DIR_MOD;
+		d->view_angle.y += mult * OBJ_DIR_MOD;
+		d->view_angle.z += mult * OBJ_DIR_MOD;
 	}
 	else
 	{

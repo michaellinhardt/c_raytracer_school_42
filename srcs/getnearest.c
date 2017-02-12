@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 17:22:00 by ocarta-l          #+#    #+#             */
-/*   Updated: 2017/02/11 23:29:22 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 14:20:06 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,18 @@ void			sqrtc(double *color)
 }
 
 // applique l'angle de la camera
-static void		init_getnearesthit(t_ray *r,
-	t_gen *raytracer, double x1, double y1)
+static void		init_cam(t_ray *r, t_vector *cam_angle, t_vector vec)
 {
-	r->dir = vector_normalize(new_vector(x1 - W_X / 2.0,
-		W_Y / 2.0 - y1, (W_Y / 2.0) / tan(70 * 0.5)));
-	if (raytracer->view_angle[0])
-		r->dir = matricerot_x(r->dir, raytracer->view_angle[0]);
-	if (raytracer->view_angle[1])
-		r->dir = matricerot_y(r->dir, raytracer->view_angle[1]);
-	if (raytracer->view_angle[2])
-		r->dir = matricerot_z(r->dir, raytracer->view_angle[2]);
+	vec.x = vec.x - W_X / 2.0;
+	vec.y = W_Y / 2.0 - vec.y;
+	vec.z = (W_Y / 2.0) / tan(70 * 0.5);
+	r->dir = vector_normalize(new_vector(vec.x, vec.y, vec.z));
+	if (cam_angle->x)
+		r->dir = matricerot_x(r->dir, cam_angle->x);
+	if (cam_angle->y)
+		r->dir = matricerot_y(r->dir, cam_angle->y);
+	if (cam_angle->z)
+		r->dir = matricerot_z(r->dir, cam_angle->z);
 }
 
 static void		getnearesthit_end(t_ray *r,
@@ -75,7 +76,7 @@ static void		getnearesthit_mid(t_ray *r,
 	co[2] = 1 - co[0] - co[1];
 }
 
-double			getnearesthit(t_ray *r, t_gen *raytracer, double x, double y)
+double			getnearesthit(t_ray *ray, t_gen *raytracer, double x, double y)
 {
 	double	ref[3];		// reflexion
 	double	co[4];
@@ -84,14 +85,14 @@ double			getnearesthit(t_ray *r, t_gen *raytracer, double x, double y)
 	int		c[3];
 
 	// recalcule langle camera
-	init_getnearesthit(r, raytracer, x, y);
+	init_cam(ray, &raytracer->view_angle, new_vector(x, y, 0));
 	// sotque lobjet le plus proche, sa normal et renvoie la distance
-	co[3] = lenray(raytracer->sc, r);
+	co[3] = lenray(raytracer->sc, ray);
 	// si la distance de cet objet est plus grand que epsilone (distance mini)
 	if (co[3] >= EPS)
 	{
 		// applique le calcule de la lumiere et des effet
-		getnearesthit_mid(r, raytracer, c, co);
+		getnearesthit_mid(ray, raytracer, c, co);
 		// recup les composante des couleur
 		color_composants(c[0], d);
 		color_composants(c[1], re);

@@ -30,9 +30,9 @@ int			main(void)
 {
 	t_gen	s;
 
-	s.view_angle[0] = 0;
-	s.view_angle[1] = 0;
-	s.view_angle[2] = 0;
+	s.view_angle.x = 0;
+	s.view_angle.y = 0;
+	s.view_angle.z = 0;
 	init_struct(&s);
 	mlx_start(&s, &s.mlx);
 	return (0);

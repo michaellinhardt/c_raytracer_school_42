@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 17:12:41 by ocarta-l          #+#    #+#             */
-/*   Updated: 2017/02/05 14:58:25 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 14:20:30 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ typedef struct		s_gen
 	t_mlx			mlx;
 	int				rep;
 	char			nb;
-	double			view_angle[3];
+	t_vector		view_angle;
 }					t_gen;
 
 void				error(int i, char *str);
