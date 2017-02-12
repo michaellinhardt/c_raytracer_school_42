@@ -6,7 +6,7 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2017/02/12 12:31:56 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 12:45:35 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -376,11 +376,6 @@ int					texture_earth(double u, double v, char *str, void *mlx);
 int					texture_fire(double u, double v, char *str, void *mlx);
 int					texture_black(double u, double v, char *str, void *mlx);
 int					texture_ice(double u, double v, char *str, void *mlx);
-
-/*
-**									raytracing_pixel_loop.c
-*/
-void				*raytracing_pixel_loop(void *z);
 
 /*
 **									palette_couleur

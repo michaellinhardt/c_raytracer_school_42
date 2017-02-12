@@ -6,42 +6,34 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2017/02/12 12:31:45 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 12:46:26 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raystruct.h"
 
-double			noise(t_ray *r, t_vector hitpoint, double bump_mapping)
+static void		*raytracing_pixel_loop(void *ptr_thread)
 {
-	double	noisecoef;
-	int		level;
-	float	n[3];
+	t_thread	*thread;
+	t_ray		rayon;
+	t_scene		*sc;
+	int			i[2];
 
-	noisecoef = 0;
-	level = 0;
-	while (++level < 50)
+	thread = (t_thread *)ptr_thread;
+	sc = thread->s->sc;
+	rayon.start = new_vector(sc->cam[0], sc->cam[1], sc->cam[2]);
+	rayon.dir = new_vector(sc->cam[3], sc->cam[4] , sc->cam[5]);
+	i[1] = thread->lim[1] - 1;
+	while (++i[1] < thread->lim[3])
 	{
-		noisecoef += (1.0 / level)
-			* fabs((perlin(fabs(level * 0.15 * hitpoint.x),
-							fabs(level * 0.15 * hitpoint.y),
-							fabs(level * 0.15 * hitpoint.z))));
+		i[0] = thread->lim[0] - 1;
+		while (++i[0] < thread->lim[2])
+			getnearesthit(&rayon, thread->s, i[0], i[1]);
 	}
-	noisecoef = (noisecoef > 1.0) ? 1 : noisecoef;
-	if (bump_mapping)
-	{
-		n[0] = perlin(hitpoint.x, hitpoint.y, hitpoint.z);
-		n[1] = perlin(hitpoint.y, hitpoint.z, hitpoint.x);
-		n[2] = perlin(hitpoint.z, hitpoint.x, hitpoint.y);
-		r->norm.x = (1.0f - 0.25) * r->norm.x + 0.25 * n[0];
-		r->norm.y = (1.0f - 0.25) * r->norm.y + 0.25 * n[1];
-		r->norm.z = (1.0f - 0.25) * r->norm.z + 0.25 * n[2];
-		r->norm = vector_normalize(r->norm);
-	}
-	return (noisecoef);
+	return (NULL);
 }
 
-static void		lanch_raytracing(pthread_t *p, t_thread *thread)
+static void		raytracing_lanch_thread(pthread_t *p, t_thread *thread)
 {
 	int	j;
 
@@ -72,5 +64,5 @@ void			raytracing(t_gen *s)
 	}
 	else
 		ft_bzero(s->data, size_data);
-	lanch_raytracing(p, threads);
+	raytracing_lanch_thread(p, threads);
 }

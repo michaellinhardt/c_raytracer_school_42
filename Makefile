@@ -6,7 +6,6 @@ LIBFT_INCLUDES = libft/includes
 
 SRCS = 	main.c \
 		raytracing.c \
-		raytracing_pixel_loop.c \
 		error.c \
 		parse.c \
 		parse_next.c \
@@ -44,6 +43,7 @@ SRCS = 	main.c \
 		intersectray_cone2.c \
 		equa_sec.c \
 		ft_shadow.c \
+		noise.c \
 		cut_object.c \
 		color_functions.c \
 		perlin.c \
