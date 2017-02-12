@@ -6,7 +6,7 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2017/02/12 12:46:26 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 13:14:34 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void			raytracing(t_gen *s)
 	size_data = W_Y * W_X * 4;
 	if (!is_init)
 	{
-		(!(threads = ft_memalloc(
-			sizeof(t_thread) * MT))) ? error(2, "Malloc") : 1;
+		if (!(threads = ft_memalloc(sizeof(t_thread) * MT)))
+			error(2, "ft_memalloc(t_thread[MT])");
 		init_threads(threads, s);
 		is_init = 1;
 		if (!(s->data = (char *)ft_memalloc(size_data)))
