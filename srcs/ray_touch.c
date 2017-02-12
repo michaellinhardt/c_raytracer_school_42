@@ -6,32 +6,32 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 16:52:24 by ocarta-l          #+#    #+#             */
-/*   Updated: 2017/02/12 00:00:38 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 14:33:37 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raystruct.h"
 
-double			lenray_type(t_ray *r, t_obj *s, t_inter *i, int *col)
+double			lenray_type(t_ray *rayon, t_obj *obj, t_inter *inter, int *col)
 {
-	if (s->type & SPHERE)
-		return (intersectray_sphere(r, s, i));
-	else if (s->type & PLAN)
-		return (intersectray_plane(r, s, i));
-	else if (s->type & CYLINDRE)
-		return (intersectray_cylindre(r, s, i));
-	else if (s->type & RECTANGLE)
-		return (intersectray_carre(r, s, i));
-	else if (s->type & COMPLEXE)
-		return (intersectray_complex(r, s, col));
-	else if (s->type & CONE)
-		return (intersectray_cone(r, s, i));
-	else if (s->type & BOLOID)
-		return (intersectray_boloid(r, s, i));
-	else if (s->type & TRIANGLE)
-		return (intersectray_triangle(r, s, i));
-	else if (s->type & ELLIPSE)
-		return (intersectray_ellipse(r, s, i));
+	if (obj->type & SPHERE)
+		return (intersectray_sphere(rayon, obj, inter));
+	else if (obj->type & PLAN)
+		return (intersectray_plane(rayon, obj, inter));
+	else if (obj->type & CYLINDRE)
+		return (intersectray_cylindre(rayon, obj, inter));
+	else if (obj->type & RECTANGLE)
+		return (intersectray_carre(rayon, obj, inter));
+	else if (obj->type & COMPLEXE)
+		return (intersectray_complex(rayon, obj, col));
+	else if (obj->type & CONE)
+		return (intersectray_cone(rayon, obj, inter));
+	else if (obj->type & BOLOID)
+		return (intersectray_boloid(rayon, obj, inter));
+	else if (obj->type & TRIANGLE)
+		return (intersectray_triangle(rayon, obj, inter));
+	else if (obj->type & ELLIPSE)
+		return (intersectray_ellipse(rayon, obj, inter));
 	return (0);
 }
 
@@ -115,26 +115,25 @@ static t_obj	*lenray_final(t_obj *s, t_ray *r,
 	return (tmp);
 }
 
-double			lenray(t_scene *sc, t_ray *r)
+double			lenray(t_scene *sc, t_ray *rayon)
 {
 	double		nearest[6];
-	t_obj		*tmp;
+	t_obj		*tmp_obj;
 	t_vector	norm;
 
-	tmp = NULL;
+	tmp_obj = NULL;
 	nearest[0] = -1;
 	nearest[1] = INT_MAX;
 	norm.x = 0;
-	// a enlever !!
-	lenray_neg(sc->obj, r, nearest, &norm);
+	lenray_neg(sc->obj, rayon, nearest, &norm);
 	nearest[2] = -1;
 	// sort lobjet le plus proche
-	tmp = lenray_final(sc->obj, r, nearest, &norm);
+	tmp_obj = lenray_final(sc->obj, rayon, nearest, &norm);
 	// si lobjet le plus proche est superieur a la distance minimum on le save
 	if (nearest[2] > EPS)
 	{
-		r->norm = norm;
-		r->obj = tmp;
+		rayon->norm = norm;
+		rayon->obj = tmp_obj;
 	}
 	return (nearest[2]);
 }

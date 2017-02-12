@@ -6,7 +6,7 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 17:39:12 by vbauguen          #+#    #+#             */
-/*   Updated: 2017/02/12 13:58:49 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 14:26:30 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -361,7 +361,7 @@ void				init_var_i(int *i, double x, double y, double z);
 */
 
 double				lenray_type(t_ray *r, t_obj *s, t_inter *i, int *col);
-double				lenray(t_scene *sc, t_ray *r);
+double				lenray(t_scene *sc, t_ray *rayon);
 
 /*
 **									texture.c

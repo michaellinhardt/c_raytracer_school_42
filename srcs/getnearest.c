@@ -6,7 +6,7 @@
 /*   By: ocarta-l <ocarta-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 17:22:00 by ocarta-l          #+#    #+#             */
-/*   Updated: 2017/02/12 14:23:12 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 14:28:01 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ double			getnearesthit(t_ray *ray, t_gen *raytracer, double x, double y)
 	double	re[3];		// refraction
 	int		c[3];
 
-	// recalcule langle camera
 	init_cam(ray, &raytracer->view_angle, new_vector(x, y, 0));
 	// sotque lobjet le plus proche, sa normal et renvoie la distance
 	co[3] = lenray(raytracer->sc, ray);
