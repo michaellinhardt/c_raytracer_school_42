@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filter_part3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrunell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbrunell <bbrunell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/06 17:57:13 by bbrunell          #+#    #+#             */
-/*   Updated: 2016/09/06 17:57:17 by bbrunell         ###   ########.fr       */
+/*   Updated: 2017/02/12 16:44:42 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,4 +151,3 @@ void	abstract(char *data, int index)
 		data[index + 0] = change_col(col, nbr[2]);
 	}
 }
-

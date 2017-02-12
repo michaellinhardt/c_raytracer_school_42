@@ -6,7 +6,7 @@
 /*   By: vbauguen <vbauguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 16:39:16 by vbauguen          #+#    #+#             */
-/*   Updated: 2017/02/12 13:58:51 by mlinhard         ###   ########.fr       */
+/*   Updated: 2017/02/12 16:44:19 by mlinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void		*raytracing_pixel_loop(void *ptr_thread)
 	thread = (t_thread *)ptr_thread;
 	scene = thread->s->sc;
 	rayon.start = new_vector(scene->cam[0], scene->cam[1], scene->cam[2]);
-	rayon.dir = new_vector(scene->cam[3], scene->cam[4] , scene->cam[5]);
+	rayon.dir = new_vector(scene->cam[3], scene->cam[4], scene->cam[5]);
 	i[1] = thread->lim[1] - 1;
 	while (++i[1] < thread->lim[3])
 	{
